@@ -1,0 +1,51 @@
+---
+# refer: https://circleci.com/docs/2.1/language-javascript/
+version: 2.1
+
+executors:
+  node-lts:
+    docker:
+      - image: circleci/node:10.16
+    working_directory: ~/repo
+
+commands:
+  setup:
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+
+jobs:
+  build:
+    executor: node-lts
+    steps:
+      - setup
+      - run: yarn
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+  test:
+    docker:
+      - image: circleci/node:10.16
+    working_directory: ~/repo
+    steps:
+      - setup
+      - run:
+          command: |
+            yarn type-check
+            yarn lint
+            yarn coverage
+      - store_artifacts:
+          path: ~/repo/coverage
+
+workflows:
+  version: 2
+  test-all:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
