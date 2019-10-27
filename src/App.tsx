@@ -5,7 +5,7 @@ import store from './store'
 import ErrorContext from './contexts/error'
 import NetworkContext, { reducer } from './contexts/network'
 import UserContext, { UserInformation } from './contexts/user'
-import { MainRoutes } from './routes'
+import App from './components/App'
 import NetworkPanel from './components/NetworkPanel'
 import ErrorPanel from './components/ErrorPanel'
 
@@ -19,7 +19,7 @@ export default () => {
       <ErrorContext.Provider value={{ error, setError }}>
         <NetworkContext.Provider value={{ networkState, dispatchNetworkActions }}>
           <UserContext.Provider value={{ userState, setUserState }}>
-            <MainRoutes />
+            <App />
             <NetworkPanel />
             <ErrorPanel />
           </UserContext.Provider>

@@ -351,15 +351,19 @@ PODS:
     - ReactCommon/jscallinvoker (= 0.61.2)
   - RNCAsyncStorage (1.6.2):
     - React
-  - RNFBApp (6.0.2):
+  - RNFBAnalytics (6.0.3):
     - Firebase/Core (~> 6.8.1)
     - React
-  - RNFBAuth (6.0.2):
+    - RNFBApp
+  - RNFBApp (6.0.3):
+    - Firebase/Core (~> 6.8.1)
+    - React
+  - RNFBAuth (6.0.3):
     - Firebase/Auth (~> 6.8.1)
     - Firebase/Core (~> 6.8.1)
     - React
     - RNFBApp
-  - RNFBFirestore (6.0.2):
+  - RNFBFirestore (6.0.3):
     - Firebase/Core (~> 6.8.1)
     - Firebase/Firestore (~> 6.8.1)
     - React
@@ -404,6 +408,7 @@ DEPENDENCIES:
   - ReactCommon/jscallinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
+  - "RNFBAnalytics (from `../node_modules/@react-native-firebase/analytics`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - "RNFBFirestore (from `../node_modules/@react-native-firebase/firestore`)"
@@ -491,6 +496,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-community/async-storage"
+  RNFBAnalytics:
+    :path: "../node_modules/@react-native-firebase/analytics"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBAuth:
@@ -558,15 +565,16 @@ SPEC CHECKSUMS:
   React-RCTVibration: fb54c732fd20405a76598e431aa2f8c2bf527de9
   ReactCommon: 5848032ed2f274fcb40f6b9ec24067787c42d479
   RNCAsyncStorage: 60a80e72d95bf02a01cace55d3697d9724f0d77f
-  RNFBApp: 32c782583cda2a9d53eac0ca154daf9f4e94f0fd
-  RNFBAuth: 405e85b784f9e12d5e0ca00fed8349148d83a424
-  RNFBFirestore: c9f12990ea9ef49d8faf45470f99fbed4f64fef8
+  RNFBAnalytics: d75433ac464f0ac6e5bd1ae7015cb5fb6427e80a
+  RNFBApp: 92ae594c85e82e1e68434049b2a37e1f584cf8b9
+  RNFBAuth: edc2e5986b92f0dfd0076b312caf7871a1646ed8
+  RNFBFirestore: 781a0084ac0f152e859fb150bb3409a522abeee7
   RNGestureHandler: 4cb47a93019c1a201df2644413a0a1569a51c8aa
   RNGoogleSignin: bb1393dec8541d997fd12b7b8f43481868a34e93
   RNReanimated: 6abbbae2e5e72609d85aabd92a982a94566885f1
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Yoga: 14927e37bd25376d216b150ab2a561773d57911f
 
-PODFILE CHECKSUM: 1b0de7250c726f52500d4e8ff4918e7f662b5781
+PODFILE CHECKSUM: f28a4c93f91b740d181e85260e505e46ae0a9a69
 
 COCOAPODS: 1.7.5
