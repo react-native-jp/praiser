@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>997443237631-la6am5c0d84d2qk77s0t7is8kc7t3ve9.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.997443237631-la6am5c0d84d2qk77s0t7is8kc7t3ve9</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>997443237631-8t6srs5e2bc8spamdfd3e5ravgau02bl.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAJNeXeIsujOZ5U3U1ZUyeQy9wFUQ1ifuE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>997443237631</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.januswel.praiser</string>
+	<key>PROJECT_ID</key>
+	<string>reactnativetodo-2f2df</string>
+	<key>STORAGE_BUCKET</key>
+	<string>reactnativetodo-2f2df.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:997443237631:ios:4cdace491a305b5926beca</string>
+	<key>DATABASE_URL</key>
+	<string>https://reactnativetodo-2f2df.firebaseio.com</string>
+</dict>
+</plist>
