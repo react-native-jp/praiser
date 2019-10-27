@@ -2,13 +2,14 @@ import auth from '@react-native-firebase/auth'
 import { GoogleSignin } from 'react-native-google-signin'
 
 GoogleSignin.configure({
-  scopes: ['https://www.googleapis.com/auth/drive.readonly'],
-  webClientId: '', // required
+  scopes: ['profile', 'email'],
+  webClientId: '',
 })
 
 export default async function signInWithGoogle() {
-  const { accessToken, idToken } = await GoogleSignin.getTokens()
-  const credential = auth.GoogleAuthProvider.credential(idToken, accessToken)
+  await GoogleSignin.hasPlayServices()
+  const { idToken } = await GoogleSignin.signIn()
+  const credential = auth.GoogleAuthProvider.credential(idToken)
 
   const response = await auth().signInWithCredential(credential)
 
