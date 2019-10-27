@@ -13,6 +13,7 @@
     "generate-typings": "node bin/generate-typings.js > src/@types/react-native-dotenv.d.ts"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "1.6.2",
     "@react-native-firebase/app": "6.0.2",
     "@react-native-firebase/auth": "6.0.2",
     "@react-native-firebase/firestore": "6.0.2",

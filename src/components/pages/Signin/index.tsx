@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
     justifyContent: 'flex-start',
-  }
+  },
 })
 
 interface Props {
@@ -64,16 +64,17 @@ function SignUp(props: Props) {
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
-        <TextField label="email" value={mailAddress.value} onChangeText={mailAddress.onChangeText} style={styles.text}/>
-        <TextField label="password" value={password.value} onChangeText={password.onChangeText} style={styles.text}/>
+        <TextField
+          label="email"
+          value={mailAddress.value}
+          onChangeText={mailAddress.onChangeText}
+          style={styles.text}
+        />
+        <TextField label="password" value={password.value} onChangeText={password.onChangeText} style={styles.text} />
       </View>
       <View style={styles.buttonContainer}>
         <SignInWithGoogle {...props} />
-        <Button
-          onPress={signInWithPassword}
-          label="SignIn"
-          style={styles.button}
-        />
+        <Button onPress={signInWithPassword} label="SignIn" style={styles.button} />
       </View>
     </View>
   )
