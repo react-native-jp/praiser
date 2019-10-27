@@ -19,7 +19,6 @@ const App = () => (
       const currentScreen = getActiveRouteName(currentState)
 
       if (prevScreen !== currentScreen) {
-        console.log(currentScreen)
         analytics().setCurrentScreen(currentScreen, currentScreen)
       }
     }}

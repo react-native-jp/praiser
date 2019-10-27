@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { StyleSheet } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
+import analytics from '@react-native-firebase/analytics'
+
 import * as TodosRepository from '../../../domain/repositories/todos'
 import { Todos } from '../../../domain/entities'
 import { HOME } from '../../../constants/path'
@@ -40,6 +42,7 @@ export default function SignInWithGoogle(props: Props) {
         await LocalStore.saveUserInformation(userInformation)
         const todos = await TodosRepository.getAll(userInformation.id)
         props.actions.setTodos(todos)
+        await analytics().logLogin({ method: 'Google' })
         navigate(HOME)
       })
     } catch (e) {
