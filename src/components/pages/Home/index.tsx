@@ -2,6 +2,7 @@ import React, { useCallback } from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from 'react-navigation-hooks'
+import analytics from '@react-native-firebase/analytics'
 
 import * as Domain from '../../../domain/entities'
 import { INPUT } from '../../../constants/path'
@@ -44,7 +45,15 @@ interface Props {
 
 export default function Home(props: Props) {
   const { navigate } = useNavigation()
-  const gotoInput = useCallback(() => navigate(INPUT, { actions: props.actions }), [])
+  const gotoInput = useCallback(() => navigate(INPUT, { actions: props.actions }), [navigate, props.actions])
+  React.useEffect(() => {
+    async function logViewItemList() {
+      await analytics().logViewItemList({
+        item_category: 'todo',
+      })
+    }
+    logViewItemList()
+  }, [])
 
   return (
     <View style={styles.container}>

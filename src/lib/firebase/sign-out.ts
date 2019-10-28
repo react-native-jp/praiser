@@ -1,5 +1,7 @@
-import { firebase } from '@react-native-firebase/auth'
+import analytics from '@react-native-firebase/analytics'
+import auth from '@react-native-firebase/auth'
 
 export default async function signOut() {
-  await firebase.auth().signOut()
+  await analytics().resetAnalyticsData()
+  await auth().signOut()
 }

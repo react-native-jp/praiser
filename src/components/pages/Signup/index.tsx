@@ -1,6 +1,8 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
+import analytics from '@react-native-firebase/analytics'
+
 import * as TodosRepository from '../../../domain/repositories/todos'
 import { Todos } from '../../../domain/entities'
 import { HOME } from '../../../constants/path'
@@ -48,19 +50,16 @@ function SignUp(props: Props) {
       await LocalStore.saveUserInformation(userInformation)
       const todos = await TodosRepository.getAll(userInformation.id)
       props.actions.setTodos(todos)
+      await analytics().logSignUp({ method: 'mail address and password' })
       navigate(HOME)
     })
   }, [mailAddress.value, password.value])
 
   return (
     <View style={styles.container}>
-      <TextField label="email" value={mailAddress.value} onChangeText={mailAddress.onChangeText} style={styles.text}/>
-      <TextField label="password" value={password.value} onChangeText={password.onChangeText} style={styles.text}/>
-      <Button
-        onPress={registerUser}
-        style={styles.button}
-        label="Register"
-      />
+      <TextField label="email" value={mailAddress.value} onChangeText={mailAddress.onChangeText} style={styles.text} />
+      <TextField label="password" value={password.value} onChangeText={password.onChangeText} style={styles.text} />
+      <Button onPress={registerUser} style={styles.button} label="Register" />
     </View>
   )
 }

@@ -2,8 +2,9 @@ import * as React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from 'react-navigation-hooks'
+import analytics from '@react-native-firebase/analytics'
 
-import { userContext } from '../../../contexts'
+import { errorContext, userContext } from '../../../contexts'
 import { DETAIL } from '../../../constants/path'
 import * as Domain from '../../../domain/entities'
 
@@ -47,16 +48,24 @@ const styles = StyleSheet.create({
 export default function Todo(props: Props) {
   const { userState } = React.useContext(userContext)
   const { navigate } = useNavigation()
-  const gotoDetail = React.useCallback(() => navigate(DETAIL), [])
+  const gotoDetail = React.useCallback(() => navigate(DETAIL, props.state), [navigate, props.state])
   const backgroundStyle = props.state.completedAt ? { backgroundColor: 'gray' } : null
+  const { setError } = React.useContext(errorContext)
+  const toggleTodo = React.useCallback(async () => {
+    try {
+      props.actions.toggleTodo(userState.id, props.state.id)
+      const eventName = props.state.completedAt === null ? 'complete_todo' : 'uncomplete_todo'
+      await analytics().logEvent(eventName, {
+        id: props.state.id,
+        name: props.state.title,
+      })
+    } catch (error) {
+      setError(error)
+    }
+  }, [props.actions, props.state.completedAt, props.state.id, props.state.title, setError, userState.id])
 
   return (
-    <TouchableOpacity
-      style={[styles.container, backgroundStyle]}
-      onPress={() => {
-        props.actions.toggleTodo(userState.id, props.state.id)
-      }}
-    >
+    <TouchableOpacity style={[styles.container, backgroundStyle]} onPress={toggleTodo}>
       <View>
         <Text style={styles.title}>{props.state.title}</Text>
         {props.state.detail && <Text style={styles.detail}>{props.state.detail}</Text>}
