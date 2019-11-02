@@ -1,10 +1,10 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import analytics from '@react-native-firebase/analytics'
 
 import * as TodosRepository from '../../../domain/repositories/todos'
-import TextField from '../../TextField'
+import TextField, { dismiss } from '../../TextField'
 import { Todos } from '../../../domain/entities'
 import { HOME } from '../../../constants/path'
 import { userContext } from '../../../contexts'
@@ -65,21 +65,31 @@ function SignUp(props: Props) {
   }, [mailAddress.value, password.value])
 
   return (
-    <View style={styles.container}>
-      <View style={styles.textContainer}>
-        <TextField
-          label="email"
-          value={mailAddress.value}
-          onChangeText={mailAddress.onChangeText}
-          style={styles.text}
-        />
-        <TextField label="password" value={password.value} onChangeText={password.onChangeText} style={styles.text} />
+    <TouchableWithoutFeedback onPress={dismiss}>
+      <View style={styles.container}>
+        <View style={styles.textContainer}>
+          <TextField
+            label="email"
+            value={mailAddress.value}
+            onChangeText={mailAddress.onChangeText}
+            style={styles.text}
+            autoCompleteType="email"
+          />
+          <TextField
+            label="password"
+            value={password.value}
+            onChangeText={password.onChangeText}
+            style={styles.text}
+            autoCompleteType="password"
+            secureTextEntry={true}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <SignInWithGoogle {...props} />
+          <Button onPress={signInWithPassword} label="SignIn" style={styles.button} />
+        </View>
       </View>
-      <View style={styles.buttonContainer}>
-        <SignInWithGoogle {...props} />
-        <Button onPress={signInWithPassword} label="SignIn" style={styles.button} />
-      </View>
-    </View>
+    </TouchableWithoutFeedback>
   )
 }
 

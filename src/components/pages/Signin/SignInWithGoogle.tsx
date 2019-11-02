@@ -49,6 +49,5 @@ export default function SignInWithGoogle(props: Props) {
       setError(e)
     }
   }, [])
-  // iconを正しく認識できない問題がある。
-  return <Button onPress={loginWithGoogle} style={styles.button} icon="camera" label="Sign In with Google" />
+  return <Button onPress={loginWithGoogle} style={styles.button} icon="google" label="Sign In with Google" />
 }

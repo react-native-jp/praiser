@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import analytics from '@react-native-firebase/analytics'
 
@@ -12,7 +12,7 @@ import useNetworker from '../../../lib/hooks/use-networker'
 import * as LocalStore from '../../../lib/local-store'
 import registerUserToFirebase from '../../../lib/firebase/register-user'
 import Button from '../../Button'
-import TextField from '../../TextField'
+import TextField, { dismiss } from '../../TextField'
 
 const styles = StyleSheet.create({
   container: {
@@ -53,14 +53,29 @@ function SignUp(props: Props) {
       await analytics().logSignUp({ method: 'mail address and password' })
       navigate(HOME)
     })
-  }, [mailAddress.value, password.value])
+  }, [mailAddress.value, navigate, networker, password.value, props.actions, setUserState])
 
   return (
-    <View style={styles.container}>
-      <TextField label="email" value={mailAddress.value} onChangeText={mailAddress.onChangeText} style={styles.text} />
-      <TextField label="password" value={password.value} onChangeText={password.onChangeText} style={styles.text} />
-      <Button onPress={registerUser} style={styles.button} label="Register" />
-    </View>
+    <TouchableWithoutFeedback onPress={dismiss}>
+      <View style={styles.container}>
+        <TextField
+          label="email"
+          value={mailAddress.value}
+          onChangeText={mailAddress.onChangeText}
+          style={styles.text}
+          autoCompleteType="email"
+        />
+        <TextField
+          label="password"
+          value={password.value}
+          onChangeText={password.onChangeText}
+          style={styles.text}
+          autoCompleteType="password"
+          secureTextEntry={true}
+        />
+        <Button onPress={registerUser} style={styles.button} label="Register" />
+      </View>
+    </TouchableWithoutFeedback>
   )
 }
 

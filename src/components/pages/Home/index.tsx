@@ -1,12 +1,11 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { useNavigation } from 'react-navigation-hooks'
 import analytics from '@react-native-firebase/analytics'
-
+import Input from '../../../containers/Input'
 import * as Domain from '../../../domain/entities'
-import { INPUT } from '../../../constants/path'
 import Todos, { Actions as TodosActions } from './Todos'
+import { COLOR } from '../../../constants'
 
 const styles = StyleSheet.create({
   container: {
@@ -20,8 +19,7 @@ const styles = StyleSheet.create({
     right: 32,
     width: 48,
     height: 48,
-    color: 'white',
-    backgroundColor: 'black',
+    backgroundColor: COLOR.MAIN_DARK,
     borderRadius: 24,
     justifyContent: 'center',
     alignItems: 'center',
@@ -38,14 +36,12 @@ const styles = StyleSheet.create({
 
 interface Props {
   todos: Domain.Todo.Entity[]
-  actions: {
-    addTodo: (userId: string, todo: Domain.Todo.Values) => void
-  } & TodosActions
+  actions: TodosActions
 }
 
 export default function Home(props: Props) {
-  const { navigate } = useNavigation()
-  const gotoInput = useCallback(() => navigate(INPUT, { actions: props.actions }), [navigate, props.actions])
+  const [visible, changeVisible] = useState(false)
+  const gotoInput = useCallback(() => changeVisible(true), [])
   React.useEffect(() => {
     async function logViewItemList() {
       await analytics().logViewItemList({
@@ -54,12 +50,13 @@ export default function Home(props: Props) {
     }
     logViewItemList()
   }, [])
-
   return (
     <View style={styles.container}>
+      <Input visible={visible} handleClose={() => changeVisible(false)} />
+
       <Todos {...props} />
       <TouchableOpacity onPress={gotoInput} style={styles.button}>
-        <Icon color="white" size={24} name="plus" />
+        <Icon color={COLOR.PRIMARY} size={24} name="plus" />
       </TouchableOpacity>
     </View>
   )
