@@ -10,41 +10,51 @@ export const TOGGLE = 'todo/toggle' as const
 export const createInitialState = () => ({} as Todos.Entity)
 export type State = ReturnType<typeof createInitialState>
 
-export const set = (todos: Todos.Entity) => ({
-  type: SET,
-  payload: {
-    todos,
-  },
-})
+export function set(todos: Todos.Entity) {
+  return {
+    type: SET,
+    payload: {
+      todos,
+    },
+  }
+}
 
-export const add = (todo: Todo.Entity) => ({
-  type: ADD,
-  payload: {
-    todo,
-  },
-})
+export function add(todo: Todo.Entity) {
+  return {
+    type: ADD,
+    payload: {
+      todo,
+    },
+  }
+}
 
-export const update = (id: string, todo: Todo.Values) => ({
-  type: UPDATE,
-  payload: {
-    id,
-    todo,
-  },
-})
+export function update(id: string, todo: Todo.Values) {
+  return {
+    type: UPDATE,
+    payload: {
+      id,
+      todo,
+    },
+  }
+}
 
-export const remove = (id: string) => ({
-  type: REMOVE,
-  payload: {
-    id,
-  },
-})
+export function remove(id: string) {
+  return {
+    type: REMOVE,
+    payload: {
+      id,
+    },
+  }
+}
 
-export const toggle = (id: string) => ({
-  type: TOGGLE,
-  payload: {
-    id,
-  },
-})
+export function toggle(id: string) {
+  return {
+    type: TOGGLE,
+    payload: {
+      id,
+    },
+  }
+}
 
 export type Actions =
   | ReturnType<typeof set>
