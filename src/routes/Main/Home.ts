@@ -1,6 +1,6 @@
 import { createStackNavigator } from 'react-navigation-stack'
-import { DETAIL, HOME, INPUT } from '../../constants/path'
-import { Detail, Input } from '../../components/pages'
+import { DETAIL, HOME } from '../../constants/path'
+import { Detail } from '../../components/pages'
 import { Home } from '../../containers'
 import { HeaderLeft, headerStyle, headerTintColor } from '../Header'
 import { COLOR } from '../../constants'
@@ -17,17 +17,11 @@ const HomeNavigator = createStackNavigator(
         headerLeft: HeaderLeft,
         headerStyle,
         headerTintColor,
+        title: 'Home',
       },
     },
     [DETAIL]: {
       screen: Detail,
-      navigationOptions: {
-        headerStyle,
-        headerTintColor,
-      },
-    },
-    [INPUT]: {
-      screen: Input,
       navigationOptions: {
         headerStyle,
         headerTintColor,

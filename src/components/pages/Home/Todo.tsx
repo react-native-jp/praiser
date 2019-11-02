@@ -7,6 +7,7 @@ import analytics from '@react-native-firebase/analytics'
 import { errorContext, userContext } from '../../../contexts'
 import { DETAIL } from '../../../constants/path'
 import * as Domain from '../../../domain/entities'
+import { COLOR } from '../../../constants'
 
 export interface Actions {
   removeTodo: (userId: string, id: string) => void
@@ -31,9 +32,11 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
     fontSize: 32,
+    color: COLOR.WHITE,
   },
   detail: {
     fontSize: 16,
+    color: COLOR.WHITE
   },
   detailButton: {
     width: 32,
@@ -49,7 +52,6 @@ export default function Todo(props: Props) {
   const { userState } = React.useContext(userContext)
   const { navigate } = useNavigation()
   const gotoDetail = React.useCallback(() => navigate(DETAIL, props.state), [navigate, props.state])
-  const backgroundStyle = props.state.completedAt ? { backgroundColor: 'gray' } : null
   const { setError } = React.useContext(errorContext)
   const toggleTodo = React.useCallback(async () => {
     try {
@@ -65,18 +67,16 @@ export default function Todo(props: Props) {
   }, [props.actions, props.state.completedAt, props.state.id, props.state.title, setError, userState.id])
 
   return (
-    <TouchableOpacity style={[styles.container, backgroundStyle]} onPress={toggleTodo}>
+    <TouchableOpacity style={[styles.container]} onPress={toggleTodo}>
       <View>
         <Text style={styles.title}>{props.state.title}</Text>
         {props.state.detail && <Text style={styles.detail}>{props.state.detail}</Text>}
       </View>
       <TouchableOpacity
         style={styles.detailButton}
-        onPress={() => {
-          gotoDetail()
-        }}
+        onPress={gotoDetail}
       >
-        <Icon name="angle-right" size={32} color="black" />
+        <Icon name="angle-right" size={32} color={COLOR.WHITE} />
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.removeButton}

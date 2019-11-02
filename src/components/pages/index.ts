@@ -1,6 +1,5 @@
 export { default as Signin } from './Signin'
 export { default as Home } from './Home'
-export { default as Input } from './Input'
 export { default as Detail } from './Detail'
 export { default as Statistics } from './Statistics'
 export { default as UserInfo } from './UserInfo'

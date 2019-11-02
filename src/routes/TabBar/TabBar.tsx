@@ -1,6 +1,6 @@
 import React from 'react'
 import SafeAreaView from 'react-native-safe-area-view'
-import { BottomTabBar } from 'react-navigation-tabs';
+import { BottomTabBar } from 'react-navigation-tabs'
 import { COLOR } from '../../constants'
 
 const styles = {
