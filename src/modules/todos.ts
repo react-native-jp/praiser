@@ -46,12 +46,12 @@ export const toggle = (id: string) => ({
   },
 })
 
-type SetAction = ReturnType<typeof set>
-type AddAction = ReturnType<typeof add>
-type UpdateAction = ReturnType<typeof update>
-type RemoveAction = ReturnType<typeof remove>
-type ToggleAction = ReturnType<typeof toggle>
-export type Actions = SetAction | AddAction | UpdateAction | RemoveAction | ToggleAction
+export type Actions =
+  | ReturnType<typeof set>
+  | ReturnType<typeof add>
+  | ReturnType<typeof update>
+  | ReturnType<typeof remove>
+  | ReturnType<typeof toggle>
 
 export default createReducer(createInitialState(), {
   [SET]: (_state, action) => action.payload.todos,
