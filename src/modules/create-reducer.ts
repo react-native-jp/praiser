@@ -1,16 +1,18 @@
-import { Action, AnyAction } from 'redux'
+import * as Redux from 'redux'
 
-type Handler<State, Types extends string, Actions extends Action<Types> = AnyAction> = (
-  state: State,
-  action: Actions,
-) => State
+export type Actions<Type extends keyof any = string> = Record<Type, Redux.Action>
 
-type Handlers<State, Types extends string, Actions extends Action<Types> = AnyAction> = {
-  readonly [Type in Types]: Handler<State, Types, Actions>
+type Handler<State = any, Action extends Redux.Action = Redux.AnyAction> = (state: State, action: Action) => State
+
+type Handlers<State, Action extends Actions> = {
+  [Type in keyof Action]: Action[Type] extends Redux.Action ? Handler<State, Action[Type]> : never
 }
 
-export default <State, Types extends string, Actions extends Action<Types> = AnyAction>(
+export default function createReducer<State, H extends Handlers<State, any> = Handlers<State, any>>(
   initialState: State,
-  handlers: Handlers<State, Types, Actions>,
-) => (state = initialState, action: Actions) =>
-  handlers.hasOwnProperty(action.type) ? handlers[action.type](state, action) : state
+  handlers: H,
+): Redux.Reducer<State> {
+  return function(state = initialState, action): State {
+    return handlers.hasOwnProperty(action.type) ? handlers[action.type](state, action) : state
+  }
+}
