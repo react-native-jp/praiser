@@ -60,14 +60,15 @@ function Index() {
   return (
     <View style={styles.container}>
       <Carousel
+        // @ts-ignore
         data={renderData}
         ref={carouselRef}
-        // @ts-ignore
         renderItem={({ item, index }) => (
           <RenderItem item={item} onPress={index === renderData.length - 1 ? onEnd : onNext} />
         )}
         sliderWidth={width}
         itemWidth={width}
+        // @ts-ignore
         onSnapToItem={changeSlide}
       />
       <Pagination
