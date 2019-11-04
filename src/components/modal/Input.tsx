@@ -48,6 +48,8 @@ export default function Input(props: Props) {
     await networker(async () => {
       actions.addTodo(userState.id, { title: title.value, detail: detail.value })
       handleClose()
+      title.onChangeText('')
+      detail.onChangeText('')
     })
   }, [networker, actions, userState.id, title.value, detail.value])
 
