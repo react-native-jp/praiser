@@ -60,7 +60,6 @@ function Index() {
   return (
     <View style={styles.container}>
       <Carousel
-        // @ts-ignore
         data={renderData}
         ref={carouselRef}
         renderItem={({ item, index }) => (
@@ -68,7 +67,6 @@ function Index() {
         )}
         sliderWidth={width}
         itemWidth={width}
-        // @ts-ignore
         onSnapToItem={changeSlide}
       />
       <Pagination
