@@ -14,6 +14,7 @@ import * as LocalStore from '../../../lib/local-store'
 import signInWithPasswordToFirebase from '../../../lib/firebase/sign-in-with-password'
 import Button from '../../Button'
 import SignInWithGoogle from './SignInWithGoogle'
+import testIDs from "../../../constants/testIDs";
 
 const styles = StyleSheet.create({
   container: {
@@ -63,7 +64,7 @@ function SignUp(props: Props) {
   }, [navigate, networker, setUserState, setTodos, mailAddress.value, password.value])
 
   return (
-    <TouchableWithoutFeedback onPress={dismiss}>
+    <TouchableWithoutFeedback onPress={dismiss} testID={testIDs.SIGN_IN}>
       <View style={styles.container}>
         <View style={styles.textContainer}>
           <TextField

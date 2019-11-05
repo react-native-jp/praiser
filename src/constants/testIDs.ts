@@ -1,0 +1,9 @@
+export default {
+  // Page
+  CHOOSE_LOGIN: 'CHOOSE_LOGIN',
+  SIGN_IN: 'SIGN_IN',
+  SIGN_IN_BTN: 'SIGN_IN_BUTTON',
+  SIGN_UP: 'SIGN_UP',
+  SIGN_UP_BTN: 'SIGN_UP_BUTTON',
+  HOME: 'HOME',
+}

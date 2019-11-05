@@ -12,6 +12,7 @@ interface Props {
   icon?: string
   disabled?: boolean
   disabledColor?: string
+  testID?: string
 }
 
 const styles = StyleSheet.create({
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
 })
 
 export default function Button(props: Props) {
-  const { onPress, style, textStyle, label, color = '#008080', icon, disabled, disabledColor = '#555' } = props
+  const { onPress, style, textStyle, label, color = '#008080', icon, disabled, disabledColor = '#555', testID } = props
   return (
     <PaperButton
       mode="contained"
@@ -34,6 +35,7 @@ export default function Button(props: Props) {
       contentStyle={{
         backgroundColor: disabled ? disabledColor : color,
       }}
+      testID={testID}
     >
       {label && <Text style={[styles.text, textStyle]}>{label}</Text>}
     </PaperButton>
