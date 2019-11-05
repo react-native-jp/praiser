@@ -1,15 +1,16 @@
 import React from 'react'
-import { FlatList, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { View, SafeAreaView, StyleSheet, Text } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
-
-import { AUTH } from '../../../constants/path'
+import { Avatar } from 'react-native-paper'
+import { CHOOSE_LOGIN } from '../../../constants/path'
 import userContext, { UserInformation } from '../../../contexts/user'
 import useNetworker from '../../../lib/hooks/use-networker'
 import signOutFromFirebase from '../../../lib/firebase/sign-out'
 import * as LocalStore from '../../../lib/local-store'
 import formatDate from '../../../lib/format-date'
-import UserInformationItem, { Item } from './UserInformationItem'
-import Separator from './Separator'
+import Button from '../../../components/Button'
+import LabelViewContainer from './LabelValueContainer'
+import { COLOR } from '../../../constants'
 
 const styles = StyleSheet.create({
   container: {
@@ -17,20 +18,19 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  image: {
-    width: 240,
-    height: 240,
-    resizeMode: 'contain',
+  imageIconContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+    marginBottom: 40,
   },
-  information: {
-    alignSelf: 'stretch',
+  nameText: {
+    color: COLOR.WHITE,
+    fontSize: 20,
+    marginTop: 5,
   },
-  informationContainer: {
-    alignSelf: 'stretch',
-  },
-  buttonLabel: {
-    fontSize: 16,
-    color: 'blue',
+  button: {
+    marginTop: 30,
   },
 })
 
@@ -43,48 +43,23 @@ export default function UserInfo() {
       await signOutFromFirebase()
       setUserState({} as UserInformation)
       await LocalStore.clearUserInformation()
-      navigate(AUTH)
+      navigate(CHOOSE_LOGIN)
     })
-  }, [])
-
-  const userInformation = React.useMemo(
-    () => [
-      { id: 'user name', value: userState.name },
-      {
-        id: 'registered at',
-        value: userState.createdAt && formatDate(new Date(userState.createdAt)),
-      },
-      {
-        id: 'mailAddress',
-        value: userState.mailAddress,
-      },
-      {
-        id: 'sign out',
-        value: (
-          <TouchableOpacity onPress={signOut}>
-            <Text style={styles.buttonLabel}>Sign Out</Text>
-          </TouchableOpacity>
-        ),
-      },
-    ],
-    [userState],
-  ) as Item[]
+  }, [navigate, networker, setUserState])
+  const source = userState.photoUrl ? { uri: userState.photoUrl } : require('../../../../assets/person.png')
 
   return (
     <SafeAreaView style={styles.container}>
-      {userState.photoUrl ? (
-        <Image source={{ uri: userState.photoUrl }} style={styles.image} />
-      ) : (
-        <Image source={require('../../../../assets/person.png')} style={styles.image} />
-      )}
-      <FlatList
-        style={styles.information}
-        contentContainerStyle={styles.informationContainer}
-        data={userInformation}
-        renderItem={({ item }: { item: Item }) => <UserInformationItem {...item} />}
-        keyExtractor={(item: Item) => item.id}
-        ItemSeparatorComponent={Separator}
+      <View style={styles.imageIconContainer}>
+        <Avatar.Image size={220} source={source} />
+        <Text style={styles.nameText}>{userState.name}</Text>
+      </View>
+      <LabelViewContainer label="e-mail" value={userState.mailAddress} />
+      <LabelViewContainer
+        label="registeredAt"
+        value={userState.createdAt && formatDate(new Date(userState.createdAt))}
       />
+      <Button style={styles.button} onPress={signOut} label="Sign Out" />
     </SafeAreaView>
   )
 }

@@ -1,7 +1,7 @@
 import { createStackNavigator } from 'react-navigation-stack'
 import { USER_INFO } from '../../constants/path'
 import { UserInfo } from '../../components/pages'
-import { HeaderLeft } from '../Header'
+import { HeaderLeft, headerStyle, headerTintColor } from '../Header'
 import { COLOR } from '../../constants'
 
 const cardStyle = {
@@ -14,6 +14,9 @@ const UserInfoNavigator = createStackNavigator(
       screen: UserInfo,
       navigationOptions: {
         headerLeft: HeaderLeft,
+        headerStyle,
+        headerTintColor,
+        title: 'UserInfo',
       },
     },
   },
