@@ -22,21 +22,16 @@ const renderData = [
   {
     text:
       'brevity is the soul of wit budge an inch\n' +
-      'I must be cruel only to be kind flesh and blood\n' +
-      "in a fool's paradise a foregone conclusion\n" +
       'foul play the game is up',
   },
   {
     text:
       "good riddance for goodness' sake!\n" +
-      "green-eyed jealousy It's Greek to me\n" +
-      'it is high time lie low\n' +
       "love is blind in my mind's eye",
   },
   {
     text:
       'neither here nor there seen better days\n' +
-      'the short and the long of it too much of a good thing\n' +
       'at one fell swoop a tower of strength Tut, tut!',
   },
 ]
@@ -54,7 +49,7 @@ function Index() {
   const onNext = useCallback(() => {
     const nextIndex = activeSlide === renderData.length - 1 ? activeSlide : 1 + activeSlide
     // @ts-ignore
-    carouselRef.current.snapToItem(nextIndex)
+    setTimeout(() => carouselRef.current.snapToItem(nextIndex), 250)
     changeSlide(nextIndex)
   }, [carouselRef.current, activeSlide])
   return (
