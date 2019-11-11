@@ -4,7 +4,7 @@ import { Button as PaperButton } from 'react-native-paper'
 
 interface Props {
   onPress: () => void
-  style?: ViewStyle
+  style?: ViewStyle | ViewStyle[]
   textStyle?: TextStyle
   label?: string
   color?: string

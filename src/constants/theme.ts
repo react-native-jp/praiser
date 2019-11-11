@@ -4,4 +4,5 @@ export const COLOR = {
   PRIMARY: '#00d8ff',
   SECONDARY: '#008080',
   WHITE: '#FFF',
+  RED: '#F35151',
 }

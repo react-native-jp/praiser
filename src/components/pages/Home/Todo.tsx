@@ -1,9 +1,10 @@
 import * as React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, TouchableHighlight, View } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from 'react-navigation-hooks'
+import { SwipeRow } from 'react-native-swipe-list-view'
 import analytics from '@react-native-firebase/analytics'
-
+import Button from '../../../components/Button'
 import { errorContext, userContext } from '../../../contexts'
 import { DETAIL } from '../../../constants/path'
 import * as Domain from '../../../domain/entities'
@@ -20,23 +21,42 @@ interface Props {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  contentContainer: {
+    backgroundColor: COLOR.MAIN,
     height: 120,
-    margin: 4,
-    padding: 8,
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  leftButton: {
+    height: 120,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLOR.PRIMARY,
+    width: 80,
+  },
+  done: {
+    backgroundColor: COLOR.MAIN_DARK,
+  },
+  rightButton: {
+    height: 120,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLOR.RED,
+    width: 80,
   },
   title: {
     fontWeight: 'bold',
     fontSize: 32,
     color: COLOR.WHITE,
   },
+  doneText: {
+    textDecorationLine: 'line-through',
+  },
   detail: {
     fontSize: 16,
-    color: COLOR.WHITE
+    color: COLOR.WHITE,
   },
   detailButton: {
     width: 32,
@@ -65,27 +85,37 @@ export default function Todo(props: Props) {
       setError(error)
     }
   }, [props.actions, props.state.completedAt, props.state.id, props.state.title, setError, userState.id])
+  const isDone = React.useMemo(() => {
+    return !!props.state.completedAt
+  }, [props.state.completedAt])
 
   return (
-    <TouchableOpacity style={[styles.container]} onPress={toggleTodo}>
-      <View>
-        <Text style={styles.title}>{props.state.title}</Text>
-        {props.state.detail && <Text style={styles.detail}>{props.state.detail}</Text>}
+    <SwipeRow rightOpenValue={-80} leftOpenValue={80}>
+      <View style={[styles.contentContainer]}>
+        {isDone ? (
+          <Button onPress={toggleTodo} icon="check" style={styles.leftButton} />
+        ) : (
+          <Button onPress={toggleTodo} icon="restore" style={[styles.leftButton, styles.done]} />
+        )}
+        <Button
+          onPress={() => {
+            props.actions.removeTodo(userState.id, props.state.id)
+          }}
+          icon="delete"
+          style={styles.rightButton}
+        />
       </View>
-      <TouchableOpacity
-        style={styles.detailButton}
-        onPress={gotoDetail}
-      >
-        <Icon name="angle-right" size={32} color={COLOR.WHITE} />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.removeButton}
-        onPress={() => {
-          props.actions.removeTodo(userState.id, props.state.id)
-        }}
-      >
-        <Icon name="times-circle" size={16} color="red" />
-      </TouchableOpacity>
-    </TouchableOpacity>
+      <TouchableHighlight style={[styles.contentContainer]} onPress={gotoDetail}>
+        <View style={styles.contentContainer}>
+          <View>
+            <Text style={[styles.title, !isDone ? styles.doneText : null]}>{props.state.title}</Text>
+            {props.state.detail && <Text style={styles.detail}>{props.state.detail}</Text>}
+          </View>
+          <TouchableOpacity style={styles.detailButton} onPress={toggleTodo}>
+            <Icon name="angle-right" size={32} color={COLOR.WHITE} />
+          </TouchableOpacity>
+        </View>
+      </TouchableHighlight>
+    </SwipeRow>
   )
 }
