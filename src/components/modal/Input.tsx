@@ -51,20 +51,14 @@ export default function Input(props: Props) {
       title.onChangeText('')
       detail.onChangeText('')
     })
-  }, [networker, actions, userState.id, title.value, detail.value])
+  }, [networker, actions, userState.id, detail, title, handleClose])
 
   return (
     <Modal visible={visible} onRequestClose={handleClose}>
       <SafeAreaView style={styles.container}>
         <TouchableWithoutFeedback onPress={dismiss}>
           <View style={styles.container}>
-            <IconButton
-              icon="close"
-              size={30}
-              color={COLOR.PRIMARY}
-              onPress={handleClose}
-              style={styles.iconButton}
-            />
+            <IconButton icon="close" size={30} color={COLOR.PRIMARY} onPress={handleClose} style={styles.iconButton} />
             <TextField label="Title" value={title.value} onChangeText={title.onChangeText} style={styles.text} />
             <TextField label="Detail" value={detail.value} onChangeText={detail.onChangeText} style={styles.text} />
             <Button onPress={addTodo} label="Add" style={styles.button} />

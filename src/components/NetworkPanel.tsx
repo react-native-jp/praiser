@@ -3,13 +3,14 @@ import { ActivityIndicator, SafeAreaView, StyleSheet } from 'react-native'
 
 import networkContext from '../contexts/network'
 import { height, width } from '../lib/window'
+import { COLOR } from '../constants'
 
 const styles = StyleSheet.create({
   dropdown: {
     position: 'absolute',
     width,
     height,
-    backgroundColor: 'white',
+    backgroundColor: COLOR.WHITE,
     opacity: 0.5,
   },
   container: {

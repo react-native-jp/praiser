@@ -2,6 +2,7 @@ import * as React from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
 
 import Todo, { Actions as TodoActions, State as TodoState } from './Todo'
+import { COLOR } from '../../../constants'
 
 export type Actions = TodoActions
 export type State = TodoState[]
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
   },
   separator: {
     height: 1,
-    backgroundColor: 'gray',
+    backgroundColor: COLOR.SECONDARY,
   },
 })
 
