@@ -29,6 +29,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  displayContent: {
+    paddingHorizontal: 20,
+  },
   leftButton: {
     height: 120,
     justifyContent: 'center',
@@ -71,6 +74,7 @@ const styles = StyleSheet.create({
 export default function Todo(props: Props) {
   const { userState } = React.useContext(userContext)
   const { navigate } = useNavigation()
+  const rowRef = React.useRef<any>(null)
   const gotoDetail = React.useCallback(() => navigate(DETAIL, props.state), [navigate, props.state])
   const { setError } = React.useContext(errorContext)
   const toggleTodo = React.useCallback(async () => {
@@ -81,6 +85,7 @@ export default function Todo(props: Props) {
         id: props.state.id,
         name: props.state.title,
       })
+      rowRef.current.closeRow()
     } catch (error) {
       setError(error)
     }
@@ -90,7 +95,7 @@ export default function Todo(props: Props) {
   }, [props.state.completedAt])
 
   return (
-    <SwipeRow rightOpenValue={-80} leftOpenValue={80}>
+    <SwipeRow rightOpenValue={-80} leftOpenValue={80} ref={rowRef}>
       <View style={[styles.contentContainer]}>
         {isDone ? (
           <Button onPress={toggleTodo} icon="check" style={styles.leftButton} />
@@ -105,7 +110,7 @@ export default function Todo(props: Props) {
           style={styles.rightButton}
         />
       </View>
-      <TouchableHighlight style={[styles.contentContainer]} onPress={gotoDetail}>
+      <TouchableHighlight style={[styles.contentContainer, styles.displayContent]} onPress={gotoDetail}>
         <View style={styles.contentContainer}>
           <View>
             <Text style={[styles.title, !isDone ? styles.doneText : null]}>{props.state.title}</Text>

@@ -1,7 +1,6 @@
 import { createStackNavigator } from 'react-navigation-stack'
 import { DETAIL, HOME } from '../../constants/path'
-import { Detail } from '../../components/pages'
-import { Home } from '../../containers'
+import { Home, Detail } from '../../containers'
 import { HeaderLeft, headerStyle, headerTintColor } from '../Header'
 import { COLOR } from '../../constants'
 
