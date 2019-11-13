@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 
+import { COLOR } from '../constants'
+
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'flex-start',
@@ -14,7 +16,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     height: 36,
     padding: 4,
-    borderColor: 'black',
+    borderColor: COLOR.SHADOW,
     borderWidth: 1,
     fontSize: 24,
   },

@@ -27,6 +27,7 @@ export default function Loading(props: Props) {
   const { navigate } = useNavigation()
   const { setUserState } = React.useContext(userContext)
   const { setError } = React.useContext(errorContext)
+  const { setTodos } = props.actions
 
   React.useEffect(() => {
     LocalStore.retrieveUserInformation()
@@ -39,14 +40,10 @@ export default function Loading(props: Props) {
               } else {
                 navigate(INITIAL)
               }
-              return new Promise(resolve => {
-                resolve()
-              })
             })
             .catch(e => {
               return Promise.reject(new Error(e))
             })
-          return Promise.resolve()
         }
 
         setUserState(userInformation)
@@ -59,7 +56,7 @@ export default function Loading(props: Props) {
 
             TodosRepository.getAll(user.uid)
               .then(todos => {
-                props.actions.setTodos(todos)
+                setTodos(todos)
                 navigate(HOME)
                 resolve()
               })
@@ -72,7 +69,7 @@ export default function Loading(props: Props) {
       .catch(e => {
         setError(e)
       })
-  }, [])
+  }, [navigate, setTodos, setError, setUserState])
 
   return (
     <View style={styles.container}>

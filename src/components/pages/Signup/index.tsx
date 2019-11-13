@@ -19,9 +19,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
   },
-  signInButton: {
-    backgroundColor: 'green',
-  },
   text: {
     marginVertical: 20,
   },

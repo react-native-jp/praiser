@@ -17,9 +17,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  label: {
-    fontSize: 20,
-  },
 })
 
 interface Props {
@@ -32,6 +29,7 @@ export default function SignInWithGoogle(props: Props) {
   const { navigate } = useNavigation()
   const { setError } = React.useContext(errorContext)
   const { setUserState } = React.useContext(userContext)
+  const { setTodos } = props.actions
   const networker = useNetworker()
 
   const loginWithGoogle = React.useCallback(async () => {
@@ -41,13 +39,13 @@ export default function SignInWithGoogle(props: Props) {
         setUserState(userInformation)
         await LocalStore.saveUserInformation(userInformation)
         const todos = await TodosRepository.getAll(userInformation.id)
-        props.actions.setTodos(todos)
+        setTodos(todos)
         await analytics().logLogin({ method: 'Google' })
         navigate(HOME)
       })
     } catch (e) {
       setError(e)
     }
-  }, [])
+  }, [navigate, networker, setTodos, setUserState, setError])
   return <Button onPress={loginWithGoogle} style={styles.button} icon="google" label="Sign In with Google" />
 }

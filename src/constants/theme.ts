@@ -4,5 +4,9 @@ export const COLOR = {
   PRIMARY: '#00d8ff',
   SECONDARY: '#008080',
   WHITE: '#FFF',
-  RED: '#F35151',
+  LABEL: '#555',
+  BACKGROUND: 'rgba(255, 255, 255, 0.9)',
+  CAROUSEL_BACKGROUND: 'rgba(0, 0, 0, 0.5)',
+  SHADOW: '#000000',
+  CAUTION: '#ff0000',
 }
