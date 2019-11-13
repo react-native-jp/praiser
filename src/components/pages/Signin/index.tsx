@@ -21,9 +21,6 @@ const styles = StyleSheet.create({
     padding: 16,
     justifyContent: 'center',
   },
-  signInButton: {
-    backgroundColor: 'green',
-  },
   text: {
     marginVertical: 20,
   },
@@ -52,17 +49,18 @@ function SignUp(props: Props) {
   const networker = useNetworker()
   const mailAddress = useTextInput('')
   const password = useTextInput('')
+  const { setTodos } = props.actions
   const signInWithPassword = React.useCallback(async () => {
     await networker(async () => {
       const userInformation = await signInWithPasswordToFirebase(mailAddress.value, password.value)
       setUserState(userInformation)
       await LocalStore.saveUserInformation(userInformation)
       const todos = await TodosRepository.getAll(userInformation.id)
-      props.actions.setTodos(todos)
+      setTodos(todos)
       await analytics().logLogin({ method: 'mail address and password' })
       navigate(HOME)
     })
-  }, [mailAddress.value, password.value])
+  }, [navigate, networker, setUserState, setTodos, mailAddress.value, password.value])
 
   return (
     <TouchableWithoutFeedback onPress={dismiss}>

@@ -1,1 +1,3 @@
 coverage
+*.js
+*.d.ts

@@ -9,7 +9,7 @@ const styles = {
   },
   container: {
     backgroundColor: COLOR.MAIN,
-  }
+  },
 }
 
 // BottomTabBarPropsが近いうちに追加される。そしてそれをコレで上書きすれば大丈夫

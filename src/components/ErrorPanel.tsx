@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native'
 
 import errorContext from '../contexts/error'
 import { width } from '../lib/window'
+import { COLOR } from '../constants'
 import UniversalSafeAreaView from './UniversalSafeAreaView'
 
 const styles = StyleSheet.create({
@@ -11,11 +12,11 @@ const styles = StyleSheet.create({
     width,
   },
   panel: {
-    backgroundColor: 'red',
+    backgroundColor: COLOR.CAUTION,
     padding: 8,
   },
   label: {
-    color: 'white',
+    color: COLOR.WHITE,
   },
 })
 

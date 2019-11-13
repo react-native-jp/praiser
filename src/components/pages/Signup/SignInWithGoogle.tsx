@@ -29,6 +29,7 @@ export default function SignInWithGoogle(props: Props) {
   const { navigate } = useNavigation()
   const { setError } = React.useContext(errorContext)
   const { setUserState } = React.useContext(userContext)
+  const { setTodos } = props.actions
   const networker = useNetworker()
 
   const loginWithGoogle = React.useCallback(async () => {
@@ -38,13 +39,13 @@ export default function SignInWithGoogle(props: Props) {
         setUserState(userInformation)
         await LocalStore.saveUserInformation(userInformation)
         const todos = await TodosRepository.getAll(userInformation.id)
-        props.actions.setTodos(todos)
+        setTodos(todos)
         navigate(HOME)
       })
     } catch (e) {
       setError(e)
     }
-  }, [])
+  }, [navigate, networker, setTodos, setError, setUserState])
 
   return (
     <TouchableOpacity onPress={loginWithGoogle} style={styles.button}>

@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   detail: {
     fontSize: 16,
-    color: COLOR.WHITE
+    color: COLOR.WHITE,
   },
   detailButton: {
     width: 32,
@@ -72,10 +72,7 @@ export default function Todo(props: Props) {
         <Text style={styles.title}>{props.state.title}</Text>
         {props.state.detail && <Text style={styles.detail}>{props.state.detail}</Text>}
       </View>
-      <TouchableOpacity
-        style={styles.detailButton}
-        onPress={gotoDetail}
-      >
+      <TouchableOpacity style={styles.detailButton} onPress={gotoDetail}>
         <Icon name="angle-right" size={32} color={COLOR.WHITE} />
       </TouchableOpacity>
       <TouchableOpacity
