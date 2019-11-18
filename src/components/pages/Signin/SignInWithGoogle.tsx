@@ -6,7 +6,7 @@ import analytics from '@react-native-firebase/analytics'
 import * as TodosRepository from '../../../domain/repositories/todos'
 import { Todos } from '../../../domain/entities'
 import { HOME } from '../../../constants/path'
-import { errorContext, userContext } from '../../../contexts'
+import { uiContext, userContext } from '../../../contexts'
 import signInWithGoogle from '../../../lib/firebase/sign-in-with-google'
 import * as LocalStore from '../../../lib/local-store'
 import useNetworker from '../../../lib/hooks/use-networker'
@@ -27,7 +27,7 @@ interface Props {
 
 export default function SignInWithGoogle(props: Props) {
   const { navigate } = useNavigation()
-  const { setError } = React.useContext(errorContext)
+  const { setError } = React.useContext(uiContext)
   const { setUserState } = React.useContext(userContext)
   const { setTodos } = props.actions
   const networker = useNetworker()

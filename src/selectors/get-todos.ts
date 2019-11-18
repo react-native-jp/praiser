@@ -7,5 +7,8 @@ const getTodos = (state: AppState) => state.todos
 
 export default createSelector(
   [getTodos],
-  (todos: Todos.Entity) => Object.values(todos),
+  (todos: Todos.Entity) => Object.values(todos).map((todo) => ({
+    ...todo,
+    isDone: !!todo.completedAt,
+  })),
 )

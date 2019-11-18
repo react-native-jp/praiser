@@ -5,7 +5,7 @@ import { useNavigation } from 'react-navigation-hooks'
 import { SwipeRow } from 'react-native-swipe-list-view'
 import analytics from '@react-native-firebase/analytics'
 import Button from '../../../components/Button'
-import { errorContext, userContext } from '../../../contexts'
+import { uiContext, userContext } from '../../../contexts'
 import { DETAIL } from '../../../constants/path'
 import * as Domain from '../../../domain/entities'
 import { COLOR } from '../../../constants'
@@ -76,7 +76,7 @@ export default function Todo(props: Props) {
   const { navigate } = useNavigation()
   const rowRef = React.useRef<any>(null)
   const gotoDetail = React.useCallback(() => navigate(DETAIL, props.state), [navigate, props.state])
-  const { setError } = React.useContext(errorContext)
+  const { setError } = React.useContext(uiContext)
   const toggleTodo = React.useCallback(async () => {
     try {
       props.actions.toggleTodo(userState.id, props.state.id)
@@ -90,14 +90,11 @@ export default function Todo(props: Props) {
       setError(error)
     }
   }, [props.actions, props.state.completedAt, props.state.id, props.state.title, setError, userState.id])
-  const isDone = React.useMemo(() => {
-    return !!props.state.completedAt
-  }, [props.state.completedAt])
 
   return (
     <SwipeRow rightOpenValue={-80} leftOpenValue={80} ref={rowRef}>
       <View style={[styles.contentContainer]}>
-        {isDone ? (
+        {props.state.isDone ? (
           <Button onPress={toggleTodo} icon="check" style={styles.leftButton} />
         ) : (
           <Button onPress={toggleTodo} icon="restore" style={[styles.leftButton, styles.done]} />
@@ -113,7 +110,7 @@ export default function Todo(props: Props) {
       <TouchableHighlight style={[styles.contentContainer, styles.displayContent]} onPress={gotoDetail}>
         <View style={styles.contentContainer}>
           <View>
-            <Text style={[styles.title, !isDone ? styles.doneText : null]}>{props.state.title}</Text>
+            <Text style={[styles.title, !props.state.isDone ? styles.doneText : null]}>{props.state.title}</Text>
             {props.state.detail && <Text style={styles.detail}>{props.state.detail}</Text>}
           </View>
           <TouchableOpacity style={styles.detailButton} onPress={toggleTodo}>

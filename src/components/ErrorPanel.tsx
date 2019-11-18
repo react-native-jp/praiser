@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-import errorContext from '../contexts/error'
+import uiContext from '../contexts/ui'
 import { width } from '../lib/window'
 import { COLOR } from '../constants'
 import UniversalSafeAreaView from './UniversalSafeAreaView'
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 })
 
 export default function ErrorPanel() {
-  const { error } = React.useContext(errorContext)
+  const { error } = React.useContext(uiContext)
   if (!error) {
     return null
   }
