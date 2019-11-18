@@ -8,7 +8,7 @@ export interface SnackBar {
 export const snackBarInitialState = {
   visible: false,
   message: '',
-  label: 'Done'
+  label: 'Done',
 }
 
 const uiContext = React.createContext({
@@ -18,7 +18,7 @@ const uiContext = React.createContext({
     visible: false,
     message: '',
   },
-  setSnackBar: (_: SnackBar) =>  {},
+  setSnackBar: (_: SnackBar) => {},
 })
 
 export default uiContext

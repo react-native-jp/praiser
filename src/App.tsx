@@ -11,14 +11,14 @@ import ErrorPanel from './components/ErrorPanel'
 
 export default () => {
   const [error, setError] = React.useState(null as Error | null)
-  const [snackBar, setSnackBar ] =  React.useState(snackBarInitialState)
+  const [snackBar, setSnackBar] = React.useState(snackBarInitialState)
   const onDismiss = React.useCallback(() => {
     setSnackBar({
       visible: false,
       message: '',
-      label: 'Done'
+      label: 'Done',
     })
-  }, []);
+  }, [])
   const [networkState, dispatchNetworkActions] = React.useReducer(reducer, 0)
   const [userState, setUserState] = React.useState({} as UserInformation)
   return (
@@ -29,7 +29,11 @@ export default () => {
             <App />
             <NetworkPanel />
             <ErrorPanel />
-            <Snackbar visible={snackBar.visible} onDismiss={onDismiss} action={{ label: snackBar.label, onPress: onDismiss }} >
+            <Snackbar
+              visible={snackBar.visible}
+              onDismiss={onDismiss}
+              action={{ label: snackBar.label, onPress: onDismiss }}
+            >
               {snackBar.message}
             </Snackbar>
           </UserContext.Provider>

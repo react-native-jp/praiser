@@ -42,5 +42,10 @@ export function toggle(userId: string, id: string, newValue: string | null) {
     })
 }
 export function change(userId: string, id: string, newValue: object) {
-  firestore(userId).doc(id).update(newValue).catch(e => { throw e  })
+  firestore(userId)
+    .doc(id)
+    .update(newValue)
+    .catch(e => {
+      throw e
+    })
 }

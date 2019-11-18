@@ -64,11 +64,6 @@ const styles = StyleSheet.create({
   detailButton: {
     width: 32,
   },
-  removeButton: {
-    position: 'absolute',
-    top: 4,
-    right: 4,
-  },
 })
 
 export default function Todo(props: Props) {

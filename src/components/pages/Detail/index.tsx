@@ -51,9 +51,9 @@ export default function Detail(props: Props) {
     setSnackBar({
       visible: true,
       message: 'edit is completed.',
-      label: 'Done'
+      label: 'Done',
     })
-  }, [detail.value, id, props.actions, title.value, userState.id])
+  }, [detail.value, id, props.actions, setSnackBar, title.value, userState.id])
 
   React.useEffect(() => {
     async function logViewItem() {
