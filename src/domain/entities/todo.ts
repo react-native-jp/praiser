@@ -14,6 +14,10 @@ export interface Values {
   readonly detail?: string
 }
 
+export function isDone(todo: Entity): boolean {
+  return todo.completedAt !== null
+}
+
 export function create(todo: Values): Entity {
   if (!todo.title) {
     throw new Error('title is required')
