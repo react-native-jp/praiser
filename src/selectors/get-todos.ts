@@ -9,7 +9,9 @@ export default createSelector(
   [getTodos],
   (todos: Todos.Entity) =>
     Object.values(todos).map(todo => ({
-      ...todo,
+      id: todo.id,
+      title: todo.title,
+      detail: todo.detail,
       isDone: !!todo.completedAt,
     })),
 )

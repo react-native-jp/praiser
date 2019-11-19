@@ -7,7 +7,6 @@ export interface Entity {
   readonly createdAt: string
   readonly updatedAt: string
   readonly completedAt: string | null
-  readonly isDone: boolean
 }
 
 export interface Values {
@@ -28,7 +27,6 @@ export function create(todo: Values): Entity {
     createdAt: now.toISOString(),
     updatedAt: now.toISOString(),
     completedAt: null,
-    isDone: false,
   }
 }
 
