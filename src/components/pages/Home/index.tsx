@@ -3,8 +3,7 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import analytics from '@react-native-firebase/analytics'
 import Input from '../../../containers/Input'
-import * as Domain from '../../../domain/entities'
-import Todos, { Actions as TodosActions } from './Todos'
+import Todos, { Actions as TodosActions, State as TodosState } from './Todos'
 import { COLOR } from '../../../constants'
 
 const styles = StyleSheet.create({
@@ -35,7 +34,7 @@ const styles = StyleSheet.create({
 })
 
 interface Props {
-  todos: Domain.Todo.Entity[]
+  todos: TodosState
   actions: TodosActions
 }
 

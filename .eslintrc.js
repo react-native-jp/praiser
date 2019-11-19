@@ -2,31 +2,27 @@ const fs = require('fs')
 const path = require('path')
 const yaml = require('js-yaml')
 
-const searchRootDir = p => {
-  if (p === '/') {
-    throw new Error('root dir is not found')
+function searchProjectRoot(currentPath) {
+  if (currentPath === '/') {
+    throw new Error('project root is not found')
   }
-  if (fs.existsSync(path.join(p, 'package.json'))) {
-    return p
+  if (fs.existsSync(path.join(currentPath, 'package.json'))) {
+    return currentPath
   }
-  return searchRootDir(path.normalize(path.join(p, '..')))
+  return searchProjectRoot(path.normalize(path.join(currentPath, '..')))
 }
 
-const main = () => {
-  try {
-    const rootDir = searchRootDir(__dirname)
-    const config = yaml.safeLoad(fs.readFileSync(path.join(rootDir, '.eslintrc.yml'), 'utf8'))
+function main() {
+  const projectRoot = searchProjectRoot(__dirname)
+  const config = yaml.safeLoad(fs.readFileSync(path.join(projectRoot, '.eslintrc.yml'), 'utf8'))
 
-    if (config.parserOptions == null) {
-      config.parserOptions = {}
-    }
-
-    config.parserOptions.tsconfigRootDir = rootDir
-
-    return config
-  } catch (e) {
-    console.log(e)
+  if (config.parserOptions == null) {
+    config.parserOptions = {}
   }
+
+  config.parserOptions.tsconfigRootDir = projectRoot
+
+  return config
 }
 
 module.exports = main()

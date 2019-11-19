@@ -3,6 +3,17 @@
 import * as Todo from './todo'
 
 describe('Todo', () => {
+  describe('isDone', () => {
+    it('returns true if todo is completed', () => {
+      const uncompleted = Todo.create({
+        title: 'sample todo',
+      })
+      expect(Todo.isDone(uncompleted)).toBe(false)
+      const completed = Todo.toggle(uncompleted)
+      expect(Todo.isDone(completed)).toBe(true)
+    })
+  })
+
   describe('create', () => {
     it('returns Todo instances', () => {
       const timeExpected = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/u

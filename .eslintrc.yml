@@ -1,9 +1,5 @@
 ---
 root: true
-env:
-  es6: true
-  jest/globals: true
-  react-native/react-native: true
 extends:
   - plugin:@typescript-eslint/recommended
   - prettier
@@ -11,25 +7,26 @@ extends:
   - plugin:react/recommended
   - '@react-native-community'
   - plugin:react-native/all
+  - plugin:jest/recommended
 parser: '@typescript-eslint/parser'
 parserOptions:
   project: ./tsconfig.json
-  jsx: true
-  useJSXTextNode: true
-  ecmaVersion: 6
+  ecmaVersion: 2018
   sourceType: module
   ecmaFeatures:
-    modules: true
+    jsx: true
 plugins:
+  - '@typescript-eslint'
   - react
   - react-native
   - jest
-  - '@typescript-eslint'
 settings:
   react:
     version: detect
 rules:
+  no-console: warn
   semi: off
+  yoda: off
   '@typescript-eslint/camelcase':
     - error
     - allow:
@@ -39,4 +36,3 @@ rules:
   '@typescript-eslint/explicit-function-return-type': off
   react-native/no-raw-text: off
   react-native/sort-styles: off
-  yoda: off

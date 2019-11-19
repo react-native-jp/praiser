@@ -7,14 +7,18 @@ import analytics from '@react-native-firebase/analytics'
 import Button from '../../../components/Button'
 import { uiContext, userContext } from '../../../contexts'
 import { DETAIL } from '../../../constants/path'
-import * as Domain from '../../../domain/entities'
 import { COLOR } from '../../../constants'
 
 export interface Actions {
   removeTodo: (userId: string, id: string) => void
   toggleTodo: (userId: string, id: string) => void
 }
-export type State = Domain.Todo.Entity
+export type State = {
+  id: string
+  title: string
+  detail?: string
+  isDone: boolean
+}
 interface Props {
   actions: Actions
   state: State
@@ -75,7 +79,7 @@ export default function Todo(props: Props) {
   const toggleTodo = React.useCallback(async () => {
     try {
       props.actions.toggleTodo(userState.id, props.state.id)
-      const eventName = props.state.completedAt === null ? 'complete_todo' : 'uncomplete_todo'
+      const eventName = props.state.isDone ? 'complete_todo' : 'uncomplete_todo'
       await analytics().logEvent(eventName, {
         id: props.state.id,
         name: props.state.title,
@@ -84,7 +88,7 @@ export default function Todo(props: Props) {
     } catch (error) {
       setError(error)
     }
-  }, [props.actions, props.state.completedAt, props.state.id, props.state.title, setError, userState.id])
+  }, [props.actions, props.state.isDone, props.state.id, props.state.title, setError, userState.id])
 
   return (
     <SwipeRow rightOpenValue={-80} leftOpenValue={80} ref={rowRef}>
