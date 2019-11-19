@@ -24,7 +24,9 @@ settings:
   react:
     version: detect
 rules:
+  no-console: warn
   semi: off
+  yoda: off
   '@typescript-eslint/camelcase':
     - error
     - allow:
@@ -34,4 +36,3 @@ rules:
   '@typescript-eslint/explicit-function-return-type': off
   react-native/no-raw-text: off
   react-native/sort-styles: off
-  yoda: off
