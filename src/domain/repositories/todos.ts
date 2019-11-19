@@ -41,3 +41,11 @@ export function toggle(userId: string, id: string, newValue: string | null) {
       throw e
     })
 }
+export function change(userId: string, id: string, newValue: object) {
+  firestore(userId)
+    .doc(id)
+    .update(newValue)
+    .catch(e => {
+      throw e
+    })
+}

@@ -2,9 +2,9 @@ import * as React from 'react'
 import { ActivityIndicator, StyleSheet, View } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import { firebase } from '@react-native-firebase/auth'
-import { CHOOSE_LOGIN, HOME, INITIAL } from '../../constants/path'
+import { HOME, INITIAL } from '../../constants/path'
 import userContext from '../../contexts/user'
-import errorContext from '../../contexts/error'
+import uiContext from '../../contexts/ui'
 import * as LocalStore from '../../lib/local-store'
 import { Todos } from '../../domain/entities'
 import * as TodosRepository from '../../domain/repositories/todos'
@@ -26,7 +26,7 @@ interface Props {
 export default function Loading(props: Props) {
   const { navigate } = useNavigation()
   const { setUserState } = React.useContext(userContext)
-  const { setError } = React.useContext(errorContext)
+  const { setError } = React.useContext(uiContext)
   const { setTodos } = props.actions
 
   React.useEffect(() => {
@@ -38,7 +38,7 @@ export default function Loading(props: Props) {
               if (!isOpened) {
                 navigate(INITIAL)
               } else {
-                navigate(CHOOSE_LOGIN)
+                navigate(INITIAL)
               }
             })
             .catch(e => {
