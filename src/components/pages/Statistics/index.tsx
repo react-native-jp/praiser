@@ -1,10 +1,11 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
+import Progress from './Progress'
+import * as Domain from '../../../domain/entities'
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
   },
 })
@@ -15,15 +16,15 @@ interface Props {
     numofCompleted: number
     numofUncompleted: number
   }
+  todos: Domain.Todo.Entity[]
 }
 
 function Statics(props: Props) {
+  const { statistics, todos } = props
   return (
     <View style={styles.container}>
-      <Text>Statics</Text>
-      <Text>
-        {props.statistics.numofCompleted} / {props.statistics.numofAll}
-      </Text>
+      <Progress {...statistics} />
+      <Text>History</Text>
     </View>
   )
 }
