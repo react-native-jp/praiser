@@ -23,6 +23,7 @@ interface Props {
     | 'cc-exp-month'
     | 'cc-exp-year'
   secureTextEntry?: boolean
+  disabled?: boolean
 }
 const theme = {
   dark: true,
@@ -35,11 +36,12 @@ const theme = {
 }
 
 function TextField(props: Props) {
-  const { label, value, onChangeText = () => {}, style, autoCompleteType, secureTextEntry } = props
+  const { label, value, onChangeText = () => {}, style, autoCompleteType, secureTextEntry, disabled } = props
   return (
     <TextInput
       label={label}
       value={value}
+      disabled={disabled}
       onChangeText={onChangeText}
       mode="outlined"
       theme={theme}

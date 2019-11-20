@@ -24,6 +24,7 @@ const HomeNavigator = createStackNavigator(
       navigationOptions: {
         headerStyle,
         headerTintColor,
+        title: 'Detail',
       },
     },
   },

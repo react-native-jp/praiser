@@ -17,11 +17,12 @@ export type State = {
   id: string
   title: string
   detail?: string
-  isDone: boolean
+  isDone?: boolean
 }
 interface Props {
   actions: Actions
   state: State
+  forbiddenEdit?: boolean
 }
 
 const styles = StyleSheet.create({
@@ -71,36 +72,46 @@ const styles = StyleSheet.create({
 })
 
 export default function Todo(props: Props) {
+  const { state, actions, forbiddenEdit } = props
   const { userState } = React.useContext(userContext)
   const { navigate } = useNavigation()
   const rowRef = React.useRef<any>(null)
-  const gotoDetail = React.useCallback(() => navigate(DETAIL, props.state), [navigate, props.state])
+  const gotoDetail = React.useCallback(() => navigate(DETAIL, { ...state, forbiddenEdit }), [
+    forbiddenEdit,
+    navigate,
+    state,
+  ])
   const { setError } = React.useContext(uiContext)
   const toggleTodo = React.useCallback(async () => {
     try {
-      props.actions.toggleTodo(userState.id, props.state.id)
-      const eventName = props.state.isDone ? 'complete_todo' : 'uncomplete_todo'
+      actions.toggleTodo(userState.id, state.id)
+      const eventName = state.isDone ? 'complete_todo' : 'uncomplete_todo'
       await analytics().logEvent(eventName, {
-        id: props.state.id,
-        name: props.state.title,
+        id: state.id,
+        name: state.title,
       })
       rowRef.current.closeRow()
     } catch (error) {
       setError(error)
     }
-  }, [props.actions, props.state.isDone, props.state.id, props.state.title, setError, userState.id])
-
+  }, [actions, state.isDone, state.id, state.title, setError, userState.id])
   return (
-    <SwipeRow rightOpenValue={-80} leftOpenValue={80} ref={rowRef}>
+    <SwipeRow
+      disableLeftSwipe={forbiddenEdit}
+      disableRightSwipe={forbiddenEdit}
+      rightOpenValue={-80}
+      leftOpenValue={80}
+      ref={rowRef}
+    >
       <View style={[styles.contentContainer]}>
-        {props.state.isDone ? (
+        {state.isDone ? (
           <Button onPress={toggleTodo} icon="check" style={styles.leftButton} />
         ) : (
           <Button onPress={toggleTodo} icon="restore" style={[styles.leftButton, styles.done]} />
         )}
         <Button
           onPress={() => {
-            props.actions.removeTodo(userState.id, props.state.id)
+            actions.removeTodo(userState.id, state.id)
           }}
           icon="delete"
           style={styles.rightButton}
@@ -109,8 +120,8 @@ export default function Todo(props: Props) {
       <TouchableHighlight style={[styles.contentContainer, styles.displayContent]} onPress={gotoDetail}>
         <View style={styles.contentContainer}>
           <View>
-            <Text style={[styles.title, !props.state.isDone ? styles.doneText : null]}>{props.state.title}</Text>
-            {props.state.detail && <Text style={styles.detail}>{props.state.detail}</Text>}
+            <Text style={[styles.title, !forbiddenEdit && !state.isDone ? styles.doneText : null]}>{state.title}</Text>
+            {state.detail && <Text style={styles.detail}>{state.detail}</Text>}
           </View>
           <TouchableOpacity style={styles.detailButton} onPress={toggleTodo}>
             <Icon name="angle-right" size={32} color={COLOR.WHITE} />

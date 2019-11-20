@@ -1,12 +1,12 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, ScrollView } from 'react-native'
 import Progress from './Progress'
-import * as Domain from '../../../domain/entities'
+import Histories from './Histories'
+import { State as TodosState } from '../Home/Todos'
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
   },
 })
 
@@ -16,16 +16,16 @@ interface Props {
     numofCompleted: number
     numofUncompleted: number
   }
-  todos: Domain.Todo.Entity[]
+  histories: TodosState
 }
 
 function Statics(props: Props) {
-  const { statistics, todos } = props
+  const { statistics, histories } = props
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Progress {...statistics} />
-      <Text>History</Text>
-    </View>
+      <Histories histories={histories} />
+    </ScrollView>
   )
 }
 
