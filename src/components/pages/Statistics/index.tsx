@@ -1,31 +1,47 @@
 import React from 'react'
-import { StyleSheet, ScrollView } from 'react-native'
-import Progress from './Progress'
-import Histories from './Histories'
+import { StyleSheet, View, FlatList, Text } from 'react-native'
+import Progress, { Statistic } from './Progress'
 import { State as TodosState } from '../Home/Todos'
+import { COLOR } from '../../../constants'
+import Todo from '../../pages/Home/Todo'
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  headerText: {
+    color: COLOR.WHITE,
+    fontSize: 24,
+  },
+  headerTextContainer: {
+    paddingLeft: 20,
+    marginTop: 20,
+    marginBottom: 8,
+  },
+  separator: {
+    height: 1,
+    backgroundColor: COLOR.SECONDARY,
   },
 })
 
 interface Props {
-  statistics: {
-    numofAll: number
-    numofCompleted: number
-    numofUncompleted: number
-  }
+  statistics: Statistic
   histories: TodosState
 }
 
 function Statics(props: Props) {
   const { statistics, histories } = props
   return (
-    <ScrollView style={styles.container}>
-      <Progress {...statistics} />
-      <Histories histories={histories} />
-    </ScrollView>
+    <FlatList
+      data={histories}
+      renderItem={({ item }) => <Todo state={item} forbiddenEdit={true} />}
+      ListHeaderComponent={
+        <View>
+          <Progress {...statistics} />
+          <View style={styles.headerTextContainer}>
+            <Text style={styles.headerText}>History</Text>
+          </View>
+        </View>
+      }
+      ItemSeparatorComponent={() => <View style={styles.separator} />}
+    />
   )
 }
 

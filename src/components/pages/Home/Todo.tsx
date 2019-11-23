@@ -4,10 +4,10 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from 'react-navigation-hooks'
 import { SwipeRow } from 'react-native-swipe-list-view'
 import analytics from '@react-native-firebase/analytics'
-import Button from '../../../components/Button'
 import { uiContext, userContext } from '../../../contexts'
 import { DETAIL } from '../../../constants/path'
 import { COLOR } from '../../../constants'
+import { DoneButton, DeleteButton } from './SwipeButtons'
 
 export interface Actions {
   removeTodo: (userId: string, id: string) => void
@@ -19,10 +19,14 @@ export type State = {
   detail?: string
   isDone?: boolean
 }
-interface Props {
+interface EnableEditProps {
   actions: Actions
   state: State
-  forbiddenEdit?: boolean
+  forbiddenEdit: false
+}
+interface DisableEditProps {
+  state: State
+  forbiddenEdit: true
 }
 
 const styles = StyleSheet.create({
@@ -36,23 +40,6 @@ const styles = StyleSheet.create({
   },
   displayContent: {
     paddingHorizontal: 20,
-  },
-  leftButton: {
-    height: 120,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: COLOR.PRIMARY,
-    width: 80,
-  },
-  done: {
-    backgroundColor: COLOR.MAIN_DARK,
-  },
-  rightButton: {
-    height: 120,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: COLOR.CAUTION,
-    width: 80,
   },
   title: {
     fontWeight: 'bold',
@@ -71,20 +58,15 @@ const styles = StyleSheet.create({
   },
 })
 
-export default function Todo(props: Props) {
-  const { state, actions, forbiddenEdit } = props
-  const { userState } = React.useContext(userContext)
-  const { navigate } = useNavigation()
-  const rowRef = React.useRef<any>(null)
-  const gotoDetail = React.useCallback(() => navigate(DETAIL, { ...state, forbiddenEdit }), [
-    forbiddenEdit,
-    navigate,
-    state,
-  ])
+function useToggle(props: EnableEditProps | DisableEditProps) {
+  const { state } = props
   const { setError } = React.useContext(uiContext)
+  const { userState } = React.useContext(userContext)
+  const rowRef = React.useRef<any>(null)
+  // @todo ちょっとしらべます
   const toggleTodo = React.useCallback(async () => {
     try {
-      actions.toggleTodo(userState.id, state.id)
+      !props.forbiddenEdit && props.actions.toggleTodo(userState.id, state.id)
       const eventName = state.isDone ? 'complete_todo' : 'uncomplete_todo'
       await analytics().logEvent(eventName, {
         id: state.id,
@@ -94,7 +76,28 @@ export default function Todo(props: Props) {
     } catch (error) {
       setError(error)
     }
-  }, [actions, state.isDone, state.id, state.title, setError, userState.id])
+  }, [props.forbiddenEdit, props.actions, userState.id, state.id, state.isDone, state.title, setError])
+  const removeTodo = React.useCallback(() => {
+    !props.forbiddenEdit && props.actions.removeTodo(userState.id, state.id)
+  }, [props.forbiddenEdit, props.actions, userState.id, state.id])
+
+  return {
+    toggleTodo,
+    rowRef,
+    removeTodo,
+  }
+}
+
+export default function Todo(props: EnableEditProps | DisableEditProps) {
+  const { state, forbiddenEdit } = props
+  const { navigate } = useNavigation()
+  const gotoDetail = React.useCallback(() => navigate(DETAIL, { ...state, forbiddenEdit }), [
+    forbiddenEdit,
+    navigate,
+    state,
+  ])
+  const { toggleTodo, rowRef, removeTodo } = useToggle(props)
+
   return (
     <SwipeRow
       disableLeftSwipe={forbiddenEdit}
@@ -104,18 +107,8 @@ export default function Todo(props: Props) {
       ref={rowRef}
     >
       <View style={[styles.contentContainer]}>
-        {state.isDone ? (
-          <Button onPress={toggleTodo} icon="check" style={styles.leftButton} />
-        ) : (
-          <Button onPress={toggleTodo} icon="restore" style={[styles.leftButton, styles.done]} />
-        )}
-        <Button
-          onPress={() => {
-            actions.removeTodo(userState.id, state.id)
-          }}
-          icon="delete"
-          style={styles.rightButton}
-        />
+        <DoneButton state={state} onPress={toggleTodo} />
+        <DeleteButton onPress={removeTodo} />
       </View>
       <TouchableHighlight style={[styles.contentContainer, styles.displayContent]} onPress={gotoDetail}>
         <View style={styles.contentContainer}>

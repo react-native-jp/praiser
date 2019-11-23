@@ -15,9 +15,9 @@ const styles = StyleSheet.create({
     color: COLOR.WHITE,
     fontSize: 24,
   },
-  headerTextContainer:{
+  headerTextContainer: {
     paddingLeft: 20,
-    marginBottom: 8
+    marginBottom: 8,
   },
   text: {
     color: COLOR.WHITE,
@@ -33,35 +33,37 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     flexDirection: 'row',
   },
+  progress: {
+    height: 200,
+    width: 200,
+  },
 })
 
-interface Props {
+export interface Statistic {
   numofCompleted: number
   numofAll: number
   numofUncompleted: number
+  completedRatio: number
+  uncompletedRatio: number
 }
 
-export default function Progress(props: Props) {
-  const { numofAll, numofCompleted, numofUncompleted } = props
+export default function Progress(props: Statistic) {
+  const { uncompletedRatio, completedRatio } = props
   return (
     <View style={styles.ratioArea}>
       <View style={styles.headerTextContainer}>
         <Text style={styles.headerText}>Progress</Text>
       </View>
       <View style={styles.graphContainer}>
-        <ProgressCircle
-          style={{ height: 200, width: 200 }}
-          progress={numofCompleted / numofAll}
-          progressColor={COLOR.PRIMARY}
-        />
+        <ProgressCircle style={styles.progress} progress={completedRatio} progressColor={COLOR.PRIMARY} />
         <View style={styles.textContainer}>
           <View>
             <Text style={styles.text}>Done</Text>
             <Text style={styles.text}>UnDone</Text>
           </View>
           <View>
-            <Text style={[styles.text, styles.numberText]}>{Math.round((numofCompleted / numofAll) * 100) / 100}</Text>
-            <Text style={[styles.text, styles.numberText]}>{Math.round((numofUncompleted / numofAll) * 100) / 100}</Text>
+            <Text style={[styles.text, styles.numberText]}>{completedRatio}</Text>
+            <Text style={[styles.text, styles.numberText]}>{uncompletedRatio}</Text>
           </View>
         </View>
       </View>
