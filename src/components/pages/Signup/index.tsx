@@ -13,7 +13,7 @@ import * as LocalStore from '../../../lib/local-store'
 import registerUserToFirebase from '../../../lib/firebase/register-user'
 import Button from '../../Button'
 import TextField, { dismiss } from '../../TextField'
-import testIDs from "../../../constants/testIDs";
+import testIDs from '../../../constants/testIDs'
 
 const styles = StyleSheet.create({
   container: {

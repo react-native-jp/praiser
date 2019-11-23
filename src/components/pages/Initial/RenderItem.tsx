@@ -45,11 +45,9 @@ const styles = StyleSheet.create({
   },
 })
 
-function RenderItem({ onPress, item }: { item: { text: string, testID: string }; onPress: () => void }) {
+function RenderItem({ onPress, item }: { item: { text: string; testID: string }; onPress: () => void }) {
   return (
-    <View
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <View style={styles.textContainer}>
         <View style={styles.imageContainer}>
           <Image source={reactImage} resizeMode="contain" style={styles.image} />
@@ -58,11 +56,7 @@ function RenderItem({ onPress, item }: { item: { text: string, testID: string };
           <View>
             <Text style={styles.text}>{item.text}</Text>
           </View>
-          <Button
-            testID={item.testID}
-            onPress={onPress}
-            label="次へ"
-          />
+          <Button testID={item.testID} onPress={onPress} label="次へ" />
         </View>
       </View>
     </View>

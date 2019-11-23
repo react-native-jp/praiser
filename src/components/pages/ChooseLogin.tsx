@@ -6,7 +6,7 @@ import Button from '../../components/Button'
 import reactImage from '../../../assets/reactIcon.jpg'
 import { SIGN_IN, SIGN_UP } from '../../constants/path'
 import { COLOR } from '../../constants'
-import testIDs from "../../constants/testIDs";
+import testIDs from '../../constants/testIDs'
 
 const { width } = Dimensions.get('window')
 
@@ -49,18 +49,8 @@ function ChooseLogin() {
         <Image source={reactImage} resizeMode="contain" style={styles.image} />
       </View>
       <View style={styles.contentContainer}>
-        <Button
-          testID={testIDs.SIGN_IN_BTN}
-          onPress={() => navigate(SIGN_IN)}
-          style={styles.button}
-          label="Sign in"
-        />
-        <Button
-          testID={testIDs.SIGN_UP_BTN}
-          onPress={() => navigate(SIGN_UP)}
-          style={styles.button}
-          label="Sign up"
-        />
+        <Button testID={testIDs.SIGN_IN_BTN} onPress={() => navigate(SIGN_IN)} style={styles.button} label="Sign in" />
+        <Button testID={testIDs.SIGN_UP_BTN} onPress={() => navigate(SIGN_UP)} style={styles.button} label="Sign up" />
       </View>
     </View>
   )

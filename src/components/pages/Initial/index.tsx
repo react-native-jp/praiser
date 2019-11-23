@@ -7,7 +7,7 @@ import RenderItem from './RenderItem'
 import { CHOOSE_LOGIN } from '../../../constants/path'
 import { openFirstLaunch } from '../../../lib/local-store'
 import { COLOR } from '../../../constants'
-import testIDs from "../../../constants/testIDs";
+import testIDs from '../../../constants/testIDs'
 
 const { width } = Dimensions.get('window')
 

@@ -10,7 +10,8 @@
     "coverage": "jest --coverage",
     "lint": "eslint index.js $(find src -name '*.ts' -a -not -name '*.d.ts' -o -name '*.tsx')",
     "type-check": "tsc --noEmit",
-    "generate-typings": "node bin/generate-typings.js > src/@types/react-native-dotenv.d.ts"
+    "generate-typings": "node bin/generate-typings.js > src/@types/react-native-dotenv.d.ts",
+    "test-e2e-ios": "node ./scripts/test-e2e --ios"
   },
   "dependencies": {
     "@react-native-community/async-storage": "1.6.2",
@@ -67,6 +68,7 @@
     "js-yaml": "3.13.1",
     "metro-react-native-babel-preset": "0.56.3",
     "prettier": "1.18.2",
+    "react-devtools": "^4.2.0",
     "react-test-renderer": "16.11.0",
     "typescript": "3.6.4"
   },
@@ -74,7 +76,7 @@
     "preset": "react-native"
   },
   "detox": {
-      "configurations": {
+    "configurations": {
       "ios.sim.debug": {
         "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/praiser.app",
         "build": "xcodebuild -workspace ios/praiser.xcworkspace -scheme praiser -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
@@ -82,8 +84,8 @@
         "device": {
           "type": "iPhone 11 Pro"
         }
-    }
-  },
+      }
+    },
     "test-runner": "jest"
   }
 }

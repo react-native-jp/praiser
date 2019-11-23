@@ -14,7 +14,7 @@ import * as LocalStore from '../../../lib/local-store'
 import signInWithPasswordToFirebase from '../../../lib/firebase/sign-in-with-password'
 import Button from '../../Button'
 import SignInWithGoogle from './SignInWithGoogle'
-import testIDs from "../../../constants/testIDs";
+import testIDs from '../../../constants/testIDs'
 
 const styles = StyleSheet.create({
   container: {
