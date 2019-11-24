@@ -61,7 +61,7 @@ export default function Input(props: Props) {
             <IconButton icon="close" size={30} color={COLOR.PRIMARY} onPress={handleClose} style={styles.iconButton} />
             <TextField label="Title" value={title.value} onChangeText={title.onChangeText} style={styles.text} />
             <TextField label="Detail" value={detail.value} onChangeText={detail.onChangeText} style={styles.text} />
-            <Button onPress={addTodo} label="Add" style={styles.button} />
+            <Button onPress={addTodo} label="Add" style={styles.button} disabled={!title.value} />
           </View>
         </TouchableWithoutFeedback>
       </SafeAreaView>

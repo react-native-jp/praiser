@@ -42,7 +42,8 @@ export function DoneButton(props: DoneProps) {
   return (
     <Button
       onPress={onPress}
-      icon={isDone ? 'check' : 'restore'}
+      icon={isDone ? 'restore' : 'check'}
+      color={isDone ? COLOR.MAIN_DARK : COLOR.PRIMARY}
       style={isDone ? [styles.leftButton, styles.done] : styles.leftButton}
     />
   )
@@ -54,5 +55,5 @@ interface DeleteProps {
 
 export function DeleteButton(props: DeleteProps) {
   const { onPress } = props
-  return <Button onPress={onPress} icon="delete" style={styles.rightButton} />
+  return <Button onPress={onPress} icon="delete" style={styles.rightButton} color={COLOR.CAUTION} />
 }

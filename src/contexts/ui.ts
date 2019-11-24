@@ -17,6 +17,7 @@ const uiContext = React.createContext({
   snackBar: {
     visible: false,
     message: '',
+    label: '',
   },
   setSnackBar: (_: SnackBar) => {},
 })

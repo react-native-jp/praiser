@@ -76,10 +76,18 @@ function useToggle(props: EnableEditProps | DisableEditProps) {
     } catch (error) {
       setError(error)
     }
-  }, [props.forbiddenEdit, props.actions, userState.id, state.id, state.isDone, state.title, setError])
+  }, [
+    props.forbiddenEdit,
+    !props.forbiddenEdit && props.actions,
+    userState.id,
+    state.id,
+    state.isDone,
+    state.title,
+    setError,
+  ])
   const removeTodo = React.useCallback(() => {
     !props.forbiddenEdit && props.actions.removeTodo(userState.id, state.id)
-  }, [props.forbiddenEdit, props.actions, userState.id, state.id])
+  }, [props.forbiddenEdit, !props.forbiddenEdit && props.actions, userState.id, state.id])
 
   return {
     toggleTodo,
@@ -97,7 +105,6 @@ export default function Todo(props: EnableEditProps | DisableEditProps) {
     state,
   ])
   const { toggleTodo, rowRef, removeTodo } = useToggle(props)
-
   return (
     <SwipeRow
       disableLeftSwipe={forbiddenEdit}
@@ -113,8 +120,8 @@ export default function Todo(props: EnableEditProps | DisableEditProps) {
       <TouchableHighlight style={[styles.contentContainer, styles.displayContent]} onPress={gotoDetail}>
         <View style={styles.contentContainer}>
           <View>
-            <Text style={[styles.title, !forbiddenEdit && !state.isDone ? styles.doneText : null]}>{state.title}</Text>
-            {state.detail && <Text style={styles.detail}>{state.detail}</Text>}
+            <Text style={[styles.title, !forbiddenEdit && state.isDone ? styles.doneText : null]}>{state.title}</Text>
+            {!!state.detail && <Text style={styles.detail}>{state.detail}</Text>}
           </View>
           <TouchableOpacity style={styles.detailButton} onPress={toggleTodo}>
             <Icon name="angle-right" size={32} color={COLOR.WHITE} />
