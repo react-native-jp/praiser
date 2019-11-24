@@ -73,7 +73,12 @@ function SignUp(props: Props) {
           secureTextEntry={true}
           testID={testIDs.SIGN_UP_PASSWORD}
         />
-        <Button onPress={registerUser} style={styles.button} label="Register" testID={testIDs.SIGN_UP_REGISTER_BUTTON} />
+        <Button
+          onPress={registerUser}
+          style={styles.button}
+          label="Register"
+          testID={testIDs.SIGN_UP_REGISTER_BUTTON}
+        />
       </View>
     </TouchableWithoutFeedback>
   )

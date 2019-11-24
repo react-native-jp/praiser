@@ -5,7 +5,7 @@ import analytics from '@react-native-firebase/analytics'
 import Input from '../../../containers/Input'
 import Todos, { Actions as TodosActions, State as TodosState } from './Todos'
 import { COLOR } from '../../../constants'
-import testIDs from "../../../constants/testIDs";
+import testIDs from '../../../constants/testIDs'
 
 const styles = StyleSheet.create({
   container: {

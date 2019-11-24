@@ -11,7 +11,7 @@ import formatDate from '../../../lib/format-date'
 import Button from '../../../components/Button'
 import LabelViewContainer from './LabelValueContainer'
 import { COLOR } from '../../../constants'
-import testIDs from "../../../constants/testIDs";
+import testIDs from '../../../constants/testIDs'
 
 const styles = StyleSheet.create({
   container: {
