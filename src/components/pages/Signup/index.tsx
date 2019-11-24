@@ -62,6 +62,7 @@ function SignUp(props: Props) {
           onChangeText={mailAddress.onChangeText}
           style={styles.text}
           autoCompleteType="email"
+          testID={testIDs.SIGN_UP_EMAIL}
         />
         <TextField
           label="password"
@@ -70,8 +71,9 @@ function SignUp(props: Props) {
           style={styles.text}
           autoCompleteType="password"
           secureTextEntry={true}
+          testID={testIDs.SIGN_UP_PASSWORD}
         />
-        <Button onPress={registerUser} style={styles.button} label="Register" />
+        <Button onPress={registerUser} style={styles.button} label="Register" testID={testIDs.SIGN_UP_REGISTER_BUTTON} />
       </View>
     </TouchableWithoutFeedback>
   )

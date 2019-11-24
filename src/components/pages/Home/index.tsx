@@ -5,6 +5,7 @@ import analytics from '@react-native-firebase/analytics'
 import Input from '../../../containers/Input'
 import Todos, { Actions as TodosActions, State as TodosState } from './Todos'
 import { COLOR } from '../../../constants'
+import testIDs from "../../../constants/testIDs";
 
 const styles = StyleSheet.create({
   container: {
@@ -50,7 +51,7 @@ export default function Home(props: Props) {
     logViewItemList()
   }, [])
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID={testIDs.HOME}>
       <Input visible={visible} handleClose={() => changeVisible(false)} />
 
       <Todos {...props} />

@@ -73,6 +73,7 @@ function SignUp(props: Props) {
             onChangeText={mailAddress.onChangeText}
             style={styles.text}
             autoCompleteType="email"
+            testID={testIDs.SIGN_IN_EMAIL}
           />
           <TextField
             label="password"
@@ -81,6 +82,7 @@ function SignUp(props: Props) {
             style={styles.text}
             autoCompleteType="password"
             secureTextEntry={true}
+            testID={testIDs.SIGN_IN_PASSWORD}
           />
         </View>
         <View style={styles.buttonContainer}>
