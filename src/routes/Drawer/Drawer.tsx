@@ -10,23 +10,46 @@ interface DrawerItemProps {
   title: string
   onPress: () => void
   testID?: string
+  itemKey: string
+  activeItemKey: string
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLOR.BACKGROUND,
+    paddingVertical: 4,
   },
   itemContainer: {
     height: 60,
-    justifyContent: 'center',
+    flexDirection: 'row',
     alignItems: 'center',
+  },
+  itemText: {
+    margin: 16,
+    fontWeight: 'bold',
   },
 })
 
+const activeColor = '#2196f3'
+const inactiveColor = 'rgba(0, 0, 0, .87)'
+const activeBackgroundColor = 'rgba(0, 0, 0, .04)'
+const inactiveBackgroundColor = 'transparent'
+
 const DrawerItem = (props: DrawerItemProps) => {
+  const focused = props.activeItemKey === props.itemKey
+
+  const textStyle = React.useMemo(() => {
+    const color = focused ? activeColor : inactiveColor
+    return [styles.itemText, { color }]
+  }, [focused])
+  const containerStyle = React.useMemo(() => {
+    const backgroundColor = focused ? activeBackgroundColor : inactiveBackgroundColor
+    return [styles.itemContainer, focused && { backgroundColor }]
+  }, [focused])
+
   return (
-    <TouchableOpacity onPress={props.onPress} style={styles.itemContainer} testID={props.testID}>
-      <Text>{props.title}</Text>
+    <TouchableOpacity onPress={props.onPress} style={containerStyle} testID={props.testID}>
+      <Text style={textStyle}>{props.title}</Text>
     </TouchableOpacity>
   )
 }
@@ -43,13 +66,14 @@ function Drawer(props: any) {
   return (
     <ScrollView alwaysBounceVertical={false} style={styles.container} testID={testIDs.MENU_DRAWER_ITEMS}>
       <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
-        {/*<DrawerItems {...props} testID={testIDs.MENU_DRAWER_ITEMS} />*/}
-        {props.items.map(item => (
+        {props.items.map((item: any) => (
           <DrawerItem
             title={item.key}
-            key={item.key}
             testID={`DRAWER_ITEM_${item.key}`}
             onPress={() => onPressItem(item.key)}
+            key={item.key}
+            itemKey={item.key}
+            activeItemKey={props.activeItemKey}
           />
         ))}
       </SafeAreaView>
