@@ -2,7 +2,7 @@ import * as React from 'react'
 import { ActivityIndicator, StyleSheet, View } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import { firebase } from '@react-native-firebase/auth'
-import { HOME, INITIAL } from '../../constants/path'
+import { HOME, INITIAL, CHOOSE_LOGIN } from '../../constants/path'
 import userContext from '../../contexts/user'
 import uiContext from '../../contexts/ui'
 import * as LocalStore from '../../lib/local-store'
@@ -36,7 +36,7 @@ export default function Loading(props: Props) {
           LocalStore.isOpendFirstLaunch()
             .then(isOpened => {
               if (!isOpened) {
-                navigate(INITIAL)
+                navigate(CHOOSE_LOGIN)
               } else {
                 navigate(INITIAL)
               }
@@ -44,6 +44,7 @@ export default function Loading(props: Props) {
             .catch(e => {
               return Promise.reject(new Error(e))
             })
+          return Promise.resolve()
         }
 
         setUserState(userInformation)

@@ -41,6 +41,7 @@ export default function Detail(props: Props) {
   const { setSnackBar } = React.useContext(uiContext)
   const detailInitialValue = useNavigation().getParam('detail')
   const titleInitialValue = useNavigation().getParam('title')
+  const forbiddenEdit = useNavigation().getParam('forbiddenEdit')
   const detail = useTextInput(detailInitialValue)
   const title = useTextInput(titleInitialValue)
   const onSubmit = React.useCallback(() => {
@@ -68,9 +69,21 @@ export default function Detail(props: Props) {
 
   return (
     <View style={styles.container}>
-      <TextField label="title" value={title.value} onChangeText={title.onChangeText} style={styles.textField} />
-      <TextField label="detail" value={detail.value} onChangeText={detail.onChangeText} style={styles.textField} />
-      <Button onPress={onSubmit} label="Submit" style={styles.button} />
+      <TextField
+        disabled={forbiddenEdit}
+        label="title"
+        value={title.value}
+        onChangeText={title.onChangeText}
+        style={styles.textField}
+      />
+      <TextField
+        disabled={forbiddenEdit}
+        label="detail"
+        value={detail.value}
+        onChangeText={detail.onChangeText}
+        style={styles.textField}
+      />
+      {!forbiddenEdit && <Button onPress={onSubmit} label="Submit" style={styles.button} />}
     </View>
   )
 }
