@@ -110,7 +110,7 @@ export default function Todo(props: Props) {
         <View style={styles.contentContainer}>
           <View>
             <Text style={[styles.title, !props.state.isDone ? styles.doneText : null]}>{props.state.title}</Text>
-            {props.state.detail && <Text style={styles.detail}>{props.state.detail}</Text>}
+            <Text style={styles.detail}>{props.state.detail}</Text>
           </View>
           <TouchableOpacity style={styles.detailButton} onPress={toggleTodo}>
             <Icon name="angle-right" size={32} color={COLOR.WHITE} />
