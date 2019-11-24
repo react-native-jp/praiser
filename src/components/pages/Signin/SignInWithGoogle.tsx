@@ -11,6 +11,7 @@ import signInWithGoogle from '../../../lib/firebase/sign-in-with-google'
 import * as LocalStore from '../../../lib/local-store'
 import useNetworker from '../../../lib/hooks/use-networker'
 import Button from '../../Button'
+import testIDs from "../../../constants/testIDs";
 
 const styles = StyleSheet.create({
   button: {
@@ -47,5 +48,5 @@ export default function SignInWithGoogle(props: Props) {
       setError(e)
     }
   }, [navigate, networker, setTodos, setUserState, setError])
-  return <Button onPress={loginWithGoogle} style={styles.button} icon="google" label="Sign In with Google" />
+  return <Button onPress={loginWithGoogle} style={styles.button} icon="google" label="Sign In with Google" testID={testIDs.SIGN_IN_WITH_GOOGLE_BUTTON} />
 }

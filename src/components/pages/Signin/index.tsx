@@ -87,7 +87,7 @@ function SignUp(props: Props) {
         </View>
         <View style={styles.buttonContainer}>
           <SignInWithGoogle {...props} />
-          <Button onPress={signInWithPassword} label="SignIn" style={styles.button} />
+          <Button onPress={signInWithPassword} label="SignIn" style={styles.button} testID={testIDs.SIGN_IN_EMAIL_BUTTON} />
         </View>
       </View>
     </TouchableWithoutFeedback>

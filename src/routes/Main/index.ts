@@ -11,6 +11,7 @@ import { headerStyle, headerTintColor } from '../Header'
 import { TabBar } from '../TabBar'
 import { createStackNavigator } from 'react-navigation-stack'
 import { COLOR } from '../../constants'
+import Drawer from "../Drawer/Drawer";
 
 const makeWithDrawerRouter = (routeObject: object) =>
   createDrawerNavigator({
@@ -18,7 +19,14 @@ const makeWithDrawerRouter = (routeObject: object) =>
     [USER_INFO]: {
       screen: UserInfo,
     },
-  })
+  }, {
+    contentComponent: Drawer,
+    contentOptions: {
+      style: {
+        backgroundColor: 'black',
+      }
+    },
+});
 
 const cardStyle = {
   backgroundColor: COLOR.MAIN,
