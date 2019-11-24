@@ -6,11 +6,15 @@ const random = (() => {
 })();
 
 describe('All', () => {
+  afterAll(async () => {
+    await device.resetContentAndSettings().then(() => console.info(' 🧹 Reset iOS All Settings 🧹'));
+  });
+
   describe('Go to ChooseLogin', () => {
     beforeAll(async () => {
-      await device.reloadReactNative();
-      // await device.relaunchApp();
+      await device.launchApp();
     });
+
     it('Initialページが表示される', async () => {
       await expect(elementById(testIDs.INITIAL)).toBeVisible();
       await expect(elementById(testIDs.INITIAL_NEXT_BUTTON1)).toBeVisible();
@@ -50,7 +54,7 @@ describe('All', () => {
       await expect(elementById(testIDs.SIGN_IN_PASSWORD)).toBeVisible();
     });
 
-    it('会員登録できる', async () => {
+    it('アカウントを登録できる', async () => {
       await pressBack();
       await elementById(testIDs.SIGN_UP_BTN).tap();
       await expect(elementById(testIDs.SIGN_UP)).toBeVisible();
@@ -62,6 +66,6 @@ describe('All', () => {
       await elementById(testIDs.SIGN_UP_REGISTER_BUTTON).tap();
 
       await expect(elementById(testIDs.HOME)).toBeVisible();
-    })
+    });
   });
 });
