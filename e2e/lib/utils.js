@@ -12,4 +12,5 @@ module.exports = {
       return element(by.text('Back')).tap();
     }
   },
+  delay: (ms: number): Promise<void> => new Promise((res: any) => setTimeout(res, ms)),
 };

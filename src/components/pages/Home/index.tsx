@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
     elevation: 7,
   },
-})
+});
 
 interface Props {
   todos: TodosState
@@ -55,7 +55,7 @@ export default function Home(props: Props) {
       <Input visible={visible} handleClose={() => changeVisible(false)} />
 
       <Todos {...props} />
-      <TouchableOpacity onPress={gotoInput} style={styles.button}>
+      <TouchableOpacity onPress={gotoInput} style={styles.button} testID={testIDs.TODO_OPEN_INPUT_BUTTON}>
         <Icon color={COLOR.PRIMARY} size={24} name="plus" />
       </TouchableOpacity>
     </View>

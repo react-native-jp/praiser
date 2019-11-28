@@ -6,6 +6,7 @@ import TextField from '../../../components/TextField'
 import useTextInput from '../../../lib/hooks/use-TextInput'
 import Button from '../../../components/Button'
 import { userContext, uiContext } from '../../../contexts'
+import testIDs from "../../../constants/testIDs";
 
 const styles = StyleSheet.create({
   container: {
@@ -68,13 +69,14 @@ export default function Detail(props: Props) {
   }, [id, titleInitialValue])
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID={testIDs.TODO_DETAIL_SCREEN}>
       <TextField
         disabled={forbiddenEdit}
         label="title"
         value={title.value}
         onChangeText={title.onChangeText}
         style={styles.textField}
+        testID={testIDs.TODO_DETAIL_INPUT_TITLE}
       />
       <TextField
         disabled={forbiddenEdit}
@@ -82,8 +84,9 @@ export default function Detail(props: Props) {
         value={detail.value}
         onChangeText={detail.onChangeText}
         style={styles.textField}
+        testID={testIDs.TODO_DETAIL_INPUT_DETAIL}
       />
-      {!forbiddenEdit && <Button onPress={onSubmit} label="Submit" style={styles.button} />}
+      {!forbiddenEdit && <Button onPress={onSubmit} label="Submit" style={styles.button} testID={testIDs.TODO_DETAIL_SUBMIT_BUTTON}/>}
     </View>
   )
 }
