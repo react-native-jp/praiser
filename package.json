@@ -8,7 +8,7 @@
     "start": "react-native start",
     "test": "jest",
     "coverage": "jest --coverage",
-    "lint": "eslint index.ts $(find src -name '*.ts' -a -not -name '*.d.ts' -o -name '*.tsx')",
+    "lint": "eslint index.js $(find src -name '*.ts' -a -not -name '*.d.ts' -o -name '*.tsx')",
     "type-check": "tsc --noEmit",
     "generate-typings": "node bin/generate-typings.js > src/@types/react-native-dotenv.d.ts"
   },
