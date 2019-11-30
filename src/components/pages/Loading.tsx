@@ -36,9 +36,9 @@ export default function Loading(props: Props) {
           LocalStore.isOpendFirstLaunch()
             .then(isOpened => {
               if (!isOpened) {
-                navigate(CHOOSE_LOGIN)
-              } else {
                 navigate(INITIAL)
+              } else {
+                navigate(CHOOSE_LOGIN)
               }
             })
             .catch(e => {
