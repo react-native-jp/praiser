@@ -2,9 +2,7 @@ import testIDs from "../src/constants/testIDs";
 import { elementById, pressBack, delay, elementByLabel } from './lib/utils';
 
 
-const random = (() =>
-  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
-)();
+const random = new Date().getTime();
 
 describe('All', () => {
   afterAll(async () => {
@@ -14,39 +12,37 @@ describe('All', () => {
   describe('Go to ChooseLogin', () => {
     beforeAll(async () => {
       await device.launchApp();
-      console.debug(Object.keys(process.env).includes('DETOX_START_TIMESTAMP'))
     });
 
-    xit('Initialページが表示される', async () => {
+    it('Initialページが表示される', async () => {
       await expect(elementById(testIDs.INITIAL)).toBeVisible();
       await expect(elementById(testIDs.INITIAL_NEXT_BUTTON1)).toBeVisible();
     });
 
-    xit('カルーセル2ページ目が表示される', async () => {
+    it('カルーセル2ページ目が表示される', async () => {
       await elementById(testIDs.INITIAL_NEXT_BUTTON1).tap();
       await expect(elementById(testIDs.INITIAL_NEXT_BUTTON2)).toBeVisible();
     });
 
-    xit('カルーセル3ページ目が表示される', async () => {
+    it('カルーセル3ページ目が表示される', async () => {
       await elementById(testIDs.INITIAL_NEXT_BUTTON2).tap();
       await expect(elementById(testIDs.INITIAL_NEXT_BUTTON3)).toBeVisible();
     });
 
-    xit('ChooseLoginページが表示される', async () => {
+    it('ChooseLoginページが表示される', async () => {
       await elementById(testIDs.INITIAL_NEXT_BUTTON3).tap();
       await expect(elementById(testIDs.CHOOSE_LOGIN)).toBeVisible();
     });
 
-    xit('カルーセルの表示は一度きり', async () => {
-      await device.reloadReactNative();
+    it('カルーセルの表示は一度きり', async () => {
+      await device.launchApp({newInstance: true});
 
       await expect(elementById(testIDs.INITIAL)).toBeNotVisible();
       await expect(elementById(testIDs.CHOOSE_LOGIN)).toBeVisible();
     });
   });
 
-
-  describe('Go to SignUp', function() {
+  describe('Go to Home', function() {
     let email;
     let password;
 
@@ -57,7 +53,7 @@ describe('All', () => {
 
     it('SignUpページが表示される', async () => {
       await expect(elementById(testIDs.CHOOSE_LOGIN)).toBeVisible();
-      await elementById(testIDs.SIGN_UP_BTN).tap();
+      await elementById(testIDs.SIGN_UP_BUTTON).tap();
       await expect(elementById(testIDs.SIGN_UP)).toBeVisible();
       await expect(elementById(testIDs.SIGN_UP_EMAIL)).toBeVisible();
       await expect(elementById(testIDs.SIGN_UP_PASSWORD)).toBeVisible();
@@ -65,7 +61,7 @@ describe('All', () => {
 
     it('SignInページが表示される', async () => {
       await pressBack();
-      await elementById(testIDs.SIGN_IN_BTN).tap();
+      await elementById(testIDs.SIGN_IN_BUTTON).tap();
       await expect(elementById(testIDs.SIGN_IN)).toBeVisible();
       await expect(elementById(testIDs.SIGN_IN_EMAIL)).toBeVisible();
       await expect(elementById(testIDs.SIGN_IN_PASSWORD)).toBeVisible();
@@ -73,7 +69,7 @@ describe('All', () => {
 
     it('アカウントを登録できる', async () => {
       await pressBack();
-      await elementById(testIDs.SIGN_UP_BTN).tap();
+      await elementById(testIDs.SIGN_UP_BUTTON).tap();
       await expect(elementById(testIDs.SIGN_UP)).toBeVisible();
       await expect(elementById(testIDs.SIGN_UP_EMAIL)).toBeVisible();
       await expect(elementById(testIDs.SIGN_UP_PASSWORD)).toBeVisible();
@@ -96,7 +92,7 @@ describe('All', () => {
     });
 
     it('サインインできる', async () => {
-      await elementById(testIDs.SIGN_IN_BTN).tap();
+      await elementById(testIDs.SIGN_IN_BUTTON).tap();
 
       await expect(elementById(testIDs.SIGN_IN)).toBeVisible();
       await elementById(testIDs.SIGN_IN_EMAIL).typeText(email);
@@ -144,7 +140,8 @@ describe('All', () => {
       await elementById(testIDs.TODO_DETAIL_INPUT_DETAIL).replaceText('卵を買う\n');
       await elementById(testIDs.TODO_DETAIL_SUBMIT_BUTTON).tap();
 
-      await element(by.id("header-back")).tap(); // react-navigationの戻る
+      // await element(by.id("header-back")).tap(); // react-navigationの戻る
+      await pressBack();
       await expect(elementById(testIDs.HOME)).toBeVisible();
     });
 

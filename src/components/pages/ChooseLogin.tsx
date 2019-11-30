@@ -49,8 +49,8 @@ function ChooseLogin() {
         <Image source={reactImage} resizeMode="contain" style={styles.image} />
       </View>
       <View style={styles.contentContainer}>
-        <Button testID={testIDs.SIGN_IN_BTN} onPress={() => navigate(SIGN_IN)} style={styles.button} label="Sign in" />
-        <Button testID={testIDs.SIGN_UP_BTN} onPress={() => navigate(SIGN_UP)} style={styles.button} label="Sign up" />
+        <Button testID={testIDs.SIGN_IN_BUTTON} onPress={() => navigate(SIGN_IN)} style={styles.button} label="Sign in" />
+        <Button testID={testIDs.SIGN_UP_BUTTON} onPress={() => navigate(SIGN_UP)} style={styles.button} label="Sign up" />
       </View>
     </View>
   )
