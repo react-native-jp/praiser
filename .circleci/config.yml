@@ -28,9 +28,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
   test:
-    docker:
-      - image: circleci/node:10.16
-    working_directory: ~/repo
+    executor: node-lts
     steps:
       - setup
       - run:
