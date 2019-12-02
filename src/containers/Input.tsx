@@ -7,8 +7,6 @@ import * as Todos from '../usecases/todos'
 import { Input } from '../components/pages'
 import getTodos from '../selectors/get-todos'
 
-console.log(Input)
-
 export const mapStateToProps = (state: AppState) => ({
   todos: getTodos(state),
 })
