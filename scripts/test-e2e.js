@@ -1,4 +1,4 @@
-const { execSync } = require('./utils');
+const { execSync } = require('shell-utils').exec;
 
 const android = process.argv.includes('--android');
 const release = process.argv.includes('--release');

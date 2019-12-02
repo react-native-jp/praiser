@@ -13,5 +13,4 @@ module.exports = {
       return element(by.id("header-back")).tap();
     }
   },
-  delay: (ms: number): Promise<void> => new Promise((res: any) => setTimeout(res, ms)),
 };

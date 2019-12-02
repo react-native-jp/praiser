@@ -9,7 +9,7 @@ import TextField, { dismiss } from '../TextField'
 import Button from '../Button'
 import { COLOR } from '../../constants'
 import { Todo } from '../../domain/entities'
-import testIDs from "../../constants/testIDs";
+import testIDs from '../../constants/testIDs'
 
 const styles = StyleSheet.create({
   container: {
@@ -59,10 +59,35 @@ export default function Input(props: Props) {
       <SafeAreaView style={styles.container}>
         <TouchableWithoutFeedback onPress={dismiss} testID={testIDs.TODO_INPUT_DISMISS}>
           <View style={styles.container} testID={testIDs.TODO_INPUT_SCREEN}>
-            <IconButton icon="close" size={30} color={COLOR.PRIMARY} onPress={handleClose} style={styles.iconButton} testID={testIDs.TODO_INPUT_CLOSE}/>
-            <TextField label="Title" value={title.value} onChangeText={title.onChangeText} style={styles.text} testID={testIDs.TODO_INPUT_TITLE}/>
-            <TextField label="Detail" value={detail.value} onChangeText={detail.onChangeText} style={styles.text} testID={testIDs.TODO_INPUT_DETAIL} />
-            <Button onPress={addTodo} label="Add" style={styles.button} disabled={!title.value} testID={testIDs.TODO_INPUT_ADD_BUTTON} />
+            <IconButton
+              icon="close"
+              size={30}
+              color={COLOR.PRIMARY}
+              onPress={handleClose}
+              style={styles.iconButton}
+              testID={testIDs.TODO_INPUT_CLOSE}
+            />
+            <TextField
+              label="Title"
+              value={title.value}
+              onChangeText={title.onChangeText}
+              style={styles.text}
+              testID={testIDs.TODO_INPUT_TITLE}
+            />
+            <TextField
+              label="Detail"
+              value={detail.value}
+              onChangeText={detail.onChangeText}
+              style={styles.text}
+              testID={testIDs.TODO_INPUT_DETAIL}
+            />
+            <Button
+              onPress={addTodo}
+              label="Add"
+              style={styles.button}
+              disabled={!title.value}
+              testID={testIDs.TODO_INPUT_ADD_BUTTON}
+            />
           </View>
         </TouchableWithoutFeedback>
       </SafeAreaView>
