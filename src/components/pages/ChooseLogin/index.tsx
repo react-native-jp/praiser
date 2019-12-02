@@ -2,10 +2,10 @@ import React from 'react'
 import { Dimensions, Image, StyleSheet, View } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 
-import Button from '../../components/Button'
-import reactImage from '../../../assets/reactIcon.jpg'
-import { SIGN_IN, SIGN_UP } from '../../constants/path'
-import { COLOR } from '../../constants'
+import Button from '../../Button'
+import reactImage from '../../../../assets/reactIcon.jpg'
+import { SIGN_IN, SIGN_UP } from '../../../constants/path'
+import { COLOR } from '../../../constants'
 
 const { width } = Dimensions.get('window')
 
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
 })
 
-function ChooseLogin() {
+function Index() {
   const { navigate } = useNavigation()
   return (
     <View style={styles.container}>
@@ -55,4 +55,4 @@ function ChooseLogin() {
   )
 }
 
-export default ChooseLogin
+export default Index

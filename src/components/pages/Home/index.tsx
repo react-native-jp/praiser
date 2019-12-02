@@ -1,10 +1,11 @@
-import React, { useCallback, useState } from 'react'
+import React from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
+import { useNavigation } from 'react-navigation-hooks'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import analytics from '@react-native-firebase/analytics'
-import Input from '../../../containers/Input'
 import Todos, { Actions as TodosActions, State as TodosState } from './Todos'
 import { COLOR } from '../../../constants'
+import { INPUT } from '../../../constants/path'
 
 const styles = StyleSheet.create({
   container: {
@@ -39,8 +40,6 @@ interface Props {
 }
 
 export default function Home(props: Props) {
-  const [visible, changeVisible] = useState(false)
-  const gotoInput = useCallback(() => changeVisible(true), [])
   React.useEffect(() => {
     async function logViewItemList() {
       await analytics().logViewItemList({
@@ -49,12 +48,14 @@ export default function Home(props: Props) {
     }
     logViewItemList()
   }, [])
+  const { navigate } = useNavigation()
+  const onPress = React.useCallback(() => {
+    navigate(INPUT)
+  }, [])
   return (
     <View style={styles.container}>
-      <Input visible={visible} handleClose={() => changeVisible(false)} />
-
       <Todos {...props} />
-      <TouchableOpacity onPress={gotoInput} style={styles.button}>
+      <TouchableOpacity onPress={onPress} style={styles.button}>
         <Icon color={COLOR.PRIMARY} size={24} name="plus" />
       </TouchableOpacity>
     </View>
