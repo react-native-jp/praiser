@@ -6,12 +6,12 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest",
+    "test": "jest --testPathIgnorePatterns e2e/*",
+    "test-e2e-ios": "node ./scripts/test-e2e --ios",
     "coverage": "jest --coverage",
     "lint": "eslint index.js $(find src -name '*.ts' -a -not -name '*.d.ts' -o -name '*.tsx')",
     "type-check": "tsc --noEmit",
-    "generate-typings": "node bin/generate-typings.js > src/@types/react-native-dotenv.d.ts",
-    "test-e2e-ios": "node ./scripts/test-e2e --ios"
+    "generate-typings": "node bin/generate-typings.js > src/@types/react-native-dotenv.d.ts"
   },
   "dependencies": {
     "@react-native-community/async-storage": "1.6.2",
