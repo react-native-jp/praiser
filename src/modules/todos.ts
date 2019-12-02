@@ -1,14 +1,16 @@
 import createReducer from './create-reducer'
 import { Todo, Todos } from '../domain/entities'
 
+export function createInitialState(): Todos.Entity {
+  return {}
+}
+export type State = ReturnType<typeof createInitialState>
+
 export const SET = 'todo/set' as const
 export const ADD = 'todo/add' as const
 export const UPDATE = 'todo/update' as const
 export const REMOVE = 'todo/remove' as const
 export const TOGGLE = 'todo/toggle' as const
-
-export const createInitialState = () => ({} as Todos.Entity)
-export type State = ReturnType<typeof createInitialState>
 
 export function set(todos: Todos.Entity) {
   return {
