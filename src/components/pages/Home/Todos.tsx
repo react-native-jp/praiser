@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
 })
 
-export default function Todos(props: Props){
+export default function Todos(props: Props) {
   return (
     <FlatList
       style={styles.container}

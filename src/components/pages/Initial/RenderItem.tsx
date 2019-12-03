@@ -62,4 +62,3 @@ export default function RenderItem({ onPress, item }: { item: { text: string }; 
     </View>
   )
 }
-
