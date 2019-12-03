@@ -2,8 +2,6 @@ import testIDs from "../src/constants/testIDs";
 import { elementById, pressBack, elementByLabel } from './lib/utils';
 
 
-const random = new Date().getTime();
-
 describe('All', () => {
   afterAll(async () => {
     await device.resetContentAndSettings().then(() => console.info(' Reset iOS All Settings 🧹'));
@@ -47,6 +45,7 @@ describe('All', () => {
     let password;
 
     beforeAll(() => {
+      const random = new Date().getTime();
       email = `e2e+from_detox_${random}@gmail.com`;
       password = 'password';
     });
