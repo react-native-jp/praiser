@@ -34,7 +34,7 @@ interface Props {
   }
 }
 
-function SignUp(props: Props) {
+export default function SignUp(props: Props) {
   const { setUserState } = React.useContext(userContext)
   const { navigate } = useNavigation()
   const networker = useNetworker()
@@ -83,5 +83,3 @@ function SignUp(props: Props) {
     </TouchableWithoutFeedback>
   )
 }
-
-export default SignUp

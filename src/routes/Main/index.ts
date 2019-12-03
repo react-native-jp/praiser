@@ -1,12 +1,22 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createDrawerNavigator } from 'react-navigation-drawer'
-import { CHOOSE_LOGIN, HOME, INITIAL, LOADING, SIGN_IN, SIGN_UP, STATISTICS, USER_INFO } from '../../constants/path'
+import {
+  CHOOSE_LOGIN,
+  HOME,
+  INITIAL,
+  LOADING,
+  SIGN_IN,
+  SIGN_UP,
+  STATISTICS,
+  USER_INFO,
+  INPUT,
+} from '../../constants/path'
 import Home from './Home'
 import UserInfo from './UserInfo'
 import Statistics from './Statistics'
 import { ChooseLogin, Initial } from '../../components/pages'
-import { Loading, Signin, Signup } from '../../containers'
+import { Loading, Signin, Signup, Input } from '../../containers'
 import { headerStyle, headerTintColor } from '../Header'
 import { TabBar } from '../TabBar'
 import { createStackNavigator } from 'react-navigation-stack'
@@ -65,6 +75,17 @@ const TabRoutes = createBottomTabNavigator(
   },
 )
 
+const TabWithModalRoutes = createStackNavigator(
+  {
+    [HOME]: TabRoutes,
+    [INPUT]: Input,
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none',
+  },
+)
+
 const ChooseLoginNavigator = createStackNavigator(
   {
     [CHOOSE_LOGIN]: {
@@ -99,7 +120,7 @@ const AuthWithRoutes = createSwitchNavigator(
   {
     [INITIAL]: Initial,
     [LOADING]: Loading,
-    [HOME]: TabRoutes,
+    [HOME]: TabWithModalRoutes,
     [CHOOSE_LOGIN]: ChooseLoginNavigator,
   },
   {

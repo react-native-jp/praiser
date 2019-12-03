@@ -21,12 +21,14 @@ const styles = StyleSheet.create({
   },
 })
 
-export default (props: Props) => (
-  <FlatList
-    style={styles.container}
-    data={props.todos}
-    renderItem={({ item }) => <Todo state={item} actions={props.actions} forbiddenEdit={false} />}
-    ItemSeparatorComponent={() => <View style={styles.separator} />}
-    keyExtractor={item => item.id}
-  />
-)
+export default function Todos(props: Props) {
+  return (
+    <FlatList
+      style={styles.container}
+      data={props.todos}
+      renderItem={({ item }) => <Todo state={item} actions={props.actions} forbiddenEdit={false} />}
+      ItemSeparatorComponent={() => <View style={styles.separator} />}
+      keyExtractor={item => item.id}
+    />
+  )
+}

@@ -2,11 +2,11 @@ import React from 'react'
 import { Dimensions, Image, StyleSheet, View } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 
-import Button from '../../components/Button'
-import reactImage from '../../../assets/reactIcon.jpg'
-import { SIGN_IN, SIGN_UP } from '../../constants/path'
-import { COLOR } from '../../constants'
-import testIDs from '../../constants/testIDs'
+import Button from '../../Button'
+import reactImage from '../../../../assets/reactIcon.jpg'
+import { SIGN_IN, SIGN_UP } from '../../../constants/path'
+import { COLOR } from '../../../constants'
+import testIDs from '../../../constants/testIDs'
 
 const { width } = Dimensions.get('window')
 
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
 })
 
-function ChooseLogin() {
+export default function ChooseLogin() {
   const { navigate } = useNavigation()
   return (
     <View style={styles.container} testID={testIDs.CHOOSE_LOGIN}>
@@ -65,5 +65,3 @@ function ChooseLogin() {
     </View>
   )
 }
-
-export default ChooseLogin
