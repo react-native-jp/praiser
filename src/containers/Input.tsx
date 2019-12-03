@@ -4,7 +4,7 @@ import { AnyAction } from 'redux'
 import { Todo } from '../domain/entities'
 import { AppState } from '../modules'
 import * as Todos from '../usecases/todos'
-import { Input } from '../components/modal'
+import { Input } from '../components/pages'
 import getTodos from '../selectors/get-todos'
 
 export const mapStateToProps = (state: AppState) => ({
