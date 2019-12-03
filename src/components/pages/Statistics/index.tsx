@@ -26,7 +26,7 @@ interface Props {
   histories: TodosState
 }
 
-function Statics(props: Props) {
+export default function Statics(props: Props) {
   const { statistics, histories } = props
   return (
     <FlatList
@@ -44,5 +44,3 @@ function Statics(props: Props) {
     />
   )
 }
-
-export default Statics

@@ -46,7 +46,7 @@ const renderData = [
   },
 ]
 
-function Index() {
+export default function Initial() {
   const [activeSlide, changeSlide] = useState(0)
   const { navigate } = useNavigation()
 
@@ -92,5 +92,3 @@ function Index() {
     </View>
   )
 }
-
-export default Index

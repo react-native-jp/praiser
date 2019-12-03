@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
 })
 
-function RenderItem({ onPress, item }: { item: { text: string }; onPress: () => void }) {
+export default function RenderItem({ onPress, item }: { item: { text: string }; onPress: () => void }) {
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
@@ -63,4 +63,3 @@ function RenderItem({ onPress, item }: { item: { text: string }; onPress: () => 
   )
 }
 
-export default RenderItem

@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
 })
 
-function Index() {
+export default function ChooseLogin() {
   const { navigate } = useNavigation()
   return (
     <View style={styles.container}>
@@ -54,5 +54,3 @@ function Index() {
     </View>
   )
 }
-
-export default Index
