@@ -13,6 +13,7 @@ import * as LocalStore from '../../../lib/local-store'
 import registerUserToFirebase from '../../../lib/firebase/register-user'
 import Button from '../../Button'
 import TextField, { dismiss } from '../../TextField'
+import testIDs from '../../../constants/testIDs'
 
 const styles = StyleSheet.create({
   container: {
@@ -53,7 +54,7 @@ export default function SignUp(props: Props) {
   }, [mailAddress.value, navigate, networker, password.value, props.actions, setUserState])
 
   return (
-    <TouchableWithoutFeedback onPress={dismiss}>
+    <TouchableWithoutFeedback onPress={dismiss} testID={testIDs.SIGN_UP}>
       <View style={styles.container}>
         <TextField
           label="email"
@@ -61,6 +62,7 @@ export default function SignUp(props: Props) {
           onChangeText={mailAddress.onChangeText}
           style={styles.text}
           autoCompleteType="email"
+          testID={testIDs.SIGN_UP_EMAIL}
         />
         <TextField
           label="password"
@@ -69,8 +71,14 @@ export default function SignUp(props: Props) {
           style={styles.text}
           autoCompleteType="password"
           secureTextEntry={true}
+          testID={testIDs.SIGN_UP_PASSWORD}
         />
-        <Button onPress={registerUser} style={styles.button} label="Register" />
+        <Button
+          onPress={registerUser}
+          style={styles.button}
+          label="Register"
+          testID={testIDs.SIGN_UP_REGISTER_BUTTON}
+        />
       </View>
     </TouchableWithoutFeedback>
   )

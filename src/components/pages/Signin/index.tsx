@@ -14,6 +14,7 @@ import * as LocalStore from '../../../lib/local-store'
 import signInWithPasswordToFirebase from '../../../lib/firebase/sign-in-with-password'
 import Button from '../../Button'
 import SignInWithGoogle from './SignInWithGoogle'
+import testIDs from '../../../constants/testIDs'
 
 const styles = StyleSheet.create({
   container: {
@@ -63,7 +64,7 @@ export default function SignUp(props: Props) {
   }, [navigate, networker, setUserState, setTodos, mailAddress.value, password.value])
 
   return (
-    <TouchableWithoutFeedback onPress={dismiss}>
+    <TouchableWithoutFeedback onPress={dismiss} testID={testIDs.SIGN_IN}>
       <View style={styles.container}>
         <View style={styles.textContainer}>
           <TextField
@@ -72,6 +73,7 @@ export default function SignUp(props: Props) {
             onChangeText={mailAddress.onChangeText}
             style={styles.text}
             autoCompleteType="email"
+            testID={testIDs.SIGN_IN_EMAIL}
           />
           <TextField
             label="password"
@@ -80,11 +82,17 @@ export default function SignUp(props: Props) {
             style={styles.text}
             autoCompleteType="password"
             secureTextEntry={true}
+            testID={testIDs.SIGN_IN_PASSWORD}
           />
         </View>
         <View style={styles.buttonContainer}>
           <SignInWithGoogle {...props} />
-          <Button onPress={signInWithPassword} label="SignIn" style={styles.button} />
+          <Button
+            onPress={signInWithPassword}
+            label="SignIn"
+            style={styles.button}
+            testID={testIDs.SIGN_IN_EMAIL_BUTTON}
+          />
         </View>
       </View>
     </TouchableWithoutFeedback>

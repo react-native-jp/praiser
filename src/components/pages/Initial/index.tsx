@@ -7,6 +7,7 @@ import RenderItem from './RenderItem'
 import { CHOOSE_LOGIN } from '../../../constants/path'
 import { openFirstLaunch } from '../../../lib/local-store'
 import { COLOR } from '../../../constants'
+import testIDs from '../../../constants/testIDs'
 
 const { width } = Dimensions.get('window')
 
@@ -37,12 +38,15 @@ interface Data {
 const renderData = [
   {
     text: 'brevity is the soul of wit budge an inch\n' + 'foul play the game is up',
+    testID: testIDs.INITIAL_NEXT_BUTTON1,
   },
   {
     text: "good riddance for goodness' sake!\n" + "love is blind in my mind's eye",
+    testID: testIDs.INITIAL_NEXT_BUTTON2,
   },
   {
     text: 'neither here nor there seen better days\n' + 'at one fell swoop a tower of strength Tut, tut!',
+    testID: testIDs.INITIAL_NEXT_BUTTON3,
   },
 ]
 
@@ -70,7 +74,7 @@ export default function Initial() {
   }, [activeSlide])
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID={testIDs.INITIAL}>
       <Carousel
         data={renderData}
         ref={carouselRef}

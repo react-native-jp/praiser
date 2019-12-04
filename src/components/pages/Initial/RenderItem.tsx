@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
 })
 
-export default function RenderItem({ onPress, item }: { item: { text: string }; onPress: () => void }) {
+export default function RenderItem({ onPress, item }: { item: { text: string; testID: string }; onPress: () => void }) {
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
@@ -56,7 +56,7 @@ export default function RenderItem({ onPress, item }: { item: { text: string }; 
           <View>
             <Text style={styles.text}>{item.text}</Text>
           </View>
-          <Button onPress={onPress} label="次へ" />
+          <Button testID={item.testID} onPress={onPress} label="次へ" />
         </View>
       </View>
     </View>

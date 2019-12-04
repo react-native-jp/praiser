@@ -11,6 +11,7 @@ import formatDate from '../../../lib/format-date'
 import Button from '../../../components/Button'
 import LabelViewContainer from './LabelValueContainer'
 import { COLOR } from '../../../constants'
+import testIDs from '../../../constants/testIDs'
 
 const styles = StyleSheet.create({
   container: {
@@ -50,7 +51,7 @@ export default function UserInfo() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.imageIconContainer}>
+      <View style={styles.imageIconContainer} testID={testIDs.USER_INFO_SCREEN}>
         <Avatar.Image size={220} source={source} />
         <Text style={styles.nameText}>{userState.name}</Text>
       </View>
@@ -59,7 +60,7 @@ export default function UserInfo() {
         label="registeredAt"
         value={userState.createdAt && formatDate(new Date(userState.createdAt))}
       />
-      <Button style={styles.button} onPress={signOut} label="Sign Out" />
+      <Button style={styles.button} onPress={signOut} label="Sign Out" testID={testIDs.USER_INFO_SIGN_OUT_BUTTON} />
     </SafeAreaView>
   )
 }

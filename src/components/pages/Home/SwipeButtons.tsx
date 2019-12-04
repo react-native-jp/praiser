@@ -2,6 +2,7 @@ import React from 'react'
 import Button from '../../Button'
 import { StyleSheet } from 'react-native'
 import { COLOR } from '../../../constants'
+import testIDs from '../../../constants/testIDs'
 
 const styles = StyleSheet.create({
   leftButton: {
@@ -32,6 +33,7 @@ export type State = {
   title: string
   detail?: string
   isDone?: boolean
+  testID?: string
 }
 
 export function DoneButton(props: DoneProps) {
@@ -45,6 +47,7 @@ export function DoneButton(props: DoneProps) {
       icon={isDone ? 'restore' : 'check'}
       color={isDone ? COLOR.MAIN_DARK : COLOR.PRIMARY}
       style={isDone ? [styles.leftButton, styles.done] : styles.leftButton}
+      testID={isDone ? testIDs.TODO_ROW_NOT_DONE : testIDs.TODO_ROW_DONE}
     />
   )
 }
@@ -55,5 +58,13 @@ interface DeleteProps {
 
 export function DeleteButton(props: DeleteProps) {
   const { onPress } = props
-  return <Button onPress={onPress} icon="delete" style={styles.rightButton} color={COLOR.CAUTION} />
+  return (
+    <Button
+      onPress={onPress}
+      icon="delete"
+      style={styles.rightButton}
+      color={COLOR.CAUTION}
+      testID={testIDs.TODO_ROW_DELETE}
+    />
+  )
 }

@@ -6,6 +6,7 @@ import analytics from '@react-native-firebase/analytics'
 import Todos, { Actions as TodosActions, State as TodosState } from './Todos'
 import { COLOR } from '../../../constants'
 import { INPUT } from '../../../constants/path'
+import testIDs from '../../../constants/testIDs'
 
 const styles = StyleSheet.create({
   container: {
@@ -53,9 +54,9 @@ export default function Home(props: Props) {
     navigate(INPUT)
   }, [])
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID={testIDs.HOME}>
       <Todos {...props} />
-      <TouchableOpacity onPress={onPress} style={styles.button}>
+      <TouchableOpacity onPress={onPress} style={styles.button} testID={testIDs.TODO_OPEN_INPUT_BUTTON}>
         <Icon color={COLOR.PRIMARY} size={24} name="plus" />
       </TouchableOpacity>
     </View>
