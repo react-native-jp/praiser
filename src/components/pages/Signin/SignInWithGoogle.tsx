@@ -10,7 +10,7 @@ import { uiContext, userContext } from '../../../contexts'
 import signInWithGoogle from '../../../lib/firebase/sign-in-with-google'
 import * as LocalStore from '../../../lib/local-store'
 import useNetworker from '../../../lib/hooks/use-networker'
-import Button from '../../Button'
+import Button from '../../atoms/Button'
 import testIDs from '../../../constants/testIDs'
 
 const styles = StyleSheet.create({

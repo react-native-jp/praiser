@@ -11,8 +11,8 @@ import useTextInput from '../../../lib/hooks/use-TextInput'
 import useNetworker from '../../../lib/hooks/use-networker'
 import * as LocalStore from '../../../lib/local-store'
 import registerUserToFirebase from '../../../lib/firebase/register-user'
-import Button from '../../Button'
-import TextField, { dismiss } from '../../TextField'
+import Button from '../../atoms/Button'
+import TextField, { dismiss } from '../../atoms/TextField'
 import testIDs from '../../../constants/testIDs'
 
 const styles = StyleSheet.create({

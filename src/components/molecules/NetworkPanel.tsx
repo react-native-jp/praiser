@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { ActivityIndicator, SafeAreaView, StyleSheet } from 'react-native'
-
-import networkContext from '../contexts/network'
-import { height, width } from '../lib/window'
-import { COLOR } from '../constants'
+import { ActivityIndicator, StyleSheet } from 'react-native'
+import SafeAreaView from '../atoms/UniversalSafeAreaView'
+import networkContext from '../../contexts/network'
+import { height, width } from '../../lib/window'
+import { COLOR } from '../../constants'
 
 const styles = StyleSheet.create({
   dropdown: {

@@ -6,8 +6,8 @@ import UiContext, { snackBarInitialState } from './contexts/ui'
 import NetworkContext, { reducer } from './contexts/network'
 import UserContext, { UserInformation } from './contexts/user'
 import App from './components/App'
-import NetworkPanel from './components/NetworkPanel'
-import ErrorPanel from './components/ErrorPanel'
+import NetworkPanel from './components/molecules/NetworkPanel'
+import ErrorPanel from './components/molecules/ErrorPanel'
 
 export default () => {
   const [error, setError] = React.useState(null as Error | null)

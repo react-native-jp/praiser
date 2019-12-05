@@ -2,7 +2,7 @@ import React from 'react'
 import { Dimensions, Image, StyleSheet, View } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 
-import Button from '../../Button'
+import Button from '../../atoms/Button'
 import reactImage from '../../../../assets/reactIcon.jpg'
 import { SIGN_IN, SIGN_UP } from '../../../constants/path'
 import { COLOR } from '../../../constants'

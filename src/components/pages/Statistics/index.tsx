@@ -3,7 +3,7 @@ import { StyleSheet, View, FlatList, Text } from 'react-native'
 import Progress, { Statistic } from './Progress'
 import { State as TodosState } from '../Home/Todos'
 import { COLOR } from '../../../constants'
-import Todo from '../../pages/Home/Todo'
+import Index from '../../molecules/Todo'
 
 const styles = StyleSheet.create({
   headerText: {
@@ -31,7 +31,7 @@ export default function Statics(props: Props) {
   return (
     <FlatList
       data={histories}
-      renderItem={({ item }) => <Todo state={item} forbiddenEdit={true} />}
+      renderItem={({ item }) => <Index state={item} forbiddenEdit={true} />}
       ListHeaderComponent={
         <View>
           <Progress {...statistics} />

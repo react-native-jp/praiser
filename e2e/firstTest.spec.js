@@ -102,7 +102,7 @@ describe('All', () => {
   });
 
 
-  describe('Todo', function() {
+  describe('Index', function() {
     it('todoを追加できる', async () => {
       await expect(elementById(testIDs.TODO_OPEN_INPUT_BUTTON)).toBeVisible();
       await elementById(testIDs.TODO_OPEN_INPUT_BUTTON).tap();

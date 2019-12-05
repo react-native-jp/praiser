@@ -2,7 +2,7 @@ import React from 'react'
 import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
 
 import reactImage from '../../../../assets/reactIcon.jpg'
-import Button from '../../Button'
+import Button from '../../atoms/Button'
 import { COLOR } from '../../../constants'
 
 const { width } = Dimensions.get('window')

@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-import uiContext from '../contexts/ui'
-import { width } from '../lib/window'
-import { COLOR } from '../constants'
-import UniversalSafeAreaView from './UniversalSafeAreaView'
+import uiContext from '../../contexts/ui'
+import { width } from '../../lib/window'
+import { COLOR } from '../../constants'
+import UniversalSafeAreaView from '../atoms/UniversalSafeAreaView'
 
 const styles = StyleSheet.create({
   container: {
