@@ -57,12 +57,12 @@ export function toggle(id: string) {
   }
 }
 
-type SetAction = ReturnType<typeof set>
-type AddAction = ReturnType<typeof add>
-type UpdateAction = ReturnType<typeof update>
-type RemoveAction = ReturnType<typeof remove>
-type ToggleAction = ReturnType<typeof toggle>
-export type Action = SetAction | AddAction | UpdateAction | RemoveAction | ToggleAction
+export type Action =
+  | ReturnType<typeof set>
+  | ReturnType<typeof add>
+  | ReturnType<typeof update>
+  | ReturnType<typeof remove>
+  | ReturnType<typeof toggle>
 
 export default function reducer(state = createInitialState(), action: Action) {
   switch (action.type) {
