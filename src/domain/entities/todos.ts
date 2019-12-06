@@ -7,7 +7,11 @@ export interface Model {
   [id: string]: Todo.Model
 }
 
-export function factory(newValues: Todo.Values[]): Model {
+export function factory(newValues?: Todo.Values[]): Model {
+  if (!newValues) {
+    return {}
+  }
+
   return newValues.reduce<Model>((result, newValue) => {
     const newTodo = Todo.factory(newValue)
     result[newTodo.id] = newTodo

@@ -1,7 +1,7 @@
 import { Todo, Todos } from '../domain/entities'
 
 export function createInitialState(): Todos.Model {
-  return {}
+  return Todos.factory()
 }
 export type State = ReturnType<typeof createInitialState>
 
