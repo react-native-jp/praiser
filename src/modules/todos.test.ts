@@ -1,5 +1,6 @@
 import { Todo, Todos } from '../domain/models'
 import {
+  Action,
   ADD,
   REMOVE,
   SET,
@@ -139,6 +140,15 @@ describe('todos', () => {
 
         const toggledTodo = toggledState[id]
         expect(Todo.isDone(toggledTodo)).toBe(true)
+      })
+    })
+
+    describe('unknown Action', () => {
+      it('returns old state', () => {
+        const action = ({ type: 'unknown' } as unknown) as Action
+        const initialState = createInitialState()
+        const state = reducer(initialState, action)
+        expect(state).toBe(initialState)
       })
     })
   })
