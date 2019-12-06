@@ -52,7 +52,7 @@ describe('Todos', () => {
       const todos = Todos.factory(TODO_VALUES)
       expect(Todos.getNumof(todos)).toBe(3)
 
-      const [{ id }] = Todos.findByTitle(todos, '1')
+      const [id] = Object.keys(todos)
       const removed = Todos.remove(todos, id)
       expect(Todos.getNumof(removed)).toBe(2)
     })
@@ -61,7 +61,7 @@ describe('Todos', () => {
   describe('update', () => {
     it('returns an instance of Todos model that has changed Todo model with specified values', () => {
       const todos = Todos.factory(TODO_VALUES)
-      const [{ id }] = Todos.findByTitle(todos, '1')
+      const [id] = Object.keys(todos)
       const updated = Todos.update(todos, id, {
         title: 'updated',
         detail: undefined,
@@ -75,7 +75,7 @@ describe('Todos', () => {
   describe('toggle', () => {
     it('returns an instance of Todos model that has a Todo model toggled complate status', () => {
       const todos = Todos.factory(TODO_VALUES)
-      const [{ id }] = Todos.findByTitle(todos, '1')
+      const [id] = Object.keys(todos)
       const toggled = Todos.toggle(todos, id)
       expect(toggled[id].completedAt).not.toBeNull()
     })

@@ -1,11 +1,11 @@
 import React from 'react'
-import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 
-import reactImage from '../../../../assets/reactIcon.jpg'
-import Button from '../../Button'
 import { COLOR } from '../../../constants'
+import { width } from '../../../lib/window'
+import Button from '../../Button'
+import reactImage from '../../../../assets/reactIcon.jpg'
 
-const { width } = Dimensions.get('window')
 const padding = 20
 const edgeNumber = 2
 const styles = StyleSheet.create({

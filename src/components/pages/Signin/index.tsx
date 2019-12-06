@@ -55,7 +55,7 @@ export default function SignUp(props: Props) {
     await networker(async () => {
       const userInformation = await signInWithPasswordToFirebase(mailAddress.value, password.value)
       setUserState(userInformation)
-      await LocalStore.saveUserInformation(userInformation)
+      await LocalStore.UserInformation.save(userInformation)
       const todos = await TodosRepository.getAll(userInformation.id)
       setTodos(todos)
       await analytics().logLogin({ method: 'mail address and password' })

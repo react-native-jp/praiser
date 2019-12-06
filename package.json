@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@januswel/object-utilities": "1.0.0",
-    "@react-native-community/async-storage": "1.6.2",
+    "@react-native-community/async-storage": "https://github.com/januswel/async-storage.git#add-typings-of-mock",
     "@react-native-firebase/analytics": "6.0.3",
     "@react-native-firebase/app": "6.0.3",
     "@react-native-firebase/auth": "6.0.3",

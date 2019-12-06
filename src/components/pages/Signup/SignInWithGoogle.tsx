@@ -38,7 +38,7 @@ export default function SignInWithGoogle(props: Props) {
       await networker(async () => {
         const userInformation = await signInWithGoogle()
         setUserState(userInformation)
-        await LocalStore.saveUserInformation(userInformation)
+        await LocalStore.UserInformation.save(userInformation)
         const todos = await TodosRepository.getAll(userInformation.id)
         setTodos(todos)
         navigate(HOME)

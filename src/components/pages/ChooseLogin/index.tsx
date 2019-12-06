@@ -1,14 +1,13 @@
 import React from 'react'
-import { Dimensions, Image, StyleSheet, View } from 'react-native'
+import { Image, StyleSheet, View } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 
-import Button from '../../Button'
-import reactImage from '../../../../assets/reactIcon.jpg'
 import { SIGN_IN, SIGN_UP } from '../../../constants/path'
 import { COLOR } from '../../../constants'
 import testIDs from '../../../constants/testIDs'
-
-const { width } = Dimensions.get('window')
+import { width } from '../../../lib/window'
+import Button from '../../Button'
+import reactImage from '../../../../assets/reactIcon.jpg'
 
 const padding = 20
 const edgeNumber = 2

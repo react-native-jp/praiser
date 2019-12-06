@@ -30,10 +30,10 @@ export default function Index(props: Props) {
   const { setTodos } = props.actions
 
   React.useEffect(() => {
-    LocalStore.retrieveUserInformation()
+    LocalStore.UserInformation.retrieve()
       .then(userInformation => {
         if (!userInformation) {
-          LocalStore.isOpendFirstLaunch()
+          LocalStore.InitialLaunch.isInitialLaunch()
             .then(isOpened => {
               if (!isOpened) {
                 navigate(INITIAL)

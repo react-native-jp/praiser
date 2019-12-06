@@ -1,15 +1,14 @@
 import React, { useCallback, useRef, useState } from 'react'
-import { Dimensions, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import Carousel, { Pagination, CarouselStatic } from 'react-native-snap-carousel'
 
-import RenderItem from './RenderItem'
-import { CHOOSE_LOGIN } from '../../../constants/path'
-import { openFirstLaunch } from '../../../lib/local-store'
 import { COLOR } from '../../../constants'
 import testIDs from '../../../constants/testIDs'
-
-const { width } = Dimensions.get('window')
+import { CHOOSE_LOGIN } from '../../../constants/path'
+import RenderItem from './RenderItem'
+import * as LocalStore from '../../../lib/local-store'
+import { width } from '../../../lib/window'
 
 const padding = 20
 const styles = StyleSheet.create({
@@ -56,7 +55,7 @@ export default function Initial() {
 
   const carouselRef = useRef(null)
   const onEnd = useCallback(() => {
-    openFirstLaunch().finally(() => {
+    LocalStore.InitialLaunch.markAsTutorialIsDone().finally(() => {
       navigate(CHOOSE_LOGIN)
     })
   }, [navigate])
