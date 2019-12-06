@@ -78,7 +78,5 @@ export default function reducer(state = createInitialState(), action: Action) {
       return Todos.remove(state, action.payload.id)
     case TOGGLE:
       return Todos.toggle(state, action.payload.id)
-    default:
-      return state
   }
 }
