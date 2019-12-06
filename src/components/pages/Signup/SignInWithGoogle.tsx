@@ -1,10 +1,11 @@
 import * as React from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
-import * as TodosRepository from '../../../domain/repositories/todos'
-import { Todos } from '../../../domain/entities'
+
 import { HOME } from '../../../constants/path'
 import { uiContext, userContext } from '../../../contexts'
+import { Todos } from '../../../domain/models'
+import * as TodosRepository from '../../../domain/repositories/todos'
 import signInWithGoogle from '../../../lib/firebase/sign-in-with-google'
 import * as LocalStore from '../../../lib/local-store'
 import useNetworker from '../../../lib/hooks/use-networker'
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
 
 interface Props {
   actions: {
-    setTodos: (todos: Todos.Entity) => void
+    setTodos: (todos: Todos.Model) => void
   }
 }
 

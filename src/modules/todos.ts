@@ -1,5 +1,9 @@
-import createReducer from './create-reducer'
-import { Todo, Todos } from '../domain/entities'
+import { Todo, Todos } from '../domain/models'
+
+export function createInitialState(): Todos.Model {
+  return Todos.factory()
+}
+export type State = ReturnType<typeof createInitialState>
 
 export const SET = 'todo/set' as const
 export const ADD = 'todo/add' as const
@@ -7,10 +11,7 @@ export const UPDATE = 'todo/update' as const
 export const REMOVE = 'todo/remove' as const
 export const TOGGLE = 'todo/toggle' as const
 
-export const createInitialState = () => ({} as Todos.Entity)
-export type State = ReturnType<typeof createInitialState>
-
-export function set(todos: Todos.Entity) {
+export function set(todos: Todos.Model) {
   return {
     type: SET,
     payload: {
@@ -19,7 +20,7 @@ export function set(todos: Todos.Entity) {
   }
 }
 
-export function add(todo: Todo.Entity) {
+export function add(todo: Todo.Model) {
   return {
     type: ADD,
     payload: {
@@ -56,20 +57,28 @@ export function toggle(id: string) {
   }
 }
 
-type SetAction = ReturnType<typeof set>
-type AddAction = ReturnType<typeof add>
-type UpdateAction = ReturnType<typeof update>
-type RemoveAction = ReturnType<typeof remove>
-type ToggleAction = ReturnType<typeof toggle>
-export type Actions = SetAction | AddAction | UpdateAction | RemoveAction | ToggleAction
+export type Action =
+  | ReturnType<typeof set>
+  | ReturnType<typeof add>
+  | ReturnType<typeof update>
+  | ReturnType<typeof remove>
+  | ReturnType<typeof toggle>
 
-export default createReducer(createInitialState(), {
-  [SET]: (_state, action) => (action as SetAction).payload.todos,
-  [ADD]: (state, action) => Todos.add(state, (action as AddAction).payload.todo),
-  [UPDATE]: (state, action) => {
-    const { payload } = action as UpdateAction
-    return Todos.update(state, payload.id, payload.todo)
-  },
-  [REMOVE]: (state, action) => Todos.remove(state, (action as RemoveAction).payload.id),
-  [TOGGLE]: (state, action) => Todos.toggle(state, (action as ToggleAction).payload.id),
-})
+export default function reducer(state = createInitialState(), action: Action) {
+  switch (action.type) {
+    case SET:
+      return action.payload.todos
+    case ADD:
+      return Todos.add(state, action.payload.todo)
+    case UPDATE: {
+      const { payload } = action
+      return Todos.update(state, payload.id, payload.todo)
+    }
+    case REMOVE:
+      return Todos.remove(state, action.payload.id)
+    case TOGGLE:
+      return Todos.toggle(state, action.payload.id)
+    default:
+      return state
+  }
+}

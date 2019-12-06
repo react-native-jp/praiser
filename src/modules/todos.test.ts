@@ -1,21 +1,15 @@
-/* eslint @typescript-eslint/no-magic-numbers: off */
-import { Todo, Todos } from '../domain/entities'
+import { Todo, Todos } from '../domain/models'
 import { ADD, REMOVE, SET, UPDATE, add, remove, set, update } from './todos'
 
-describe('todo', () => {
-  it('returns Action to tell "set todos"', () => {
-    const action = set(
-      Todos.factory([
-        { title: 'foo', detail: 'bar' },
-        { title: 'sample', detail: 'buz' },
-      ]),
-    )
+describe('todos', () => {
+  it('returns an Action to tell the reducer "set todos"', () => {
+    const action = set(Todos.factory([{ title: 'foo', detail: 'bar' }, { title: 'buz' }]))
     expect(action.type).toBe(SET)
-    expect(Object.keys(action.payload.todos).length).toBe(2)
+    expect(Todos.getNumof(action.payload.todos)).toBe(2)
   })
 
-  it('returns Action to tell "add a todo"', () => {
-    const action = add(Todo.create({ title: 'foo', detail: 'bar' }))
+  it('returns an Action to tell the reducer"add a todo"', () => {
+    const action = add(Todo.factory({ title: 'foo', detail: 'bar' }))
 
     expect(action.type).toBe(ADD)
     expect(action.payload.todo.id.length).toBe(36)
@@ -24,7 +18,7 @@ describe('todo', () => {
     expect(action.payload.todo.createdAt).toBe(action.payload.todo.updatedAt)
   })
 
-  it('returns Action to tell "update the todo"', () => {
+  it('returns an Action to tell the reducer "update the todo"', () => {
     const action = update('4', { title: 'foo', detail: 'bar' })
     expect(action).toEqual({
       type: UPDATE,
@@ -38,7 +32,7 @@ describe('todo', () => {
     })
   })
 
-  it('returns Action to tell "remove the todo"', () => {
+  it('returns an Action to tell the reducer "remove the todo"', () => {
     const action = remove('0')
     expect(action).toEqual({
       type: REMOVE,

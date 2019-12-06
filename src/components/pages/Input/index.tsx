@@ -3,14 +3,15 @@ import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
 import { IconButton } from 'react-native-paper'
 import SafeAreaView from 'react-native-safe-area-view'
 import { useNavigation } from 'react-navigation-hooks'
+
+import { userContext } from '../../../contexts'
+import { COLOR } from '../../../constants'
+import { Todo } from '../../../domain/models'
+import testIDs from '../../../constants/testIDs'
+import Button from '../../Button'
+import TextField, { dismiss } from '../../TextField'
 import useTextInput from '../../../lib/hooks/use-TextInput'
 import useNetworker from '../../../lib/hooks/use-networker'
-import { userContext } from '../../../contexts'
-import TextField, { dismiss } from '../../TextField'
-import Button from '../../Button'
-import { COLOR } from '../../../constants'
-import { Todo } from '../../../domain/entities'
-import testIDs from '../../../constants/testIDs'
 
 const styles = StyleSheet.create({
   container: {
