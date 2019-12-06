@@ -35,9 +35,7 @@ export function isDone(todo: Model): boolean {
 }
 
 export function change(todo: Model, newValues: Values): Model {
-  if (!newValues.title) {
-    throw new Error('title is required')
-  }
+  assertIsDefined(newValues.title)
 
   const now = new Date().toISOString()
   return {

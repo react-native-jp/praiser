@@ -4,7 +4,7 @@ const ISO8601_PATTERN = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/u
 
 describe('Todo', () => {
   describe('factory', () => {
-    it('returns Todo instances', () => {
+    it('returns an instance of Todo model', () => {
       const todo = Todo.factory({
         title: 'Try building apps with React Native',
         detail: 'Build Hello World app',
@@ -34,7 +34,7 @@ describe('Todo', () => {
   })
 
   describe('change', () => {
-    it('returns Todo instances that have specified titles and details', () => {
+    it('returns an instance of Todo model that have specified titles and details', () => {
       const todo = Todo.factory({ title: 'abcde' })
       expect(todo.title).toBe('abcde')
       expect(todo.detail).toBeUndefined()
@@ -47,13 +47,12 @@ describe('Todo', () => {
       expect(changed.detail).toBe('changed')
       expect(todo.completedAt).toBeNull()
       expect(changed.createdAt).toBe(todo.createdAt)
-      expect(changed.updatedAt).not.toBe(todo.updatedAt)
       expect(new Date(changed.updatedAt).getTime()).toBeGreaterThanOrEqual(new Date(changed.createdAt).getTime())
     })
   })
 
   describe('toggle', () => {
-    it('returns Todo instances that has inversed value of isDone', () => {
+    it('returns an instance of Todo that has inversed value of isDone', () => {
       const todo = Todo.factory({ title: 'foo' })
       const toggled = Todo.toggle(todo)
 
