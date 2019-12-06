@@ -1,4 +1,3 @@
-import createReducer from './create-reducer'
 import { Todo, Todos } from '../domain/entities'
 
 export function createInitialState(): Todos.Entity {
@@ -63,15 +62,23 @@ type AddAction = ReturnType<typeof add>
 type UpdateAction = ReturnType<typeof update>
 type RemoveAction = ReturnType<typeof remove>
 type ToggleAction = ReturnType<typeof toggle>
-export type Actions = SetAction | AddAction | UpdateAction | RemoveAction | ToggleAction
+export type Action = SetAction | AddAction | UpdateAction | RemoveAction | ToggleAction
 
-export default createReducer(createInitialState(), {
-  [SET]: (_state, action) => (action as SetAction).payload.todos,
-  [ADD]: (state, action) => Todos.add(state, (action as AddAction).payload.todo),
-  [UPDATE]: (state, action) => {
-    const { payload } = action as UpdateAction
-    return Todos.update(state, payload.id, payload.todo)
-  },
-  [REMOVE]: (state, action) => Todos.remove(state, (action as RemoveAction).payload.id),
-  [TOGGLE]: (state, action) => Todos.toggle(state, (action as ToggleAction).payload.id),
-})
+export default function reducer(state = createInitialState(), action: Action) {
+  switch (action.type) {
+    case SET:
+      return action.payload.todos
+    case ADD:
+      return Todos.add(state, action.payload.todo)
+    case UPDATE: {
+      const { payload } = action
+      return Todos.update(state, payload.id, payload.todo)
+    }
+    case REMOVE:
+      return Todos.remove(state, action.payload.id)
+    case TOGGLE:
+      return Todos.toggle(state, action.payload.id)
+    default:
+      return state
+  }
+}
