@@ -2,7 +2,10 @@ import React from 'react'
 import { View, SafeAreaView, StyleSheet, Text } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import { Avatar } from 'react-native-paper'
+
 import { CHOOSE_LOGIN } from '../../../constants/path'
+import { COLOR } from '../../../constants'
+import testIDs from '../../../constants/testIDs'
 import userContext, { UserInformation } from '../../../contexts/user'
 import useNetworker from '../../../lib/hooks/use-networker'
 import signOutFromFirebase from '../../../lib/firebase/sign-out'
@@ -10,8 +13,6 @@ import * as LocalStore from '../../../lib/local-store'
 import formatDate from '../../../lib/format-date'
 import Button from '../../../components/Button'
 import LabelViewContainer from './LabelValueContainer'
-import { COLOR } from '../../../constants'
-import testIDs from '../../../constants/testIDs'
 
 const styles = StyleSheet.create({
   container: {
@@ -43,7 +44,7 @@ export default function UserInfo() {
     await networker(async () => {
       await signOutFromFirebase()
       setUserState({} as UserInformation)
-      await LocalStore.clearUserInformation()
+      await LocalStore.UserInformation.clear()
       navigate(CHOOSE_LOGIN)
     })
   }, [navigate, networker, setUserState])

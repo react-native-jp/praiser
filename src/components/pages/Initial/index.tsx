@@ -5,7 +5,7 @@ import Carousel, { Pagination, CarouselStatic } from 'react-native-snap-carousel
 
 import RenderItem from './RenderItem'
 import { CHOOSE_LOGIN } from '../../../constants/path'
-import { openFirstLaunch } from '../../../lib/local-store'
+import * as LocalStore from '../../../lib/local-store'
 import { COLOR } from '../../../constants'
 import testIDs from '../../../constants/testIDs'
 
@@ -56,7 +56,7 @@ export default function Initial() {
 
   const carouselRef = useRef(null)
   const onEnd = useCallback(() => {
-    openFirstLaunch().finally(() => {
+    LocalStore.InitialLaunch.markAsTutorialIsDone().finally(() => {
       navigate(CHOOSE_LOGIN)
     })
   }, [navigate])
