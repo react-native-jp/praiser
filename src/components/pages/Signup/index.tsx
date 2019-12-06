@@ -3,17 +3,17 @@ import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import analytics from '@react-native-firebase/analytics'
 
-import * as TodosRepository from '../../../domain/repositories/todos'
-import { Todos } from '../../../domain/entities'
 import { HOME } from '../../../constants/path'
+import testIDs from '../../../constants/testIDs'
 import { userContext } from '../../../contexts'
+import { Todos } from '../../../domain/models'
+import * as TodosRepository from '../../../domain/repositories/todos'
 import useTextInput from '../../../lib/hooks/use-TextInput'
 import useNetworker from '../../../lib/hooks/use-networker'
 import * as LocalStore from '../../../lib/local-store'
 import registerUserToFirebase from '../../../lib/firebase/register-user'
 import Button from '../../Button'
 import TextField, { dismiss } from '../../TextField'
-import testIDs from '../../../constants/testIDs'
 
 const styles = StyleSheet.create({
   container: {

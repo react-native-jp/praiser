@@ -1,5 +1,4 @@
-/* eslint @typescript-eslint/no-magic-numbers: off */
-import { Todo, Todos } from '../domain/entities'
+import { Todo, Todos } from '../domain/models'
 import { ADD, REMOVE, SET, UPDATE, add, remove, set, update } from './todos'
 
 describe('todo', () => {

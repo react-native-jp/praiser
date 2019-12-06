@@ -3,15 +3,15 @@ import { StyleSheet } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import analytics from '@react-native-firebase/analytics'
 
-import * as TodosRepository from '../../../domain/repositories/todos'
-import { Todos } from '../../../domain/entities'
 import { HOME } from '../../../constants/path'
+import testIDs from '../../../constants/testIDs'
 import { uiContext, userContext } from '../../../contexts'
+import { Todos } from '../../../domain/models'
+import * as TodosRepository from '../../../domain/repositories/todos'
 import signInWithGoogle from '../../../lib/firebase/sign-in-with-google'
 import * as LocalStore from '../../../lib/local-store'
 import useNetworker from '../../../lib/hooks/use-networker'
 import Button from '../../Button'
-import testIDs from '../../../constants/testIDs'
 
 const styles = StyleSheet.create({
   button: {

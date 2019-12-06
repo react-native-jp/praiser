@@ -2,12 +2,12 @@ import * as React from 'react'
 import { ActivityIndicator, StyleSheet, View } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import { firebase } from '@react-native-firebase/auth'
-import { HOME, INITIAL, CHOOSE_LOGIN } from '../../../constants/path'
-import userContext from '../../../contexts/user'
-import uiContext from '../../../contexts/ui'
-import * as LocalStore from '../../../lib/local-store'
-import { Todos } from '../../../domain/entities'
+
+import { CHOOSE_LOGIN, HOME, INITIAL } from '../../../constants/path'
+import { uiContext, userContext } from '../../../contexts'
+import { Todos } from '../../../domain/models'
 import * as TodosRepository from '../../../domain/repositories/todos'
+import * as LocalStore from '../../../lib/local-store'
 
 const styles = StyleSheet.create({
   container: {

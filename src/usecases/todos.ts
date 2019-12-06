@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux'
 
-import { Todo } from '../domain/entities'
+import { Todo } from '../domain/models'
 import * as TodosRepository from '../domain/repositories/todos'
 import { add, remove, toggle, update } from '../modules/todos'
 import { AppState } from '../modules'

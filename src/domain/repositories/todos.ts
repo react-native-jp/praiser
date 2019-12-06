@@ -1,5 +1,5 @@
 import firestore from '../../lib/firebase/firestore'
-import { Todo, Todos } from '../entities'
+import { Todo, Todos } from '../models'
 
 export function getAll(userId: string) {
   return firestore(userId)

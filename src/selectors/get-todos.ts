@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import * as Domain from '../domain/entities'
+import * as Domain from '../domain/models'
 
 import { AppState } from '../modules'
 

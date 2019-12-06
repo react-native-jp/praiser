@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
-import { Todo } from '../domain/entities'
+
+import { Todo } from '../domain/models'
 import { AppState } from '../modules'
 import * as Todos from '../usecases/todos'
 import { Input } from '../components/pages'

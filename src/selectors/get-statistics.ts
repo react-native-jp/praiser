@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import { Todos } from '../domain/entities'
+import { Todos } from '../domain/models'
 
 import { AppState } from '../modules'
 

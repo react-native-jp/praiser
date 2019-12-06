@@ -1,4 +1,4 @@
-import { Todo, Todos } from '../domain/entities'
+import { Todo, Todos } from '../domain/models'
 
 export function createInitialState(): Todos.Model {
   return Todos.factory()
