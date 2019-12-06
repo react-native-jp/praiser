@@ -15,7 +15,7 @@ describe('todo', () => {
   })
 
   it('returns Action to tell "add a todo"', () => {
-    const action = add(Todo.create({ title: 'foo', detail: 'bar' }))
+    const action = add(Todo.factory({ title: 'foo', detail: 'bar' }))
 
     expect(action.type).toBe(ADD)
     expect(action.payload.todo.id.length).toBe(36)

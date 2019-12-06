@@ -38,7 +38,7 @@ describe('Todos', () => {
   describe('add', () => {
     it('returns Object that has specified one', () => {
       expect(Object.keys(TODOS).length).toBe(3)
-      const added = Todos.add(TODOS, Todo.create({ title: '4', detail: 'sample' }))
+      const added = Todos.add(TODOS, Todo.factory({ title: '4', detail: 'sample' }))
       expect(Object.keys(added).length).toBe(4)
     })
   })

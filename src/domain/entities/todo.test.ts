@@ -1,11 +1,30 @@
-/* eslint @typescript-eslint/no-magic-numbers: off */
-
 import * as Todo from './todo'
 
+const ISO8601_PATTERN = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/u
+
 describe('Todo', () => {
+  describe('factory', () => {
+    it('returns Todo instances', () => {
+      const todo = Todo.factory({
+        title: 'Try building apps with React Native',
+        detail: 'Build Hello World app',
+      })
+
+      expect(todo.id.length).toBe(36)
+      expect(todo.title).toBe('Try building apps with React Native')
+      expect(todo.detail).toBe('Build Hello World app')
+      expect(todo.completedAt).toBeNull()
+      expect(todo.createdAt).toEqual(expect.stringMatching(ISO8601_PATTERN))
+      expect(() => new Date(todo.createdAt)).not.toThrow()
+      expect(todo.updatedAt).toEqual(expect.stringMatching(ISO8601_PATTERN))
+      expect(() => new Date(todo.updatedAt)).not.toThrow()
+      expect(todo.createdAt).toEqual(todo.updatedAt)
+    })
+  })
+
   describe('isDone', () => {
-    it('returns true if todo is completed', () => {
-      const uncompleted = Todo.create({
+    it('returns true when todo is completed', () => {
+      const uncompleted = Todo.factory({
         title: 'sample todo',
       })
       expect(Todo.isDone(uncompleted)).toBe(false)
@@ -14,45 +33,28 @@ describe('Todo', () => {
     })
   })
 
-  describe('create', () => {
-    it('returns Todo instances', () => {
-      const timeExpected = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/u
-
-      const todo = Todo.create({ title: 'try RNW', detail: 'implement app with react-native-web' })
-
-      expect(todo.id.length).toBe(36)
-      expect(todo.title).toBe('try RNW')
-      expect(todo.detail).toBe('implement app with react-native-web')
-      expect(todo.completedAt).toBe(null)
-      expect(todo.createdAt).toEqual(expect.stringMatching(timeExpected))
-      expect(() => new Date(todo.createdAt)).not.toThrow()
-      expect(todo.updatedAt).toEqual(expect.stringMatching(timeExpected))
-      expect(() => new Date(todo.updatedAt)).not.toThrow()
-    })
-  })
-
   describe('change', () => {
-    it('returns Todo instances that values are changed to specified', () => {
-      const todo = Todo.create({ title: 'abcde', detail: '' })
+    it('returns Todo instances that have specified titles and details', () => {
+      const todo = Todo.factory({ title: 'abcde' })
       expect(todo.title).toBe('abcde')
+      expect(todo.detail).toBeUndefined()
 
-      setTimeout(() => {
-        const changed = Todo.change(todo, {
-          title: 'changed',
-          detail: 'changed',
-        })
-        expect(changed.title).toBe('changed')
-        expect(changed.detail).toBe('changed')
-        expect(todo.completedAt).toBe(null)
-        expect(changed.createdAt).toBe(todo.createdAt)
-        expect(changed.updatedAt).not.toBe(todo.updatedAt)
-      }, 0)
+      const changed = Todo.change(todo, {
+        title: 'changed',
+        detail: 'changed',
+      })
+      expect(changed.title).toBe('changed')
+      expect(changed.detail).toBe('changed')
+      expect(todo.completedAt).toBeNull()
+      expect(changed.createdAt).toBe(todo.createdAt)
+      expect(changed.updatedAt).not.toBe(todo.updatedAt)
+      expect(new Date(changed.updatedAt).getTime()).toBeGreaterThanOrEqual(new Date(changed.createdAt).getTime())
     })
   })
 
   describe('toggle', () => {
     it('returns Todo instances that has inversed value of isDone', () => {
-      const todo = Todo.create({ title: 'foo' })
+      const todo = Todo.factory({ title: 'foo' })
       const toggled = Todo.toggle(todo)
 
       expect(toggled.title).toBe('foo')

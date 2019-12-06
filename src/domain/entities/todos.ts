@@ -1,34 +1,34 @@
 import * as Todo from './todo'
 
-export interface Entity {
-  [id: string]: Todo.Entity
+export interface Model {
+  [id: string]: Todo.Model
 }
 
-export function factory(newValues: Todo.Values[]): Entity {
-  return newValues.reduce((result: Entity, newValue: Todo.Values) => {
-    const newTodo = Todo.create(newValue)
+export function factory(newValues: Todo.Values[]): Model {
+  return newValues.reduce((result: Model, newValue: Todo.Values) => {
+    const newTodo = Todo.factory(newValue)
     result[newTodo.id] = newTodo
     return result
   }, {})
 }
 
-export function add(todos: Entity, newTodo: Todo.Entity): Entity {
+export function add(todos: Model, newTodo: Todo.Model): Model {
   return {
     ...todos,
     [newTodo.id]: newTodo,
   }
 }
 
-export function remove(todos: Entity, targetId: string): Entity {
+export function remove(todos: Model, targetId: string): Model {
   return Object.keys(todos)
     .filter(id => id !== targetId)
-    .reduce((result: Entity, id) => {
+    .reduce((result: Model, id) => {
       result[id] = todos[id]
       return result
     }, {})
 }
 
-export function update(todos: Entity, id: string, values: Todo.Values): Entity {
+export function update(todos: Model, id: string, values: Todo.Values): Model {
   if (!(id in todos)) {
     throw new Error(`todo with specified id ${id} is not found`)
   }
@@ -39,7 +39,7 @@ export function update(todos: Entity, id: string, values: Todo.Values): Entity {
   }
 }
 
-export function toggle(todos: Entity, id: string): Entity {
+export function toggle(todos: Model, id: string): Model {
   if (!(id in todos)) {
     throw new Error(`todo with specified id ${id} is not found`)
   }

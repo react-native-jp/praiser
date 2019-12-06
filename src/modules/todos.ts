@@ -1,6 +1,6 @@
 import { Todo, Todos } from '../domain/entities'
 
-export function createInitialState(): Todos.Entity {
+export function createInitialState(): Todos.Model {
   return {}
 }
 export type State = ReturnType<typeof createInitialState>
@@ -11,7 +11,7 @@ export const UPDATE = 'todo/update' as const
 export const REMOVE = 'todo/remove' as const
 export const TOGGLE = 'todo/toggle' as const
 
-export function set(todos: Todos.Entity) {
+export function set(todos: Todos.Model) {
   return {
     type: SET,
     payload: {
@@ -20,7 +20,7 @@ export function set(todos: Todos.Entity) {
   }
 }
 
-export function add(todo: Todo.Entity) {
+export function add(todo: Todo.Model) {
   return {
     type: ADD,
     payload: {

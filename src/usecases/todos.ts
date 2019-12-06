@@ -6,7 +6,7 @@ import { add, remove, toggle, update } from '../modules/todos'
 import { AppState } from '../modules'
 
 export const addAndSync = (userId: string, newValues: Todo.Values) => (dispatch: Dispatch) => {
-  const newTodo = Todo.create(newValues)
+  const newTodo = Todo.factory(newValues)
   dispatch(add(newTodo))
   TodosRepository.add(userId, newTodo)
 }

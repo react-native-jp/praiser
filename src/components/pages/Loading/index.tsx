@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
 
 interface Props {
   actions: {
-    setTodos: (todos: Todos.Entity) => void
+    setTodos: (todos: Todos.Model) => void
   }
 }
 

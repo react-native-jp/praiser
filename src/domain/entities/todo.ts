@@ -1,6 +1,8 @@
 import generateUuid from 'uuid/v4'
 
-export interface Entity {
+import { assertIsDefined } from '../../lib/assert'
+
+export interface Model {
   readonly id: string
   readonly title: string
   readonly detail?: string
@@ -14,44 +16,42 @@ export interface Values {
   readonly detail?: string
 }
 
-export function isDone(todo: Entity): boolean {
-  return todo.completedAt !== null
-}
+export function factory(todo: Values): Model {
+  assertIsDefined(todo.title)
 
-export function create(todo: Values): Entity {
-  if (!todo.title) {
-    throw new Error('title is required')
-  }
-
-  const now = new Date()
+  const now = new Date().toISOString()
   return {
     id: generateUuid(),
     title: todo.title,
     detail: todo.detail,
-    createdAt: now.toISOString(),
-    updatedAt: now.toISOString(),
+    createdAt: now,
+    updatedAt: now,
     completedAt: null,
   }
 }
 
-export function change(todo: Entity, newValues: Values): Entity {
+export function isDone(todo: Model): boolean {
+  return todo.completedAt !== null
+}
+
+export function change(todo: Model, newValues: Values): Model {
   if (!newValues.title) {
     throw new Error('title is required')
   }
 
-  const now = new Date()
+  const now = new Date().toISOString()
   return {
     ...todo,
     ...newValues,
-    updatedAt: now.toISOString(),
+    updatedAt: now,
   }
 }
 
-export function toggle(todo: Entity): Entity {
-  const now = new Date()
+export function toggle(todo: Model): Model {
+  const now = new Date().toISOString()
   return {
     ...todo,
-    updatedAt: now.toISOString(),
-    completedAt: todo.completedAt === null ? now.toISOString() : null,
+    updatedAt: now,
+    completedAt: todo.completedAt === null ? now : null,
   }
 }

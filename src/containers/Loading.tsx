@@ -9,7 +9,7 @@ import { Loading } from '../components/pages'
 
 export const mapDispatchToProps = (dispatch: ThunkDispatch<AppState, void, AnyAction>) => ({
   actions: {
-    setTodos: (newValues: Todos.Entity) => {
+    setTodos: (newValues: Todos.Model) => {
       return dispatch(set(newValues))
     },
   },

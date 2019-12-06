@@ -5,15 +5,15 @@ export function getAll(userId: string) {
   return firestore(userId)
     .get()
     .then(querySnapshot => {
-      const todos = querySnapshot.docs.reduce((result: Todos.Entity, doc) => {
-        result[doc.id] = doc.data() as Todo.Entity
+      const todos = querySnapshot.docs.reduce((result: Todos.Model, doc) => {
+        result[doc.id] = doc.data() as Todo.Model
         return result
       }, {})
       return todos
     })
 }
 
-export function add(userId: string, newTodo: Todo.Entity) {
+export function add(userId: string, newTodo: Todo.Model) {
   firestore(userId)
     .doc(newTodo.id)
     .set(newTodo)
