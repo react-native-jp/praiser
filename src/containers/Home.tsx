@@ -17,7 +17,4 @@ export const mapDispatchToProps = (dispatch: ThunkDispatch<AppState, void, AnyAc
   },
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

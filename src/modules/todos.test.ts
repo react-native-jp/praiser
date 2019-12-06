@@ -4,7 +4,12 @@ import { ADD, REMOVE, SET, UPDATE, add, remove, set, update } from './todos'
 
 describe('todo', () => {
   it('returns Action to tell "set todos"', () => {
-    const action = set(Todos.factory([{ title: 'foo', detail: 'bar' }, { title: 'sample', detail: 'buz' }]))
+    const action = set(
+      Todos.factory([
+        { title: 'foo', detail: 'bar' },
+        { title: 'sample', detail: 'buz' },
+      ]),
+    )
     expect(action.type).toBe(SET)
     expect(Object.keys(action.payload.todos).length).toBe(2)
   })
