@@ -29,7 +29,7 @@ export const getStatistics = createSelector([getArray, getNumofCompleted], (todo
   const numofAll = todos.length
   const numofUncompleted = numofAll - numofCompleted
   const completedRatio = round(numofCompleted / numofAll, 3)
-  const uncompletedRatio = 1 - completedRatio
+  const uncompletedRatio = round(1 - completedRatio, 3)
 
   return {
     numofAll,
