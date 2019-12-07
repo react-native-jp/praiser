@@ -349,7 +349,7 @@ PODS:
     - React-cxxreact (= 0.61.2)
     - React-jsi (= 0.61.2)
     - ReactCommon/jscallinvoker (= 0.61.2)
-  - RNCAsyncStorage (1.6.2):
+  - RNCAsyncStorage (1.6.3):
     - React
   - RNFBAnalytics (6.0.3):
     - Firebase/Core (~> 6.8.1)
@@ -569,7 +569,7 @@ SPEC CHECKSUMS:
   React-RCTText: e3ef6191cdb627855ff7fe8fa0c1e14094967fb8
   React-RCTVibration: fb54c732fd20405a76598e431aa2f8c2bf527de9
   ReactCommon: 5848032ed2f274fcb40f6b9ec24067787c42d479
-  RNCAsyncStorage: 60a80e72d95bf02a01cace55d3697d9724f0d77f
+  RNCAsyncStorage: 3c304d1adfaea02ec732ac218801cb13897aa8c0
   RNFBAnalytics: d75433ac464f0ac6e5bd1ae7015cb5fb6427e80a
   RNFBApp: 92ae594c85e82e1e68434049b2a37e1f584cf8b9
   RNFBAuth: edc2e5986b92f0dfd0076b312caf7871a1646ed8
