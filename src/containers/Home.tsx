@@ -1,20 +1,25 @@
-import { connect } from 'react-redux'
-import { ThunkDispatch } from 'redux-thunk'
-import { AnyAction } from 'redux'
-import { AppState } from '../modules'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import getTodos from '../selectors/get-todos'
 import * as Todos from '../usecases/todos'
 import { Home } from '../components/pages'
-import getTodos from '../selectors/get-todos'
 
-export const mapStateToProps = (state: AppState) => ({
-  todos: getTodos(state),
-})
+export default function ConnectedHome() {
+  const todos = useSelector(getTodos)
 
-export const mapDispatchToProps = (dispatch: ThunkDispatch<AppState, void, AnyAction>) => ({
-  actions: {
-    removeTodo: (userId: string, id: string) => dispatch(Todos.removeAndSync(userId, id)),
-    toggleTodo: (userId: string, id: string) => dispatch(Todos.toggleAndSync(userId, id)),
-  },
-})
+  const dispatch = useDispatch()
+  const actions = React.useMemo(
+    () => ({
+      removeTodo(userId: string, id: string) {
+        dispatch(Todos.removeAndSync(userId, id))
+      },
+      toggleTodo(userId: string, id: string) {
+        dispatch(Todos.toggleAndSync(userId, id))
+      },
+    }),
+    [dispatch],
+  )
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+  return <Home todos={todos} actions={actions} />
+}
