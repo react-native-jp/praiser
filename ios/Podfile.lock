@@ -368,12 +368,12 @@ PODS:
     - Firebase/Firestore (~> 6.8.1)
     - React
     - RNFBApp
-  - RNGestureHandler (1.4.1):
+  - RNGestureHandler (1.5.2):
     - React
   - RNGoogleSignin (2.1.0):
     - GoogleSignIn (~> 5.0.0)
     - React
-  - RNReanimated (1.3.0):
+  - RNReanimated (1.4.0):
     - React
   - RNSVG (9.13.3):
     - React
@@ -574,9 +574,9 @@ SPEC CHECKSUMS:
   RNFBApp: 92ae594c85e82e1e68434049b2a37e1f584cf8b9
   RNFBAuth: edc2e5986b92f0dfd0076b312caf7871a1646ed8
   RNFBFirestore: 781a0084ac0f152e859fb150bb3409a522abeee7
-  RNGestureHandler: 4cb47a93019c1a201df2644413a0a1569a51c8aa
+  RNGestureHandler: 946a7691e41df61e2c4b1884deab41a4cdc3afff
   RNGoogleSignin: bb1393dec8541d997fd12b7b8f43481868a34e93
-  RNReanimated: 6abbbae2e5e72609d85aabd92a982a94566885f1
+  RNReanimated: b2ab0b693dddd2339bd2f300e770f6302d2e960c
   RNSVG: f6177f8d7c095fada7cfee2e4bb7388ba426064c
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Yoga: 14927e37bd25376d216b150ab2a561773d57911f
