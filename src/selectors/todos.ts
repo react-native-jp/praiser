@@ -8,16 +8,7 @@ function selectTodos(state: AppState) {
   return state.todos
 }
 
-interface Todo {
-  id: string
-  title: string
-  detail: string | undefined
-  isDone: boolean
-  createdAt: number
-  updatedAt: number
-}
-
-export const getArray = createSelector([selectTodos], (todos: Domain.Todos.Model) =>
+export const getArray = createSelector([selectTodos], todos =>
   Object.values(todos).map(todo => ({
     id: todo.id,
     title: todo.title,
@@ -28,16 +19,16 @@ export const getArray = createSelector([selectTodos], (todos: Domain.Todos.Model
   })),
 )
 
-export const getTodos = createSelector([getArray], (todos: Todo[]) => todos.sort((a, b) => b.createdAt - a.createdAt))
+export const getTodos = createSelector([getArray], todos => todos.sort((a, b) => b.createdAt - a.createdAt))
 
-export const getCompletedAll = createSelector([getArray], (todos: Todo[]) => todos.filter(todo => todo.isDone))
+export const getCompletedAll = createSelector([getArray], todos => todos.filter(todo => todo.isDone))
 
-export const getNumofCompleted = createSelector([getCompletedAll], (todos: Todo[]) => todos.length)
+export const getNumofCompleted = createSelector([getCompletedAll], todos => todos.length)
 
-export const getStatistics = createSelector([getArray, getNumofCompleted], (todos: Todo[], numofCompleted: number) => {
+export const getStatistics = createSelector([getArray, getNumofCompleted], (todos, numofCompleted) => {
   const numofAll = todos.length
   const numofUncompleted = numofAll - numofCompleted
-  const completedRatio = round(numofCompleted / numofAll, 2)
+  const completedRatio = round(numofCompleted / numofAll, 3)
   const uncompletedRatio = 1 - completedRatio
 
   return {
@@ -49,6 +40,4 @@ export const getStatistics = createSelector([getArray, getNumofCompleted], (todo
   }
 })
 
-export const getHistories = createSelector([getCompletedAll], (todos: Todo[]) =>
-  todos.sort((a, b) => b.updatedAt - a.updatedAt),
-)
+export const getHistories = createSelector([getCompletedAll], todos => todos.sort((a, b) => b.updatedAt - a.updatedAt))
