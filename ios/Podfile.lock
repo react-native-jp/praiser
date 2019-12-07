@@ -370,7 +370,7 @@ PODS:
     - RNFBApp
   - RNGestureHandler (1.5.2):
     - React
-  - RNGoogleSignin (2.1.0):
+  - RNGoogleSignin (2.1.1):
     - GoogleSignIn (~> 5.0.0)
     - React
   - RNReanimated (1.4.0):
@@ -575,7 +575,7 @@ SPEC CHECKSUMS:
   RNFBAuth: edc2e5986b92f0dfd0076b312caf7871a1646ed8
   RNFBFirestore: 781a0084ac0f152e859fb150bb3409a522abeee7
   RNGestureHandler: 946a7691e41df61e2c4b1884deab41a4cdc3afff
-  RNGoogleSignin: bb1393dec8541d997fd12b7b8f43481868a34e93
+  RNGoogleSignin: 6baed9bb19c9c54614bef63bdc55c381b4e33c44
   RNReanimated: b2ab0b693dddd2339bd2f300e770f6302d2e960c
   RNSVG: f6177f8d7c095fada7cfee2e4bb7388ba426064c
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
