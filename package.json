@@ -59,7 +59,7 @@
     "@typescript-eslint/eslint-plugin": "2.10.0",
     "@typescript-eslint/parser": "2.10.0",
     "babel-jest": "24.9.0",
-    "detox": "14.6.0",
+    "detox": "14.8.5",
     "eslint": "6.7.2",
     "eslint-config-prettier": "6.7.0",
     "eslint-plugin-jest": "23.1.1",
