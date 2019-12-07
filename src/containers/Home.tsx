@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import getTodos from '../selectors/get-todos'
+import { getTodos } from '../selectors/todos'
 import * as Todos from '../usecases/todos'
 import { Home } from '../components/pages'
 

@@ -1,8 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-import getStatistics from '../selectors/get-statistics'
-import getHistories from '../selectors/get-histories'
+import { getStatistics, getHistories } from '../selectors/todos'
 import { Statistics } from '../components/pages'
 
 export default function ConnectedStatistics() {
