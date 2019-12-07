@@ -22,14 +22,7 @@ export const toggleAndSync = (userId: string, id: string) => (dispatch: Dispatch
   TodosRepository.toggle(userId, id, newValue)
 }
 
-export const editTodo = (
-  userId: string,
-  id: string,
-  newValue: {
-    title: string
-    detail: string
-  },
-) => (dispatch: Dispatch) => {
-  dispatch(update(id, newValue))
-  TodosRepository.change(userId, id, newValue)
+export const editTodo = (userId: string, id: string, newValues: Todo.Values) => (dispatch: Dispatch) => {
+  dispatch(update(id, newValues))
+  TodosRepository.change(userId, id, newValues)
 }
