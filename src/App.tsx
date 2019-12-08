@@ -11,15 +11,15 @@ import NetworkPanel from './components/NetworkPanel'
 import ErrorPanel from './components/ErrorPanel'
 
 export default function App() {
-  const [error, setError] = React.useState(null as Error | null)
+  const [error, setError] = React.useState(UiContext.createErrorInitialState())
   const [networkState, dispatchNetworkActions] = React.useReducer(
     NetworkContext.reducer,
     NetworkContext.createInitialState(),
   )
   const [userState, setUserState] = React.useState(UserContext.createInitialState())
-  const [snackBar, setSnackBar] = React.useState(UiContext.createInitialState())
+  const [snackBar, setSnackBar] = React.useState(UiContext.createSnackBarInitialState())
   const onDismiss = React.useCallback(() => {
-    setSnackBar(UiContext.createInitialState())
+    setSnackBar(UiContext.createSnackBarInitialState())
   }, [])
 
   return (

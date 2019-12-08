@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function createInitialState() {
+export function createSnackBarInitialState() {
   return {
     visible: false,
     message: '',
@@ -8,11 +8,16 @@ export function createInitialState() {
   }
 }
 
-type SnackBarState = ReturnType<typeof createInitialState>
+type SnackBarState = ReturnType<typeof createSnackBarInitialState>
+
+type ErrorState = Error | null
+export function createErrorInitialState(): ErrorState {
+  return null
+}
 
 export const Context = React.createContext({
-  error: null as Error | null,
-  setError: (_: Error | null) => {},
-  snackBar: createInitialState(),
+  error: createErrorInitialState(),
+  setError: (_: ErrorState) => {},
+  snackBar: createSnackBarInitialState(),
   setSnackBar: (_: SnackBarState) => {},
 })
