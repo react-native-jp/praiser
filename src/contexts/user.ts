@@ -1,6 +1,6 @@
 import React from 'react'
 
-export interface UserInformation {
+export interface User {
   id: string
   name: string | null
   mailAddress: string | null
@@ -9,9 +9,13 @@ export interface UserInformation {
   lastLoginAt: number | null
 }
 
-const UserContext = React.createContext({
-  userState: {} as UserInformation,
+export type UserInformation = User | null
+
+export function createInitialState(): UserInformation {
+  return null
+}
+
+export const Context = React.createContext({
+  userState: createInitialState(),
   setUserState: (_: UserInformation) => {},
 })
-
-export default UserContext

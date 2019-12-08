@@ -5,7 +5,7 @@ import { Snackbar } from 'react-native-paper'
 import store from './store'
 import * as UiContext from './contexts/ui'
 import * as NetworkContext from './contexts/network'
-import UserContext, { UserInformation } from './contexts/user'
+import * as UserContext from './contexts/user'
 import Routes from './routes'
 import NetworkPanel from './components/NetworkPanel'
 import ErrorPanel from './components/ErrorPanel'
@@ -16,7 +16,7 @@ export default function App() {
     NetworkContext.reducer,
     NetworkContext.createInitialState(),
   )
-  const [userState, setUserState] = React.useState({} as UserInformation)
+  const [userState, setUserState] = React.useState(UserContext.createInitialState())
   const [snackBar, setSnackBar] = React.useState(UiContext.createInitialState())
   const onDismiss = React.useCallback(() => {
     setSnackBar(UiContext.createInitialState())
@@ -26,7 +26,7 @@ export default function App() {
     <Provider store={store}>
       <UiContext.Context.Provider value={{ error, setError, snackBar, setSnackBar }}>
         <NetworkContext.Context.Provider value={{ networkState, dispatchNetworkActions }}>
-          <UserContext.Provider value={{ userState, setUserState }}>
+          <UserContext.Context.Provider value={{ userState, setUserState }}>
             <Routes />
             <NetworkPanel />
             <ErrorPanel />
@@ -37,7 +37,7 @@ export default function App() {
             >
               {snackBar.message}
             </Snackbar>
-          </UserContext.Provider>
+          </UserContext.Context.Provider>
         </NetworkContext.Context.Provider>
       </UiContext.Context.Provider>
     </Provider>
