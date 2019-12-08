@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { Snackbar } from 'react-native-paper'
 
 import store from './store'
-import UiContext, { snackBarInitialState } from './contexts/ui'
+import UiContext, { createInitialState } from './contexts/ui'
 import NetworkContext, { reducer } from './contexts/network'
 import UserContext, { UserInformation } from './contexts/user'
 import Routes from './routes'
@@ -14,13 +14,9 @@ export default function App() {
   const [error, setError] = React.useState(null as Error | null)
   const [networkState, dispatchNetworkActions] = React.useReducer(reducer, 0)
   const [userState, setUserState] = React.useState({} as UserInformation)
-  const [snackBar, setSnackBar] = React.useState(snackBarInitialState)
+  const [snackBar, setSnackBar] = React.useState(createInitialState())
   const onDismiss = React.useCallback(() => {
-    setSnackBar({
-      visible: false,
-      message: '',
-      label: 'Done',
-    })
+    setSnackBar(createInitialState())
   }, [])
 
   return (

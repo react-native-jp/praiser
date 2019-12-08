@@ -3,7 +3,7 @@ import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 
 import { HOME } from '../../../constants/path'
-import { uiContext, userContext } from '../../../contexts'
+import { UiContext, userContext } from '../../../contexts'
 import { Todos } from '../../../domain/models'
 import * as TodosRepository from '../../../domain/repositories/todos'
 import signInWithGoogle from '../../../lib/firebase/sign-in-with-google'
@@ -28,7 +28,7 @@ interface Props {
 
 export default function SignInWithGoogle(props: Props) {
   const { navigate } = useNavigation()
-  const { setError } = React.useContext(uiContext)
+  const { setError } = React.useContext(UiContext)
   const { setUserState } = React.useContext(userContext)
   const { setTodos } = props.actions
   const networker = useNetworker()

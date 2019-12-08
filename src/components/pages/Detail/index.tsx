@@ -6,7 +6,7 @@ import analytics from '@react-native-firebase/analytics'
 import TextField from '../../../components/TextField'
 import useTextInput from '../../../lib/hooks/use-TextInput'
 import Button from '../../../components/Button'
-import { uiContext } from '../../../contexts'
+import { UiContext } from '../../../contexts'
 import testIDs from '../../../constants/testIDs'
 
 const styles = StyleSheet.create({
@@ -38,7 +38,7 @@ interface Props {
 
 export default function Detail(props: Props) {
   const id = useNavigation().getParam('id')
-  const { setSnackBar } = React.useContext(uiContext)
+  const { setSnackBar } = React.useContext(UiContext)
   const detailInitialValue = useNavigation().getParam('detail')
   const titleInitialValue = useNavigation().getParam('title')
   const forbiddenEdit = useNavigation().getParam('forbiddenEdit')
