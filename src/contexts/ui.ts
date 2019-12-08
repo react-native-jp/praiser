@@ -10,11 +10,9 @@ export function createInitialState() {
 
 type SnackBarState = ReturnType<typeof createInitialState>
 
-const uiContext = React.createContext({
+export const Context = React.createContext({
   error: null as Error | null,
   setError: (_: Error | null) => {},
   snackBar: createInitialState(),
   setSnackBar: (_: SnackBarState) => {},
 })
-
-export default uiContext

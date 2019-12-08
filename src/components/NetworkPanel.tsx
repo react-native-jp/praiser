@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { ActivityIndicator, SafeAreaView, StyleSheet } from 'react-native'
 
-import NetworkContext from '../contexts/network'
+import { NetworkContext } from '../contexts'
 import { height, width } from '../lib/window'
 import { COLOR } from '../constants'
 

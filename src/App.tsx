@@ -3,8 +3,8 @@ import { Provider } from 'react-redux'
 import { Snackbar } from 'react-native-paper'
 
 import store from './store'
-import UiContext, { createInitialState } from './contexts/ui'
-import NetworkContext, { reducer } from './contexts/network'
+import * as UiContext from './contexts/ui'
+import * as NetworkContext from './contexts/network'
 import UserContext, { UserInformation } from './contexts/user'
 import Routes from './routes'
 import NetworkPanel from './components/NetworkPanel'
@@ -12,17 +12,20 @@ import ErrorPanel from './components/ErrorPanel'
 
 export default function App() {
   const [error, setError] = React.useState(null as Error | null)
-  const [networkState, dispatchNetworkActions] = React.useReducer(reducer, 0)
+  const [networkState, dispatchNetworkActions] = React.useReducer(
+    NetworkContext.reducer,
+    NetworkContext.createInitialState(),
+  )
   const [userState, setUserState] = React.useState({} as UserInformation)
-  const [snackBar, setSnackBar] = React.useState(createInitialState())
+  const [snackBar, setSnackBar] = React.useState(UiContext.createInitialState())
   const onDismiss = React.useCallback(() => {
-    setSnackBar(createInitialState())
+    setSnackBar(UiContext.createInitialState())
   }, [])
 
   return (
     <Provider store={store}>
-      <UiContext.Provider value={{ error, setError, snackBar, setSnackBar }}>
-        <NetworkContext.Provider value={{ networkState, dispatchNetworkActions }}>
+      <UiContext.Context.Provider value={{ error, setError, snackBar, setSnackBar }}>
+        <NetworkContext.Context.Provider value={{ networkState, dispatchNetworkActions }}>
           <UserContext.Provider value={{ userState, setUserState }}>
             <Routes />
             <NetworkPanel />
@@ -35,8 +38,8 @@ export default function App() {
               {snackBar.message}
             </Snackbar>
           </UserContext.Provider>
-        </NetworkContext.Provider>
-      </UiContext.Provider>
+        </NetworkContext.Context.Provider>
+      </UiContext.Context.Provider>
     </Provider>
   )
 }

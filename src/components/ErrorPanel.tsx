@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-import UiContext from '../contexts/ui'
+import { UiContext } from '../contexts'
 import { width } from '../lib/window'
 import { COLOR } from '../constants'
 import UniversalSafeAreaView from './UniversalSafeAreaView'

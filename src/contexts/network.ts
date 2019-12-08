@@ -1,19 +1,21 @@
-import * as React from 'react'
+import React from 'react'
 
-type State = number
-interface NetworkAction {
+export function createInitialState() {
+  return 0
+}
+
+type State = ReturnType<typeof createInitialState>
+
+interface Action {
   type: 'begin' | 'end'
 }
+
 interface Context {
   networkState: number
-  dispatchNetworkActions: React.Dispatch<NetworkAction>
+  dispatchNetworkActions: React.Dispatch<Action>
 }
-const NetworkContext = React.createContext<Context>({
-  networkState: 0,
-  dispatchNetworkActions: () => {},
-})
 
-function reducer(state: State, action: NetworkAction) {
+export function reducer(state: State, action: Action) {
   switch (action.type) {
     case 'begin':
       return state + 1
@@ -24,6 +26,7 @@ function reducer(state: State, action: NetworkAction) {
   }
 }
 
-export { reducer }
-
-export default NetworkContext
+export const Context = React.createContext<Context>({
+  networkState: createInitialState(),
+  dispatchNetworkActions: () => {},
+})
