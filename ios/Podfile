@@ -38,6 +38,8 @@ target 'praiser' do
 
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
+  pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
+
   target 'praiserTests' do
     inherit! :search_paths
     # Pods for testing
