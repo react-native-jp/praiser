@@ -1,6 +1,6 @@
 import React from 'react'
 import SnapCarousel from 'react-native-snap-carousel'
-import RenderItem from '../molecules/RenderItem'
+import CarouselItem from '../molecules/CarouselItem'
 import { Dimensions } from 'react-native'
 
 const { width } = Dimensions.get('window')
@@ -19,7 +19,7 @@ export default function Carousel(props: Props) {
     <SnapCarousel
       data={data}
       ref={ref}
-      renderItem={({ item, index }) => <RenderItem item={item} onPress={index === data.length - 1 ? onEnd : onNext} />}
+      renderItem={({ item, index }) => <CarouselItem item={item} onPress={index === data.length - 1 ? onEnd : onNext} />}
       sliderWidth={width}
       itemWidth={width}
       onSnapToItem={onSnapToItem}

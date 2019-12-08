@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
 })
 
-export default function RenderItem({ onPress, item }: { item: { text: string; testID: string }; onPress: () => void }) {
+export default function CarouselItem({ onPress, item }: { item: { text: string; testID: string }; onPress: () => void }) {
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
