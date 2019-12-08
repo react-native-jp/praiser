@@ -1,10 +1,10 @@
-import * as React from 'react'
+import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import SafeAreaView from 'react-native-safe-area-view'
 
 import { UiContext } from '../contexts'
 import { width } from '../lib/window'
 import { COLOR } from '../constants'
-import UniversalSafeAreaView from './UniversalSafeAreaView'
 
 const styles = StyleSheet.create({
   container: {
@@ -27,10 +27,10 @@ export default function ErrorPanel() {
   }
 
   return (
-    <UniversalSafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.panel}>
         <Text style={styles.label}>{error.toString()}</Text>
       </View>
-    </UniversalSafeAreaView>
+    </SafeAreaView>
   )
 }

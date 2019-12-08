@@ -1,4 +1,5 @@
 import React from 'react'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Provider } from 'react-redux'
 import { Snackbar } from 'react-native-paper'
 
@@ -26,22 +27,24 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <UiContext.Context.Provider value={{ error, setError, snackbar, setSnackbar }}>
-        <NetworkContext.Context.Provider value={{ networkState, dispatchNetworkActions }}>
-          <UserContext.Context.Provider value={{ userState, setUserState }}>
-            <Routes />
-            <NetworkPanel />
-            <ErrorPanel />
-            <Snackbar
-              visible={snackbar.visible}
-              onDismiss={onDismiss}
-              action={{ label: snackbar.label, onPress: onDismiss }}
-            >
-              {snackbar.message}
-            </Snackbar>
-          </UserContext.Context.Provider>
-        </NetworkContext.Context.Provider>
-      </UiContext.Context.Provider>
+      <SafeAreaProvider>
+        <UiContext.Context.Provider value={{ error, setError, snackbar, setSnackbar }}>
+          <NetworkContext.Context.Provider value={{ networkState, dispatchNetworkActions }}>
+            <UserContext.Context.Provider value={{ userState, setUserState }}>
+              <Routes />
+              <NetworkPanel />
+              <ErrorPanel />
+              <Snackbar
+                visible={snackbar.visible}
+                onDismiss={onDismiss}
+                action={{ label: snackbar.label, onPress: onDismiss }}
+              >
+                {snackbar.message}
+              </Snackbar>
+            </UserContext.Context.Provider>
+          </NetworkContext.Context.Provider>
+        </UiContext.Context.Provider>
+      </SafeAreaProvider>
     </Provider>
   )
 }

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
-import { IconButton } from 'react-native-paper'
 import SafeAreaView from 'react-native-safe-area-view'
+import { IconButton } from 'react-native-paper'
 import { useNavigation } from 'react-navigation-hooks'
 
 import { COLOR } from '../../../constants'
