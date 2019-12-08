@@ -5,11 +5,11 @@ export function createInitialState(): Todos.Model {
 }
 export type State = ReturnType<typeof createInitialState>
 
-export const SET = 'todo/set' as const
-export const ADD = 'todo/add' as const
-export const UPDATE = 'todo/update' as const
-export const REMOVE = 'todo/remove' as const
-export const TOGGLE = 'todo/toggle' as const
+export const SET = 'praiser/todos/set' as const
+export const ADD = 'praiser/todos/add' as const
+export const UPDATE = 'praiser/todos/update' as const
+export const REMOVE = 'praiser/todos/remove' as const
+export const TOGGLE = 'praiser/todos/toggle' as const
 
 export function set(todos: Todos.Model) {
   return {
@@ -58,11 +58,11 @@ export function toggle(id: string) {
 }
 
 export type Action =
-  | ReturnType<typeof set>
-  | ReturnType<typeof add>
-  | ReturnType<typeof update>
-  | ReturnType<typeof remove>
-  | ReturnType<typeof toggle>
+  | Readonly<ReturnType<typeof set>>
+  | Readonly<ReturnType<typeof add>>
+  | Readonly<ReturnType<typeof update>>
+  | Readonly<ReturnType<typeof remove>>
+  | Readonly<ReturnType<typeof toggle>>
 
 export default function reducer(state = createInitialState(), action: Action) {
   switch (action.type) {

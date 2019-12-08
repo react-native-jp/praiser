@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Provider } from 'react-redux'
 import { Snackbar } from 'react-native-paper'
 import store from './store'

@@ -1,4 +1,5 @@
 import * as Todo from './todo'
+import sleep from '../../lib/sleep'
 
 const ISO8601_PATTERN = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/u
 
@@ -34,40 +35,39 @@ describe('Todo', () => {
   })
 
   describe('change', () => {
-    it('returns an instance of Todo model that have specified titles and details', () => {
+    it('returns an instance of Todo model that have specified titles and details', async () => {
       const todo = Todo.factory({ title: 'abcde' })
       expect(todo.title).toBe('abcde')
       expect(todo.detail).toBeUndefined()
 
+      await sleep(10)
       const changed = Todo.change(todo, {
         title: 'changed',
         detail: 'changed',
       })
       expect(changed.title).toBe('changed')
       expect(changed.detail).toBe('changed')
-      expect(todo.completedAt).toBeNull()
       expect(changed.createdAt).toBe(todo.createdAt)
-      expect(new Date(changed.updatedAt).getTime()).toBeGreaterThanOrEqual(new Date(changed.createdAt).getTime())
+      expect(new Date(changed.updatedAt).getTime()).toBeGreaterThan(new Date(changed.createdAt).getTime())
     })
   })
 
   describe('toggle', () => {
-    it('returns an instance of Todo that has inversed value of isDone', () => {
+    it('returns an instance of Todo that has inversed value of isDone', async () => {
       const todo = Todo.factory({ title: 'foo' })
-      const toggled = Todo.toggle(todo)
+      expect(todo.completedAt).toBeNull()
 
-      expect(toggled.title).toBe('foo')
-      expect(toggled.detail).toBeUndefined()
+      await sleep(10)
+      const toggled = Todo.toggle(todo)
       expect(toggled.completedAt).not.toBeNull()
       expect(toggled.createdAt).toBe(todo.createdAt)
-      expect(new Date(toggled.updatedAt).getTime()).toBeGreaterThanOrEqual(new Date(todo.updatedAt).getTime())
+      expect(new Date(toggled.updatedAt).getTime()).toBeGreaterThan(new Date(todo.updatedAt).getTime())
 
+      await sleep(10)
       const undoed = Todo.toggle(toggled)
-      expect(undoed.title).toBe('foo')
-      expect(undoed.detail).toBeUndefined()
       expect(undoed.completedAt).toBeNull()
       expect(undoed.createdAt).toBe(todo.createdAt)
-      expect(new Date(undoed.updatedAt).getTime()).toBeGreaterThanOrEqual(new Date(toggled.updatedAt).getTime())
+      expect(new Date(undoed.updatedAt).getTime()).toBeGreaterThan(new Date(toggled.updatedAt).getTime())
     })
   })
 })
