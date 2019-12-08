@@ -6,7 +6,7 @@ import { Avatar } from 'react-native-paper'
 import { CHOOSE_LOGIN } from '../../../constants/path'
 import { COLOR } from '../../../constants'
 import testIDs from '../../../constants/testIDs'
-import userContext, { UserInformation } from '../../../contexts/user'
+import { UserContext } from '../../../contexts'
 import useNetworker from '../../../lib/hooks/use-networker'
 import signOutFromFirebase from '../../../lib/firebase/sign-out'
 import * as LocalStore from '../../../lib/local-store'
@@ -37,18 +37,26 @@ const styles = StyleSheet.create({
 })
 
 export default function UserInfo() {
-  const { userState, setUserState } = React.useContext(userContext)
+  const { userState, setUserState } = React.useContext(UserContext)
   const networker = useNetworker()
   const { navigate } = useNavigation()
   const signOut = React.useCallback(async () => {
     await networker(async () => {
       await signOutFromFirebase()
-      setUserState({} as UserInformation)
+      setUserState(null)
       await LocalStore.UserInformation.clear()
       navigate(CHOOSE_LOGIN)
     })
   }, [navigate, networker, setUserState])
-  const source = userState.photoUrl ? { uri: userState.photoUrl } : require('../../../../assets/person.png')
+
+  const source = React.useMemo(
+    () => (userState?.photoUrl ? { uri: userState.photoUrl } : require('../../../../assets/person.png')),
+    [userState],
+  )
+
+  if (userState === null) {
+    return null
+  }
 
   return (
     <SafeAreaView style={styles.container}>

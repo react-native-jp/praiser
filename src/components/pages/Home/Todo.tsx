@@ -5,7 +5,7 @@ import { useNavigation } from 'react-navigation-hooks'
 import { SwipeRow } from 'react-native-swipe-list-view'
 import analytics from '@react-native-firebase/analytics'
 
-import { uiContext } from '../../../contexts'
+import { UiContext } from '../../../contexts'
 import { DETAIL } from '../../../constants/path'
 import { COLOR } from '../../../constants'
 import { DoneButton, DeleteButton } from './SwipeButtons'
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 
 function useToggle(props: EnableEditProps | DisableEditProps) {
   const { state } = props
-  const { setError } = React.useContext(uiContext)
+  const { setError } = React.useContext(UiContext)
   const rowRef = React.useRef<any>(null)
   // @todo ちょっとしらべます
   const toggleTodo = React.useCallback(async () => {

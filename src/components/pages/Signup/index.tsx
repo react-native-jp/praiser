@@ -5,7 +5,7 @@ import analytics from '@react-native-firebase/analytics'
 
 import { HOME } from '../../../constants/path'
 import testIDs from '../../../constants/testIDs'
-import { userContext } from '../../../contexts'
+import { UserContext } from '../../../contexts'
 import { Todos } from '../../../domain/models'
 import * as TodosRepository from '../../../domain/repositories/todos'
 import useTextInput from '../../../lib/hooks/use-TextInput'
@@ -35,7 +35,7 @@ interface Props {
 }
 
 export default function SignUp(props: Props) {
-  const { setUserState } = React.useContext(userContext)
+  const { setUserState } = React.useContext(UserContext)
   const { navigate } = useNavigation()
   const networker = useNetworker()
   const mailAddress = useTextInput('')

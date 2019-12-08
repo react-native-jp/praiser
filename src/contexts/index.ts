@@ -1,3 +1,3 @@
-export { default as uiContext } from './ui'
-export { default as networkContext } from './network'
-export { default as userContext } from './user'
+export { Context as UiContext } from './ui'
+export { Context as NetworkContext } from './network'
+export { Context as UserContext } from './user'

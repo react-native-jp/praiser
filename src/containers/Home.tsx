@@ -4,11 +4,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getTodos } from '../selectors/todos'
 import * as Todos from '../usecases/todos'
 import { Home } from '../components/pages'
-import { userContext } from '../contexts'
+import { UserContext } from '../contexts'
+import { assertIsDefined } from '../lib/assert'
 
 export default function ConnectedHome() {
   const todos = useSelector(getTodos)
-  const { userState } = React.useContext(userContext)
+  const { userState } = React.useContext(UserContext)
+  assertIsDefined(userState)
 
   const dispatch = useDispatch()
   const actions = React.useMemo(
