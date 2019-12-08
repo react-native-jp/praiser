@@ -9,7 +9,7 @@ export function addAndSync(userId: string, newValues: Todo.Values) {
   return async function(dispatch: Dispatch) {
     const newTodo = Todo.factory(newValues)
     dispatch(add(newTodo))
-    await TodosRepository.add(userId, newTodo)
+    TodosRepository.add(userId, newTodo)
   }
 }
 

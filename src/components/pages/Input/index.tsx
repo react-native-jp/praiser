@@ -6,12 +6,11 @@ import { useNavigation } from 'react-navigation-hooks'
 
 import { userContext } from '../../../contexts'
 import { COLOR } from '../../../constants'
-import { Todo } from '../../../domain/models'
 import testIDs from '../../../constants/testIDs'
+import { Todo } from '../../../domain/models'
 import Button from '../../Button'
 import TextField, { dismiss } from '../../TextField'
-import useTextInput from '../../../lib/hooks/use-TextInput'
-import useNetworker from '../../../lib/hooks/use-networker'
+import { useTextInput } from '../../../lib/hooks/'
 
 const styles = StyleSheet.create({
   container: {
@@ -40,23 +39,21 @@ interface Props {
 }
 
 export default function Input(props: Props) {
-  const { goBack } = useNavigation()
-  const { actions } = props
   const title = useTextInput('')
   const detail = useTextInput('')
-  const networker = useNetworker()
-  const { userState } = React.useContext(userContext)
+
+  const { goBack } = useNavigation()
   const back = React.useCallback(() => {
     goBack()
   }, [goBack])
-  const addTodo = React.useCallback(async () => {
-    await networker(async () => {
-      actions.addTodo(userState.id, { title: title.value, detail: detail.value })
-      back()
-      title.onChangeText('')
-      detail.onChangeText('')
-    })
-  }, [networker, actions, userState.id, detail, title])
+
+  const { userState } = React.useContext(userContext)
+  const addTodo = React.useCallback(() => {
+    props.actions.addTodo(userState.id, { title: title.value, detail: detail.value })
+    back()
+    title.onChangeText('')
+    detail.onChangeText('')
+  }, [title, detail, props.actions, userState.id])
 
   return (
     <SafeAreaView style={styles.container}>
