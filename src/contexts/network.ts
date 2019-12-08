@@ -8,7 +8,7 @@ interface Context {
   networkState: number
   dispatchNetworkActions: React.Dispatch<NetworkAction>
 }
-const networkContext = React.createContext<Context>({
+const NetworkContext = React.createContext<Context>({
   networkState: 0,
   dispatchNetworkActions: () => {},
 })
@@ -26,4 +26,4 @@ function reducer(state: State, action: NetworkAction) {
 
 export { reducer }
 
-export default networkContext
+export default NetworkContext

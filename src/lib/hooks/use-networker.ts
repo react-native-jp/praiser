@@ -1,10 +1,10 @@
 import * as React from 'react'
 
-import { UiContext, networkContext } from '../../contexts'
+import { UiContext, NetworkContext } from '../../contexts'
 
 type Task = () => Promise<void>
 export default function useNetworker() {
-  const { dispatchNetworkActions } = React.useContext(networkContext)
+  const { dispatchNetworkActions } = React.useContext(NetworkContext)
   const { setError } = React.useContext(UiContext)
 
   return async (task: Task) => {
