@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
-import { IconButton } from 'react-native-paper'
+import IconButton from '../../atoms/IconButton'
 import SafeAreaView from 'react-native-safe-area-view'
 import { useNavigation } from 'react-navigation-hooks'
 import useTextInput from '../../../lib/hooks/use-TextInput'
@@ -64,7 +64,7 @@ export default function Input(props: Props) {
           <IconButton
             icon="close"
             size={30}
-            color={COLOR.PRIMARY}
+            iconColor={COLOR.PRIMARY}
             onPress={back}
             style={styles.iconButton}
             testID={testIDs.TODO_INPUT_CLOSE}

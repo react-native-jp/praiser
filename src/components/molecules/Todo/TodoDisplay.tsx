@@ -1,7 +1,7 @@
 import React from 'react'
-import {Text, TouchableHighlight, View, StyleSheet } from "react-native";
+import { Text, TouchableHighlight, View, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import {COLOR} from "../../../constants";
+import { COLOR } from '../../../constants'
 
 const styles = StyleSheet.create({
   contentContainer: {
@@ -27,9 +27,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: COLOR.WHITE,
   },
-  detailButton: {
-    width: 32,
-  },
 })
 
 interface Props {
@@ -40,12 +37,7 @@ interface Props {
 }
 
 export default function TodoDisplay(props: Props) {
-  const {
-    onPress,
-    title,
-    detail,
-    isDone
-  } = props
+  const { onPress, title, detail, isDone } = props
 
   return (
     <TouchableHighlight style={[styles.contentContainer, styles.displayContent]} onPress={onPress}>

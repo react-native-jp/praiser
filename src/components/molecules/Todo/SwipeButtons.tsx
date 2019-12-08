@@ -49,12 +49,5 @@ interface DeleteProps {
 
 export function DeleteButton(props: DeleteProps) {
   const { onPress } = props
-  return (
-    <IconButton
-      onPress={onPress}
-      icon="delete"
-      style={styles.rightButton}
-      testID={testIDs.TODO_ROW_DELETE}
-    />
-  )
+  return <IconButton onPress={onPress} icon="delete" style={styles.rightButton} testID={testIDs.TODO_ROW_DELETE} />
 }

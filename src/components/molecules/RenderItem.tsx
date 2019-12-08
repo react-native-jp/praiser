@@ -1,9 +1,8 @@
 import React from 'react'
-import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
-
-import reactImage from '../../../../assets/reactIcon.jpg'
-import Button from '../../atoms/Button'
-import { COLOR } from '../../../constants'
+import { Dimensions, StyleSheet, Text, View } from 'react-native'
+import Logo from '../atoms/Logo'
+import Button from '../atoms/Button'
+import { COLOR } from '../../constants'
 
 const { width } = Dimensions.get('window')
 const padding = 20
@@ -29,11 +28,6 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.BACKGROUND,
     paddingVertical: 10,
   },
-  image: {
-    width: width - padding * edgeNumber,
-    resizeMode: 'contain',
-    flex: 1,
-  },
   imageContainer: {
     flex: 2,
   },
@@ -50,7 +44,7 @@ export default function RenderItem({ onPress, item }: { item: { text: string; te
     <View style={styles.container}>
       <View style={styles.textContainer}>
         <View style={styles.imageContainer}>
-          <Image source={reactImage} resizeMode="contain" style={styles.image} />
+          <Logo />
         </View>
         <View style={styles.contentContainer}>
           <View>

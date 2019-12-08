@@ -1,15 +1,12 @@
 import React from 'react'
-import { StyleSheet, View, FlatList, Text } from 'react-native'
-import Progress, { Statistic } from './Progress'
-import { State as TodosState } from '../Home/Todos'
+import { StyleSheet, View, FlatList } from 'react-native'
+import ProgressPanel, { Statistic } from '../../molecules/ProgressPanel'
+import { State as TodosState } from '../../organisms/Todos'
 import { COLOR } from '../../../constants'
-import Index from '../../molecules/Todo'
+import Todo from '../../molecules/Todo'
+import HeaderText from '../../atoms/HeaderText'
 
 const styles = StyleSheet.create({
-  headerText: {
-    color: COLOR.WHITE,
-    fontSize: 24,
-  },
   headerTextContainer: {
     paddingLeft: 20,
     marginTop: 20,
@@ -31,12 +28,12 @@ export default function Statics(props: Props) {
   return (
     <FlatList
       data={histories}
-      renderItem={({ item }) => <Index state={item} forbiddenEdit={true} />}
+      renderItem={({ item }) => <Todo state={item} forbiddenEdit={true} />}
       ListHeaderComponent={
         <View>
-          <Progress {...statistics} />
+          <ProgressPanel {...statistics} />
           <View style={styles.headerTextContainer}>
-            <Text style={styles.headerText}>History</Text>
+            <HeaderText text="History" />
           </View>
         </View>
       }

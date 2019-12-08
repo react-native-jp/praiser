@@ -20,10 +20,11 @@ interface Props {
   disabled?: boolean
   disabledColor?: string
   testID?: string
+  icon?: string
 }
 
 export default function Button(props: Props) {
-  const { onPress, style, textStyle, label, color = '#008080', disabled, disabledColor = '#555', testID } = props
+  const { onPress, style, textStyle, label, color = '#008080', disabled, disabledColor = '#555', testID, icon } = props
   return (
     <PaperButton
       mode="contained"
@@ -34,6 +35,7 @@ export default function Button(props: Props) {
         backgroundColor: disabled ? disabledColor : color,
       }}
       testID={testID}
+      icon={icon}
     >
       {label && <Text style={[styles.text, textStyle]}>{label}</Text>}
     </PaperButton>

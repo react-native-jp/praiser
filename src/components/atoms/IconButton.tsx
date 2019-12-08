@@ -21,16 +21,17 @@ interface Props {
   style: ViewStyle | ViewStyle[]
   testID?: string
   iconColor?: string
+  size?: number
 }
 
 export default function IconButton(props: Props) {
-  const { icon, onPress, style, testID, iconColor = COLOR.WHITE } = props
+  const { icon, onPress, style, testID, iconColor = COLOR.WHITE, size = 18 } = props
 
   return (
     <PaperIconButton
       onPress={onPress}
       color={iconColor}
-      size={18}
+      size={size}
       style={[styles.button, style]}
       icon={icon}
       testID={testID}

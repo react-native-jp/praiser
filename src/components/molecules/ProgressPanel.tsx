@@ -1,7 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { ProgressCircle } from 'react-native-svg-charts'
-import { COLOR } from '../../../constants'
+import Progress from '../atoms/Progress'
+import HeaderText from '../atoms/HeaderText'
+import { COLOR } from '../../constants'
 
 const styles = StyleSheet.create({
   ratioArea: {
@@ -10,10 +11,6 @@ const styles = StyleSheet.create({
   graphContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-  },
-  headerText: {
-    color: COLOR.WHITE,
-    fontSize: 24,
   },
   headerTextContainer: {
     paddingLeft: 20,
@@ -33,10 +30,6 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     flexDirection: 'row',
   },
-  progress: {
-    height: 200,
-    width: 200,
-  },
 })
 
 export interface Statistic {
@@ -47,15 +40,15 @@ export interface Statistic {
   uncompletedRatio: number
 }
 
-export default function Progress(props: Statistic) {
+export default function ProgressPanel(props: Statistic) {
   const { uncompletedRatio, completedRatio } = props
   return (
     <View style={styles.ratioArea}>
       <View style={styles.headerTextContainer}>
-        <Text style={styles.headerText}>Progress</Text>
+        <HeaderText text="Progress" />
       </View>
       <View style={styles.graphContainer}>
-        <ProgressCircle style={styles.progress} progress={completedRatio} progressColor={COLOR.PRIMARY} />
+        <Progress value={completedRatio} />
         <View style={styles.textContainer}>
           <View>
             <Text style={styles.text}>Done</Text>

@@ -1,15 +1,12 @@
 import React, { useCallback, useRef, useState } from 'react'
-import { Dimensions, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
-import Carousel, { Pagination, CarouselStatic } from 'react-native-snap-carousel'
-
-import RenderItem from './RenderItem'
+import { CarouselStatic } from 'react-native-snap-carousel'
+import Carousel from '../../organisms/Carousel'
+import Pagenation from '../../molecules/Pagenation'
 import { CHOOSE_LOGIN } from '../../../constants/path'
 import { openFirstLaunch } from '../../../lib/local-store'
-import { COLOR } from '../../../constants'
 import testIDs from '../../../constants/testIDs'
-
-const { width } = Dimensions.get('window')
 
 const padding = 20
 const styles = StyleSheet.create({
@@ -18,16 +15,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding,
-  },
-  dot: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    marginHorizontal: 8,
-    backgroundColor: COLOR.WHITE,
-  },
-  carouselContainer: {
-    backgroundColor: COLOR.CAROUSEL_BACKGROUND,
   },
 })
 
@@ -75,24 +62,8 @@ export default function Initial() {
 
   return (
     <View style={styles.container} testID={testIDs.INITIAL}>
-      <Carousel
-        data={renderData}
-        ref={carouselRef}
-        renderItem={({ item, index }) => (
-          <RenderItem item={item} onPress={index === renderData.length - 1 ? onEnd : onNext} />
-        )}
-        sliderWidth={width}
-        itemWidth={width}
-        onSnapToItem={changeSlide}
-      />
-      <Pagination
-        dotsLength={renderData.length}
-        activeDotIndex={activeSlide}
-        containerStyle={styles.carouselContainer}
-        dotStyle={styles.dot}
-        inactiveDotOpacity={0.4}
-        inactiveDotScale={0.6}
-      />
+      <Carousel data={renderData} onEnd={onEnd} onNext={onNext} ref={carouselRef} onSnapToItem={changeSlide} />
+      <Pagenation length={renderData.length} index={activeSlide} />
     </View>
   )
 }
