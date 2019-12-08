@@ -2,10 +2,9 @@ import * as React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import analytics from '@react-native-firebase/analytics'
-
-import TextField from '../../../components/TextField'
+import TextField from '../../atoms/TextField'
+import Button from '../../atoms/Button'
 import { useControlledComponent } from '../../../lib/hooks'
-import Button from '../../../components/Button'
 import { UiContext } from '../../../contexts'
 import testIDs from '../../../constants/testIDs'
 

@@ -1,10 +1,9 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { UiContext } from '../../contexts'
+import { width } from '../../lib/window'
+import { COLOR } from '../../constants'
 import SafeAreaView from 'react-native-safe-area-view'
-
-import { UiContext } from '../contexts'
-import { width } from '../lib/window'
-import { COLOR } from '../constants'
 
 const styles = StyleSheet.create({
   container: {

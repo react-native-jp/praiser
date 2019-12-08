@@ -1,18 +1,14 @@
 import React from 'react'
-import { Image, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 
+import Button from '../../atoms/Button'
 import { SIGN_IN, SIGN_UP } from '../../../constants/path'
 import { COLOR } from '../../../constants'
+import Logo from '../../atoms/Logo'
 import testIDs from '../../../constants/testIDs'
-import { width } from '../../../lib/window'
-import Button from '../../Button'
-import reactImage from '../../../../assets/reactIcon.jpg'
 
 const padding = 20
-const edgeNumber = 2
-const ratio = 3
-const imageRatio = edgeNumber / ratio
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -22,10 +18,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  image: {
-    width: width * imageRatio,
-    resizeMode: 'contain',
   },
   contentContainer: {
     flex: 1,
@@ -45,7 +37,7 @@ export default function ChooseLogin() {
   return (
     <View style={styles.container} testID={testIDs.CHOOSE_LOGIN}>
       <View style={styles.imageContainer}>
-        <Image source={reactImage} resizeMode="contain" style={styles.image} />
+        <Logo />
       </View>
       <View style={styles.contentContainer}>
         <Button

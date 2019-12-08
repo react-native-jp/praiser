@@ -1,14 +1,13 @@
 import * as React from 'react'
 import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
+import IconButton from '../../atoms/IconButton'
 import SafeAreaView from 'react-native-safe-area-view'
-import { IconButton } from 'react-native-paper'
 import { useNavigation } from 'react-navigation-hooks'
-
+import TextField, { dismiss } from '../../atoms/TextField'
+import Button from '../../atoms/Button'
 import { COLOR } from '../../../constants'
 import testIDs from '../../../constants/testIDs'
 import { Todo } from '../../../domain/models'
-import Button from '../../Button'
-import TextField, { dismiss } from '../../TextField'
 import { useControlledComponent } from '../../../lib/hooks/'
 
 const styles = StyleSheet.create({
@@ -28,6 +27,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     right: 0,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
   },
 })
 
@@ -63,7 +65,7 @@ export default function Input(props: Props) {
           <IconButton
             icon="close"
             size={30}
-            color={COLOR.PRIMARY}
+            iconColor={COLOR.PRIMARY}
             onPress={back}
             style={styles.iconButton}
             testID={testIDs.TODO_INPUT_CLOSE}

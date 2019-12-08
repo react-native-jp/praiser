@@ -2,14 +2,13 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Snackbar } from 'react-native-paper'
-
 import store from './store'
 import * as UiContext from './contexts/ui'
 import * as NetworkContext from './contexts/network'
 import * as UserContext from './contexts/user'
 import Routes from './routes'
-import ErrorPanel from './components/ErrorPanel'
-import NetworkPanel from './components/NetworkPanel'
+import NetworkPanel from './components/molecules/NetworkPanel'
+import ErrorPanel from './components/molecules/ErrorPanel'
 
 export default function App() {
   const [error, setError] = React.useState(UiContext.createErrorInitialState())

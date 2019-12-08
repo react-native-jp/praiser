@@ -2,7 +2,6 @@ import React from 'react'
 import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import analytics from '@react-native-firebase/analytics'
-
 import { HOME } from '../../../constants/path'
 import testIDs from '../../../constants/testIDs'
 import { UserContext } from '../../../contexts'
@@ -12,8 +11,8 @@ import { useControlledComponent } from '../../../lib/hooks'
 import useNetworker from '../../../lib/hooks/use-networker'
 import * as LocalStore from '../../../lib/local-store'
 import registerUserToFirebase from '../../../lib/firebase/register-user'
-import Button from '../../Button'
-import TextField, { dismiss } from '../../TextField'
+import Button from '../../atoms/Button'
+import TextField, { dismiss } from '../../atoms/TextField'
 
 const styles = StyleSheet.create({
   container: {

@@ -1,24 +1,15 @@
 import * as React from 'react'
-import { StyleSheet } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import analytics from '@react-native-firebase/analytics'
-
 import { HOME } from '../../../constants/path'
-import testIDs from '../../../constants/testIDs'
 import { UiContext, UserContext } from '../../../contexts'
 import { Todos } from '../../../domain/models'
 import * as TodosRepository from '../../../domain/repositories/todos'
 import signInWithGoogle from '../../../lib/firebase/sign-in-with-google'
 import * as LocalStore from '../../../lib/local-store'
 import useNetworker from '../../../lib/hooks/use-networker'
-import Button from '../../Button'
-
-const styles = StyleSheet.create({
-  button: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-})
+import Button from '../../atoms/Button'
+import testIDs from '../../../constants/testIDs'
 
 interface Props {
   actions: {
@@ -51,7 +42,6 @@ export default function SignInWithGoogle(props: Props) {
   return (
     <Button
       onPress={loginWithGoogle}
-      style={styles.button}
       icon="google"
       label="Sign In with Google"
       testID={testIDs.SIGN_IN_WITH_GOOGLE_BUTTON}

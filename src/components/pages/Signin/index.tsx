@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import analytics from '@react-native-firebase/analytics'
-
+import TextField, { dismiss } from '../../atoms/TextField'
 import { HOME } from '../../../constants/path'
 import testIDs from '../../../constants/testIDs'
 import { UserContext } from '../../../contexts'
@@ -12,9 +12,8 @@ import { useControlledComponent } from '../../../lib/hooks'
 import useNetworker from '../../../lib/hooks/use-networker'
 import * as LocalStore from '../../../lib/local-store'
 import signInWithPasswordToFirebase from '../../../lib/firebase/sign-in-with-password'
-import Button from '../../Button'
+import Button from '../../atoms/Button'
 import SignInWithGoogle from './SignInWithGoogle'
-import TextField, { dismiss } from '../../TextField'
 
 const styles = StyleSheet.create({
   container: {
