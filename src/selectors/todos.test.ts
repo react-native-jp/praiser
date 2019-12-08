@@ -3,6 +3,7 @@ import * as Selectors from './todos'
 import * as Domain from '../domain/models'
 import { createStore } from '../store'
 import { add, toggle } from '../modules/todos'
+import sleep from '../lib/sleep'
 
 describe('todos selectors', () => {
   describe('getArray', () => {
@@ -19,12 +20,12 @@ describe('todos selectors', () => {
     it('returns array of todos sorted by createdAt desc', async () => {
       const store = createStore()
       store.dispatch(add(Domain.Todo.factory({ title: 'foo' })))
-      await setTimeout(() => {
-        store.dispatch(add(Domain.Todo.factory({ title: 'bar' })))
-        const actual = Selectors.getTodos(store.getState())
-        expect(actual.length).toBe(2)
-        expect(actual[0].title).toBe('bar')
-      }, 10)
+      await sleep(10)
+      store.dispatch(add(Domain.Todo.factory({ title: 'bar' })))
+
+      const actual = Selectors.getTodos(store.getState())
+      expect(actual.length).toBe(2)
+      expect(actual[0].title).toBe('bar')
     })
   })
 
@@ -75,13 +76,12 @@ describe('todos selectors', () => {
       store.dispatch(add(Domain.Todo.factory({ title: 'bar' })))
       store.dispatch(add(Domain.Todo.factory({ title: 'buz' })))
       store.dispatch(toggle(Object.keys(store.getState().todos)[1]))
-      await setTimeout(() => {
-        store.dispatch(toggle(Object.keys(store.getState().todos)[0]))
+      await sleep(10)
+      store.dispatch(toggle(Object.keys(store.getState().todos)[0]))
 
-        const actual = Selectors.getHistories(store.getState())
-        expect(actual.length).toBe(2)
-        expect(actual[0].title).toBe('foo')
-      }, 10)
+      const actual = Selectors.getHistories(store.getState())
+      expect(actual.length).toBe(2)
+      expect(actual[0].title).toBe('foo')
     })
   })
 })
