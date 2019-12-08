@@ -3,6 +3,7 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import analytics from '@react-native-firebase/analytics'
+
 import Todos, { Actions as TodosActions, State as TodosState } from './Todos'
 import { COLOR } from '../../../constants'
 import { INPUT } from '../../../constants/path'
@@ -49,10 +50,12 @@ export default function Home(props: Props) {
     }
     logViewItemList()
   }, [])
+
   const { navigate } = useNavigation()
   const onPress = React.useCallback(() => {
     navigate(INPUT)
   }, [])
+
   return (
     <View style={styles.container} testID={testIDs.HOME}>
       <Todos {...props} />
