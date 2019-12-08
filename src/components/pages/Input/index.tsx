@@ -6,11 +6,11 @@ import { useNavigation } from 'react-navigation-hooks'
 
 import { userContext } from '../../../contexts'
 import { COLOR } from '../../../constants'
-import { Todo } from '../../../domain/models'
 import testIDs from '../../../constants/testIDs'
+import { Todo } from '../../../domain/models'
 import Button from '../../Button'
 import TextField, { dismiss } from '../../TextField'
-import useTextInput from '../../../lib/hooks/use-TextInput'
+import { useTextInput } from '../../../lib/hooks/'
 
 const styles = StyleSheet.create({
   container: {
@@ -39,21 +39,21 @@ interface Props {
 }
 
 export default function Input(props: Props) {
-  const { goBack } = useNavigation()
-  const { actions } = props
   const title = useTextInput('')
   const detail = useTextInput('')
-  const { userState } = React.useContext(userContext)
+
+  const { goBack } = useNavigation()
   const back = React.useCallback(() => {
     goBack()
   }, [goBack])
 
+  const { userState } = React.useContext(userContext)
   const addTodo = React.useCallback(() => {
-    actions.addTodo(userState.id, { title: title.value, detail: detail.value })
+    props.actions.addTodo(userState.id, { title: title.value, detail: detail.value })
     back()
     title.onChangeText('')
     detail.onChangeText('')
-  }, [actions, userState.id, detail, title])
+  }, [title, detail, props.actions, userState.id])
 
   return (
     <SafeAreaView style={styles.container}>
