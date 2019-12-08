@@ -9,7 +9,7 @@ import testIDs from '../../../constants/testIDs'
 import { Todo } from '../../../domain/models'
 import Button from '../../Button'
 import TextField, { dismiss } from '../../TextField'
-import { useTextInput } from '../../../lib/hooks/'
+import { useControlledComponent } from '../../../lib/hooks/'
 
 const styles = StyleSheet.create({
   container: {
@@ -38,8 +38,8 @@ interface Props {
 }
 
 export default function Input(props: Props) {
-  const title = useTextInput('')
-  const detail = useTextInput('')
+  const title = useControlledComponent('')
+  const detail = useControlledComponent('')
 
   const { goBack } = useNavigation()
   const back = React.useCallback(() => {

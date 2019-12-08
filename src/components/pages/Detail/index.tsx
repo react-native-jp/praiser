@@ -4,7 +4,7 @@ import { useNavigation } from 'react-navigation-hooks'
 import analytics from '@react-native-firebase/analytics'
 
 import TextField from '../../../components/TextField'
-import useTextInput from '../../../lib/hooks/use-TextInput'
+import { useControlledComponent } from '../../../lib/hooks'
 import Button from '../../../components/Button'
 import { UiContext } from '../../../contexts'
 import testIDs from '../../../constants/testIDs'
@@ -37,13 +37,15 @@ interface Props {
 }
 
 export default function Detail(props: Props) {
-  const id = useNavigation().getParam('id')
+  const { getParam } = useNavigation()
+  const id = getParam('id')
+
+  const forbiddenEdit = getParam('forbiddenEdit')
+  const titleInitialValue = getParam('title')
+  const title = useControlledComponent(titleInitialValue)
+  const detail = useControlledComponent(getParam('detail'))
+
   const { setSnackBar } = React.useContext(UiContext)
-  const detailInitialValue = useNavigation().getParam('detail')
-  const titleInitialValue = useNavigation().getParam('title')
-  const forbiddenEdit = useNavigation().getParam('forbiddenEdit')
-  const detail = useTextInput(detailInitialValue)
-  const title = useTextInput(titleInitialValue)
   const onSubmit = React.useCallback(() => {
     props.actions.changeTodo(id, {
       title: title.value,
@@ -54,7 +56,7 @@ export default function Detail(props: Props) {
       message: 'edit is completed.',
       label: 'Done',
     })
-  }, [detail.value, id, props.actions, setSnackBar, title.value])
+  }, [title.value, detail.value, id, props.actions, setSnackBar])
 
   React.useEffect(() => {
     async function logViewItem() {

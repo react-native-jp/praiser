@@ -1,5 +1,10 @@
 import React from 'react'
 
+type ErrorState = Error | null
+export function createErrorInitialState(): ErrorState {
+  return null
+}
+
 export function createSnackBarInitialState() {
   return {
     visible: false,
@@ -9,11 +14,6 @@ export function createSnackBarInitialState() {
 }
 
 type SnackBarState = ReturnType<typeof createSnackBarInitialState>
-
-type ErrorState = Error | null
-export function createErrorInitialState(): ErrorState {
-  return null
-}
 
 export const Context = React.createContext({
   error: createErrorInitialState(),
