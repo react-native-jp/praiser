@@ -9,9 +9,9 @@ export interface UserInformation {
   lastLoginAt: number | null
 }
 
-const userContext = React.createContext({
+const UserContext = React.createContext({
   userState: {} as UserInformation,
   setUserState: (_: UserInformation) => {},
 })
 
-export default userContext
+export default UserContext

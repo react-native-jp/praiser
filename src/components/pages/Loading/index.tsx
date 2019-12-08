@@ -4,7 +4,7 @@ import { useNavigation } from 'react-navigation-hooks'
 import { firebase } from '@react-native-firebase/auth'
 
 import { CHOOSE_LOGIN, HOME, INITIAL } from '../../../constants/path'
-import { UiContext, userContext } from '../../../contexts'
+import { UiContext, UserContext } from '../../../contexts'
 import { Todos } from '../../../domain/models'
 import * as TodosRepository from '../../../domain/repositories/todos'
 import * as LocalStore from '../../../lib/local-store'
@@ -25,7 +25,7 @@ interface Props {
 
 export default function Index(props: Props) {
   const { navigate } = useNavigation()
-  const { setUserState } = React.useContext(userContext)
+  const { setUserState } = React.useContext(UserContext)
   const { setError } = React.useContext(UiContext)
   const { setTodos } = props.actions
 

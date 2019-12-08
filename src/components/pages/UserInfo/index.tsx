@@ -6,7 +6,7 @@ import { Avatar } from 'react-native-paper'
 import { CHOOSE_LOGIN } from '../../../constants/path'
 import { COLOR } from '../../../constants'
 import testIDs from '../../../constants/testIDs'
-import userContext, { UserInformation } from '../../../contexts/user'
+import UserContext, { UserInformation } from '../../../contexts/user'
 import useNetworker from '../../../lib/hooks/use-networker'
 import signOutFromFirebase from '../../../lib/firebase/sign-out'
 import * as LocalStore from '../../../lib/local-store'
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
 })
 
 export default function UserInfo() {
-  const { userState, setUserState } = React.useContext(userContext)
+  const { userState, setUserState } = React.useContext(UserContext)
   const networker = useNetworker()
   const { navigate } = useNavigation()
   const signOut = React.useCallback(async () => {
