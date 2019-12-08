@@ -2,10 +2,11 @@ import * as React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import analytics from '@react-native-firebase/analytics'
+
 import TextField from '../../../components/TextField'
 import useTextInput from '../../../lib/hooks/use-TextInput'
 import Button from '../../../components/Button'
-import { userContext, uiContext } from '../../../contexts'
+import { uiContext } from '../../../contexts'
 import testIDs from '../../../constants/testIDs'
 
 const styles = StyleSheet.create({
@@ -23,7 +24,6 @@ const styles = StyleSheet.create({
 
 interface TodoEditActions {
   changeTodo: (
-    userId: string,
     id: string,
     newValue: {
       title: string
@@ -38,7 +38,6 @@ interface Props {
 
 export default function Detail(props: Props) {
   const id = useNavigation().getParam('id')
-  const { userState } = React.useContext(userContext)
   const { setSnackBar } = React.useContext(uiContext)
   const detailInitialValue = useNavigation().getParam('detail')
   const titleInitialValue = useNavigation().getParam('title')
@@ -46,7 +45,7 @@ export default function Detail(props: Props) {
   const detail = useTextInput(detailInitialValue)
   const title = useTextInput(titleInitialValue)
   const onSubmit = React.useCallback(() => {
-    props.actions.changeTodo(userState.id, id, {
+    props.actions.changeTodo(id, {
       title: title.value,
       detail: detail.value,
     })
@@ -55,7 +54,7 @@ export default function Detail(props: Props) {
       message: 'edit is completed.',
       label: 'Done',
     })
-  }, [detail.value, id, props.actions, setSnackBar, title.value, userState.id])
+  }, [detail.value, id, props.actions, setSnackBar, title.value])
 
   React.useEffect(() => {
     async function logViewItem() {
