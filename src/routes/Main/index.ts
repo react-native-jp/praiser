@@ -21,7 +21,6 @@ import { headerStyle, headerTintColor } from '../Header'
 import { TabBar } from '../TabBar'
 import { createStackNavigator } from 'react-navigation-stack'
 import { COLOR } from '../../constants'
-import Drawer from '../Drawer/Drawer'
 
 const makeWithDrawerRouter = (routeObject: object) =>
   createDrawerNavigator(
@@ -32,11 +31,10 @@ const makeWithDrawerRouter = (routeObject: object) =>
       },
     },
     {
-      contentComponent: Drawer,
+      drawerBackgroundColor: COLOR.MAIN,
       contentOptions: {
-        style: {
-          backgroundColor: 'black',
-        },
+        activeTintColor: COLOR.PRIMARY,
+        inactiveTintColor: COLOR.WHITE,
       },
     },
   )
@@ -98,21 +96,21 @@ const ChooseLoginNavigator = createStackNavigator(
       screen: Signin,
       navigationOptions: {
         title: 'Signin',
-        headerStyle,
-        headerTintColor,
       },
     },
     [SIGN_UP]: {
       screen: Signup,
       navigationOptions: {
         title: 'Signup',
-        headerStyle,
-        headerTintColor,
       },
     },
   },
   {
     cardStyle,
+    defaultNavigationOptions: {
+      headerStyle,
+      headerTintColor,
+    },
   },
 )
 

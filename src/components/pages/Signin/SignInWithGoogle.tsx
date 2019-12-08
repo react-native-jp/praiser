@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { StyleSheet } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import analytics from '@react-native-firebase/analytics'
 import { HOME } from '../../../constants/path'
@@ -11,13 +10,6 @@ import * as LocalStore from '../../../lib/local-store'
 import useNetworker from '../../../lib/hooks/use-networker'
 import Button from '../../atoms/Button'
 import testIDs from '../../../constants/testIDs'
-
-const styles = StyleSheet.create({
-  button: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-})
 
 interface Props {
   actions: {
@@ -50,7 +42,6 @@ export default function SignInWithGoogle(props: Props) {
   return (
     <Button
       onPress={loginWithGoogle}
-      style={styles.button}
       icon="google"
       label="Sign In with Google"
       testID={testIDs.SIGN_IN_WITH_GOOGLE_BUTTON}
