@@ -5,7 +5,7 @@ export function createErrorInitialState(): ErrorState {
   return null
 }
 
-export function createSnackBarInitialState() {
+export function createSnackbarInitialState() {
   return {
     visible: false,
     message: '',
@@ -13,11 +13,11 @@ export function createSnackBarInitialState() {
   }
 }
 
-type SnackBarState = ReturnType<typeof createSnackBarInitialState>
+type SnackbarState = ReturnType<typeof createSnackbarInitialState>
 
 export const Context = React.createContext({
   error: createErrorInitialState(),
   setError: (_: ErrorState) => {},
-  snackBar: createSnackBarInitialState(),
-  setSnackBar: (_: SnackBarState) => {},
+  snackbar: createSnackbarInitialState(),
+  setSnackbar: (_: SnackbarState) => {},
 })

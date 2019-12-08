@@ -45,18 +45,18 @@ export default function Detail(props: Props) {
   const title = useControlledComponent(titleInitialValue)
   const detail = useControlledComponent(getParam('detail'))
 
-  const { setSnackBar } = React.useContext(UiContext)
+  const { setSnackbar } = React.useContext(UiContext)
   const onSubmit = React.useCallback(() => {
     props.actions.changeTodo(id, {
       title: title.value,
       detail: detail.value,
     })
-    setSnackBar({
+    setSnackbar({
       visible: true,
       message: 'edit is completed.',
       label: 'Done',
     })
-  }, [title.value, detail.value, id, props.actions, setSnackBar])
+  }, [title.value, detail.value, id, props.actions, setSnackbar])
 
   React.useEffect(() => {
     async function logViewItem() {
