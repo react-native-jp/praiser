@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { ActivityIndicator, StyleSheet, View } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import { firebase } from '@react-native-firebase/auth'
@@ -29,47 +29,55 @@ export default function Index(props: Props) {
   const { setError } = React.useContext(UiContext)
   const { setTodos } = props.actions
 
-  React.useEffect(() => {
-    LocalStore.UserInformation.retrieve()
-      .then(userInformation => {
-        if (!userInformation) {
-          LocalStore.InitialLaunch.isInitialLaunch()
-            .then(isOpened => {
-              if (!isOpened) {
-                navigate(INITIAL)
-              } else {
-                navigate(CHOOSE_LOGIN)
-              }
-            })
-            .catch(e => {
-              return Promise.reject(new Error(e))
-            })
-          return Promise.resolve()
+  async function navigateNextScreen() {
+    const isOpened = await LocalStore.InitialLaunch.isInitialLaunch()
+    if (!isOpened) {
+      navigate(INITIAL)
+      return
+    }
+
+    navigate(CHOOSE_LOGIN)
+  }
+
+  function initialiseFirebaseAuthentication() {
+    return new Promise((resolve, reject) => {
+      firebase.auth().onAuthStateChanged(user => {
+        if (!user) {
+          navigate(CHOOSE_LOGIN)
+          return
         }
 
-        setUserState(userInformation)
-
-        return new Promise((resolve, reject) => {
-          firebase.auth().onAuthStateChanged(user => {
-            if (user == null) {
-              return
-            }
-
-            TodosRepository.getAll(user.uid)
-              .then(todos => {
-                setTodos(todos)
-                navigate(HOME)
-                resolve()
-              })
-              .catch(e => {
-                reject(e)
-              })
+        TodosRepository.getAll(user.uid)
+          .then(todos => {
+            setTodos(todos)
+            navigate(HOME)
+            resolve()
           })
-        })
+          .catch(e => {
+            reject(e)
+          })
       })
-      .catch(e => {
-        setError(e)
-      })
+    })
+  }
+
+  async function retrieveUserInformation() {
+    try {
+      const userInformation = await LocalStore.UserInformation.retrieve()
+
+      if (!userInformation) {
+        await navigateNextScreen()
+        return
+      }
+
+      setUserState(userInformation)
+      await initialiseFirebaseAuthentication()
+    } catch (e) {
+      setError(e)
+    }
+  }
+
+  React.useEffect(() => {
+    retrieveUserInformation()
   }, [navigate, setTodos, setError, setUserState])
 
   return (
