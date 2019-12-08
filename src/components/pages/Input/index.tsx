@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
-import { IconButton } from 'react-native-paper'
 import SafeAreaView from 'react-native-safe-area-view'
+import { IconButton } from 'react-native-paper'
 import { useNavigation } from 'react-navigation-hooks'
 
 import { COLOR } from '../../../constants'
@@ -9,7 +9,7 @@ import testIDs from '../../../constants/testIDs'
 import { Todo } from '../../../domain/models'
 import Button from '../../Button'
 import TextField, { dismiss } from '../../TextField'
-import { useTextInput } from '../../../lib/hooks/'
+import { useControlledComponent } from '../../../lib/hooks/'
 
 const styles = StyleSheet.create({
   container: {
@@ -38,8 +38,8 @@ interface Props {
 }
 
 export default function Input(props: Props) {
-  const title = useTextInput('')
-  const detail = useTextInput('')
+  const title = useControlledComponent('')
+  const detail = useControlledComponent('')
 
   const { goBack } = useNavigation()
   const back = React.useCallback(() => {

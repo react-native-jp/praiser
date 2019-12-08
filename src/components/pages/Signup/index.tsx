@@ -8,7 +8,7 @@ import testIDs from '../../../constants/testIDs'
 import { UserContext } from '../../../contexts'
 import { Todos } from '../../../domain/models'
 import * as TodosRepository from '../../../domain/repositories/todos'
-import useTextInput from '../../../lib/hooks/use-TextInput'
+import { useControlledComponent } from '../../../lib/hooks'
 import useNetworker from '../../../lib/hooks/use-networker'
 import * as LocalStore from '../../../lib/local-store'
 import registerUserToFirebase from '../../../lib/firebase/register-user'
@@ -38,8 +38,8 @@ export default function SignUp(props: Props) {
   const { setUserState } = React.useContext(UserContext)
   const { navigate } = useNavigation()
   const networker = useNetworker()
-  const mailAddress = useTextInput('')
-  const password = useTextInput('')
+  const mailAddress = useControlledComponent('')
+  const password = useControlledComponent('')
 
   const registerUser = React.useCallback(async () => {
     await networker(async () => {

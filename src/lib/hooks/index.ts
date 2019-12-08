@@ -1,2 +1,2 @@
-export { default as useTextInput } from './use-TextInput'
+export { default as useControlledComponent } from './use-controlled-component'
 export { default as useNetworker } from './use-networker'
