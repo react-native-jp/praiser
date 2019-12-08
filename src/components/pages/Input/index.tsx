@@ -4,7 +4,6 @@ import { IconButton } from 'react-native-paper'
 import SafeAreaView from 'react-native-safe-area-view'
 import { useNavigation } from 'react-navigation-hooks'
 
-import { userContext } from '../../../contexts'
 import { COLOR } from '../../../constants'
 import testIDs from '../../../constants/testIDs'
 import { Todo } from '../../../domain/models'
@@ -34,7 +33,7 @@ const styles = StyleSheet.create({
 
 interface Props {
   actions: {
-    addTodo: (userId: string, newValues: Todo.Values) => void
+    addTodo: (newValues: Todo.Values) => void
   }
 }
 
@@ -47,13 +46,15 @@ export default function Input(props: Props) {
     goBack()
   }, [goBack])
 
-  const { userState } = React.useContext(userContext)
   const addTodo = React.useCallback(() => {
-    props.actions.addTodo(userState.id, { title: title.value, detail: detail.value })
+    props.actions.addTodo({
+      title: title.value,
+      detail: detail.value,
+    })
     back()
     title.onChangeText('')
     detail.onChangeText('')
-  }, [title, detail, props.actions, userState.id])
+  }, [title, detail, props.actions])
 
   return (
     <SafeAreaView style={styles.container}>
