@@ -11,7 +11,6 @@ import testIDs from '../../../constants/testIDs'
 import Button from '../../Button'
 import TextField, { dismiss } from '../../TextField'
 import useTextInput from '../../../lib/hooks/use-TextInput'
-import useNetworker from '../../../lib/hooks/use-networker'
 
 const styles = StyleSheet.create({
   container: {
@@ -44,19 +43,17 @@ export default function Input(props: Props) {
   const { actions } = props
   const title = useTextInput('')
   const detail = useTextInput('')
-  const networker = useNetworker()
   const { userState } = React.useContext(userContext)
   const back = React.useCallback(() => {
     goBack()
   }, [goBack])
-  const addTodo = React.useCallback(async () => {
-    await networker(async () => {
-      actions.addTodo(userState.id, { title: title.value, detail: detail.value })
-      back()
-      title.onChangeText('')
-      detail.onChangeText('')
-    })
-  }, [networker, actions, userState.id, detail, title])
+
+  const addTodo = React.useCallback(() => {
+    actions.addTodo(userState.id, { title: title.value, detail: detail.value })
+    back()
+    title.onChangeText('')
+    detail.onChangeText('')
+  }, [actions, userState.id, detail, title])
 
   return (
     <SafeAreaView style={styles.container}>
