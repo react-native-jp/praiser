@@ -10,7 +10,7 @@ export default function ConnectedDetail() {
   const actions = React.useMemo(
     () => ({
       changeTodo(userId: string, id: string, newValues: Todo.Values) {
-        dispatch(Todos.editTodo(userId, id, newValues))
+        dispatch(Todos.editAndSync(userId, id, newValues))
       },
     }),
     [dispatch],
