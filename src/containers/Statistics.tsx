@@ -1,13 +1,12 @@
-import { connect } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 
-import { AppState } from '../modules'
+import { getStatistics, getHistories } from '../selectors/todos'
 import { Statistics } from '../components/pages'
-import getStatistics from '../selectors/get-statistics'
-import getHistories from '../selectors/get-histories'
 
-export const mapStateToProps = (state: AppState) => ({
-  statistics: getStatistics(state),
-  histories: getHistories(state),
-})
+export default function ConnectedStatistics() {
+  const statistics = useSelector(getStatistics)
+  const histories = useSelector(getHistories)
 
-export default connect(mapStateToProps)(Statistics)
+  return <Statistics statistics={statistics} histories={histories} />
+}

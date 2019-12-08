@@ -1,10 +1,10 @@
 import React from 'react'
-import { Dimensions, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import Logo from '../atoms/Logo'
 import Button from '../atoms/Button'
 import { COLOR } from '../../constants'
+import { width } from '../../lib/window'
 
-const { width } = Dimensions.get('window')
 const padding = 20
 const edgeNumber = 2
 const styles = StyleSheet.create({
@@ -39,7 +39,13 @@ const styles = StyleSheet.create({
   },
 })
 
-export default function CarouselItem({ onPress, item }: { item: { text: string; testID: string }; onPress: () => void }) {
+export default function CarouselItem({
+  onPress,
+  item,
+}: {
+  item: { text: string; testID: string }
+  onPress: () => void
+}) {
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>

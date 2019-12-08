@@ -1,6 +1,10 @@
-import { applyMiddleware, createStore } from 'redux'
+import { applyMiddleware, createStore as create } from 'redux'
 import thunk from 'redux-thunk'
 
 import appReducer, { createInitialState } from './modules'
 
-export default createStore(appReducer, createInitialState(), applyMiddleware(thunk))
+export function createStore() {
+  return create(appReducer, createInitialState(), applyMiddleware(thunk))
+}
+
+export default createStore()

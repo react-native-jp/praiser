@@ -2,12 +2,12 @@ import * as React from 'react'
 import { ActivityIndicator, StyleSheet, View } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import { firebase } from '@react-native-firebase/auth'
-import { HOME, INITIAL, CHOOSE_LOGIN } from '../../../constants/path'
-import userContext from '../../../contexts/user'
-import uiContext from '../../../contexts/ui'
-import * as LocalStore from '../../../lib/local-store'
-import { Todos } from '../../../domain/entities'
+
+import { CHOOSE_LOGIN, HOME, INITIAL } from '../../../constants/path'
+import { UiContext, UserContext } from '../../../contexts'
+import { Todos } from '../../../domain/models'
 import * as TodosRepository from '../../../domain/repositories/todos'
+import * as LocalStore from '../../../lib/local-store'
 
 const styles = StyleSheet.create({
   container: {
@@ -19,21 +19,21 @@ const styles = StyleSheet.create({
 
 interface Props {
   actions: {
-    setTodos: (todos: Todos.Entity) => void
+    setTodos: (todos: Todos.Model) => void
   }
 }
 
 export default function Index(props: Props) {
   const { navigate } = useNavigation()
-  const { setUserState } = React.useContext(userContext)
-  const { setError } = React.useContext(uiContext)
+  const { setUserState } = React.useContext(UserContext)
+  const { setError } = React.useContext(UiContext)
   const { setTodos } = props.actions
 
   React.useEffect(() => {
-    LocalStore.retrieveUserInformation()
+    LocalStore.UserInformation.retrieve()
       .then(userInformation => {
         if (!userInformation) {
-          LocalStore.isOpendFirstLaunch()
+          LocalStore.InitialLaunch.isInitialLaunch()
             .then(isOpened => {
               if (!isOpened) {
                 navigate(INITIAL)

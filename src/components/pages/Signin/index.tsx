@@ -2,19 +2,18 @@ import React from 'react'
 import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import analytics from '@react-native-firebase/analytics'
-
-import * as TodosRepository from '../../../domain/repositories/todos'
 import TextField, { dismiss } from '../../atoms/TextField'
-import { Todos } from '../../../domain/entities'
 import { HOME } from '../../../constants/path'
-import { userContext } from '../../../contexts'
-import useTextInput from '../../../lib/hooks/use-TextInput'
+import testIDs from '../../../constants/testIDs'
+import { UserContext } from '../../../contexts'
+import { Todos } from '../../../domain/models'
+import * as TodosRepository from '../../../domain/repositories/todos'
+import { useControlledComponent } from '../../../lib/hooks'
 import useNetworker from '../../../lib/hooks/use-networker'
 import * as LocalStore from '../../../lib/local-store'
 import signInWithPasswordToFirebase from '../../../lib/firebase/sign-in-with-password'
 import Button from '../../atoms/Button'
 import SignInWithGoogle from './SignInWithGoogle'
-import testIDs from '../../../constants/testIDs'
 
 const styles = StyleSheet.create({
   container: {
@@ -40,22 +39,23 @@ const styles = StyleSheet.create({
 
 interface Props {
   actions: {
-    setTodos: (todos: Todos.Entity) => void
+    setTodos: (todos: Todos.Model) => void
   }
 }
 
 export default function SignUp(props: Props) {
-  const { setUserState } = React.useContext(userContext)
+  const { setUserState } = React.useContext(UserContext)
   const { navigate } = useNavigation()
   const networker = useNetworker()
-  const mailAddress = useTextInput('')
-  const password = useTextInput('')
+  const mailAddress = useControlledComponent('')
+  const password = useControlledComponent('')
   const { setTodos } = props.actions
+
   const signInWithPassword = React.useCallback(async () => {
     await networker(async () => {
       const userInformation = await signInWithPasswordToFirebase(mailAddress.value, password.value)
       setUserState(userInformation)
-      await LocalStore.saveUserInformation(userInformation)
+      await LocalStore.UserInformation.save(userInformation)
       const todos = await TodosRepository.getAll(userInformation.id)
       setTodos(todos)
       await analytics().logLogin({ method: 'mail address and password' })

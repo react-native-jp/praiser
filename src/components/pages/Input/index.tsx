@@ -3,14 +3,12 @@ import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
 import IconButton from '../../atoms/IconButton'
 import SafeAreaView from 'react-native-safe-area-view'
 import { useNavigation } from 'react-navigation-hooks'
-import useTextInput from '../../../lib/hooks/use-TextInput'
-import useNetworker from '../../../lib/hooks/use-networker'
-import { userContext } from '../../../contexts'
 import TextField, { dismiss } from '../../atoms/TextField'
 import Button from '../../atoms/Button'
 import { COLOR } from '../../../constants'
-import { Todo } from '../../../domain/entities'
 import testIDs from '../../../constants/testIDs'
+import { Todo } from '../../../domain/models'
+import { useControlledComponent } from '../../../lib/hooks/'
 
 const styles = StyleSheet.create({
   container: {
@@ -34,28 +32,28 @@ const styles = StyleSheet.create({
 
 interface Props {
   actions: {
-    addTodo: (userId: string, newValues: Todo.Values) => void
+    addTodo: (newValues: Todo.Values) => void
   }
 }
 
 export default function Input(props: Props) {
+  const title = useControlledComponent('')
+  const detail = useControlledComponent('')
+
   const { goBack } = useNavigation()
-  const { actions } = props
-  const title = useTextInput('')
-  const detail = useTextInput('')
-  const networker = useNetworker()
-  const { userState } = React.useContext(userContext)
   const back = React.useCallback(() => {
     goBack()
   }, [goBack])
-  const addTodo = React.useCallback(async () => {
-    await networker(async () => {
-      actions.addTodo(userState.id, { title: title.value, detail: detail.value })
-      back()
-      title.onChangeText('')
-      detail.onChangeText('')
+
+  const addTodo = React.useCallback(() => {
+    props.actions.addTodo({
+      title: title.value,
+      detail: detail.value,
     })
-  }, [networker, actions, userState.id, detail, title])
+    back()
+    title.onChangeText('')
+    detail.onChangeText('')
+  }, [title, detail, props.actions])
 
   return (
     <SafeAreaView style={styles.container}>

@@ -19,7 +19,9 @@ export default function Carousel(props: Props) {
     <SnapCarousel
       data={data}
       ref={ref}
-      renderItem={({ item, index }) => <CarouselItem item={item} onPress={index === data.length - 1 ? onEnd : onNext} />}
+      renderItem={({ item, index }) => (
+        <CarouselItem item={item} onPress={index === data.length - 1 ? onEnd : onNext} />
+      )}
       sliderWidth={width}
       itemWidth={width}
       onSnapToItem={onSnapToItem}

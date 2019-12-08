@@ -1,44 +1,49 @@
-import * as React from 'react'
+import React from 'react'
 import { Provider } from 'react-redux'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Snackbar } from 'react-native-paper'
 import store from './store'
-import UiContext, { snackBarInitialState } from './contexts/ui'
-import NetworkContext, { reducer } from './contexts/network'
-import UserContext, { UserInformation } from './contexts/user'
-import App from './components/App'
+import * as UiContext from './contexts/ui'
+import * as NetworkContext from './contexts/network'
+import * as UserContext from './contexts/user'
+import Routes from './routes'
 import NetworkPanel from './components/molecules/NetworkPanel'
 import ErrorPanel from './components/molecules/ErrorPanel'
 
-export default () => {
-  const [error, setError] = React.useState(null as Error | null)
-  const [snackBar, setSnackBar] = React.useState(snackBarInitialState)
+export default function App() {
+  const [error, setError] = React.useState(UiContext.createErrorInitialState())
+  const [snackbar, setSnackbar] = React.useState(UiContext.createSnackbarInitialState())
   const onDismiss = React.useCallback(() => {
-    setSnackBar({
-      visible: false,
-      message: '',
-      label: 'Done',
-    })
+    setSnackbar(UiContext.createSnackbarInitialState())
   }, [])
-  const [networkState, dispatchNetworkActions] = React.useReducer(reducer, 0)
-  const [userState, setUserState] = React.useState({} as UserInformation)
+
+  const [networkState, dispatchNetworkActions] = React.useReducer(
+    NetworkContext.reducer,
+    NetworkContext.createInitialState(),
+  )
+
+  const [userState, setUserState] = React.useState(UserContext.createInitialState())
+
   return (
     <Provider store={store}>
-      <UiContext.Provider value={{ error, setError, snackBar, setSnackBar }}>
-        <NetworkContext.Provider value={{ networkState, dispatchNetworkActions }}>
-          <UserContext.Provider value={{ userState, setUserState }}>
-            <App />
-            <NetworkPanel />
-            <ErrorPanel />
-            <Snackbar
-              visible={snackBar.visible}
-              onDismiss={onDismiss}
-              action={{ label: snackBar.label, onPress: onDismiss }}
-            >
-              {snackBar.message}
-            </Snackbar>
-          </UserContext.Provider>
-        </NetworkContext.Provider>
-      </UiContext.Provider>
+      <SafeAreaProvider>
+        <UiContext.Context.Provider value={{ error, setError, snackbar, setSnackbar }}>
+          <NetworkContext.Context.Provider value={{ networkState, dispatchNetworkActions }}>
+            <UserContext.Context.Provider value={{ userState, setUserState }}>
+              <Routes />
+              <NetworkPanel />
+              <ErrorPanel />
+              <Snackbar
+                visible={snackbar.visible}
+                onDismiss={onDismiss}
+                action={{ label: snackbar.label, onPress: onDismiss }}
+              >
+                {snackbar.message}
+              </Snackbar>
+            </UserContext.Context.Provider>
+          </NetworkContext.Context.Provider>
+        </UiContext.Context.Provider>
+      </SafeAreaProvider>
     </Provider>
   )
 }

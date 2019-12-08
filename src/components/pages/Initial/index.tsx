@@ -5,8 +5,8 @@ import { CarouselStatic } from 'react-native-snap-carousel'
 import Carousel from '../../organisms/Carousel'
 import Pagenation from '../../molecules/Pagenation'
 import { CHOOSE_LOGIN } from '../../../constants/path'
-import { openFirstLaunch } from '../../../lib/local-store'
 import testIDs from '../../../constants/testIDs'
+import * as LocalStore from '../../../lib/local-store'
 
 const padding = 20
 const styles = StyleSheet.create({
@@ -43,7 +43,7 @@ export default function Initial() {
 
   const carouselRef = useRef(null)
   const onEnd = useCallback(() => {
-    openFirstLaunch().finally(() => {
+    LocalStore.InitialLaunch.markAsTutorialIsDone().finally(() => {
       navigate(CHOOSE_LOGIN)
     })
   }, [navigate])

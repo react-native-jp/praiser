@@ -1,21 +1,20 @@
-import { connect } from 'react-redux'
-import { ThunkDispatch } from 'redux-thunk'
-import { AnyAction } from 'redux'
+import React from 'react'
+import { useDispatch } from 'react-redux'
 
-import { Todos } from '../domain/entities'
-import { AppState } from '../modules'
+import { Todos } from '../domain/models'
 import { set } from '../modules/todos'
 import { Signup } from '../components/pages'
 
-export const mapDispatchToProps = (dispatch: ThunkDispatch<AppState, void, AnyAction>) => ({
-  actions: {
-    setTodos: (newValues: Todos.Entity) => {
-      return dispatch(set(newValues))
-    },
-  },
-})
+export default function ConnectedSignUp() {
+  const dispatch = useDispatch()
+  const actions = React.useMemo(
+    () => ({
+      setTodos(newValues: Todos.Model) {
+        dispatch(set(newValues))
+      },
+    }),
+    [dispatch],
+  )
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(Signup)
+  return <Signup actions={actions} />
+}

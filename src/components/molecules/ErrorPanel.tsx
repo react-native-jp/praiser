@@ -1,10 +1,9 @@
-import * as React from 'react'
+import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-
-import uiContext from '../../contexts/ui'
+import { UiContext } from '../../contexts'
 import { width } from '../../lib/window'
 import { COLOR } from '../../constants'
-import UniversalSafeAreaView from '../atoms/UniversalSafeAreaView'
+import SafeAreaView from 'react-native-safe-area-view'
 
 const styles = StyleSheet.create({
   container: {
@@ -21,16 +20,16 @@ const styles = StyleSheet.create({
 })
 
 export default function ErrorPanel() {
-  const { error } = React.useContext(uiContext)
+  const { error } = React.useContext(UiContext)
   if (!error) {
     return null
   }
 
   return (
-    <UniversalSafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.panel}>
         <Text style={styles.label}>{error.toString()}</Text>
       </View>
-    </UniversalSafeAreaView>
+    </SafeAreaView>
   )
 }

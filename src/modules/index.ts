@@ -1,14 +1,15 @@
 import { combineReducers } from 'redux'
 
-import todoReducer, { createInitialState as createTodoInitialState } from './todos'
+import * as Todos from './todos'
 
-export interface AppState {
-  readonly todos: ReturnType<typeof createTodoInitialState>
+export function createInitialState() {
+  return {
+    todos: Todos.createInitialState(),
+  }
 }
-export const createInitialState = (): AppState => ({
-  todos: createTodoInitialState(),
-})
+
+export type AppState = Readonly<ReturnType<typeof createInitialState>>
 
 export default combineReducers<AppState>({
-  todos: todoReducer,
+  todos: Todos.default,
 })

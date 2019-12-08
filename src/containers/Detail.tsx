@@ -1,29 +1,30 @@
-import { connect } from 'react-redux'
-import { ThunkDispatch } from 'redux-thunk'
-import { AnyAction } from 'redux'
-import { AppState } from '../modules'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+
+import { Todo } from '../domain/models'
 import * as Todos from '../usecases/todos'
 import { Detail } from '../components/pages'
-import getTodos from '../selectors/get-todos'
+import { UserContext } from '../contexts'
 
-export const mapStateToProps = (state: AppState) => ({
-  todos: getTodos(state),
-})
+export default function ConnectedDetail() {
+  const { userState } = React.useContext(UserContext)
+  const dispatch = useDispatch()
 
-export const mapDispatchToProps = (dispatch: ThunkDispatch<AppState, void, AnyAction>) => ({
-  actions: {
-    changeTodo: (
-      userId: string,
-      id: string,
-      newValue: {
-        title: string
-        detail: string
-      },
-    ) => dispatch(Todos.editTodo(userId, id, newValue)),
-  },
-})
+  const actions = React.useMemo(
+    () =>
+      userState
+        ? {
+            changeTodo(id: string, newValues: Todo.Values) {
+              dispatch(Todos.editAndSync(userState.id, id, newValues))
+            },
+          }
+        : null,
+    [userState, userState?.id, dispatch],
+  )
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Detail)
+  if (!actions) {
+    return null
+  }
+
+  return <Detail actions={actions} />
+}

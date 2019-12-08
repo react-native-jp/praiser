@@ -49,10 +49,12 @@ export default function Home(props: Props) {
     }
     logViewItemList()
   }, [])
+
   const { navigate } = useNavigation()
   const onPress = React.useCallback(() => {
     navigate(INPUT)
   }, [])
+
   return (
     <View style={styles.container} testID={testIDs.HOME}>
       <Todos {...props} />

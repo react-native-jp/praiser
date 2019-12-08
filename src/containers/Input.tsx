@@ -1,23 +1,30 @@
-import { connect } from 'react-redux'
-import { ThunkDispatch } from 'redux-thunk'
-import { AnyAction } from 'redux'
-import { Todo } from '../domain/entities'
-import { AppState } from '../modules'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+
+import { Todo } from '../domain/models'
 import * as Todos from '../usecases/todos'
 import { Input } from '../components/pages'
-import getTodos from '../selectors/get-todos'
+import { UserContext } from '../contexts'
 
-export const mapStateToProps = (state: AppState) => ({
-  todos: getTodos(state),
-})
+export default function ConnectedInput() {
+  const { userState } = React.useContext(UserContext)
 
-export const mapDispatchToProps = (dispatch: ThunkDispatch<AppState, void, AnyAction>) => ({
-  actions: {
-    addTodo: (userId: string, newValues: Todo.Values) => dispatch(Todos.addAndSync(userId, newValues)),
-  },
-})
+  const dispatch = useDispatch()
+  const actions = React.useMemo(
+    () =>
+      userState
+        ? {
+            addTodo(newValues: Todo.Values) {
+              dispatch(Todos.addAndSync(userState.id, newValues))
+            },
+          }
+        : null,
+    [userState, userState?.id, dispatch],
+  )
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Input)
+  if (!actions) {
+    return null
+  }
+
+  return <Input actions={actions} />
+}

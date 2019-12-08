@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { ActivityIndicator, StyleSheet } from 'react-native'
-import SafeAreaView from '../atoms/UniversalSafeAreaView'
-import networkContext from '../../contexts/network'
+import SafeAreaView from 'react-native-safe-area-view'
+import { NetworkContext } from '../../contexts'
 import { height, width } from '../../lib/window'
 import { COLOR } from '../../constants'
 
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 })
 
 export default function NetworkPanel() {
-  const { networkState } = React.useContext(networkContext)
+  const { networkState } = React.useContext(NetworkContext)
   const isCommunicating = React.useMemo(() => 0 < networkState, [networkState])
   if (!isCommunicating) {
     return null
@@ -33,7 +33,7 @@ export default function NetworkPanel() {
     <>
       <SafeAreaView style={styles.dropdown} />
       <SafeAreaView style={styles.container}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator size="large" color={COLOR.SHADOW} />
       </SafeAreaView>
     </>
   )

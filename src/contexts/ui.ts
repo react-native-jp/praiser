@@ -1,25 +1,23 @@
-import * as React from 'react'
+import React from 'react'
 
-export interface SnackBar {
-  visible: boolean
-  message: string
-  label: string
-}
-export const snackBarInitialState = {
-  visible: false,
-  message: '',
-  label: 'Done',
+type ErrorState = Error | null
+export function createErrorInitialState(): ErrorState {
+  return null
 }
 
-const uiContext = React.createContext({
-  error: null as Error | null,
-  setError: (_: Error | null) => {},
-  snackBar: {
+export function createSnackbarInitialState() {
+  return {
     visible: false,
     message: '',
-    label: '',
-  },
-  setSnackBar: (_: SnackBar) => {},
-})
+    label: 'Done',
+  }
+}
 
-export default uiContext
+type SnackbarState = ReturnType<typeof createSnackbarInitialState>
+
+export const Context = React.createContext({
+  error: createErrorInitialState(),
+  setError: (_: ErrorState) => {},
+  snackbar: createSnackbarInitialState(),
+  setSnackbar: (_: SnackbarState) => {},
+})
