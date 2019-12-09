@@ -10,6 +10,7 @@ const imageRatio = edgeNumber / ratio
 const styles = StyleSheet.create({
   image: {
     width: width * imageRatio,
+    flex: 1,
     resizeMode: 'contain',
   },
 })

@@ -13,19 +13,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding,
+    backgroundColor: COLOR.MAIN,
   },
   text: {
     fontSize: 28,
     fontWeight: '800',
-    color: COLOR.LABEL,
     lineHeight: 40,
+    color: COLOR.WHITE,
   },
   textContainer: {
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
     width: width - padding * edgeNumber,
-    backgroundColor: COLOR.BACKGROUND,
     paddingVertical: 10,
   },
   imageContainer: {
@@ -56,7 +56,7 @@ export default function CarouselItem({
           <View>
             <Text style={styles.text}>{item.text}</Text>
           </View>
-          <Button testID={item.testID} onPress={onPress} label="次へ" />
+          <Button testID={item.testID} onPress={onPress} label="next" />
         </View>
       </View>
     </View>
