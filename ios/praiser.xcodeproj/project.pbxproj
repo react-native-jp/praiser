@@ -743,7 +743,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.praiser;
+				PRODUCT_BUNDLE_IDENTIFIER = com.januswel.praiser;
 				PRODUCT_NAME = praiser;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -762,7 +762,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.praiser;
+				PRODUCT_BUNDLE_IDENTIFIER = com.januswel.praiser;
 				PRODUCT_NAME = praiser;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
