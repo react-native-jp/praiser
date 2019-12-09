@@ -1,4 +1,4 @@
-package com.praiser;
+package com.januswel.praiser;
 
 import android.app.Application;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.praiser;
+package com.januswel.praiser;
 
 import com.facebook.react.ReactActivity;
 
