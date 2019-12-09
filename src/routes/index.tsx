@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { NavigationAction, NavigationState } from 'react-navigation'
 import analytics from '@react-native-firebase/analytics'
 
