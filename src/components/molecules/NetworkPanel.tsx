@@ -33,7 +33,7 @@ export default function NetworkPanel() {
     <>
       <SafeAreaView style={styles.dropdown} />
       <SafeAreaView style={styles.container}>
-        <ActivityIndicator size="large" color={COLOR.SHADOW} />
+        <ActivityIndicator size="large" color={COLOR.MAIN_LIGHT} />
       </SafeAreaView>
     </>
   )
