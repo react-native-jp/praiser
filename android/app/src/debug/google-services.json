@@ -8,18 +8,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:997443237631:android:c2f1f7a2f5d1a07226beca",
+        "mobilesdk_app_id": "1:997443237631:android:316a9719c7b5531a26beca",
         "android_client_info": {
-          "package_name": "com.januswel.praiser"
+          "package_name": "com.januswel.praiser.debug"
         }
       },
       "oauth_client": [
         {
-          "client_id": "997443237631-nkglotddp0mu42v7m3n2l953aeamobv0.apps.googleusercontent.com",
+          "client_id": "997443237631-nsjmubp94k8pdl9dnj3g0a0qiuvl4945.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.januswel.praiser",
-            "certificate_hash": "f7edfd894cc152cac6285d4283ab0e42c0513fea"
+            "package_name": "com.januswel.praiser.debug",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
           }
         },
         {

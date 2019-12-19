@@ -1097,34 +1097,34 @@
     eslint-plugin-react-native "3.6.0"
     prettier "1.16.4"
 
-"@react-native-firebase/analytics@6.0.3":
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/analytics/-/analytics-6.0.3.tgz#5a11edeb48a1c4086a1acf91d741f45bed1a9cba"
-  integrity sha512-K8BUEIJneEIJpNIYq0yNS45lmrApn8whdKU5oazR/HaUeewH4Mseb3uI5GZkynOnlwKd/vsUK8/hwLEDKilBuw==
+"@react-native-firebase/analytics@6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/analytics/-/analytics-6.2.0.tgz#33da0c698f62be3d6ac57a859de04d3c150c0a61"
+  integrity sha512-8UYwknTbrpTnYqiyePBA/MuW42+UQE4JM8E2Sm1BOus7AuwNKTkBS50M0lfzL+pElKaVysQ8WRj9tlmB47b+IQ==
 
-"@react-native-firebase/app-types@6.0.3":
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/app-types/-/app-types-6.0.3.tgz#a420ac2b8f274e9c638d4ef36350b1d9abcc1403"
-  integrity sha512-DphELbf5A6AuIPf1HIGFvfpaUlSIXdVlrSHisTHWLNpFP45lLmpD13Ak6oMamGDIxFMLjRQz3jkTR6pCjVk4NQ==
+"@react-native-firebase/app-types@6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/app-types/-/app-types-6.2.0.tgz#4d3c0e7fa4e4f00061c52b1a32d76e85e5db9f2c"
+  integrity sha512-3UW3cuCgY/JMp+7n6bLeRXKDS/JcXwnHwL0RUIUHg2NhlNAXmIUQbbl0gZbW10YHRnW7D3+JE60Mpm9atTzh9g==
 
-"@react-native-firebase/app@6.0.3":
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-6.0.3.tgz#3c8b01587a374132fc0df14ebf2a24ae3369a992"
-  integrity sha512-PQYcs16Mpdy+FLCYpepUiIrfzbMLS+wrDhvXOHhOJ8up15ak5wrepVWaHg+P0Bw9xI4gbq4zYy4bTh4ZMkBbzA==
+"@react-native-firebase/app@6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-6.2.0.tgz#2d4327399f5e8021d7bad264624f1a29f0741f6c"
+  integrity sha512-LlYvml2hhqE28T9rU0SpwcKvlrwp0QyY90HTV0tvEEfGaCahd9xlIj7IFQCXNUNYICFi7Vn2YjxAZNF8KgKpmQ==
   dependencies:
-    "@react-native-firebase/app-types" "6.0.3"
+    "@react-native-firebase/app-types" "6.2.0"
     opencollective-postinstall "^2.0.1"
     superstruct "^0.6.2"
 
-"@react-native-firebase/auth@6.0.3":
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-6.0.3.tgz#a14f7a6f320425023d9746b7a3773c1a27af91dd"
-  integrity sha512-umKdT2ODkSDHzhS+EmLvqMYGgsP9YED8UKH6kZgUdZZF/QyyNa+UmlCOIlcTmInvBd6AZiYNfZfRVtlG7k8tCQ==
+"@react-native-firebase/auth@6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-6.2.0.tgz#f31438c1b103052b1e70840b42d8bba785af603d"
+  integrity sha512-pU/Rt3p5DHoKBwPgFMs1+iAH6HQZXo+eYHcSyw9H36NFKYFpVMr75EoCyxQvzm3ZOUUmAO1yu/HWKXBHVFNqTg==
 
-"@react-native-firebase/firestore@6.0.3":
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-6.0.3.tgz#8c9c84710f7cbdcc7247011912d510fb788af02b"
-  integrity sha512-uW5VUNmhTfk+qvkSDfDrswldjFCiB/ILR7A7LF7SqQ79HzB9Z3Y/Kf0XBIOf606RzAWF/YyxMK4j2mNLXuF3WQ==
+"@react-native-firebase/firestore@6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-6.2.0.tgz#9060ccd9289c1cbd421dc6708066bfe3fd1a2e76"
+  integrity sha512-DRoJEcryYbvFt5lzgkxBkKmQKohxT766hl263fwspJdR5VrTF0LhTz4fYA3VcUAtFz8sho0qt4vRQktELCBe+A==
 
 "@react-navigation/core@^3.5.1":
   version "3.5.1"

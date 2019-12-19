@@ -5,11 +5,11 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>praiser</string>
+	<string>${BUNDLE_DISPLAY_NAME_PREFIX}praiser</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)${BUNDLE_IDENTIFIER_SUFFIX}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -28,6 +28,14 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.997443237631-la6am5c0d84d2qk77s0t7is8kc7t3ve9</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.166018290578-80r4bl4320bubg73usfnu3rnntr9u6qd</string>
 			</array>
 		</dict>
 	</array>
