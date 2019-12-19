@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, ImageSourcePropType, StyleSheet, ImageStyle} from 'react-native'
+import { Image, ImageSourcePropType, StyleSheet, ImageStyle } from 'react-native'
 import { width } from '../../lib/window'
 import reactImage from '../../../assets/reactIcon.jpg'
 

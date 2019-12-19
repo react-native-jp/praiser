@@ -38,7 +38,7 @@ export default function Index(props: Props) {
               if (!isOpened) {
                 navigate(INITIAL)
               } else {
-                navigate(INITIAL)
+                navigate(CHOOSE_LOGIN)
               }
             })
             .catch(e => {
