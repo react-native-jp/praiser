@@ -39,13 +39,7 @@ const styles = StyleSheet.create({
   },
 })
 
-export default function CarouselItem({
-  onPress,
-  item,
-}: {
-  item: { text: string; testID: string }
-  onPress: () => void
-}) {
+export default function CarouselItem({ onPress, item }: { item: { text: string }; onPress: () => void }) {
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
@@ -56,7 +50,7 @@ export default function CarouselItem({
           <View>
             <Text style={styles.text}>{item.text}</Text>
           </View>
-          <Button testID={item.testID} onPress={onPress} label="next" />
+          <Button onPress={onPress} label="next" />
         </View>
       </View>
     </View>

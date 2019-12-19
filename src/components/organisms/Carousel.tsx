@@ -1,9 +1,7 @@
 import React from 'react'
 import SnapCarousel from 'react-native-snap-carousel'
 import CarouselItem from '../molecules/CarouselItem'
-import { Dimensions } from 'react-native'
-
-const { width } = Dimensions.get('window')
+import { width } from '../../lib/window'
 
 interface Props {
   onEnd: () => void

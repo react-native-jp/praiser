@@ -1,10 +1,10 @@
 import React from 'react'
-import { Dimensions, Image, StyleSheet } from 'react-native'
+import { Image, ImageSourcePropType, StyleSheet, ImageStyle} from 'react-native'
+import { width } from '../../lib/window'
 import reactImage from '../../../assets/reactIcon.jpg'
 
 const edgeNumber = 2
 const ratio = 3
-const { width } = Dimensions.get('window')
 const imageRatio = edgeNumber / ratio
 
 const styles = StyleSheet.create({
@@ -15,6 +15,12 @@ const styles = StyleSheet.create({
   },
 })
 
-export default function Logo() {
-  return <Image source={reactImage} resizeMode="contain" style={styles.image} />
+interface Props {
+  image?: ImageSourcePropType
+  style?: ImageStyle | ImageStyle[]
+}
+
+export default function Logo(props: Props) {
+  const { image = reactImage, style } = props
+  return <Image source={image} resizeMode="contain" style={[styles.image, style]} />
 }

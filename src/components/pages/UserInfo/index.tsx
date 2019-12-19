@@ -1,9 +1,6 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
-import SafeAreaView from 'react-native-safe-area-view'
 import { useNavigation } from 'react-navigation-hooks'
-import { Avatar } from 'react-native-paper'
-
 import { CHOOSE_LOGIN } from '../../../constants/path'
 import { COLOR } from '../../../constants'
 import testIDs from '../../../constants/testIDs'
@@ -13,7 +10,8 @@ import signOutFromFirebase from '../../../lib/firebase/sign-out'
 import * as LocalStore from '../../../lib/local-store'
 import formatDate from '../../../lib/format-date'
 import Button from '../../atoms/Button'
-import LabelViewContainer from './LabelValueContainer'
+import Avatar from '../../atoms/Avatar'
+import LabelViewContainer from '../../atoms/LabelValueContainer'
 
 const styles = StyleSheet.create({
   container: {
@@ -60,9 +58,9 @@ export default function UserInfo() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.imageIconContainer} testID={testIDs.USER_INFO_SCREEN}>
-        <Avatar.Image size={220} source={source} />
+        <Avatar source={source} />
         <Text style={styles.nameText}>{userState.name}</Text>
       </View>
       <LabelViewContainer label="e-mail" value={userState.mailAddress} />
@@ -71,6 +69,6 @@ export default function UserInfo() {
         value={userState.createdAt && formatDate(new Date(userState.createdAt))}
       />
       <Button style={styles.button} onPress={signOut} label="Sign Out" testID={testIDs.USER_INFO_SIGN_OUT_BUTTON} />
-    </SafeAreaView>
+    </View>
   )
 }

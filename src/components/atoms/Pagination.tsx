@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import { Pagination } from 'react-native-snap-carousel'
+import { Pagination as SCPagination } from 'react-native-snap-carousel'
 import { COLOR } from '../../constants'
 
 const styles = StyleSheet.create({
@@ -21,10 +21,10 @@ interface Props {
   index: number
 }
 
-export default function Pagenation(props: Props) {
+export default function Pagination(props: Props) {
   const { length, index } = props
   return (
-    <Pagination
+    <SCPagination
       dotsLength={length}
       activeDotIndex={index}
       containerStyle={styles.pageNation}
