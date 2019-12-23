@@ -36,7 +36,7 @@ const theme = {
   },
 }
 
-function TextField(props: Props) {
+export default function TextField(props: Props) {
   const { label, value, onChangeText = () => {}, style, autoCompleteType, secureTextEntry, disabled, testID } = props
   return (
     <TextInput
@@ -58,4 +58,3 @@ function TextField(props: Props) {
 export function dismiss() {
   Keyboard.dismiss()
 }
-export default TextField

@@ -12,7 +12,6 @@ const styles = {
   },
 }
 
-// BottomTabBarPropsが近いうちに追加される。そしてそれをコレで上書きすれば大丈夫
 function TabBar(props: any) {
   return (
     <SafeAreaView style={styles.container}>

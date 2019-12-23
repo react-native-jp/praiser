@@ -1,12 +1,14 @@
 import React, { useCallback, useRef, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import { CarouselStatic } from 'react-native-snap-carousel'
+import SafeAreaView from 'react-native-safe-area-view'
 import Carousel from '../../organisms/Carousel'
-import Pagenation from '../../molecules/Pagenation'
+import Pagination from '../../atoms/Pagination'
 import { CHOOSE_LOGIN } from '../../../constants/path'
 import testIDs from '../../../constants/testIDs'
 import * as LocalStore from '../../../lib/local-store'
+import { COLOR } from '../../../constants'
 
 const padding = 20
 const styles = StyleSheet.create({
@@ -15,6 +17,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding,
+    backgroundColor: COLOR.MAIN,
   },
 })
 
@@ -24,15 +27,15 @@ interface Data {
 
 const renderData = [
   {
-    text: 'brevity is the soul of wit budge an inch\n' + 'foul play the game is up',
+    text: 'Hello React Native world.\nWelcome to the JS world.\n\nThis application is made from React Native.',
     testID: testIDs.INITIAL_NEXT_BUTTON1,
   },
   {
-    text: "good riddance for goodness' sake!\n" + "love is blind in my mind's eye",
+    text: 'If you use this application,\nyou could manage your task.\n\nSo, please register and manage your task',
     testID: testIDs.INITIAL_NEXT_BUTTON2,
   },
   {
-    text: 'neither here nor there seen better days\n' + 'at one fell swoop a tower of strength Tut, tut!',
+    text: 'In the first, you have to register your account.\n\nPlease, tell me your email.',
     testID: testIDs.INITIAL_NEXT_BUTTON3,
   },
 ]
@@ -59,11 +62,10 @@ export default function Initial() {
     }, 250)
     changeSlide(nextIndex)
   }, [activeSlide])
-
   return (
-    <View style={styles.container} testID={testIDs.INITIAL}>
-      <Carousel data={renderData} onEnd={onEnd} onNext={onNext} ref={carouselRef} onSnapToItem={changeSlide} />
-      <Pagenation length={renderData.length} index={activeSlide} />
-    </View>
+    <SafeAreaView style={styles.container} testID={testIDs.INITIAL}>
+      <Carousel data={renderData} onEnd={onEnd} onNext={onNext} carouselRef={carouselRef} onSnapToItem={changeSlide} />
+      <Pagination length={renderData.length} index={activeSlide} />
+    </SafeAreaView>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View, StyleSheet } from 'react-native'
-import { COLOR } from '../../../constants'
+import { COLOR } from '../../constants'
 
 const styles = StyleSheet.create({
   row: {

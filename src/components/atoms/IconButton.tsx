@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 interface Props {
   icon: string
   onPress: () => void
-  style: ViewStyle | ViewStyle[]
+  style?: ViewStyle | ViewStyle[]
   testID?: string
   iconColor?: string
   size?: number

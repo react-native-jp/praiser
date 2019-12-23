@@ -24,7 +24,17 @@ interface Props {
 }
 
 export default function Button(props: Props) {
-  const { onPress, style, textStyle, label, color = '#008080', disabled, disabledColor = '#555', testID, icon } = props
+  const {
+    onPress,
+    style,
+    textStyle,
+    label,
+    color = COLOR.SECONDARY,
+    disabled,
+    disabledColor = COLOR.MAIN_LIGHT,
+    testID,
+    icon,
+  } = props
   return (
     <PaperButton
       mode="contained"
