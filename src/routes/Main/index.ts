@@ -18,6 +18,7 @@ import Statistics from './Statistics'
 import { ChooseLogin, Initial } from '../../components/pages'
 import { Loading, Signin, Signup, Input } from '../../containers'
 import { headerStyle, headerTintColor } from '../Header'
+import { Drawer } from '../Drawer'
 import { TabBar } from '../TabBar'
 import { createStackNavigator } from 'react-navigation-stack'
 import { COLOR } from '../../constants'
@@ -31,6 +32,7 @@ const makeWithDrawerRouter = (routeObject: object) =>
       },
     },
     {
+      contentComponent: Drawer,
       drawerBackgroundColor: COLOR.MAIN,
       contentOptions: {
         activeTintColor: COLOR.PRIMARY,
