@@ -43,33 +43,26 @@ const cardStyle = {
   backgroundColor: COLOR.MAIN,
 }
 
-const hiddenTabbar = ({ navigation: { state } }: any) => {
-  const { index, routes } = state
-  return {
-    tabBarVisible: routes[index].routeName !== USER_INFO,
-  }
-}
-
 const TabRoutes = createBottomTabNavigator(
   {
-    [HOME]: {
-      screen: makeWithDrawerRouter({ [HOME]: Home }),
-      navigationOptions: hiddenTabbar,
-    },
-    [STATISTICS]: {
-      screen: makeWithDrawerRouter({ [STATISTICS]: Statistics }),
-      navigationOptions: hiddenTabbar,
-    },
+    [HOME]: makeWithDrawerRouter({ [HOME]: Home }),
+    [STATISTICS]: makeWithDrawerRouter({ [STATISTICS]: Statistics }),
   },
   {
-    tabBarOptions: {
-      inactiveBackgroundColor: COLOR.MAIN,
-      activeBackgroundColor: COLOR.MAIN,
-      activeTintColor: COLOR.PRIMARY,
-      inactiveTintColor: COLOR.WHITE,
-      safeAreaInset: { bottom: 'never' },
+    defaultNavigationOptions: ({ navigation: { state } }: any) => {
+      const { index, routes } = state
+      return {
+        tabBarVisible: routes[index].routeName !== USER_INFO,
+        tabBarOptions: {
+          inactiveBackgroundColor: COLOR.MAIN,
+          activeBackgroundColor: COLOR.MAIN,
+          activeTintColor: COLOR.PRIMARY,
+          inactiveTintColor: COLOR.WHITE,
+          safeAreaInset: { bottom: 0, top: 0 },
+        },
+        tabBarComponent: TabBar,
+      }
     },
-    tabBarComponent: TabBar,
   },
 )
 
