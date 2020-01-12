@@ -1,8 +1,8 @@
 import React from 'react'
 import { useNavigation } from 'react-navigation-hooks'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { COLOR } from '../../../constants'
-import testIDs from '../../../constants/testIDs'
+import { COLOR } from '../../constants/theme'
+import testIDs from '../../constants/testIDs'
 
 function HeaderLeft() {
   const { openDrawer } = useNavigation()

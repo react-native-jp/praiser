@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import { Pagination as SCPagination } from 'react-native-snap-carousel'
-import { COLOR } from '../../constants'
+import { COLOR } from '../../constants/theme'
 
 const styles = StyleSheet.create({
   pageNation: {

@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet } from 'react-native'
 import IconButton from '../../atoms/IconButton'
 import testIDs from '../../../constants/testIDs'
-import { COLOR } from '../../../constants'
+import { COLOR } from '../../../constants/theme'
 
 const styles = StyleSheet.create({
   button: {

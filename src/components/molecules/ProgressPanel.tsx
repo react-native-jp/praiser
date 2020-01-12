@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import Progress from '../atoms/Progress'
 import HeaderText from '../atoms/HeaderText'
-import { COLOR } from '../../constants'
+import { COLOR } from '../../constants/theme'
 
 const styles = StyleSheet.create({
   ratioArea: {

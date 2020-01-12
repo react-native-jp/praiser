@@ -20,7 +20,7 @@ import { Loading, Signin, Signup, Input } from '../../containers'
 import { headerStyle, headerTintColor } from '../Header'
 import { TabBar } from '../TabBar'
 import { createStackNavigator } from 'react-navigation-stack'
-import { COLOR } from '../../constants'
+import { COLOR } from '../../constants/theme'
 
 const makeWithDrawerRouter = (routeObject: object) =>
   createDrawerNavigator(

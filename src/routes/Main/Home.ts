@@ -2,7 +2,7 @@ import { createStackNavigator } from 'react-navigation-stack'
 import { DETAIL, HOME } from '../../constants/path'
 import { Home, Detail } from '../../containers'
 import { HeaderLeft, headerStyle, headerTintColor } from '../Header'
-import { COLOR } from '../../constants'
+import { COLOR } from '../../constants/theme'
 
 const cardStyle = {
   backgroundColor: COLOR.MAIN,

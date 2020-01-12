@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconButton as PaperIconButton } from 'react-native-paper'
 import { StyleSheet, ViewStyle } from 'react-native'
-import { COLOR } from '../../constants'
+import { COLOR } from '../../constants/theme'
 
 const styles = StyleSheet.create({
   button: {

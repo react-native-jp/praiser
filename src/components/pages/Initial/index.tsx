@@ -8,7 +8,7 @@ import Pagination from '../../atoms/Pagination'
 import { CHOOSE_LOGIN } from '../../../constants/path'
 import testIDs from '../../../constants/testIDs'
 import * as LocalStore from '../../../lib/local-store'
-import { COLOR } from '../../../constants'
+import { COLOR } from '../../../constants/theme'
 
 const padding = 20
 const styles = StyleSheet.create({

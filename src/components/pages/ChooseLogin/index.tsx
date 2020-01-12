@@ -4,7 +4,7 @@ import { useNavigation } from 'react-navigation-hooks'
 
 import Button from '../../atoms/Button'
 import { SIGN_IN, SIGN_UP } from '../../../constants/path'
-import { COLOR } from '../../../constants'
+import { COLOR } from '../../../constants/theme'
 import Logo from '../../atoms/Logo'
 import testIDs from '../../../constants/testIDs'
 

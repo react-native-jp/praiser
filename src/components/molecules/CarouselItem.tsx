@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import Logo from '../atoms/Logo'
 import Button from '../atoms/Button'
-import { COLOR } from '../../constants'
+import { COLOR } from '../../constants/theme'
 import { width } from '../../lib/window'
 
 const padding = 20

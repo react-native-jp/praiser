@@ -1,7 +1,7 @@
 import React from 'react'
 import { ViewStyle, Keyboard } from 'react-native'
 import { TextInput } from 'react-native-paper'
-import { COLOR } from '../../constants'
+import { COLOR } from '../../constants/theme'
 
 interface Props {
   label: string
