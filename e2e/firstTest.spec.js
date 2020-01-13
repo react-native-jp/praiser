@@ -1,7 +1,6 @@
 import testIDs from "../src/constants/testIDs";
 import { elementById, pressBack, elementByLabel } from './lib/utils';
 
-
 describe('All', () => {
   afterAll(async () => {
     await device.resetContentAndSettings().then(() => console.info(' Reset iOS All Settings 🧹'));
@@ -74,6 +73,7 @@ describe('All', () => {
       await elementById(testIDs.SIGN_UP_PASSWORD).typeText(password);
       await elementById(testIDs.SIGN_UP_REGISTER_BUTTON).tap();
 
+      await waitFor(elementById(testIDs.HOME)).toBeVisible().withTimeout(10000);
       await expect(elementById(testIDs.HOME)).toBeVisible();
     });
 
@@ -97,6 +97,7 @@ describe('All', () => {
       await elementById(testIDs.SIGN_IN_PASSWORD).typeText(password);
       await elementById(testIDs.SIGN_IN_EMAIL_BUTTON).tap();
 
+      await waitFor(elementById(testIDs.HOME)).toBeVisible().withTimeout(10000);
       await expect(elementById(testIDs.HOME)).toBeVisible();
     });
   });
@@ -107,8 +108,13 @@ describe('All', () => {
       await expect(elementById(testIDs.TODO_OPEN_INPUT_BUTTON)).toBeVisible();
       await elementById(testIDs.TODO_OPEN_INPUT_BUTTON).tap();
 
-      await elementById(testIDs.TODO_INPUT_TITLE).typeText('買い物');
-      await elementById(testIDs.TODO_INPUT_DETAIL).typeText('牛乳を買う\n');
+      if (device.getPlatform() === 'android') {
+        await elementById(testIDs.TODO_INPUT_TITLE).replaceText('買い物');
+        await elementById(testIDs.TODO_INPUT_DETAIL).replaceText('牛乳を買う');
+      } else {
+        await elementById(testIDs.TODO_INPUT_TITLE).typeText('買い物');
+        await elementById(testIDs.TODO_INPUT_DETAIL).typeText('牛乳を買う\n');
+      }
       await elementById(testIDs.TODO_INPUT_ADD_BUTTON).tap();
 
       await expect(elementById(testIDs.HOME)).toBeVisible();
@@ -117,7 +123,9 @@ describe('All', () => {
     });
 
     it('todoを完了できる', async () => {
-      await expect(elementById(testIDs.TODO_ROW_DONE)).toBeNotVisible();
+      if (device.getPlatform() === 'ios') {
+        await expect(elementById(testIDs.TODO_ROW_DONE)).toBeNotVisible();
+      }
       await elementByLabel('買い物').swipe('right');
       await expect(elementById(testIDs.TODO_ROW_DONE)).toBeVisible();
       await elementById(testIDs.TODO_ROW_DONE).tap();
@@ -145,7 +153,9 @@ describe('All', () => {
     });
 
     it('todoを削除できる', async () => {
-      await expect(elementById(testIDs.TODO_ROW_DELETE)).toBeNotVisible();
+      if (device.getPlatform() === 'ios') {
+        await expect(elementById(testIDs.TODO_ROW_DELETE)).toBeNotVisible();
+      }
       await elementByLabel('連絡').swipe('left');
       await expect(elementById(testIDs.TODO_ROW_DELETE)).toBeVisible();
       await elementById(testIDs.TODO_ROW_DELETE).tap();
