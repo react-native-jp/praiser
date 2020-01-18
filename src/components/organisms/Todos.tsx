@@ -1,13 +1,12 @@
 import * as React from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
 import Todo from '../molecules/Todo'
-import { Actions as TodoActions, State as TodoState } from '../molecules/Todo/useToggle'
+import { Actions as TodoActions } from '../molecules/Todo/useToggle'
 import { COLOR } from '../../constants/theme'
 
 export type Actions = TodoActions
-export type State = TodoState[]
 interface Props {
-  todos: State
+  todos: TodoState[]
   actions: Actions
 }
 

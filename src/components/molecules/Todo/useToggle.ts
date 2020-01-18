@@ -6,19 +6,13 @@ export interface Actions {
   removeTodo: (id: string) => void
   toggleTodo: (id: string) => void
 }
-export type State = {
-  id: string
-  title: string
-  detail?: string
-  isDone?: boolean
-}
 export interface EnableEditProps {
   actions: Actions
-  state: State
+  state: TodoState
   forbiddenEdit: false
 }
 export interface DisableEditProps {
-  state: State
+  state: TodoState
   forbiddenEdit: true
 }
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, FlatList } from 'react-native'
 import ProgressPanel, { Statistic } from '../../molecules/ProgressPanel'
-import { State as TodosState } from '../../organisms/Todos'
 import { COLOR } from '../../../constants/theme'
 import Todo from '../../molecules/Todo'
 import HeaderText from '../../atoms/HeaderText'
@@ -20,7 +19,7 @@ const styles = StyleSheet.create({
 
 interface Props {
   statistics: Statistic
-  histories: TodosState
+  histories: TodoState[]
 }
 
 export default function Statics(props: Props) {
