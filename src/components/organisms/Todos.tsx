@@ -4,10 +4,9 @@ import Todo from '../molecules/Todo'
 import { Actions as TodoActions } from '../molecules/Todo/useToggle'
 import { COLOR } from '../../constants/theme'
 
-export type Actions = TodoActions
 interface Props {
   todos: TodoState[]
-  actions: Actions
+  actions: TodoActions
 }
 
 const styles = StyleSheet.create({

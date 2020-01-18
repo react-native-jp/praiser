@@ -14,15 +14,8 @@ const styles = StyleSheet.create({
 })
 
 interface DoneProps {
-  state: State
+  state: TodoState
   onPress: () => void
-}
-export type State = {
-  id: string
-  title: string
-  detail?: string
-  isDone?: boolean
-  testID?: string
 }
 
 export default function DoneButton(props: DoneProps) {
