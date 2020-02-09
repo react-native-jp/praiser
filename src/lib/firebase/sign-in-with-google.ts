@@ -1,5 +1,5 @@
 import auth from '@react-native-firebase/auth'
-import { GoogleSignin } from 'react-native-google-signin'
+import { GoogleSignin } from '@react-native-community/google-signin'
 
 GoogleSignin.configure({
   scopes: ['profile', 'email'],
