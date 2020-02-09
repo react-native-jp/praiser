@@ -18,6 +18,7 @@ import Statistics from './Statistics'
 import { ChooseLogin, Initial } from '../../components/pages'
 import { Loading, Signin, Signup, Input } from '../../containers'
 import { headerStyle, headerTintColor } from '../Header'
+import { Drawer } from '../Drawer'
 import { TabBar } from '../TabBar'
 import { createStackNavigator } from 'react-navigation-stack'
 import { COLOR } from '../../constants/theme'
@@ -31,6 +32,7 @@ const makeWithDrawerRouter = (routeObject: object) =>
       },
     },
     {
+      contentComponent: Drawer,
       drawerBackgroundColor: COLOR.MAIN,
       contentOptions: {
         activeTintColor: COLOR.PRIMARY,
@@ -43,33 +45,26 @@ const cardStyle = {
   backgroundColor: COLOR.MAIN,
 }
 
-const hiddenTabbar = ({ navigation: { state } }: any) => {
-  const { index, routes } = state
-  return {
-    tabBarVisible: routes[index].routeName !== USER_INFO,
-  }
-}
-
 const TabRoutes = createBottomTabNavigator(
   {
-    [HOME]: {
-      screen: makeWithDrawerRouter({ [HOME]: Home }),
-      navigationOptions: hiddenTabbar,
-    },
-    [STATISTICS]: {
-      screen: makeWithDrawerRouter({ [STATISTICS]: Statistics }),
-      navigationOptions: hiddenTabbar,
-    },
+    [HOME]: makeWithDrawerRouter({ [HOME]: Home }),
+    [STATISTICS]: makeWithDrawerRouter({ [STATISTICS]: Statistics }),
   },
   {
-    tabBarOptions: {
-      inactiveBackgroundColor: COLOR.MAIN,
-      activeBackgroundColor: COLOR.MAIN,
-      activeTintColor: COLOR.PRIMARY,
-      inactiveTintColor: COLOR.WHITE,
-      safeAreaInset: { bottom: 'never' },
+    defaultNavigationOptions: ({ navigation: { state } }: any) => {
+      const { index, routes } = state
+      return {
+        tabBarVisible: routes[index].routeName !== USER_INFO,
+        tabBarOptions: {
+          inactiveBackgroundColor: COLOR.MAIN,
+          activeBackgroundColor: COLOR.MAIN,
+          activeTintColor: COLOR.PRIMARY,
+          inactiveTintColor: COLOR.WHITE,
+          safeAreaInset: { bottom: 0, top: 0 },
+        },
+        tabBarComponent: TabBar,
+      }
     },
-    tabBarComponent: TabBar,
   },
 )
 
