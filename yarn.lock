@@ -1257,7 +1257,7 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
   integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
 
-"@types/react-native-snap-carousel@^3.7.4":
+"@types/react-native-snap-carousel@3.7.4":
   version "3.7.4"
   resolved "https://registry.yarnpkg.com/@types/react-native-snap-carousel/-/react-native-snap-carousel-3.7.4.tgz#1e1ad5b5314715d538f6785b4f3a6590a036a6bd"
   integrity sha512-Egwj264i8lQtp4O8+TXse2yagW5im8oPzPcfWzIEYspKspPE0NikqWFtpVrecgbd/uwhwEjLXLY5kEXOvpiJjA==
@@ -1265,7 +1265,7 @@
     "@types/react" "*"
     "@types/react-native" "*"
 
-"@types/react-native-svg-charts@^5.0.3":
+"@types/react-native-svg-charts@5.0.3":
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/@types/react-native-svg-charts/-/react-native-svg-charts-5.0.3.tgz#79ba443c2150d48b9bef5e33ccaadcca586a3875"
   integrity sha512-RDOvpnC8YTxCC++KfGCDaA+THAc+JtOMBr+YM40Q0sbszgDPjWVgID7xYN5b4653b9gBr8JvHhJSYatEjCoysg==
