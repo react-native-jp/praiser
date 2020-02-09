@@ -37,7 +37,7 @@ export default function Todo(props: EnableEditProps | DisableEditProps) {
       leftOpenValue={80}
       ref={rowRef}
     >
-      <View style={[styles.contentContainer]}>
+      <View style={styles.contentContainer}>
         <DoneButton state={state} onPress={toggleTodo} />
         <DeleteButton onPress={removeTodo} />
       </View>
