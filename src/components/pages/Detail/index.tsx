@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { useNavigation } from 'react-navigation-hooks'
+import { useRoute, RouteProp } from '@react-navigation/native'
 import analytics from '@react-native-firebase/analytics'
 import TextField from '../../atoms/TextField'
 import Button from '../../atoms/Button'
@@ -35,14 +35,19 @@ interface Props {
   actions: TodoEditActions
 }
 
-export default function Detail(props: Props) {
-  const { getParam } = useNavigation()
-  const id = getParam('id')
+type params = {
+  id: string
+  forbiddenEdit: boolean
+  title: string
+  detail: string
+}
 
-  const forbiddenEdit = getParam('forbiddenEdit')
-  const titleInitialValue = getParam('title')
+export default function Detail(props: Props) {
+  const { params } = useRoute<RouteProp<Record<string, params>, string>>()
+  const { id, forbiddenEdit, title: titleInitialValue, detail: detailInitialValue } = params
+
   const title = useControlledComponent(titleInitialValue)
-  const detail = useControlledComponent(getParam('detail'))
+  const detail = useControlledComponent(detailInitialValue)
 
   const { setSnackbar } = React.useContext(UiContext)
   const onSubmit = React.useCallback(() => {

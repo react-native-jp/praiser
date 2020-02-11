@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native'
-import { useNavigation } from 'react-navigation-hooks'
+import { useNavigation } from '@react-navigation/native'
 
 import { HOME } from '../../../constants/path'
 import { UiContext, UserContext } from '../../../contexts'

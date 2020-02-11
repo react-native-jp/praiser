@@ -1,10 +1,11 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
-import { useNavigation } from 'react-navigation-hooks'
+import { useNavigation } from '@react-navigation/native'
 import { CHOOSE_LOGIN } from '../../../constants/path'
 import { COLOR } from '../../../constants/theme'
 import testIDs from '../../../constants/testIDs'
-import { UserContext } from '../../../contexts'
+import { UserContext, UiContext } from '../../../contexts'
+import { UNREGISTERED } from '../../../contexts/ui'
 import useNetworker from '../../../lib/hooks/use-networker'
 import signOutFromFirebase from '../../../lib/firebase/sign-out'
 import * as LocalStore from '../../../lib/local-store'
@@ -37,6 +38,7 @@ const styles = StyleSheet.create({
 
 export default function UserInfo() {
   const { userState, setUserState } = React.useContext(UserContext)
+  const { setApplicationState } = React.useContext(UiContext)
   const networker = useNetworker()
   const { navigate } = useNavigation()
   const signOut = React.useCallback(async () => {
@@ -44,6 +46,10 @@ export default function UserInfo() {
       await signOutFromFirebase()
       setUserState(null)
       await LocalStore.UserInformation.clear()
+      setApplicationState({
+        stage: UNREGISTERED,
+        initialLoaded: true,
+      })
       navigate(CHOOSE_LOGIN)
     })
   }, [navigate, networker, setUserState])

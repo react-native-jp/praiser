@@ -1,6 +1,5 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-
 import { Todo } from '../domain/models'
 import * as Todos from '../usecases/todos'
 import { Detail } from '../components/pages'

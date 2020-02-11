@@ -1,6 +1,6 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useRef, useState, useContext } from 'react'
 import { StyleSheet } from 'react-native'
-import { useNavigation } from 'react-navigation-hooks'
+import { useNavigation } from '@react-navigation/native'
 import { CarouselStatic } from 'react-native-snap-carousel'
 import SafeAreaView from 'react-native-safe-area-view'
 import Carousel from '../../organisms/Carousel'
@@ -8,6 +8,7 @@ import Pagination from '../../atoms/Pagination'
 import { CHOOSE_LOGIN } from '../../../constants/path'
 import testIDs from '../../../constants/testIDs'
 import * as LocalStore from '../../../lib/local-store'
+import { Context, UNREGISTERED } from '../../../contexts/ui'
 import { COLOR } from '../../../constants/theme'
 
 const padding = 20
@@ -43,10 +44,14 @@ const renderData = [
 export default function Initial() {
   const [activeSlide, changeSlide] = useState(0)
   const { navigate } = useNavigation()
-
+  const { setApplicationState } = useContext(Context)
   const carouselRef = useRef(null)
   const onEnd = useCallback(() => {
     LocalStore.InitialLaunch.markAsTutorialIsDone().finally(() => {
+      setApplicationState({
+        stage: UNREGISTERED,
+        initialLoaded: true,
+      })
       navigate(CHOOSE_LOGIN)
     })
   }, [navigate])

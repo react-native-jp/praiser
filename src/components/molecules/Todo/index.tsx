@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { useNavigation } from 'react-navigation-hooks'
+import { useNavigation } from '@react-navigation/native'
 import { SwipeRow } from 'react-native-swipe-list-view'
 import { DETAIL } from '../../../constants/path'
 import { COLOR } from '../../../constants/theme'

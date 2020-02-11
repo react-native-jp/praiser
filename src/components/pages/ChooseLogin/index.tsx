@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { useNavigation } from 'react-navigation-hooks'
+import { useNavigation } from '@react-navigation/native'
 
 import Button from '../../atoms/Button'
 import { SIGN_IN, SIGN_UP } from '../../../constants/path'

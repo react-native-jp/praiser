@@ -13,6 +13,7 @@ import ErrorPanel from './components/molecules/ErrorPanel'
 export default function App() {
   const [error, setError] = React.useState(UiContext.createErrorInitialState())
   const [snackbar, setSnackbar] = React.useState(UiContext.createSnackbarInitialState())
+  const [applicationState, setApplicationState] = React.useState(UiContext.createApplicationInitialState())
   const onDismiss = React.useCallback(() => {
     setSnackbar(UiContext.createSnackbarInitialState())
   }, [])
@@ -27,7 +28,9 @@ export default function App() {
   return (
     <Provider store={store}>
       <SafeAreaProvider>
-        <UiContext.Context.Provider value={{ error, setError, snackbar, setSnackbar }}>
+        <UiContext.Context.Provider
+          value={{ error, setError, snackbar, setSnackbar, applicationState, setApplicationState }}
+        >
           <NetworkContext.Context.Provider value={{ networkState, dispatchNetworkActions }}>
             <UserContext.Context.Provider value={{ userState, setUserState }}>
               <Routes />

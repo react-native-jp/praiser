@@ -1,83 +1,150 @@
 import React from 'react'
-import { StyleSheet, Text } from 'react-native'
-import testIDs from '../../constants/testIDs'
-import { ScrollView, TouchableOpacity } from 'react-native'
-import { SafeAreaView } from 'react-navigation'
-import { useNavigation } from 'react-navigation-hooks'
-import { COLOR } from '../../constants'
+import { CommonActions, useTheme } from '@react-navigation/native'
+import SafeAreaView from 'react-native-safe-area-view'
+import { DrawerActions, DrawerNavigationState } from '@react-navigation/routers'
+import { DrawerContentOptions, DrawerDescriptorMap, DrawerNavigationHelpers } from '@react-navigation/drawer/src/types'
+import { StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native'
+import TouchableItem from '@react-navigation/drawer/src/views/TouchableItem'
+import Color from 'color'
 
-interface DrawerItemProps {
-  title: string
+type Props = Omit<DrawerContentOptions, 'contentContainerStyle' | 'style'> & {
+  state: DrawerNavigationState
+  navigation: DrawerNavigationHelpers
+  descriptors: DrawerDescriptorMap
+}
+
+type ItemProps = {
+  label: string | ((props: { focused: boolean; color: string }) => React.ReactNode)
+  icon?: (props: { focused: boolean; size: number; color: string }) => React.ReactNode
+  focused?: boolean
   onPress: () => void
-  testID?: string
-  itemKey: string
-  activeItemKey: string
+  activeTintColor?: string
+  inactiveTintColor?: string
+  activeBackgroundColor?: string
+  inactiveBackgroundColor?: string
+  labelStyle?: StyleProp<TextStyle>
+  style?: StyleProp<ViewStyle>
+  testID: string
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLOR.MAIN,
-    paddingVertical: 4,
+    marginHorizontal: 10,
+    marginVertical: 4,
   },
-  itemContainer: {
-    height: 60,
+  wrapper: {
     flexDirection: 'row',
     alignItems: 'center',
+    padding: 8,
   },
-  itemText: {
-    margin: 16,
-    fontWeight: 'bold',
+  label: {
+    marginRight: 32,
   },
 })
 
-const activeColor = COLOR.PRIMARY
-const inactiveColor = COLOR.WHITE
-const activeBackgroundColor = 'rgba(0, 0, 0, .04)'
-const inactiveBackgroundColor = 'transparent'
+function DrawerItem(props: ItemProps) {
+  const { colors } = useTheme()
+  const {
+    icon,
+    label,
+    labelStyle,
+    focused = false,
+    activeTintColor = colors.primary,
+    inactiveTintColor = Color(colors.text)
+      .alpha(0.68)
+      .rgb()
+      .string(),
+    activeBackgroundColor = Color(activeTintColor)
+      .alpha(0.12)
+      .rgb()
+      .string(),
+    inactiveBackgroundColor = 'transparent',
+    style,
+    onPress,
+    ...rest
+  } = props
 
-const DrawerItem = (props: DrawerItemProps) => {
-  const focused = props.activeItemKey === props.itemKey
+  const { borderRadius = 4 } = StyleSheet.flatten(style || {})
+  const color = focused ? activeTintColor : inactiveTintColor
+  const backgroundColor = focused ? activeBackgroundColor : inactiveBackgroundColor
 
+  const iconNode = icon ? icon({ size: 24, focused, color }) : null
+  const viewStyle = React.useMemo(() => {
+    return {
+      marginLeft: iconNode ? 32 : 0,
+      marginVertical: 5,
+    }
+  }, [iconNode])
   const textStyle = React.useMemo(() => {
-    const color = focused ? activeColor : inactiveColor
-    return [styles.itemText, { color }]
-  }, [focused])
-  const containerStyle = React.useMemo(() => {
-    const backgroundColor = focused ? activeBackgroundColor : inactiveBackgroundColor
-    return [styles.itemContainer, focused && { backgroundColor }]
-  }, [focused])
-
+    return {
+      color,
+    }
+  }, [color])
   return (
-    <TouchableOpacity onPress={props.onPress} style={containerStyle} testID={props.testID}>
-      <Text style={textStyle}>{props.title}</Text>
-    </TouchableOpacity>
+    <View collapsable={false} {...rest} style={[styles.container, { borderRadius, backgroundColor }, style]}>
+      <TouchableItem
+        borderless
+        delayPressIn={0}
+        onPress={onPress}
+        testID={props.testID}
+        style={[styles.wrapper, { borderRadius }]}
+        accessibilityTraits={focused ? ['button', 'selected'] : 'button'}
+        accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={focused ? ['selected'] : []}
+      >
+        <React.Fragment>
+          {iconNode}
+          <View style={[styles.label, viewStyle]}>
+            {typeof label === 'string' ? (
+              <Text numberOfLines={1} style={[textStyle, labelStyle]}>
+                {label}
+              </Text>
+            ) : (
+              label({ color, focused })
+            )}
+          </View>
+        </React.Fragment>
+      </TouchableItem>
+    </View>
   )
 }
 
-function Drawer(props: any) {
-  const { navigate } = useNavigation()
-  const onPressItem = React.useCallback(
-    (routeName: string) => {
-      navigate(routeName)
-    },
-    [navigate],
-  )
-
-  return (
-    <ScrollView alwaysBounceVertical={false} style={styles.container} testID={testIDs.MENU_DRAWER_ITEMS}>
-      <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
-        {props.items.map((item: any) => (
-          <DrawerItem
-            title={item.key}
-            testID={`DRAWER_ITEM_${item.key}`}
-            onPress={() => onPressItem(item.key)}
-            key={item.key}
-            itemKey={item.key}
-            activeItemKey={props.activeItemKey}
-          />
-        ))}
+export default function DrawerItemList({
+  state,
+  navigation,
+  descriptors,
+  activeTintColor,
+  inactiveTintColor,
+  activeBackgroundColor,
+  inactiveBackgroundColor,
+  itemStyle,
+  labelStyle,
+}: Props) {
+  return (state.routes.map((route, i) => {
+    const focused = i === state.index
+    const { title, drawerLabel, drawerIcon } = descriptors[route.key].options
+    return (
+      <SafeAreaView key={route.key} forceInset={{ top: 'always', horizontal: 'never' }}>
+        <DrawerItem
+          testID={`DRAWER_ITEM_${route.key}`}
+          label={drawerLabel !== undefined ? drawerLabel : title !== undefined ? title : route.name}
+          icon={drawerIcon}
+          focused={focused}
+          activeTintColor={activeTintColor}
+          inactiveTintColor={inactiveTintColor}
+          activeBackgroundColor={activeBackgroundColor}
+          inactiveBackgroundColor={inactiveBackgroundColor}
+          labelStyle={labelStyle}
+          style={itemStyle}
+          onPress={() => {
+            navigation.dispatch({
+              ...(focused ? DrawerActions.closeDrawer() : CommonActions.navigate(route.name)),
+              target: state.key,
+            })
+          }}
+        />
       </SafeAreaView>
-    </ScrollView>
-  )
+    )
+  }) as React.ReactNode) as React.ReactElement
 }
-export default Drawer

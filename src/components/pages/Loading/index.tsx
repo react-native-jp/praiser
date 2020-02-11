@@ -1,10 +1,9 @@
 import React from 'react'
 import { ActivityIndicator, StyleSheet, View } from 'react-native'
-import { useNavigation } from 'react-navigation-hooks'
+import { useNavigation } from '@react-navigation/native'
 import { firebase } from '@react-native-firebase/auth'
-
-import { CHOOSE_LOGIN, HOME, INITIAL } from '../../../constants/path'
 import { UiContext, UserContext } from '../../../contexts'
+import { FIRST_OPEN, REGISTERED, UNREGISTERED } from '../../../contexts/ui'
 import { Todos } from '../../../domain/models'
 import * as TodosRepository from '../../../domain/repositories/todos'
 import * as LocalStore from '../../../lib/local-store'
@@ -26,31 +25,42 @@ interface Props {
 export default function Index(props: Props) {
   const { navigate } = useNavigation()
   const { setUserState } = React.useContext(UserContext)
-  const { setError } = React.useContext(UiContext)
+  const { setError, setApplicationState } = React.useContext(UiContext)
   const { setTodos } = props.actions
 
   async function navigateNextScreen() {
     const isOpened = await LocalStore.InitialLaunch.isInitialLaunch()
     if (!isOpened) {
-      navigate(INITIAL)
+      setApplicationState({
+        initialLoaded: true,
+        stage: FIRST_OPEN,
+      })
       return
     }
-
-    navigate(CHOOSE_LOGIN)
+    setApplicationState({
+      initialLoaded: true,
+      stage: UNREGISTERED,
+    })
   }
 
   function initialiseFirebaseAuthentication() {
     return new Promise((resolve, reject) => {
       firebase.auth().onAuthStateChanged(user => {
         if (!user) {
-          navigate(CHOOSE_LOGIN)
+          setApplicationState({
+            initialLoaded: true,
+            stage: UNREGISTERED,
+          })
           return
         }
 
         TodosRepository.getAll(user.uid)
           .then(todos => {
             setTodos(todos)
-            navigate(HOME)
+            setApplicationState({
+              initialLoaded: true,
+              stage: REGISTERED,
+            })
             resolve()
           })
           .catch(e => {
