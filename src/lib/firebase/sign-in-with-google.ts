@@ -1,15 +1,16 @@
 import auth from '@react-native-firebase/auth'
-import { GoogleSignin } from 'react-native-google-signin'
+import { GoogleSignin } from '@react-native-community/google-signin'
 
 GoogleSignin.configure({
   scopes: ['profile', 'email'],
-  webClientId: '',
 })
 
 export default async function signInWithGoogle() {
   await GoogleSignin.hasPlayServices()
-  const { idToken } = await GoogleSignin.signIn()
-  const credential = auth.GoogleAuthProvider.credential(idToken)
+  const user = await GoogleSignin.signIn()
+  const { idToken } = user
+  const { accessToken } = await GoogleSignin.getTokens()
+  const credential = auth.GoogleAuthProvider.credential(idToken, accessToken)
 
   const response = await auth().signInWithCredential(credential)
 
