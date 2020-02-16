@@ -35,7 +35,7 @@ interface Props {
   actions: TodoEditActions
 }
 
-type params = {
+interface Params {
   id: string
   forbiddenEdit: boolean
   title: string
@@ -43,7 +43,7 @@ type params = {
 }
 
 export default function Detail(props: Props) {
-  const { params } = useRoute<RouteProp<Record<string, params>, string>>()
+  const { params } = useRoute<RouteProp<Record<string, Params>, string>>()
   const { id, forbiddenEdit, title: titleInitialValue, detail: detailInitialValue } = params
 
   const title = useControlledComponent(titleInitialValue)

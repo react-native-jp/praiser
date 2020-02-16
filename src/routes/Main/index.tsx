@@ -85,7 +85,6 @@ function TabRoutes() {
           backgroundColor: COLOR.MAIN,
         },
       }}
-      // コードみてったら型がおかしいような・・・
       screenOptions={(props: any) => {
         const routeName = getActiveRouteName(props.route.state)
         return {
@@ -133,7 +132,7 @@ const forFade = ({ current }: StackCardInterpolationProps) => ({
 
 function switchngAuthStatus(status: UiContext.Status) {
   switch (status) {
-    case UiContext.UNREGISTERED:
+    case UiContext.Status.UNREGISTERED:
       return (
         <Stack.Screen
           name={CHOOSE_LOGIN}
@@ -141,9 +140,9 @@ function switchngAuthStatus(status: UiContext.Status) {
           options={{ cardStyleInterpolator: forFade }}
         />
       )
-    case UiContext.REGISTERED:
+    case UiContext.Status.REGISTERED:
       return <Stack.Screen name={HOME} component={TabWithModalRoutes} options={{ cardStyleInterpolator: forFade }} />
-    case UiContext.FIRST_OPEN:
+    case UiContext.Status.FIRST_OPEN:
     default:
       return <Stack.Screen name={INITIAL} component={Initial} options={{ cardStyleInterpolator: forFade }} />
   }
@@ -152,8 +151,8 @@ function AuthWithRoutes() {
   const uiContext = React.useContext(UiContext.Context)
   return (
     <Stack.Navigator initialRouteName={LOADING} headerMode="none">
-      {uiContext.applicationState.initialLoaded ? (
-        switchngAuthStatus(uiContext.applicationState.stage)
+      {uiContext.applicationState !== UiContext.Status.LOADING ? (
+        switchngAuthStatus(uiContext.applicationState)
       ) : (
         <Stack.Screen name={LOADING} component={Loading} options={{ cardStyleInterpolator: forFade }} />
       )}

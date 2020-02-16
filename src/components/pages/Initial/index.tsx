@@ -8,7 +8,7 @@ import Pagination from '../../atoms/Pagination'
 import { CHOOSE_LOGIN } from '../../../constants/path'
 import testIDs from '../../../constants/testIDs'
 import * as LocalStore from '../../../lib/local-store'
-import { Context, UNREGISTERED } from '../../../contexts/ui'
+import { Context, Status } from '../../../contexts/ui'
 import { COLOR } from '../../../constants/theme'
 
 const padding = 20
@@ -48,10 +48,7 @@ export default function Initial() {
   const carouselRef = useRef(null)
   const onEnd = useCallback(() => {
     LocalStore.InitialLaunch.markAsTutorialIsDone().finally(() => {
-      setApplicationState({
-        stage: UNREGISTERED,
-        initialLoaded: true,
-      })
+      setApplicationState(Status.UNREGISTERED)
       navigate(CHOOSE_LOGIN)
     })
   }, [navigate])

@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native'
 import analytics from '@react-native-firebase/analytics'
 import { HOME } from '../../../constants/path'
 import { UiContext, UserContext } from '../../../contexts'
-import { REGISTERED } from '../../../contexts/ui'
+import { Status } from '../../../contexts/ui'
 import { Todos } from '../../../domain/models'
 import * as TodosRepository from '../../../domain/repositories/todos'
 import signInWithGoogle from '../../../lib/firebase/sign-in-with-google'
@@ -30,10 +30,7 @@ export default function SignInWithGoogle(props: Props) {
       await networker(async () => {
         const userInformation = await signInWithGoogle()
         setUserState(userInformation)
-        setApplicationState({
-          stage: REGISTERED,
-          initialLoaded: true,
-        })
+        setApplicationState(Status.REGISTERED)
         await LocalStore.UserInformation.save(userInformation)
         const todos = await TodosRepository.getAll(userInformation.id)
         setTodos(todos)

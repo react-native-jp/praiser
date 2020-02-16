@@ -3,7 +3,7 @@ import { ActivityIndicator, StyleSheet, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { firebase } from '@react-native-firebase/auth'
 import { UiContext, UserContext } from '../../../contexts'
-import { FIRST_OPEN, REGISTERED, UNREGISTERED } from '../../../contexts/ui'
+import { Status } from '../../../contexts/ui'
 import { Todos } from '../../../domain/models'
 import * as TodosRepository from '../../../domain/repositories/todos'
 import * as LocalStore from '../../../lib/local-store'
@@ -31,36 +31,24 @@ export default function Index(props: Props) {
   async function navigateNextScreen() {
     const isOpened = await LocalStore.InitialLaunch.isInitialLaunch()
     if (!isOpened) {
-      setApplicationState({
-        initialLoaded: true,
-        stage: FIRST_OPEN,
-      })
+      setApplicationState(Status.FIRST_OPEN)
       return
     }
-    setApplicationState({
-      initialLoaded: true,
-      stage: UNREGISTERED,
-    })
+    setApplicationState(Status.UNREGISTERED)
   }
 
   function initialiseFirebaseAuthentication() {
     return new Promise((resolve, reject) => {
       firebase.auth().onAuthStateChanged(user => {
         if (!user) {
-          setApplicationState({
-            initialLoaded: true,
-            stage: UNREGISTERED,
-          })
+          setApplicationState(Status.UNREGISTERED)
           return
         }
 
         TodosRepository.getAll(user.uid)
           .then(todos => {
             setTodos(todos)
-            setApplicationState({
-              initialLoaded: true,
-              stage: REGISTERED,
-            })
+            setApplicationState(Status.REGISTERED)
             resolve()
           })
           .catch(e => {

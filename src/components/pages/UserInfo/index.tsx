@@ -5,7 +5,7 @@ import { CHOOSE_LOGIN } from '../../../constants/path'
 import { COLOR } from '../../../constants/theme'
 import testIDs from '../../../constants/testIDs'
 import { UserContext, UiContext } from '../../../contexts'
-import { UNREGISTERED } from '../../../contexts/ui'
+import { Status } from '../../../contexts/ui'
 import useNetworker from '../../../lib/hooks/use-networker'
 import signOutFromFirebase from '../../../lib/firebase/sign-out'
 import * as LocalStore from '../../../lib/local-store'
@@ -46,10 +46,7 @@ export default function UserInfo() {
       await signOutFromFirebase()
       setUserState(null)
       await LocalStore.UserInformation.clear()
-      setApplicationState({
-        stage: UNREGISTERED,
-        initialLoaded: true,
-      })
+      setApplicationState(Status.UNREGISTERED)
       navigate(CHOOSE_LOGIN)
     })
   }, [navigate, networker, setUserState])
