@@ -46,7 +46,7 @@ export default function UserInfo() {
       await signOutFromFirebase()
       setUserState(null)
       await LocalStore.UserInformation.clear()
-      setApplicationState(Status.UNREGISTERED)
+      setApplicationState(Status.UN_AUTHORIZED)
       navigate(CHOOSE_LOGIN)
     })
   }, [navigate, networker, setUserState])

@@ -34,21 +34,21 @@ export default function Index(props: Props) {
       setApplicationState(Status.FIRST_OPEN)
       return
     }
-    setApplicationState(Status.UNREGISTERED)
+    setApplicationState(Status.UN_AUTHORIZED)
   }
 
   function initialiseFirebaseAuthentication() {
     return new Promise((resolve, reject) => {
       firebase.auth().onAuthStateChanged(user => {
         if (!user) {
-          setApplicationState(Status.UNREGISTERED)
+          setApplicationState(Status.UN_AUTHORIZED)
           return
         }
 
         TodosRepository.getAll(user.uid)
           .then(todos => {
             setTodos(todos)
-            setApplicationState(Status.REGISTERED)
+            setApplicationState(Status.AUTHORIZED)
             resolve()
           })
           .catch(e => {

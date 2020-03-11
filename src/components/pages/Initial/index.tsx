@@ -48,7 +48,7 @@ export default function Initial() {
   const carouselRef = useRef(null)
   const onEnd = useCallback(() => {
     LocalStore.InitialLaunch.markAsTutorialIsDone().finally(() => {
-      setApplicationState(Status.UNREGISTERED)
+      setApplicationState(Status.UN_AUTHORIZED)
       navigate(CHOOSE_LOGIN)
     })
   }, [navigate])

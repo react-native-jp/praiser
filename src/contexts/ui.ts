@@ -18,8 +18,8 @@ type SnackbarState = ReturnType<typeof createSnackbarInitialState>
 export enum Status {
   LOADING = 'loading',
   FIRST_OPEN = 'firstOpen',
-  UNREGISTERED = 'unregistered',
-  REGISTERED = 'registered',
+  UN_AUTHORIZED = 'unAuthorized',
+  AUTHORIZED = 'authorized',
 }
 
 export function createApplicationInitialState(): Status {
