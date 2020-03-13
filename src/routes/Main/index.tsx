@@ -130,7 +130,7 @@ const forFade = ({ current }: StackCardInterpolationProps) => ({
   },
 })
 
-function switchngAuthStatus(status: UiContext.Status) {
+function switchingAuthStatus(status: UiContext.Status) {
   switch (status) {
     case UiContext.Status.UNREGISTERED:
       return (
@@ -152,7 +152,7 @@ function AuthWithRoutes() {
   return (
     <Stack.Navigator initialRouteName={LOADING} headerMode="none">
       {uiContext.applicationState !== UiContext.Status.LOADING ? (
-        switchngAuthStatus(uiContext.applicationState)
+        switchingAuthStatus(uiContext.applicationState)
       ) : (
         <Stack.Screen name={LOADING} component={Loading} options={{ cardStyleInterpolator: forFade }} />
       )}
