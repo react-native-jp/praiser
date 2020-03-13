@@ -132,7 +132,7 @@ const forFade = ({ current }: StackCardInterpolationProps) => ({
 
 function switchingAuthStatus(status: UiContext.Status) {
   switch (status) {
-    case UiContext.Status.UNREGISTERED:
+    case UiContext.Status.UN_AUTHORIZED:
       return (
         <Stack.Screen
           name={CHOOSE_LOGIN}
@@ -140,7 +140,7 @@ function switchingAuthStatus(status: UiContext.Status) {
           options={{ cardStyleInterpolator: forFade }}
         />
       )
-    case UiContext.Status.REGISTERED:
+    case UiContext.Status.AUTHORIZED:
       return <Stack.Screen name={HOME} component={TabWithModalRoutes} options={{ cardStyleInterpolator: forFade }} />
     case UiContext.Status.FIRST_OPEN:
     default:
