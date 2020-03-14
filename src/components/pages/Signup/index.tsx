@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
-import { useNavigation } from 'react-navigation-hooks'
+import { useNavigation } from '@react-navigation/native'
 import analytics from '@react-native-firebase/analytics'
 import { HOME } from '../../../constants/path'
 import testIDs from '../../../constants/testIDs'

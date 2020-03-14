@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import { ProgressCircle } from 'react-native-svg-charts'
-import { COLOR } from '../../constants'
+import { COLOR } from '../../constants/theme'
 
 const styles = StyleSheet.create({
   progress: {

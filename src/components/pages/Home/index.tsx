@@ -1,10 +1,10 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
-import { useNavigation } from 'react-navigation-hooks'
+import { useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import analytics from '@react-native-firebase/analytics'
 import Todos, { Actions as TodosActions, State as TodosState } from '../../organisms/Todos'
-import { COLOR } from '../../../constants'
+import { COLOR } from '../../../constants/theme'
 import { INPUT } from '../../../constants/path'
 import testIDs from '../../../constants/testIDs'
 

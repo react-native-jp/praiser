@@ -1,26 +1,38 @@
 import React from 'react'
-import { NavigationAction, NavigationState } from 'react-navigation'
+import { NavigationState } from '@react-navigation/native'
 import analytics from '@react-native-firebase/analytics'
+import { NavigationContainer } from '@react-navigation/native'
 
 import MainRoutes from './Main'
 
-function getActiveRouteName(navigationState: NavigationState): string {
-  const route = navigationState.routes[navigationState.index]
-  if (route.routes) {
-    return getActiveRouteName(route)
+const getActiveRouteName = (state: any): string => {
+  const route = state.routes[state.index]
+
+  if (route.state) {
+    // Dive into nested navigators
+    return getActiveRouteName(route.state)
   }
-  return route.routeName
+
+  return route.name
 }
+const onNavigationStateChange = (routeNameRef: React.MutableRefObject<undefined | string>) => (
+  prevState: NavigationState | undefined,
+) => {
+  const previousRouteName = routeNameRef.current
+  const currentRouteName = getActiveRouteName(prevState)
 
-function onNavigationStateChange(prevState: NavigationState, currentState: NavigationState, _: NavigationAction) {
-  const prevScreen = getActiveRouteName(prevState)
-  const currentScreen = getActiveRouteName(currentState)
-
-  if (prevScreen !== currentScreen) {
-    analytics().setCurrentScreen(currentScreen, currentScreen)
+  if (previousRouteName !== currentRouteName) {
+    analytics().setCurrentScreen(currentRouteName, currentRouteName)
   }
+  routeNameRef.current = currentRouteName
 }
 
 export default function LoggingRoutes() {
-  return <MainRoutes onNavigationStateChange={onNavigationStateChange} />
+  const routeNameRef = React.useRef()
+
+  return (
+    <NavigationContainer ref={routeNameRef} onStateChange={onNavigationStateChange(routeNameRef)}>
+      <MainRoutes />
+    </NavigationContainer>
+  )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import { COLOR } from '../../../constants'
+import { COLOR } from '../../../constants/theme'
 import IconButton from '../../atoms/IconButton'
 import testIDs from '../../../constants/testIDs'
 

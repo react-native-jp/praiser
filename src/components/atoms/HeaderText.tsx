@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
-import { COLOR } from '../../constants'
+import { COLOR } from '../../constants/theme'
 
 const styles = StyleSheet.create({
   headerText: {

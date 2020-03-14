@@ -1,4 +1,4 @@
-import { COLOR } from '../../constants'
+import { COLOR } from '../../constants/theme'
 
 export { default as HeaderLeft } from './HeaderLeft'
 export const headerStyle = {
