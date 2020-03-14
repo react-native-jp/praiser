@@ -133,28 +133,23 @@ const forFade = ({ current }: StackCardInterpolationProps) => ({
 function switchingAuthStatus(status: UiContext.Status) {
   switch (status) {
     case UiContext.Status.UN_AUTHORIZED:
-      return (
-        <Stack.Screen
-          name={CHOOSE_LOGIN}
-          component={ChooseLoginNavigator}
-          options={{ cardStyleInterpolator: forFade }}
-        />
-      )
+      return <Stack.Screen name={CHOOSE_LOGIN} component={ChooseLoginNavigator} />
     case UiContext.Status.AUTHORIZED:
-      return <Stack.Screen name={HOME} component={TabWithModalRoutes} options={{ cardStyleInterpolator: forFade }} />
+      return <Stack.Screen name={HOME} component={TabWithModalRoutes} />
     case UiContext.Status.FIRST_OPEN:
     default:
-      return <Stack.Screen name={INITIAL} component={Initial} options={{ cardStyleInterpolator: forFade }} />
+      return <Stack.Screen name={INITIAL} component={Initial} />
   }
 }
 function AuthWithRoutes() {
   const uiContext = React.useContext(UiContext.Context)
+  console.log({ uiContext })
   return (
-    <Stack.Navigator initialRouteName={LOADING} headerMode="none">
+    <Stack.Navigator initialRouteName={LOADING} headerMode="none" screenOptions={{ cardStyleInterpolator: forFade }}>
       {uiContext.applicationState !== UiContext.Status.LOADING ? (
         switchingAuthStatus(uiContext.applicationState)
       ) : (
-        <Stack.Screen name={LOADING} component={Loading} options={{ cardStyleInterpolator: forFade }} />
+        <Stack.Screen name={LOADING} component={Loading} />
       )}
     </Stack.Navigator>
   )

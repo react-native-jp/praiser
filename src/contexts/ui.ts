@@ -23,7 +23,7 @@ export enum Status {
 }
 
 export function createApplicationInitialState(): Status {
-  return Status.FIRST_OPEN
+  return Status.LOADING
 }
 
 export const Context = React.createContext({
