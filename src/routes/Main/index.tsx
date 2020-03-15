@@ -74,10 +74,11 @@ const getActiveRouteName = (state: any): string => {
   return route.name
 }
 
-const CreateBottomTabNavigator = createBottomTabNavigator()
+const Tab = createBottomTabNavigator()
+
 function TabRoutes() {
   return (
-    <CreateBottomTabNavigator.Navigator
+    <Tab.Navigator
       tabBarOptions={{
         inactiveTintColor: COLOR.WHITE,
         activeTintColor: COLOR.PRIMARY,
@@ -92,9 +93,9 @@ function TabRoutes() {
         }
       }}
     >
-      <CreateBottomTabNavigator.Screen name={HOME} component={HomeWithDrawer} />
-      <CreateBottomTabNavigator.Screen name={STATISTICS} component={StatisticsWithDrawer} />
-    </CreateBottomTabNavigator.Navigator>
+      <Tab.Screen name={HOME} component={HomeWithDrawer} />
+      <Tab.Screen name={STATISTICS} component={StatisticsWithDrawer} />
+    </Tab.Navigator>
   )
 }
 
