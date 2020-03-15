@@ -16,7 +16,7 @@ import Home from './Home'
 import UserInfo from './UserInfo'
 import Statistics from './Statistics'
 import { ChooseLogin, Initial } from '../../components/pages'
-import { Loading, Signin, Signup, Input } from '../../containers'
+import { Loading, SignIn, SignUp, Input } from '../../containers'
 import { headerStyle, headerTintColor } from '../Header'
 import { Drawer as DrawerComponent } from '../Drawer'
 import * as UiContext from '../../contexts/ui'
@@ -116,10 +116,11 @@ function ChooseLoginNavigator() {
         headerStyle,
         headerTintColor,
       }}
+      initialRouteName={CHOOSE_LOGIN}
     >
       <Stack.Screen name={CHOOSE_LOGIN} component={ChooseLogin} />
-      <Stack.Screen name={SIGN_IN} component={Signin} options={{ title: 'Signin' }} />
-      <Stack.Screen name={SIGN_UP} component={Signup} options={{ title: 'Signup' }} />
+      <Stack.Screen name={SIGN_IN} component={SignIn} options={{ title: 'SignIn' }} />
+      <Stack.Screen name={SIGN_UP} component={SignUp} options={{ title: 'SignUp' }} />
     </Stack.Navigator>
   )
 }
