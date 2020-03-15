@@ -1,13 +1,10 @@
 import * as React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
 import { SwipeRow } from 'react-native-swipe-list-view'
-import { DETAIL } from '../../../constants/path'
 import { COLOR } from '../../../constants/theme'
 import DoneButton from './DoneButton'
 import DeleteButton from './DeleteButton'
 import TodoDisplay from './TodoDisplay'
-import useToggle, { EnableEditProps, DisableEditProps } from './useToggle'
 
 const styles = StyleSheet.create({
   contentContainer: {
@@ -20,15 +17,9 @@ const styles = StyleSheet.create({
   },
 })
 
-export default function Todo(props: EnableEditProps | DisableEditProps) {
-  const { state, forbiddenEdit } = props
-  const { navigate } = useNavigation()
-  const gotoDetail = React.useCallback(() => navigate(DETAIL, { ...state, forbiddenEdit }), [
-    forbiddenEdit,
-    navigate,
-    state,
-  ])
-  const { toggleTodo, rowRef, removeTodo } = useToggle(props)
+export default function Todo(props: any) {
+  const { state, forbiddenEdit, rowRef, onDone, onDelete, onPress } = props
+
   return (
     <SwipeRow
       disableLeftSwipe={forbiddenEdit}
@@ -38,10 +29,15 @@ export default function Todo(props: EnableEditProps | DisableEditProps) {
       ref={rowRef}
     >
       <View style={styles.contentContainer}>
-        <DoneButton state={state} onPress={toggleTodo} />
-        <DeleteButton onPress={removeTodo} />
+        <DoneButton state={state} onPress={onDone} />
+        <DeleteButton onPress={onDelete} />
       </View>
-      <TodoDisplay onPress={gotoDetail} title={state.title} detail={state.detail} isDone={state.isDone} />
+      <TodoDisplay
+        onPress={onPress({ ...state, forbiddenEdit })}
+        title={state.title}
+        detail={state.detail}
+        isDone={state.isDone}
+      />
     </SwipeRow>
   )
 }

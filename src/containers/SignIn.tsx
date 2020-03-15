@@ -1,9 +1,8 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-
 import { Todos } from '../domain/models'
 import { set } from '../modules/todos'
-import { Signin } from '../components/pages'
+import { SignIn } from '../components/pages'
 
 export default function ConnectedSignIn() {
   const dispatch = useDispatch()
@@ -16,5 +15,5 @@ export default function ConnectedSignIn() {
     [dispatch],
   )
 
-  return <Signin actions={actions} />
+  return <SignIn actions={actions} />
 }

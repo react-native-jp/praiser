@@ -1,11 +1,9 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import { CHOOSE_LOGIN } from '../../../constants/path'
 import { COLOR } from '../../../constants/theme'
 import testIDs from '../../../constants/testIDs'
-import { UserContext, UiContext } from '../../../contexts'
-import { Status } from '../../../contexts/ui'
+import { UserContext } from '../../../contexts'
+import { Context as UiContext, Status } from '../../../contexts/ui'
 import useNetworker from '../../../lib/hooks/use-networker'
 import signOutFromFirebase from '../../../lib/firebase/sign-out'
 import * as LocalStore from '../../../lib/local-store'
@@ -40,16 +38,14 @@ export default function UserInfo() {
   const { userState, setUserState } = React.useContext(UserContext)
   const { setApplicationState } = React.useContext(UiContext)
   const networker = useNetworker()
-  const { navigate } = useNavigation()
   const signOut = React.useCallback(async () => {
     await networker(async () => {
       await signOutFromFirebase()
       setUserState(null)
       await LocalStore.UserInformation.clear()
       setApplicationState(Status.UN_AUTHORIZED)
-      navigate(CHOOSE_LOGIN)
     })
-  }, [navigate, networker, setUserState])
+  }, [networker, setUserState])
 
   const source = React.useMemo(
     () => (userState?.photoUrl ? { uri: userState.photoUrl } : require('../../../../assets/person.png')),

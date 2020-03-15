@@ -79,6 +79,7 @@ const Tab = createBottomTabNavigator()
 function TabRoutes() {
   return (
     <Tab.Navigator
+      initialRouteName={HOME}
       tabBarOptions={{
         inactiveTintColor: COLOR.WHITE,
         activeTintColor: COLOR.PRIMARY,
@@ -102,7 +103,13 @@ function TabRoutes() {
 const Stack = createStackNavigator()
 function TabWithModalRoutes() {
   return (
-    <Stack.Navigator mode="modal" headerMode="none">
+    <Stack.Navigator
+      mode="modal"
+      headerMode="none"
+      screenOptions={{
+        cardStyle,
+      }}
+    >
       <Stack.Screen name={HOME} component={TabRoutes} />
       <Stack.Screen name={INPUT} component={Input} />
     </Stack.Navigator>

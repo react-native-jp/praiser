@@ -2,7 +2,7 @@ import * as React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { useRoute, RouteProp } from '@react-navigation/native'
 import analytics from '@react-native-firebase/analytics'
-import TextField from '../../atoms/TextField'
+import TextField, { dismiss } from '../../atoms/TextField'
 import Button from '../../atoms/Button'
 import { useControlledComponent } from '../../../lib/hooks'
 import { UiContext } from '../../../contexts'
@@ -55,6 +55,7 @@ export default function Detail(props: Props) {
       title: title.value,
       detail: detail.value,
     })
+    dismiss()
     setSnackbar({
       visible: true,
       message: 'edit is completed.',
