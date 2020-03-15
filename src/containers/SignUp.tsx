@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import { Todos } from '../domain/models'
 import { set } from '../modules/todos'
-import { Signup } from '../components/pages'
+import { SignUp } from '../components/pages'
 
 export default function ConnectedSignUp() {
   const dispatch = useDispatch()
@@ -16,5 +16,5 @@ export default function ConnectedSignUp() {
     [dispatch],
   )
 
-  return <Signup actions={actions} />
+  return <SignUp actions={actions} />
 }
