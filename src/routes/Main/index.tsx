@@ -18,12 +18,12 @@ import Statistics from './Statistics'
 import { ChooseLogin, Initial } from '../../components/pages'
 import { Loading, Signin, Signup, Input } from '../../containers'
 import { headerStyle, headerTintColor } from '../Header'
-import { Drawer } from '../Drawer'
+import { Drawer as DrawerComponent } from '../Drawer'
 import * as UiContext from '../../contexts/ui'
 import { createStackNavigator, StackCardInterpolationProps } from '@react-navigation/stack'
 import { COLOR } from '../../constants/theme'
 
-const CreateDrawer = createDrawerNavigator()
+const Drawer = createDrawerNavigator()
 const drawerStyle = {
   backgroundColor: COLOR.MAIN,
 }
@@ -33,28 +33,28 @@ const drawerContentOptions = {
 }
 function HomeWithDrawer() {
   return (
-    <CreateDrawer.Navigator
+    <Drawer.Navigator
       drawerStyle={drawerStyle}
       drawerContentOptions={drawerContentOptions}
       initialRouteName={HOME}
-      drawerContent={props => <Drawer {...props} />}
+      drawerContent={props => <DrawerComponent {...props} />}
     >
-      <CreateDrawer.Screen name={HOME} component={Home} />
-      <CreateDrawer.Screen name={USER_INFO} component={UserInfo} />
-    </CreateDrawer.Navigator>
+      <Drawer.Screen name={HOME} component={Home} />
+      <Drawer.Screen name={USER_INFO} component={UserInfo} />
+    </Drawer.Navigator>
   )
 }
 function StatisticsWithDrawer() {
   return (
-    <CreateDrawer.Navigator
+    <Drawer.Navigator
       drawerStyle={drawerStyle}
       drawerContentOptions={drawerContentOptions}
       initialRouteName={STATISTICS}
-      drawerContent={props => <Drawer {...props} />}
+      drawerContent={props => <DrawerComponent {...props} />}
     >
-      <CreateDrawer.Screen name={STATISTICS} component={Statistics} />
-      <CreateDrawer.Screen name={USER_INFO} component={UserInfo} />
-    </CreateDrawer.Navigator>
+      <Drawer.Screen name={STATISTICS} component={Statistics} />
+      <Drawer.Screen name={USER_INFO} component={UserInfo} />
+    </Drawer.Navigator>
   )
 }
 const cardStyle = {
@@ -143,7 +143,6 @@ function switchingAuthStatus(status: UiContext.Status) {
 }
 function AuthWithRoutes() {
   const uiContext = React.useContext(UiContext.Context)
-  console.log({ uiContext })
   return (
     <Stack.Navigator initialRouteName={LOADING} headerMode="none" screenOptions={{ cardStyleInterpolator: forFade }}>
       {uiContext.applicationState !== UiContext.Status.LOADING ? (
