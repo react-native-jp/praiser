@@ -5,13 +5,13 @@ import { Actions as TodoActions, State as TodoState } from '../../lib/useToggle'
 import { COLOR } from '../../constants/theme'
 import useToggle from '../../lib/useToggle'
 
-export type Actions = TodoActions
-export type State = TodoState[]
+type Actions = TodoActions
+type State = TodoState[]
 type OnPress = (
   params: {
     forbiddenEdit: boolean
   } & TodoState,
-) => void
+) => () => void
 interface Props {
   todos: State
   actions: Actions

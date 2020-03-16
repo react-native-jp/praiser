@@ -3,7 +3,8 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import analytics from '@react-native-firebase/analytics'
-import Todos, { Actions as TodosActions, State as TodosState } from '../../organisms/Todos'
+import Todos from '../../organisms/Todos'
+import { Actions as TodosActions, State as TodoState } from '../../../lib/useToggle'
 import { COLOR } from '../../../constants/theme'
 import { DETAIL, INPUT } from '../../../constants/path'
 import testIDs from '../../../constants/testIDs'
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
 })
 
 interface Props {
-  todos: TodosState
+  todos: TodoState[]
   actions: TodosActions
 }
 

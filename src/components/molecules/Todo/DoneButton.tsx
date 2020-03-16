@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native'
 import { COLOR } from '../../../constants/theme'
 import IconButton from '../../atoms/IconButton'
 import testIDs from '../../../constants/testIDs'
+import { State } from '../../../lib/useToggle'
 
 const styles = StyleSheet.create({
   button: {
@@ -16,13 +17,6 @@ const styles = StyleSheet.create({
 interface DoneProps {
   state: State
   onPress: () => void
-}
-export type State = {
-  id: string
-  title: string
-  detail?: string
-  isDone?: boolean
-  testID?: string
 }
 
 export default function DoneButton(props: DoneProps) {

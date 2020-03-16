@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, FlatList } from 'react-native'
 import ProgressPanel, { Statistic } from '../../molecules/ProgressPanel'
-import { State as TodosState } from '../../organisms/Todos'
+import { State } from '../../../lib/useToggle'
 import { COLOR } from '../../../constants/theme'
 import Todo from '../../molecules/Todo'
 import HeaderText from '../../atoms/HeaderText'
@@ -22,14 +22,14 @@ const styles = StyleSheet.create({
 
 interface Props {
   statistics: Statistic
-  histories: TodosState
+  histories: State[]
 }
 
 export default function Statics(props: Props) {
   const { statistics, histories } = props
   const { navigate } = useNavigation()
   const onPressTodo = React.useCallback(
-    params => () => {
+    (params: State & { forbiddenEdit: boolean }) => () => {
       navigate(DETAIL, params)
     },
     [navigate],
