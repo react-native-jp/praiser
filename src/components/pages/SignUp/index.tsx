@@ -4,7 +4,8 @@ import { useNavigation } from '@react-navigation/native'
 import analytics from '@react-native-firebase/analytics'
 import { HOME } from '../../../constants/path'
 import testIDs from '../../../constants/testIDs'
-import { UserContext } from '../../../contexts'
+import { UiContext, UserContext } from "../../../contexts";
+import { Status } from '../../../contexts/ui'
 import { Todos } from '../../../domain/models'
 import * as TodosRepository from '../../../domain/repositories/todos'
 import { useControlledComponent } from '../../../lib/hooks'
@@ -35,6 +36,7 @@ interface Props {
 
 export default function SignUp(props: Props) {
   const { setUserState } = React.useContext(UserContext)
+  const { setError, setApplicationState } = React.useContext(UiContext)
   const { navigate } = useNavigation()
   const networker = useNetworker()
   const mailAddress = useControlledComponent('')
@@ -42,13 +44,18 @@ export default function SignUp(props: Props) {
 
   const registerUser = React.useCallback(async () => {
     await networker(async () => {
-      const userInformation = await registerUserToFirebase(mailAddress.value, password.value)
-      setUserState(userInformation)
-      await LocalStore.UserInformation.save(userInformation)
-      const todos = await TodosRepository.getAll(userInformation.id)
-      props.actions.setTodos(todos)
-      await analytics().logSignUp({ method: 'mail address and password' })
-      navigate(HOME)
+      try {
+        const userInformation = await registerUserToFirebase(mailAddress.value, password.value)
+        setUserState(userInformation)
+        setApplicationState(Status.AUTHORIZED)
+        await LocalStore.UserInformation.save(userInformation)
+        const todos = await TodosRepository.getAll(userInformation.id)
+        props.actions.setTodos(todos)
+        await analytics().logSignUp({ method: 'mail address and password' })
+        navigate(HOME)
+      } catch (e) {
+        setError(e)
+      }
     })
   }, [mailAddress.value, navigate, networker, password.value, props.actions, setUserState])
 
