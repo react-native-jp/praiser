@@ -3,9 +3,8 @@ import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import analytics from '@react-native-firebase/analytics'
 import TextField, { dismiss } from '../../atoms/TextField'
-import { HOME } from '../../../constants/path'
 import testIDs from '../../../constants/testIDs'
-import { UserContext } from '../../../contexts'
+import { UiContext, UserContext } from '../../../contexts'
 import { Todos } from '../../../domain/models'
 import * as TodosRepository from '../../../domain/repositories/todos'
 import { useControlledComponent } from '../../../lib/hooks'
@@ -14,6 +13,7 @@ import * as LocalStore from '../../../lib/local-store'
 import signInWithPasswordToFirebase from '../../../lib/firebase/sign-in-with-password'
 import Button from '../../atoms/Button'
 import SignInWithGoogle from './SignInWithGoogle'
+import { Status } from '../../../contexts/ui'
 
 const styles = StyleSheet.create({
   container: {
@@ -45,6 +45,7 @@ interface Props {
 
 export default function SignIn(props: Props) {
   const { setUserState } = React.useContext(UserContext)
+  const { setError, setApplicationState } = React.useContext(UiContext)
   const { navigate } = useNavigation()
   const networker = useNetworker()
   const mailAddress = useControlledComponent('')
@@ -53,13 +54,17 @@ export default function SignIn(props: Props) {
 
   const signInWithPassword = React.useCallback(async () => {
     await networker(async () => {
-      const userInformation = await signInWithPasswordToFirebase(mailAddress.value, password.value)
-      setUserState(userInformation)
-      await LocalStore.UserInformation.save(userInformation)
-      const todos = await TodosRepository.getAll(userInformation.id)
-      setTodos(todos)
-      await analytics().logLogin({ method: 'mail address and password' })
-      navigate(HOME)
+      try {
+        const userInformation = await signInWithPasswordToFirebase(mailAddress.value, password.value)
+        setUserState(userInformation)
+        setApplicationState(Status.AUTHORIZED)
+        await LocalStore.UserInformation.save(userInformation)
+        const todos = await TodosRepository.getAll(userInformation.id)
+        setTodos(todos)
+        await analytics().logLogin({ method: 'mail address and password' })
+      } catch (e) {
+        setError(e)
+      }
     })
   }, [navigate, networker, setUserState, setTodos, mailAddress.value, password.value])
 
