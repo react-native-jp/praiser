@@ -43,7 +43,7 @@ interface Props {
   }
 }
 
-export default function SignUp(props: Props) {
+export default function SignIn(props: Props) {
   const { setUserState } = React.useContext(UserContext)
   const { navigate } = useNavigation()
   const networker = useNetworker()

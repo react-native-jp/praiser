@@ -1,6 +1,6 @@
 import * as React from 'react'
 import analytics from '@react-native-firebase/analytics'
-import { UiContext } from '../../../contexts'
+import { UiContext } from '../contexts'
 
 export interface Actions {
   removeTodo: (id: string) => void

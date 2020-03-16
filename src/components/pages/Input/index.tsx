@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     justifyContent: 'center',
-    backgroundColor: COLOR.MAIN,
   },
   text: {
     marginBottom: 16,

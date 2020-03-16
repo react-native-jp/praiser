@@ -1,11 +1,10 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-
 import { Todos } from '../domain/models'
 import { set } from '../modules/todos'
-import { Signup } from '../components/pages'
+import { SignIn } from '../components/pages'
 
-export default function ConnectedSignUp() {
+export default function ConnectedSignIn() {
   const dispatch = useDispatch()
   const actions = React.useMemo(
     () => ({
@@ -16,5 +15,5 @@ export default function ConnectedSignUp() {
     [dispatch],
   )
 
-  return <Signup actions={actions} />
+  return <SignIn actions={actions} />
 }

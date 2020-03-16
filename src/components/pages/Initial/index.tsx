@@ -1,11 +1,9 @@
 import React, { useCallback, useRef, useState, useContext } from 'react'
 import { StyleSheet } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
 import { CarouselStatic } from 'react-native-snap-carousel'
 import SafeAreaView from 'react-native-safe-area-view'
 import Carousel from '../../organisms/Carousel'
 import Pagination from '../../atoms/Pagination'
-import { CHOOSE_LOGIN } from '../../../constants/path'
 import testIDs from '../../../constants/testIDs'
 import * as LocalStore from '../../../lib/local-store'
 import { Context, Status } from '../../../contexts/ui'
@@ -43,15 +41,13 @@ const renderData = [
 
 export default function Initial() {
   const [activeSlide, changeSlide] = useState(0)
-  const { navigate } = useNavigation()
   const { setApplicationState } = useContext(Context)
   const carouselRef = useRef(null)
   const onEnd = useCallback(() => {
     LocalStore.InitialLaunch.markAsTutorialIsDone().finally(() => {
       setApplicationState(Status.UN_AUTHORIZED)
-      navigate(CHOOSE_LOGIN)
     })
-  }, [navigate])
+  }, [setApplicationState])
 
   const onNext = useCallback(() => {
     const nextIndex = activeSlide === renderData.length - 1 ? activeSlide : 1 + activeSlide
