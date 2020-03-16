@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import analytics from '@react-native-firebase/analytics'
 import { HOME } from '../../../constants/path'
 import testIDs from '../../../constants/testIDs'
-import { UiContext, UserContext } from "../../../contexts";
+import { UiContext, UserContext } from '../../../contexts'
 import { Status } from '../../../contexts/ui'
 import { Todos } from '../../../domain/models'
 import * as TodosRepository from '../../../domain/repositories/todos'

@@ -5,7 +5,7 @@ import analytics from '@react-native-firebase/analytics'
 import TextField, { dismiss } from '../../atoms/TextField'
 import { HOME } from '../../../constants/path'
 import testIDs from '../../../constants/testIDs'
-import { UiContext, UserContext } from "../../../contexts";
+import { UiContext, UserContext } from '../../../contexts'
 import { Todos } from '../../../domain/models'
 import * as TodosRepository from '../../../domain/repositories/todos'
 import { useControlledComponent } from '../../../lib/hooks'
@@ -14,7 +14,7 @@ import * as LocalStore from '../../../lib/local-store'
 import signInWithPasswordToFirebase from '../../../lib/firebase/sign-in-with-password'
 import Button from '../../atoms/Button'
 import SignInWithGoogle from './SignInWithGoogle'
-import { Status } from "../../../contexts/ui";
+import { Status } from '../../../contexts/ui'
 
 const styles = StyleSheet.create({
   container: {
