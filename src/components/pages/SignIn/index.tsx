@@ -63,7 +63,6 @@ export default function SignIn(props: Props) {
         const todos = await TodosRepository.getAll(userInformation.id)
         setTodos(todos)
         await analytics().logLogin({ method: 'mail address and password' })
-        navigate(HOME)
       } catch (e) {
         setError(e)
       }

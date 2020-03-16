@@ -109,6 +109,7 @@ function TabWithModalRoutes() {
       screenOptions={{
         cardStyle,
       }}
+      initialRouteName={HOME}
     >
       <Stack.Screen name={HOME} component={TabRoutes} />
       <Stack.Screen name={INPUT} component={Input} />

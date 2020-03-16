@@ -52,7 +52,6 @@ export default function SignUp(props: Props) {
         const todos = await TodosRepository.getAll(userInformation.id)
         props.actions.setTodos(todos)
         await analytics().logSignUp({ method: 'mail address and password' })
-        navigate(HOME)
       } catch (e) {
         setError(e)
       }
