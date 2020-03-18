@@ -1,6 +1,6 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { createDrawerNavigator } from '@react-navigation/drawer'
+import { createDrawerNavigator, DrawerContentComponentProps } from '@react-navigation/drawer'
 import {
   CHOOSE_LOGIN,
   HOME,
@@ -37,7 +37,7 @@ function HomeWithDrawer() {
       drawerStyle={drawerStyle}
       drawerContentOptions={drawerContentOptions}
       initialRouteName={HOME}
-      drawerContent={props => <DrawerComponent {...props} />}
+      drawerContent={(props: DrawerContentComponentProps) => <DrawerComponent {...props} />}
     >
       <Drawer.Screen name={HOME} component={Home} />
       <Drawer.Screen name={USER_INFO} component={UserInfo} />
@@ -50,7 +50,7 @@ function StatisticsWithDrawer() {
       drawerStyle={drawerStyle}
       drawerContentOptions={drawerContentOptions}
       initialRouteName={STATISTICS}
-      drawerContent={props => <DrawerComponent {...props} />}
+      drawerContent={(props: DrawerContentComponentProps) => <DrawerComponent {...props} />}
     >
       <Drawer.Screen name={STATISTICS} component={Statistics} />
       <Drawer.Screen name={USER_INFO} component={UserInfo} />

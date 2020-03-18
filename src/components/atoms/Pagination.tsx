@@ -31,6 +31,10 @@ export default function Pagination(props: Props) {
       dotStyle={styles.dot}
       inactiveDotOpacity={0.4}
       inactiveDotScale={0.6}
+      animatedDuration={250}
+      animatedFriction={4}
+      animatedTension={50}
+      delayPressInDot={0}
     />
   )
 }
