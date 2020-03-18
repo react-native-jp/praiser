@@ -23,25 +23,31 @@ export interface DisableEditProps {
 }
 
 export default function useToggle(props: EnableEditProps | DisableEditProps) {
-  const { state } = props
   const { setError } = React.useContext(UiContext)
   const rowRef = React.useRef<any>(null)
   const toggleTodo = React.useCallback(async () => {
     try {
-      !props.forbiddenEdit && props.actions.toggleTodo(state.id)
-      const eventName = state.isDone ? 'complete_todo' : 'uncomplete_todo'
+      !props.forbiddenEdit && props.actions.toggleTodo(props.state.id)
+      const eventName = props.state.isDone ? 'complete_todo' : 'uncomplete_todo'
       await analytics().logEvent(eventName, {
-        id: state.id,
-        name: state.title,
+        id: props.state.id,
+        name: props.state.title,
       })
       rowRef.current.closeRow()
     } catch (error) {
       setError(error)
     }
-  }, [props.forbiddenEdit, !props.forbiddenEdit && props.actions, state.id, state.isDone, state.title, setError])
+  }, [
+    props.forbiddenEdit,
+    !props.forbiddenEdit && props.actions,
+    props.state.id,
+    props.state.isDone,
+    props.state.title,
+    setError,
+  ])
   const removeTodo = React.useCallback(() => {
-    !props.forbiddenEdit && props.actions.removeTodo(state.id)
-  }, [props.forbiddenEdit, !props.forbiddenEdit && props.actions, state.id])
+    !props.forbiddenEdit && props.actions.removeTodo(props.state.id)
+  }, [props.forbiddenEdit, !props.forbiddenEdit && props.actions, props.state.id])
 
   return {
     toggleTodo,
