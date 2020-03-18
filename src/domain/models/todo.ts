@@ -1,4 +1,4 @@
-import generateUuid from 'uuid/v4'
+import { v4 as generateUuid } from 'uuid'
 
 import { assertIsDefined } from '../../lib/assert'
 
