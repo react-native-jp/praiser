@@ -539,7 +539,7 @@ PODS:
     - React
   - RNScreens (2.3.0):
     - React
-  - RNSVG (9.13.3):
+  - RNSVG (12.0.3):
     - React
   - RNVectorIcons (6.6.0):
     - React
@@ -757,7 +757,7 @@ SPEC CHECKSUMS:
   RNGoogleSignin: 068788c1e83e5e05ef0bad090ba67fd8f963a2a3
   RNReanimated: 031fe8d9ea93c2bd689a40f05320ef9d96f74d7f
   RNScreens: 03bf608b92ac0acf323f47d8f5b63a8f829340c8
-  RNSVG: f6177f8d7c095fada7cfee2e4bb7388ba426064c
+  RNSVG: 7e16ddfc6e00d5aa69c9eb83e699bcce5dcb85d4
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
