@@ -17,7 +17,7 @@
   "dependencies": {
     "@januswel/object-utilities": "1.0.1",
     "@react-native-community/async-storage": "https://github.com/januswel/async-storage.git#add-typings-of-mock",
-    "@react-native-community/google-signin": "3.0.4",
+    "@react-native-community/google-signin": "4.0.0",
     "@react-native-community/masked-view": "0.1.7",
     "@react-native-firebase/analytics": "6.3.4",
     "@react-native-firebase/app": "6.3.4",
