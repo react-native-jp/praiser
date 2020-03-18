@@ -472,7 +472,7 @@ PODS:
   - React-jsinspector (0.61.5)
   - react-native-get-random-values (1.3.0):
     - React
-  - react-native-safe-area-context (0.7.2):
+  - react-native-safe-area-context (0.7.3):
     - React
   - React-RCTActionSheet (0.61.5):
     - React-Core/RCTActionSheetHeaders (= 0.61.5)
@@ -530,14 +530,14 @@ PODS:
     - Firebase/Firestore (~> 6.13.0)
     - React
     - RNFBApp
-  - RNGestureHandler (1.5.2):
+  - RNGestureHandler (1.6.0):
     - React
   - RNGoogleSignin (3.0.4):
     - GoogleSignIn (~> 5.0.0)
     - React
-  - RNReanimated (1.4.0):
+  - RNReanimated (1.7.0):
     - React
-  - RNScreens (2.0.0-beta.2):
+  - RNScreens (2.3.0):
     - React
   - RNSVG (9.13.3):
     - React
@@ -736,7 +736,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
   react-native-get-random-values: 6f638190cfaa202576b43ea9534d5cf88181f139
-  react-native-safe-area-context: 4b3d1b9ebb040a4814a222703e7434b20c95fcf5
+  react-native-safe-area-context: e200d4433aba6b7e60b52da5f37af11f7a0b0392
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
   React-RCTBlob: d89293cc0236d9cb0933d85e430b0bbe81ad1d72
@@ -753,10 +753,10 @@ SPEC CHECKSUMS:
   RNFBApp: 7d4006751de8bb5cafa2e8d2e7d94ee250df81db
   RNFBAuth: ed8b865db45f7ded9dbf535e390cba2ba672aede
   RNFBFirestore: 04c1eb90463c208ee072988d463c74bec09d08c1
-  RNGestureHandler: 946a7691e41df61e2c4b1884deab41a4cdc3afff
+  RNGestureHandler: dde546180bf24af0b5f737c8ad04b6f3fa51609a
   RNGoogleSignin: a00f87261ea13df9a5cea8deafa6927d6f2c3562
-  RNReanimated: b2ab0b693dddd2339bd2f300e770f6302d2e960c
-  RNScreens: 5e4758109c6d35f9a009ce72af873df907548020
+  RNReanimated: 031fe8d9ea93c2bd689a40f05320ef9d96f74d7f
+  RNScreens: 03bf608b92ac0acf323f47d8f5b63a8f829340c8
   RNSVG: f6177f8d7c095fada7cfee2e4bb7388ba426064c
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
