@@ -34,4 +34,4 @@ export default {
   TODO_DETAIL_INPUT_TITLE: 'TODO_DETAIL_INPUT_TITLE',
   TODO_DETAIL_INPUT_DETAIL: 'TODO_DETAIL_INPUT_DETAIL',
   TODO_DETAIL_SUBMIT_BUTTON: 'TODO_DETAIL_SUBMIT_BUTTON',
-} as Readonly<{ [key: string]: string }>
+} as Readonly<{ [key: string]: string }>;

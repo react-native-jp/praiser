@@ -1,19 +1,19 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
-import { SwipeRow } from 'react-native-swipe-list-view'
-import { COLOR } from '../../../constants/theme'
-import DoneButton from './DoneButton'
-import DeleteButton from './DeleteButton'
-import TodoDisplay from './TodoDisplay'
-import { State as TodoState } from '../../../lib/useToggle'
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { SwipeRow } from 'react-native-swipe-list-view';
+import { COLOR } from '../../../constants/theme';
+import DoneButton from './DoneButton';
+import DeleteButton from './DeleteButton';
+import TodoDisplay from './TodoDisplay';
+import { State as TodoState } from '../../../lib/useToggle';
 
 interface Props {
-  state: TodoState
-  forbiddenEdit: boolean
-  rowRef?: any
-  onDone?: () => void
-  onDelete?: () => void
-  onPress: (params: TodoState & { forbiddenEdit: boolean }) => () => void
+  state: TodoState;
+  forbiddenEdit: boolean;
+  rowRef?: any;
+  onDone?: () => void;
+  onDelete?: () => void;
+  onPress: (params: TodoState & { forbiddenEdit: boolean }) => () => void;
 }
 
 const styles = StyleSheet.create({
@@ -25,10 +25,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-})
+});
 
 export default function Todo(props: Props) {
-  const { state, forbiddenEdit, rowRef, onDone = () => {}, onDelete = () => {}, onPress } = props
+  const { state, forbiddenEdit, rowRef, onDone = () => {}, onDelete = () => {}, onPress } = props;
 
   return (
     <SwipeRow
@@ -49,5 +49,5 @@ export default function Todo(props: Props) {
         isDone={state.isDone}
       />
     </SwipeRow>
-  )
+  );
 }

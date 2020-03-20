@@ -1,7 +1,7 @@
-import * as React from 'react'
-import { StyleSheet, Text, TextStyle, ViewStyle } from 'react-native'
-import { Button as PaperButton } from 'react-native-paper'
-import { COLOR } from '../../constants/theme'
+import React from 'react';
+import { StyleSheet, Text, TextStyle, ViewStyle } from 'react-native';
+import { Button as PaperButton } from 'react-native-paper';
+import { COLOR } from '../../constants/theme';
 
 const styles = StyleSheet.create({
   text: {
@@ -9,18 +9,18 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     color: COLOR.WHITE,
   },
-})
+});
 
 interface Props {
-  onPress: () => void
-  style?: ViewStyle | ViewStyle[]
-  textStyle?: TextStyle
-  label?: string
-  color?: string
-  disabled?: boolean
-  disabledColor?: string
-  testID?: string
-  icon?: string
+  onPress: () => void;
+  style?: ViewStyle | ViewStyle[];
+  textStyle?: TextStyle;
+  label?: string;
+  color?: string;
+  disabled?: boolean;
+  disabledColor?: string;
+  testID?: string;
+  icon?: string;
 }
 
 export default function Button(props: Props) {
@@ -34,7 +34,7 @@ export default function Button(props: Props) {
     disabledColor = COLOR.MAIN_LIGHT,
     testID,
     icon,
-  } = props
+  } = props;
   return (
     <PaperButton
       mode="contained"
@@ -49,5 +49,5 @@ export default function Button(props: Props) {
     >
       {label && <Text style={[styles.text, textStyle]}>{label}</Text>}
     </PaperButton>
-  )
+  );
 }

@@ -1,12 +1,12 @@
-import React from 'react'
-import { StyleSheet, View, FlatList } from 'react-native'
-import ProgressPanel, { Statistic } from '../../molecules/ProgressPanel'
-import { State } from '../../../lib/useToggle'
-import { COLOR } from '../../../constants/theme'
-import Todo from '../../molecules/Todo'
-import HeaderText from '../../atoms/HeaderText'
-import { DETAIL } from '../../../constants/path'
-import { useNavigation } from '@react-navigation/native'
+import React from 'react';
+import { StyleSheet, View, FlatList } from 'react-native';
+import ProgressPanel, { Statistic } from '../../molecules/ProgressPanel';
+import { State } from '../../../lib/useToggle';
+import { COLOR } from '../../../constants/theme';
+import Todo from '../../molecules/Todo';
+import HeaderText from '../../atoms/HeaderText';
+import { DETAIL } from '../../../constants/path';
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   headerTextContainer: {
@@ -18,22 +18,22 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: COLOR.SECONDARY,
   },
-})
+});
 
 interface Props {
-  statistics: Statistic
-  histories: State[]
+  statistics: Statistic;
+  histories: State[];
 }
 
 export default function Statics(props: Props) {
-  const { statistics, histories } = props
-  const { navigate } = useNavigation()
+  const { statistics, histories } = props;
+  const { navigate } = useNavigation();
   const onPressTodo = React.useCallback(
     (params: State & { forbiddenEdit: boolean }) => () => {
-      navigate(DETAIL, params)
+      navigate(DETAIL, params);
     },
     [navigate],
-  )
+  );
   return (
     <FlatList
       data={histories}
@@ -48,5 +48,5 @@ export default function Statics(props: Props) {
       }
       ItemSeparatorComponent={() => <View style={styles.separator} />}
     />
-  )
+  );
 }

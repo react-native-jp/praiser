@@ -1,14 +1,14 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-import Button from '../../atoms/Button'
-import { SIGN_IN, SIGN_UP } from '../../../constants/path'
-import { COLOR } from '../../../constants/theme'
-import Logo from '../../atoms/Logo'
-import testIDs from '../../../constants/testIDs'
+import Button from '../../atoms/Button';
+import { SIGN_IN, SIGN_UP } from '../../../constants/path';
+import { COLOR } from '../../../constants/theme';
+import Logo from '../../atoms/Logo';
+import testIDs from '../../../constants/testIDs';
 
-const padding = 20
+const padding = 20;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -30,10 +30,10 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     width: 300,
   },
-})
+});
 
 export default function ChooseLogin() {
-  const { navigate } = useNavigation()
+  const { navigate } = useNavigation();
   return (
     <View style={styles.container} testID={testIDs.CHOOSE_LOGIN}>
       <View style={styles.imageContainer}>
@@ -54,5 +54,5 @@ export default function ChooseLogin() {
         />
       </View>
     </View>
-  )
+  );
 }

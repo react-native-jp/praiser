@@ -1,18 +1,18 @@
-import React from 'react'
-import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import analytics from '@react-native-firebase/analytics'
-import testIDs from '../../../constants/testIDs'
-import { UiContext, UserContext } from '../../../contexts'
-import { Status } from '../../../contexts/ui'
-import { Todos } from '../../../domain/models'
-import * as TodosRepository from '../../../domain/repositories/todos'
-import { useControlledComponent } from '../../../lib/hooks'
-import useNetworker from '../../../lib/hooks/use-networker'
-import * as LocalStore from '../../../lib/local-store'
-import registerUserToFirebase from '../../../lib/firebase/register-user'
-import Button from '../../atoms/Button'
-import TextField, { dismiss } from '../../atoms/TextField'
+import React from 'react';
+import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import analytics from '@react-native-firebase/analytics';
+import testIDs from '../../../constants/testIDs';
+import { UiContext, UserContext } from '../../../contexts';
+import { Status } from '../../../contexts/ui';
+import { Todos } from '../../../domain/models';
+import * as TodosRepository from '../../../domain/repositories/todos';
+import { useControlledComponent } from '../../../lib/hooks';
+import useNetworker from '../../../lib/hooks/use-networker';
+import * as LocalStore from '../../../lib/local-store';
+import registerUserToFirebase from '../../../lib/firebase/register-user';
+import Button from '../../atoms/Button';
+import TextField, { dismiss } from '../../atoms/TextField';
 
 const styles = StyleSheet.create({
   container: {
@@ -25,37 +25,37 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 20,
   },
-})
+});
 
 interface Props {
   actions: {
-    setTodos: (todos: Todos.Model) => void
-  }
+    setTodos: (todos: Todos.Model) => void;
+  };
 }
 
 export default function SignUp(props: Props) {
-  const { setUserState } = React.useContext(UserContext)
-  const { setError, setApplicationState } = React.useContext(UiContext)
-  const { navigate } = useNavigation()
-  const networker = useNetworker()
-  const mailAddress = useControlledComponent('')
-  const password = useControlledComponent('')
+  const { setUserState } = React.useContext(UserContext);
+  const { setError, setApplicationState } = React.useContext(UiContext);
+  const { navigate } = useNavigation();
+  const networker = useNetworker();
+  const mailAddress = useControlledComponent('');
+  const password = useControlledComponent('');
 
   const registerUser = React.useCallback(async () => {
     await networker(async () => {
       try {
-        const userInformation = await registerUserToFirebase(mailAddress.value, password.value)
-        setUserState(userInformation)
-        setApplicationState(Status.AUTHORIZED)
-        await LocalStore.UserInformation.save(userInformation)
-        const todos = await TodosRepository.getAll(userInformation.id)
-        props.actions.setTodos(todos)
-        await analytics().logSignUp({ method: 'mail address and password' })
+        const userInformation = await registerUserToFirebase(mailAddress.value, password.value);
+        setUserState(userInformation);
+        setApplicationState(Status.AUTHORIZED);
+        await LocalStore.UserInformation.save(userInformation);
+        const todos = await TodosRepository.getAll(userInformation.id);
+        props.actions.setTodos(todos);
+        await analytics().logSignUp({ method: 'mail address and password' });
       } catch (e) {
-        setError(e)
+        setError(e);
       }
-    })
-  }, [mailAddress.value, navigate, networker, password.value, props.actions, setUserState])
+    });
+  }, [mailAddress.value, navigate, networker, password.value, props.actions, setUserState]);
 
   return (
     <TouchableWithoutFeedback onPress={dismiss} testID={testIDs.SIGN_UP}>
@@ -85,5 +85,5 @@ export default function SignUp(props: Props) {
         />
       </View>
     </TouchableWithoutFeedback>
-  )
+  );
 }

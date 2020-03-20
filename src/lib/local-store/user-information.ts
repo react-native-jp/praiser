@@ -1,21 +1,21 @@
-import AsyncStorage from '@react-native-community/async-storage'
+import AsyncStorage from '@react-native-community/async-storage';
 
-import { UserInformation } from '../../contexts/user'
+import { UserInformation } from '../../contexts/user';
 
-const KEY = 'userinformation'
+const KEY = 'userinformation';
 
 export async function save(userInformation: UserInformation) {
-  await AsyncStorage.setItem(KEY, JSON.stringify(userInformation))
+  await AsyncStorage.setItem(KEY, JSON.stringify(userInformation));
 }
 
 export async function retrieve() {
-  const serialized = await AsyncStorage.getItem(KEY)
+  const serialized = await AsyncStorage.getItem(KEY);
   if (!serialized) {
-    return null
+    return null;
   }
-  return JSON.parse(serialized)
+  return JSON.parse(serialized);
 }
 
 export async function clear() {
-  await AsyncStorage.removeItem(KEY)
+  await AsyncStorage.removeItem(KEY);
 }

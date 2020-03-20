@@ -1,9 +1,9 @@
-import * as React from 'react'
-import { ActivityIndicator, StyleSheet } from 'react-native'
-import SafeAreaView from 'react-native-safe-area-view'
-import { NetworkContext } from '../../contexts'
-import { height, width } from '../../lib/window'
-import { COLOR } from '../../constants/theme'
+import React from 'react';
+import { ActivityIndicator, StyleSheet } from 'react-native';
+import SafeAreaView from 'react-native-safe-area-view';
+import { NetworkContext } from '../../contexts';
+import { height, width } from '../../lib/window';
+import { COLOR } from '../../constants/theme';
 
 const styles = StyleSheet.create({
   dropdown: {
@@ -20,13 +20,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-})
+});
 
 export default function NetworkPanel() {
-  const { networkState } = React.useContext(NetworkContext)
-  const isCommunicating = React.useMemo(() => 0 < networkState, [networkState])
+  const { networkState } = React.useContext(NetworkContext);
+  const isCommunicating = React.useMemo(() => 0 < networkState, [networkState]);
   if (!isCommunicating) {
-    return null
+    return null;
   }
 
   return (
@@ -36,5 +36,5 @@ export default function NetworkPanel() {
         <ActivityIndicator size="large" color={COLOR.MAIN_LIGHT} />
       </SafeAreaView>
     </>
-  )
+  );
 }
