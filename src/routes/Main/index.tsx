@@ -1,6 +1,6 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { createDrawerNavigator, DrawerContentComponentProps } from '@react-navigation/drawer'
+import { createDrawerNavigator } from '@react-navigation/drawer'
 import {
   CHOOSE_LOGIN,
   HOME,
@@ -18,7 +18,6 @@ import Statistics from './Statistics'
 import { ChooseLogin, Initial } from '../../components/pages'
 import { Loading, SignIn, SignUp, Input } from '../../containers'
 import { headerStyle, headerTintColor } from '../Header'
-import { Drawer as DrawerComponent } from '../Drawer'
 import * as UiContext from '../../contexts/ui'
 import { createStackNavigator, StackCardInterpolationProps } from '@react-navigation/stack'
 import { COLOR } from '../../constants/theme'
@@ -33,12 +32,7 @@ const drawerContentOptions = {
 }
 function HomeWithDrawer() {
   return (
-    <Drawer.Navigator
-      drawerStyle={drawerStyle}
-      drawerContentOptions={drawerContentOptions}
-      initialRouteName={HOME}
-      drawerContent={(props: DrawerContentComponentProps) => <DrawerComponent {...props} />}
-    >
+    <Drawer.Navigator drawerStyle={drawerStyle} drawerContentOptions={drawerContentOptions} initialRouteName={HOME}>
       <Drawer.Screen name={HOME} component={Home} />
       <Drawer.Screen name={USER_INFO} component={UserInfo} />
     </Drawer.Navigator>
@@ -50,7 +44,6 @@ function StatisticsWithDrawer() {
       drawerStyle={drawerStyle}
       drawerContentOptions={drawerContentOptions}
       initialRouteName={STATISTICS}
-      drawerContent={(props: DrawerContentComponentProps) => <DrawerComponent {...props} />}
     >
       <Drawer.Screen name={STATISTICS} component={Statistics} />
       <Drawer.Screen name={USER_INFO} component={UserInfo} />

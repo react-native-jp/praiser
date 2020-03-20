@@ -80,9 +80,7 @@ describe('All', () => {
 
     it('サインアウトできる', async () => {
       await elementById(testIDs.MENU_HEADER_LEFT_BUTTON).tap();
-      await expect(elementById(testIDs.MENU_DRAWER_ITEMS)).toBeVisible();
-
-      await elementById(testIDs.DRAWER_ITEM_USER_INFO).tap();
+      await elementByLabel('USER_INFO').tap();
       await expect(elementById(testIDs.USER_INFO_SCREEN)).toBeVisible();
 
       await elementById(testIDs.USER_INFO_SIGN_OUT_BUTTON).tap();
