@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import analytics from '@react-native-firebase/analytics';
 import { HOME } from '../../../constants/path';

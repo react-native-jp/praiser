@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { ActivityIndicator, StyleSheet } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import { NetworkContext } from '../../contexts';

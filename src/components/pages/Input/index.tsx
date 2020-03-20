@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
 import IconButton from '../../atoms/IconButton';
 import SafeAreaView from 'react-native-safe-area-view';

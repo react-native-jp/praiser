@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { StyleSheet, Text, TextStyle, ViewStyle } from 'react-native';
 import { Button as PaperButton } from 'react-native-paper';
 import { COLOR } from '../../constants/theme';

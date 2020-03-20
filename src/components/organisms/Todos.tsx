@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import Todo from '../molecules/Todo';
 import { Actions as TodoActions, State as TodoState } from '../../lib/useToggle';
