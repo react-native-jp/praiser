@@ -1,9 +1,9 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
-import { COLOR } from '../../../constants/theme'
-import IconButton from '../../atoms/IconButton'
-import testIDs from '../../../constants/testIDs'
-import { State } from '../../../lib/useToggle'
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import { COLOR } from '../../../constants/theme';
+import IconButton from '../../atoms/IconButton';
+import testIDs from '../../../constants/testIDs';
+import { State } from '../../../lib/useToggle';
 
 const styles = StyleSheet.create({
   button: {
@@ -12,18 +12,18 @@ const styles = StyleSheet.create({
   done: {
     backgroundColor: COLOR.MAIN_DARK,
   },
-})
+});
 
 interface DoneProps {
-  state: State
-  onPress: () => void
+  state: State;
+  onPress: () => void;
 }
 
 export default function DoneButton(props: DoneProps) {
   const {
     state: { isDone },
     onPress,
-  } = props
+  } = props;
   return (
     <IconButton
       onPress={onPress}
@@ -31,5 +31,5 @@ export default function DoneButton(props: DoneProps) {
       style={isDone ? styles.done : styles.button}
       testID={isDone ? testIDs.TODO_ROW_NOT_DONE : testIDs.TODO_ROW_DONE}
     />
-  )
+  );
 }

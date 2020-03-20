@@ -1,4 +1,4 @@
-import testIDs from "../src/constants/testIDs";
+import testIDs from '../src/constants/testIDs';
 import { elementById, pressBack, elementByLabel } from './lib/utils';
 
 describe('All', () => {
@@ -32,7 +32,7 @@ describe('All', () => {
     });
 
     it('カルーセルの表示は一度きり', async () => {
-      await device.launchApp({newInstance: true});
+      await device.launchApp({ newInstance: true });
 
       await expect(elementById(testIDs.INITIAL)).toBeNotVisible();
       await expect(elementById(testIDs.CHOOSE_LOGIN)).toBeVisible();
@@ -73,10 +73,11 @@ describe('All', () => {
       await elementById(testIDs.SIGN_UP_PASSWORD).typeText(password);
       await elementById(testIDs.SIGN_UP_REGISTER_BUTTON).tap();
 
-      await waitFor(elementById(testIDs.HOME)).toBeVisible().withTimeout(10000);
+      await waitFor(elementById(testIDs.HOME))
+        .toBeVisible()
+        .withTimeout(10000);
       await expect(elementById(testIDs.HOME)).toBeVisible();
     });
-
 
     it('サインアウトできる', async () => {
       await elementById(testIDs.MENU_HEADER_LEFT_BUTTON).tap();
@@ -95,11 +96,12 @@ describe('All', () => {
       await elementById(testIDs.SIGN_IN_PASSWORD).typeText(password);
       await elementById(testIDs.SIGN_IN_EMAIL_BUTTON).tap();
 
-      await waitFor(elementById(testIDs.HOME)).toBeVisible().withTimeout(10000);
+      await waitFor(elementById(testIDs.HOME))
+        .toBeVisible()
+        .withTimeout(10000);
       await expect(elementById(testIDs.HOME)).toBeVisible();
     });
   });
-
 
   describe('Todo', function() {
     it('todoを追加できる', async () => {

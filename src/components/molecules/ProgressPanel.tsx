@@ -1,8 +1,8 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import Progress from '../atoms/Progress'
-import HeaderText from '../atoms/HeaderText'
-import { COLOR } from '../../constants/theme'
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import Progress from '../atoms/Progress';
+import HeaderText from '../atoms/HeaderText';
+import { COLOR } from '../../constants/theme';
 
 const styles = StyleSheet.create({
   ratioArea: {
@@ -30,18 +30,18 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     flexDirection: 'row',
   },
-})
+});
 
 export interface Statistic {
-  numofCompleted: number
-  numofAll: number
-  numofUncompleted: number
-  completedRatio: number
-  uncompletedRatio: number
+  numofCompleted: number;
+  numofAll: number;
+  numofUncompleted: number;
+  completedRatio: number;
+  uncompletedRatio: number;
 }
 
 export default function ProgressPanel(props: Statistic) {
-  const { uncompletedRatio, completedRatio } = props
+  const { uncompletedRatio, completedRatio } = props;
   return (
     <View style={styles.ratioArea}>
       <View style={styles.headerTextContainer}>
@@ -61,5 +61,5 @@ export default function ProgressPanel(props: Statistic) {
         </View>
       </View>
     </View>
-  )
+  );
 }

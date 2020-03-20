@@ -1,14 +1,14 @@
-import * as React from 'react'
-import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
-import IconButton from '../../atoms/IconButton'
-import SafeAreaView from 'react-native-safe-area-view'
-import { useNavigation } from '@react-navigation/native'
-import TextField, { dismiss } from '../../atoms/TextField'
-import Button from '../../atoms/Button'
-import { COLOR } from '../../../constants/theme'
-import testIDs from '../../../constants/testIDs'
-import { Todo } from '../../../domain/models'
-import { useControlledComponent } from '../../../lib/hooks/'
+import * as React from 'react';
+import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
+import IconButton from '../../atoms/IconButton';
+import SafeAreaView from 'react-native-safe-area-view';
+import { useNavigation } from '@react-navigation/native';
+import TextField, { dismiss } from '../../atoms/TextField';
+import Button from '../../atoms/Button';
+import { COLOR } from '../../../constants/theme';
+import testIDs from '../../../constants/testIDs';
+import { Todo } from '../../../domain/models';
+import { useControlledComponent } from '../../../lib/hooks/';
 
 const styles = StyleSheet.create({
   container: {
@@ -30,32 +30,32 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 40,
   },
-})
+});
 
 interface Props {
   actions: {
-    addTodo: (newValues: Todo.Values) => void
-  }
+    addTodo: (newValues: Todo.Values) => void;
+  };
 }
 
 export default function Input(props: Props) {
-  const title = useControlledComponent('')
-  const detail = useControlledComponent('')
+  const title = useControlledComponent('');
+  const detail = useControlledComponent('');
 
-  const { goBack } = useNavigation()
+  const { goBack } = useNavigation();
   const back = React.useCallback(() => {
-    goBack()
-  }, [goBack])
+    goBack();
+  }, [goBack]);
 
   const addTodo = React.useCallback(() => {
     props.actions.addTodo({
       title: title.value,
       detail: detail.value,
-    })
-    back()
-    title.onChangeText('')
-    detail.onChangeText('')
-  }, [title, detail, props.actions])
+    });
+    back();
+    title.onChangeText('');
+    detail.onChangeText('');
+  }, [title, detail, props.actions]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -93,5 +93,5 @@ export default function Input(props: Props) {
         </View>
       </TouchableWithoutFeedback>
     </SafeAreaView>
-  )
+  );
 }

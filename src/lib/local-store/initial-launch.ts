@@ -1,12 +1,12 @@
-import AsyncStorage from '@react-native-community/async-storage'
+import AsyncStorage from '@react-native-community/async-storage';
 
-const KEY = 'firstopen'
+const KEY = 'firstopen';
 
 export async function isInitialLaunch() {
-  const opened = await AsyncStorage.getItem(KEY)
-  return !!opened
+  const opened = await AsyncStorage.getItem(KEY);
+  return !!opened;
 }
 
 export async function markAsTutorialIsDone() {
-  await AsyncStorage.setItem(KEY, JSON.stringify(true))
+  await AsyncStorage.setItem(KEY, JSON.stringify(true));
 }

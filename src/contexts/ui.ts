@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
-type ErrorState = Error | null
+type ErrorState = Error | null;
 export function createErrorInitialState(): ErrorState {
-  return null
+  return null;
 }
 
 export function createSnackbarInitialState() {
@@ -10,10 +10,10 @@ export function createSnackbarInitialState() {
     visible: false,
     message: '',
     label: 'Done',
-  }
+  };
 }
 
-type SnackbarState = ReturnType<typeof createSnackbarInitialState>
+type SnackbarState = ReturnType<typeof createSnackbarInitialState>;
 
 export enum Status {
   LOADING = 'loading',
@@ -23,7 +23,7 @@ export enum Status {
 }
 
 export function createApplicationInitialState(): Status {
-  return Status.LOADING
+  return Status.LOADING;
 }
 
 export const Context = React.createContext({
@@ -33,4 +33,4 @@ export const Context = React.createContext({
   setSnackbar: (_: SnackbarState) => {},
   applicationState: createApplicationInitialState(),
   setApplicationState: (_: Status) => {},
-})
+});

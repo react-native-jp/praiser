@@ -1,7 +1,7 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
-import { Pagination as SCPagination } from 'react-native-snap-carousel'
-import { COLOR } from '../../constants/theme'
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import { Pagination as SCPagination } from 'react-native-snap-carousel';
+import { COLOR } from '../../constants/theme';
 
 const styles = StyleSheet.create({
   pageNation: {
@@ -14,15 +14,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     backgroundColor: COLOR.WHITE,
   },
-})
+});
 
 interface Props {
-  length: number
-  index: number
+  length: number;
+  index: number;
 }
 
 export default function Pagination(props: Props) {
-  const { length, index } = props
+  const { length, index } = props;
   return (
     <SCPagination
       dotsLength={length}
@@ -36,5 +36,5 @@ export default function Pagination(props: Props) {
       animatedTension={50}
       delayPressInDot={0}
     />
-  )
+  );
 }

@@ -1,19 +1,19 @@
-import React from 'react'
-import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import analytics from '@react-native-firebase/analytics'
-import TextField, { dismiss } from '../../atoms/TextField'
-import testIDs from '../../../constants/testIDs'
-import { UiContext, UserContext } from '../../../contexts'
-import { Todos } from '../../../domain/models'
-import * as TodosRepository from '../../../domain/repositories/todos'
-import { useControlledComponent } from '../../../lib/hooks'
-import useNetworker from '../../../lib/hooks/use-networker'
-import * as LocalStore from '../../../lib/local-store'
-import signInWithPasswordToFirebase from '../../../lib/firebase/sign-in-with-password'
-import Button from '../../atoms/Button'
-import SignInWithGoogle from './SignInWithGoogle'
-import { Status } from '../../../contexts/ui'
+import React from 'react';
+import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import analytics from '@react-native-firebase/analytics';
+import TextField, { dismiss } from '../../atoms/TextField';
+import testIDs from '../../../constants/testIDs';
+import { UiContext, UserContext } from '../../../contexts';
+import { Todos } from '../../../domain/models';
+import * as TodosRepository from '../../../domain/repositories/todos';
+import { useControlledComponent } from '../../../lib/hooks';
+import useNetworker from '../../../lib/hooks/use-networker';
+import * as LocalStore from '../../../lib/local-store';
+import signInWithPasswordToFirebase from '../../../lib/firebase/sign-in-with-password';
+import Button from '../../atoms/Button';
+import SignInWithGoogle from './SignInWithGoogle';
+import { Status } from '../../../contexts/ui';
 
 const styles = StyleSheet.create({
   container: {
@@ -35,38 +35,38 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
   },
-})
+});
 
 interface Props {
   actions: {
-    setTodos: (todos: Todos.Model) => void
-  }
+    setTodos: (todos: Todos.Model) => void;
+  };
 }
 
 export default function SignIn(props: Props) {
-  const { setUserState } = React.useContext(UserContext)
-  const { setError, setApplicationState } = React.useContext(UiContext)
-  const { navigate } = useNavigation()
-  const networker = useNetworker()
-  const mailAddress = useControlledComponent('')
-  const password = useControlledComponent('')
-  const { setTodos } = props.actions
+  const { setUserState } = React.useContext(UserContext);
+  const { setError, setApplicationState } = React.useContext(UiContext);
+  const { navigate } = useNavigation();
+  const networker = useNetworker();
+  const mailAddress = useControlledComponent('');
+  const password = useControlledComponent('');
+  const { setTodos } = props.actions;
 
   const signInWithPassword = React.useCallback(async () => {
     await networker(async () => {
       try {
-        const userInformation = await signInWithPasswordToFirebase(mailAddress.value, password.value)
-        setUserState(userInformation)
-        setApplicationState(Status.AUTHORIZED)
-        await LocalStore.UserInformation.save(userInformation)
-        const todos = await TodosRepository.getAll(userInformation.id)
-        setTodos(todos)
-        await analytics().logLogin({ method: 'mail address and password' })
+        const userInformation = await signInWithPasswordToFirebase(mailAddress.value, password.value);
+        setUserState(userInformation);
+        setApplicationState(Status.AUTHORIZED);
+        await LocalStore.UserInformation.save(userInformation);
+        const todos = await TodosRepository.getAll(userInformation.id);
+        setTodos(todos);
+        await analytics().logLogin({ method: 'mail address and password' });
       } catch (e) {
-        setError(e)
+        setError(e);
       }
-    })
-  }, [navigate, networker, setUserState, setTodos, mailAddress.value, password.value])
+    });
+  }, [navigate, networker, setUserState, setTodos, mailAddress.value, password.value]);
 
   return (
     <TouchableWithoutFeedback onPress={dismiss} testID={testIDs.SIGN_IN}>
@@ -101,5 +101,5 @@ export default function SignIn(props: Props) {
         </View>
       </View>
     </TouchableWithoutFeedback>
-  )
+  );
 }

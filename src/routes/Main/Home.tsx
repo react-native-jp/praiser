@@ -1,15 +1,15 @@
-import React from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
-import { DETAIL, HOME } from '../../constants/path'
-import { Home, Detail } from '../../containers'
-import { HeaderLeft, headerStyle, headerTintColor } from '../Header'
-import { COLOR } from '../../constants/theme'
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { DETAIL, HOME } from '../../constants/path';
+import { Home, Detail } from '../../containers';
+import { HeaderLeft, headerStyle, headerTintColor } from '../Header';
+import { COLOR } from '../../constants/theme';
 
 const cardStyle = {
   backgroundColor: COLOR.MAIN,
-}
+};
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
 function HomeNavigator() {
   return (
     <Stack.Navigator
@@ -35,7 +35,7 @@ function HomeNavigator() {
         }}
       />
     </Stack.Navigator>
-  )
+  );
 }
 
-export default HomeNavigator
+export default HomeNavigator;

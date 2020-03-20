@@ -1,30 +1,30 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import { Todo } from '../domain/models'
-import * as Todos from '../usecases/todos'
-import { Input } from '../components/pages'
-import { UserContext } from '../contexts'
+import { Todo } from '../domain/models';
+import * as Todos from '../usecases/todos';
+import { Input } from '../components/pages';
+import { UserContext } from '../contexts';
 
 export default function ConnectedInput() {
-  const { userState } = React.useContext(UserContext)
+  const { userState } = React.useContext(UserContext);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const actions = React.useMemo(
     () =>
       userState
         ? {
             addTodo(newValues: Todo.Values) {
-              dispatch(Todos.addAndSync(userState.id, newValues))
+              dispatch(Todos.addAndSync(userState.id, newValues));
             },
           }
         : null,
     [userState, userState?.id, dispatch],
-  )
+  );
 
   if (!actions) {
-    return null
+    return null;
   }
 
-  return <Input actions={actions} />
+  return <Input actions={actions} />;
 }

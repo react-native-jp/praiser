@@ -1,12 +1,12 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import Logo from '../atoms/Logo'
-import Button from '../atoms/Button'
-import { COLOR } from '../../constants/theme'
-import { width } from '../../lib/window'
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import Logo from '../atoms/Logo';
+import Button from '../atoms/Button';
+import { COLOR } from '../../constants/theme';
+import { width } from '../../lib/window';
 
-const padding = 20
-const edgeNumber = 2
+const padding = 20;
+const edgeNumber = 2;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -37,14 +37,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingBottom: 20,
   },
-})
+});
 
 export default function CarouselItem({
   onPress,
   item,
 }: {
-  item: { text: string; testID: string }
-  onPress: () => void
+  item: { text: string; testID: string };
+  onPress: () => void;
 }) {
   return (
     <View style={styles.container}>
@@ -60,5 +60,5 @@ export default function CarouselItem({
         </View>
       </View>
     </View>
-  )
+  );
 }

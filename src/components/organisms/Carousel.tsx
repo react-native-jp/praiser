@@ -1,18 +1,18 @@
-import React from 'react'
-import SnapCarousel from 'react-native-snap-carousel'
-import CarouselItem from '../molecules/CarouselItem'
-import { width } from '../../lib/window'
+import React from 'react';
+import SnapCarousel from 'react-native-snap-carousel';
+import CarouselItem from '../molecules/CarouselItem';
+import { width } from '../../lib/window';
 
 interface Props {
-  onEnd: () => void
-  onNext: () => void
-  carouselRef: any
-  onSnapToItem: (slide: number) => void
-  data: { text: string; testID: string }[]
+  onEnd: () => void;
+  onNext: () => void;
+  carouselRef: any;
+  onSnapToItem: (slide: number) => void;
+  data: { text: string; testID: string }[];
 }
 
 export default function Carousel(props: Props) {
-  const { onEnd, onNext, onSnapToItem, carouselRef, data } = props
+  const { onEnd, onNext, onSnapToItem, carouselRef, data } = props;
   return (
     <SnapCarousel
       data={data}
@@ -24,5 +24,5 @@ export default function Carousel(props: Props) {
       itemWidth={width}
       onSnapToItem={onSnapToItem}
     />
-  )
+  );
 }

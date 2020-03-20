@@ -1,6 +1,6 @@
-import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
-import { COLOR } from '../../constants/theme'
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import { COLOR } from '../../constants/theme';
 
 const styles = StyleSheet.create({
   row: {
@@ -25,15 +25,15 @@ const styles = StyleSheet.create({
     color: COLOR.WHITE,
     fontSize: 16,
   },
-})
+});
 
 interface Props {
-  label: string
-  value: string | number | null
+  label: string;
+  value: string | number | null;
 }
 
 function LabelViewContainer(props: Props) {
-  const { label, value = '' } = props
+  const { label, value = '' } = props;
 
   return (
     <View style={styles.row}>
@@ -44,7 +44,7 @@ function LabelViewContainer(props: Props) {
         <Text style={styles.valueText}>{value}</Text>
       </View>
     </View>
-  )
+  );
 }
 
-export default LabelViewContainer
+export default LabelViewContainer;
