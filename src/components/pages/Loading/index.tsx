@@ -1,6 +1,5 @@
 import React from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { firebase } from '@react-native-firebase/auth';
 import { UiContext, UserContext } from '../../../contexts';
 import { Status } from '../../../contexts/ui';
@@ -22,8 +21,7 @@ interface Props {
   };
 }
 
-export default function Index(props: Props) {
-  const { navigate } = useNavigation();
+export default function Loading(props: Props) {
   const { setUserState } = React.useContext(UserContext);
   const { setError, setApplicationState } = React.useContext(UiContext);
   const { setTodos } = props.actions;
@@ -76,7 +74,7 @@ export default function Index(props: Props) {
 
   React.useEffect(() => {
     retrieveUserInformation();
-  }, [navigate, setTodos, setError, setUserState]);
+  }, [setTodos, setError, setUserState]);
 
   return (
     <View style={styles.container}>

@@ -4,11 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import analytics from '@react-native-firebase/analytics';
 import Todos from '../../organisms/Todos';
-import { Actions as TodosActions, State as TodoState } from '../../../lib/useToggle';
+import useToggle, { Actions as TodosActions, State as TodoState } from '../../../lib/useToggle';
 import { COLOR } from '../../../constants/theme';
 import { DETAIL, INPUT } from '../../../constants/path';
 import testIDs from '../../../constants/testIDs';
-import useToggle from '../../../lib/useToggle';
 
 const styles = StyleSheet.create({
   container: {
