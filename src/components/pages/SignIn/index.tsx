@@ -45,7 +45,7 @@ interface Props {
 
 export default function SignIn(props: Props) {
   const { setUserState } = React.useContext(UserContext);
-  const { setError, setApplicationState } = React.useContext(UiContext);
+  const { setApplicationState } = React.useContext(UiContext);
   const { navigate } = useNavigation();
   const networker = useNetworker();
   const mailAddress = useControlledComponent('');
@@ -54,17 +54,13 @@ export default function SignIn(props: Props) {
 
   const signInWithPassword = React.useCallback(async () => {
     await networker(async () => {
-      try {
-        const userInformation = await signInWithPasswordToFirebase(mailAddress.value, password.value);
-        setUserState(userInformation);
-        setApplicationState(Status.AUTHORIZED);
-        await LocalStore.UserInformation.save(userInformation);
-        const todos = await TodosRepository.getAll(userInformation.id);
-        setTodos(todos);
-        await analytics().logLogin({ method: 'mail address and password' });
-      } catch (e) {
-        setError(e);
-      }
+      const userInformation = await signInWithPasswordToFirebase(mailAddress.value, password.value);
+      setUserState(userInformation);
+      setApplicationState(Status.AUTHORIZED);
+      await LocalStore.UserInformation.save(userInformation);
+      const todos = await TodosRepository.getAll(userInformation.id);
+      setTodos(todos);
+      await analytics().logLogin({ method: 'mail address and password' });
     });
   }, [navigate, networker, setUserState, setTodos, mailAddress.value, password.value]);
 
