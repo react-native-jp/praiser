@@ -1,4 +1,4 @@
-# praiser
+# praiser [![CircleCI](https://circleci.com/gh/react-native-jp/praiser.svg?style=svg)](https://circleci.com/gh/react-native-jp/praiser)
 
 ## Getting Started - 動かし方
 
