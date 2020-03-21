@@ -20,16 +20,21 @@ const styles = StyleSheet.create({
 });
 
 export default function ErrorPanel() {
-  const { error } = React.useContext(UiContext);
-  if (!error) {
-    return null;
-  }
-
+  const { error, setError } = React.useContext(UiContext);
+  React.useEffect(() => {
+    setTimeout(() => {
+      setError(null);
+    }, 2000);
+  }, [error]);
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.panel}>
-        <Text style={styles.label}>{error.toString()}</Text>
-      </View>
-    </SafeAreaView>
+    <>
+      {error && (
+        <SafeAreaView style={styles.container}>
+          <View style={styles.panel}>
+            <Text style={styles.label}>{error.toString()}</Text>
+          </View>
+        </SafeAreaView>
+      )}
+    </>
   );
 }
