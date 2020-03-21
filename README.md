@@ -1,6 +1,6 @@
 # praiser
 
-## 動かし方
+## Getting Started - 動かし方
 
 ```console
 git clone https://github.com/react-native-jp/praiser.git
@@ -14,6 +14,6 @@ npx react-native run-ios
 npx react-native run-android
 ```
 
-## 付録
+## Appendix - 付録
 
 - [Bitrise の設定](https://github.com/react-native-jp/praiser/wiki/bitrise.yml)
