@@ -3,7 +3,7 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import Todo from '../molecules/Todo';
 import { Actions as TodoActions, State as TodoState } from '../../lib/useToggle';
 import { COLOR } from '../../constants/theme';
-import useToggle from '../../lib/useToggle';
+import useToggleType from '../../lib/useToggle';
 
 type Actions = TodoActions;
 type State = TodoState[];
@@ -16,14 +16,14 @@ interface Props {
   todos: State;
   actions: Actions;
   forbiddenEdit: boolean;
-  useToggle: typeof useToggle;
+  useToggle: typeof useToggleType;
   onPress: OnPress;
 }
 interface ItemProps {
   state: TodoState;
   actions: Actions;
   onPress: OnPress;
-  useToggle: typeof useToggle;
+  useToggle: typeof useToggleType;
   forbiddenEdit: boolean;
 }
 
