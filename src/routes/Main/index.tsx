@@ -22,7 +22,6 @@ import * as UiContext from '../../contexts/ui';
 import { createStackNavigator, StackCardInterpolationProps } from '@react-navigation/stack';
 import { COLOR } from '../../constants/theme';
 
-const Drawer = createDrawerNavigator();
 const drawerStyle = {
   backgroundColor: COLOR.MAIN,
 };
@@ -30,24 +29,24 @@ const drawerContentOptions = {
   activeTintColor: COLOR.PRIMARY,
   inactiveTintColor: COLOR.WHITE,
 };
+const HomeDrawer = createDrawerNavigator();
+
 function HomeWithDrawer() {
   return (
-    <Drawer.Navigator drawerStyle={drawerStyle} drawerContentOptions={drawerContentOptions} initialRouteName={HOME}>
-      <Drawer.Screen name={HOME} component={Home} />
-      <Drawer.Screen name={USER_INFO} component={UserInfo} />
-    </Drawer.Navigator>
+    <HomeDrawer.Navigator drawerStyle={drawerStyle} drawerContentOptions={drawerContentOptions} initialRouteName={HOME}>
+      <HomeDrawer.Screen name={HOME} component={Home} />
+      <HomeDrawer.Screen name={USER_INFO} component={UserInfo} />
+    </HomeDrawer.Navigator>
   );
 }
+
+const StatisticsDrawer = createDrawerNavigator();
 function StatisticsWithDrawer() {
   return (
-    <Drawer.Navigator
-      drawerStyle={drawerStyle}
-      drawerContentOptions={drawerContentOptions}
-      initialRouteName={STATISTICS}
-    >
-      <Drawer.Screen name={STATISTICS} component={Statistics} />
-      <Drawer.Screen name={USER_INFO} component={UserInfo} />
-    </Drawer.Navigator>
+    <StatisticsDrawer.Navigator drawerStyle={drawerStyle} drawerContentOptions={drawerContentOptions}>
+      <StatisticsDrawer.Screen name={STATISTICS} component={Statistics} />
+      <StatisticsDrawer.Screen name={USER_INFO} component={UserInfo} />
+    </StatisticsDrawer.Navigator>
   );
 }
 const cardStyle = {
@@ -72,7 +71,6 @@ const Tab = createBottomTabNavigator();
 function TabRoutes() {
   return (
     <Tab.Navigator
-      initialRouteName={HOME}
       tabBarOptions={{
         inactiveTintColor: COLOR.WHITE,
         activeTintColor: COLOR.PRIMARY,
@@ -93,26 +91,25 @@ function TabRoutes() {
   );
 }
 
-const Stack = createStackNavigator();
+const ModalStack = createStackNavigator();
 function TabWithModalRoutes() {
   return (
-    <Stack.Navigator
+    <ModalStack.Navigator
       mode="modal"
       headerMode="none"
       screenOptions={{
         cardStyle,
       }}
-      initialRouteName={HOME}
     >
-      <Stack.Screen name={HOME} component={TabRoutes} />
-      <Stack.Screen name={INPUT} component={Input} />
-    </Stack.Navigator>
+      <ModalStack.Screen name={HOME} component={TabRoutes} />
+      <ModalStack.Screen name={INPUT} component={Input} />
+    </ModalStack.Navigator>
   );
 }
-
+const ChooseLoginStack = createStackNavigator();
 function ChooseLoginNavigator() {
   return (
-    <Stack.Navigator
+    <ChooseLoginStack.Navigator
       screenOptions={{
         cardStyle,
         headerStyle,
@@ -120,10 +117,10 @@ function ChooseLoginNavigator() {
       }}
       initialRouteName={CHOOSE_LOGIN}
     >
-      <Stack.Screen name={CHOOSE_LOGIN} component={ChooseLogin} />
-      <Stack.Screen name={SIGN_IN} component={SignIn} options={{ title: 'SignIn' }} />
-      <Stack.Screen name={SIGN_UP} component={SignUp} options={{ title: 'SignUp' }} />
-    </Stack.Navigator>
+      <ChooseLoginStack.Screen name={CHOOSE_LOGIN} component={ChooseLogin} />
+      <ChooseLoginStack.Screen name={SIGN_IN} component={SignIn} options={{ title: 'SignIn' }} />
+      <ChooseLoginStack.Screen name={SIGN_UP} component={SignUp} options={{ title: 'SignUp' }} />
+    </ChooseLoginStack.Navigator>
   );
 }
 
@@ -132,7 +129,7 @@ const forFade = ({ current }: StackCardInterpolationProps) => ({
     opacity: current.progress,
   },
 });
-
+const Stack = createStackNavigator();
 function switchingAuthStatus(status: UiContext.Status) {
   switch (status) {
     case UiContext.Status.UN_AUTHORIZED:

@@ -5,7 +5,7 @@ import { COLOR } from '../../../constants/theme';
 import DoneButton from './DoneButton';
 import DeleteButton from './DeleteButton';
 import TodoDisplay from './TodoDisplay';
-import { State as TodoState } from '../../../lib/useToggle';
+import { State as TodoState } from '../../../lib/hooks/useToggle';
 
 interface Props {
   state: TodoState;

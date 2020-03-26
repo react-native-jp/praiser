@@ -6,7 +6,7 @@ import { COLOR } from '../../constants/theme';
 interface Props {
   label: string;
   value: string;
-  onChangeText: (str: string) => void;
+  onChangeText?: (str: string) => void;
   style?: ViewStyle;
   autoCompleteType?:
     | 'off'

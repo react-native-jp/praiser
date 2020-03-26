@@ -1,9 +1,9 @@
 import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import Todo from '../molecules/Todo';
-import { Actions as TodoActions, State as TodoState } from '../../lib/useToggle';
+import { Actions as TodoActions, State as TodoState } from '../../lib/hooks/useToggle';
 import { COLOR } from '../../constants/theme';
-import useToggleType from '../../lib/useToggle';
+import useToggleType from '../../lib/hooks/useToggle';
 
 type Actions = TodoActions;
 type State = TodoState[];

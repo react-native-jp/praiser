@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import analytics from '@react-native-firebase/analytics';
 import Todos from '../../organisms/Todos';
-import useToggle, { Actions as TodosActions, State as TodoState } from '../../../lib/useToggle';
+import useToggle, { Actions as TodosActions, State as TodoState } from '../../../lib/hooks/useToggle';
 import { COLOR } from '../../../constants/theme';
 import { DETAIL, INPUT } from '../../../constants/path';
 import testIDs from '../../../constants/testIDs';

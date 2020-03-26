@@ -1,10 +1,11 @@
+// src/components/atoms/Pagination.tsx
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Pagination as SCPagination } from 'react-native-snap-carousel';
 import { COLOR } from '../../constants/theme';
 
 const styles = StyleSheet.create({
-  pageNation: {
+  pagination: {
     backgroundColor: COLOR.CAROUSEL_BACKGROUND,
   },
   dot: {
@@ -27,14 +28,10 @@ export default function Pagination(props: Props) {
     <SCPagination
       dotsLength={length}
       activeDotIndex={index}
-      containerStyle={styles.pageNation}
+      containerStyle={styles.pagination}
       dotStyle={styles.dot}
       inactiveDotOpacity={0.4}
       inactiveDotScale={0.6}
-      animatedDuration={250}
-      animatedFriction={4}
-      animatedTension={50}
-      delayPressInDot={0}
     />
   );
 }

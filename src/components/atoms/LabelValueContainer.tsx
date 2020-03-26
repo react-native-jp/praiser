@@ -32,7 +32,7 @@ interface Props {
   value: string | number | null;
 }
 
-function LabelViewContainer(props: Props) {
+export default function LabelViewContainer(props: Props) {
   const { label, value = '' } = props;
 
   return (
@@ -46,5 +46,3 @@ function LabelViewContainer(props: Props) {
     </View>
   );
 }
-
-export default LabelViewContainer;

@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { COLOR } from '../../constants/theme';
 import testIDs from '../../constants/testIDs';
 
-function HeaderLeft() {
+export default function HeaderLeft() {
   const { dispatch } = useNavigation();
   const onPress = React.useCallback(() => {
     dispatch(DrawerActions.openDrawer());
@@ -20,5 +20,3 @@ function HeaderLeft() {
     />
   );
 }
-
-export default HeaderLeft;
