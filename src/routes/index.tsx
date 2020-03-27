@@ -1,23 +1,37 @@
 import React from 'react';
-import { NavigationState } from '@react-navigation/native';
 import analytics from '@react-native-firebase/analytics';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationState, NavigationContainer } from '@react-navigation/native';
+import { PartialState } from '@react-navigation/routers';
 
 import MainRoutes from './Main';
 
-const getActiveRouteName = (state: any): string => {
+function isNavigationState(state: NavigationState | PartialState<NavigationState>): state is NavigationState {
+  return 'index' in state;
+}
+
+const getActiveRouteName = (state: NavigationState): string => {
   const route = state.routes[state.index];
 
-  if (route.state) {
+  const { state: childState } = route;
+  if (childState && isNavigationState(childState)) {
     // Dive into nested navigators
-    return getActiveRouteName(route.state);
+    return getActiveRouteName(childState);
   }
 
   return route.name;
 };
+
+function isDefined(state: NavigationState | undefined): state is NavigationState {
+  return state !== undefined;
+}
+
 const onNavigationStateChange = (routeNameRef: React.MutableRefObject<undefined | string>) => (
   prevState: NavigationState | undefined,
 ) => {
+  if (!isDefined(prevState)) {
+    return;
+  }
+
   const previousRouteName = routeNameRef.current;
   const currentRouteName = getActiveRouteName(prevState);
 
