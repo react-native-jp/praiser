@@ -45,7 +45,7 @@ export default function UserInfo() {
       await LocalStore.UserInformation.clear();
       setApplicationState(Status.UN_AUTHORIZED);
     });
-  }, [networker, setUserState]);
+  }, [networker, setUserState, setApplicationState]);
 
   const source = React.useMemo(
     () => (userState?.photoUrl ? { uri: userState.photoUrl } : require('../../../../assets/person.png')),

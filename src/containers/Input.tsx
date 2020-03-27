@@ -19,7 +19,7 @@ export default function ConnectedInput() {
             },
           }
         : null,
-    [userState, userState?.id, dispatch],
+    [userState, dispatch],
   );
 
   if (!actions) {
