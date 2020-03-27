@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import analytics from '@react-native-firebase/analytics';
 import testIDs from '../../../constants/testIDs';
 import { UiContext, UserContext } from '../../../contexts';
@@ -35,27 +34,22 @@ interface Props {
 
 export default function SignUp(props: Props) {
   const { setUserState } = React.useContext(UserContext);
-  const { setError, setApplicationState } = React.useContext(UiContext);
-  const { navigate } = useNavigation();
+  const { setApplicationState } = React.useContext(UiContext);
   const networker = useNetworker();
   const mailAddress = useControlledComponent('');
   const password = useControlledComponent('');
 
   const registerUser = React.useCallback(async () => {
     await networker(async () => {
-      try {
-        const userInformation = await registerUserToFirebase(mailAddress.value, password.value);
-        setUserState(userInformation);
-        setApplicationState(Status.AUTHORIZED);
-        await LocalStore.UserInformation.save(userInformation);
-        const todos = await TodosRepository.getAll(userInformation.id);
-        props.actions.setTodos(todos);
-        await analytics().logSignUp({ method: 'mail address and password' });
-      } catch (e) {
-        setError(e);
-      }
+      const userInformation = await registerUserToFirebase(mailAddress.value, password.value);
+      setUserState(userInformation);
+      setApplicationState(Status.AUTHORIZED);
+      await LocalStore.UserInformation.save(userInformation);
+      const todos = await TodosRepository.getAll(userInformation.id);
+      props.actions.setTodos(todos);
+      await analytics().logSignUp({ method: 'mail address and password' });
     });
-  }, [mailAddress.value, navigate, networker, password.value, props.actions, setUserState]);
+  }, [setApplicationState, mailAddress.value, networker, password.value, props.actions, setUserState]);
 
   return (
     <TouchableWithoutFeedback onPress={dismiss} testID={testIDs.SIGN_UP}>

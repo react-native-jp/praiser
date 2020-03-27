@@ -1,7 +1,5 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
 import analytics from '@react-native-firebase/analytics';
-import { HOME } from '../../../constants/path';
 import { UiContext, UserContext } from '../../../contexts';
 import { Status } from '../../../contexts/ui';
 import { Todos } from '../../../domain/models';
@@ -19,7 +17,6 @@ interface Props {
 }
 
 export default function SignInWithGoogle(props: Props) {
-  const { navigate } = useNavigation();
   const { setError, setApplicationState } = React.useContext(UiContext);
   const { setUserState } = React.useContext(UserContext);
   const { setTodos } = props.actions;
@@ -35,12 +32,11 @@ export default function SignInWithGoogle(props: Props) {
         const todos = await TodosRepository.getAll(userInformation.id);
         setTodos(todos);
         await analytics().logLogin({ method: 'Google' });
-        navigate(HOME);
       });
     } catch (e) {
       setError(e);
     }
-  }, [navigate, networker, setTodos, setUserState, setError]);
+  }, [setApplicationState, networker, setTodos, setUserState, setError]);
   return (
     <Button
       onPress={loginWithGoogle}

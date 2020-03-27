@@ -1,6 +1,6 @@
 import React from 'react';
 
-type ErrorState = Error | null;
+export type ErrorState = Error | null;
 export function createErrorInitialState(): ErrorState {
   return null;
 }

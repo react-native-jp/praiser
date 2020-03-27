@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import analytics from '@react-native-firebase/analytics';
 import TextField, { dismiss } from '../../atoms/TextField';
 import testIDs from '../../../constants/testIDs';
@@ -45,8 +44,7 @@ interface Props {
 
 export default function SignIn(props: Props) {
   const { setUserState } = React.useContext(UserContext);
-  const { setError, setApplicationState } = React.useContext(UiContext);
-  const { navigate } = useNavigation();
+  const { setApplicationState } = React.useContext(UiContext);
   const networker = useNetworker();
   const mailAddress = useControlledComponent('');
   const password = useControlledComponent('');
@@ -54,19 +52,15 @@ export default function SignIn(props: Props) {
 
   const signInWithPassword = React.useCallback(async () => {
     await networker(async () => {
-      try {
-        const userInformation = await signInWithPasswordToFirebase(mailAddress.value, password.value);
-        setUserState(userInformation);
-        setApplicationState(Status.AUTHORIZED);
-        await LocalStore.UserInformation.save(userInformation);
-        const todos = await TodosRepository.getAll(userInformation.id);
-        setTodos(todos);
-        await analytics().logLogin({ method: 'mail address and password' });
-      } catch (e) {
-        setError(e);
-      }
+      const userInformation = await signInWithPasswordToFirebase(mailAddress.value, password.value);
+      setUserState(userInformation);
+      setApplicationState(Status.AUTHORIZED);
+      await LocalStore.UserInformation.save(userInformation);
+      const todos = await TodosRepository.getAll(userInformation.id);
+      setTodos(todos);
+      await analytics().logLogin({ method: 'mail address and password' });
     });
-  }, [navigate, networker, setUserState, setTodos, mailAddress.value, password.value]);
+  }, [setApplicationState, networker, setUserState, setTodos, mailAddress.value, password.value]);
 
   return (
     <TouchableWithoutFeedback onPress={dismiss} testID={testIDs.SIGN_IN}>

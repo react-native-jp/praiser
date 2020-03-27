@@ -18,7 +18,7 @@ export default function ConnectedDetail() {
             },
           }
         : null,
-    [userState, userState?.id, dispatch],
+    [userState, dispatch],
   );
 
   if (!actions) {

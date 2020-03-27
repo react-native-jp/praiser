@@ -1,6 +1,6 @@
 import React from 'react';
 import analytics from '@react-native-firebase/analytics';
-import { UiContext } from '../contexts';
+import { UiContext } from '../../contexts';
 
 export interface Actions {
   removeTodo: (id: string) => void;
@@ -18,6 +18,7 @@ export interface EnableEditProps {
   forbiddenEdit: false;
 }
 export interface DisableEditProps {
+  actions?: Actions;
   state: State;
   forbiddenEdit: true;
 }
@@ -37,17 +38,10 @@ export default function useToggle(props: EnableEditProps | DisableEditProps) {
     } catch (error) {
       setError(error);
     }
-  }, [
-    props.forbiddenEdit,
-    !props.forbiddenEdit && props.actions,
-    props.state.id,
-    props.state.isDone,
-    props.state.title,
-    setError,
-  ]);
+  }, [props.forbiddenEdit, props.actions, props.state.id, props.state.isDone, props.state.title, setError]);
   const removeTodo = React.useCallback(() => {
     !props.forbiddenEdit && props.actions.removeTodo(props.state.id);
-  }, [props.forbiddenEdit, !props.forbiddenEdit && props.actions, props.state.id]);
+  }, [props.forbiddenEdit, props.actions, props.state.id]);
 
   return {
     toggleTodo,

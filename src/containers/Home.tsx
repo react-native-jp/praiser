@@ -23,7 +23,7 @@ export default function ConnectedHome() {
             },
           }
         : null,
-    [userState, userState?.id, dispatch],
+    [userState, dispatch],
   );
 
   if (!actions) {
