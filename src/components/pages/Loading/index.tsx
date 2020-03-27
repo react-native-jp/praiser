@@ -1,8 +1,9 @@
 import React from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { firebase } from '@react-native-firebase/auth';
-import { Context as UserContext, UserInformation } from '../../../contexts/user';
-import { Context as UiContext, Status, ErrorState } from '../../../contexts/ui';
+
+import { Context as UserContext } from '../../../contexts/user';
+import { Context as UiContext, Status } from '../../../contexts/ui';
 import { Todos } from '../../../domain/models';
 import * as TodosRepository from '../../../domain/repositories/todos';
 import * as LocalStore from '../../../lib/local-store';
@@ -15,23 +16,20 @@ const styles = StyleSheet.create({
   },
 });
 
+interface SetTodo {
+  (todos: Todos.Model): void;
+}
+
 interface Props {
   actions: {
-    setTodos: (todos: Todos.Model) => void;
+    setTodos: SetTodo;
   };
 }
 
-function useretrieveUserInformation({
-  setApplicationState,
-  setTodos,
-  setUserState,
-  setError,
-}: {
-  setApplicationState: (_: Status) => void;
-  setTodos: (_: Todos.Model) => void;
-  setUserState: (_: UserInformation) => void;
-  setError: (_: ErrorState) => void;
-}) {
+function useUserInformation(setTodos: SetTodo) {
+  const { setUserState } = React.useContext(UserContext);
+  const { setError, setApplicationState } = React.useContext(UiContext);
+
   async function navigateNextScreen() {
     const isOpened = await LocalStore.InitialLaunch.isInitialLaunch();
     if (!isOpened) {
@@ -40,6 +38,7 @@ function useretrieveUserInformation({
     }
     setApplicationState(Status.UN_AUTHORIZED);
   }
+
   function initialiseFirebaseAuthentication() {
     return new Promise((resolve, reject) => {
       firebase.auth().onAuthStateChanged(user => {
@@ -60,6 +59,7 @@ function useretrieveUserInformation({
       });
     });
   }
+
   async function retrieveUserInformation() {
     try {
       const userInformation = await LocalStore.UserInformation.retrieve();
@@ -76,21 +76,13 @@ function useretrieveUserInformation({
     }
   }
 
-  return {
-    retrieveUserInformation,
-  };
+  return retrieveUserInformation;
 }
 
 export default function Loading(props: Props) {
-  const { setUserState } = React.useContext(UserContext);
-  const { setError, setApplicationState } = React.useContext(UiContext);
   const { setTodos } = props.actions;
-  const { retrieveUserInformation } = useretrieveUserInformation({
-    setApplicationState,
-    setUserState,
-    setError,
-    setTodos,
-  });
+  const retrieveUserInformation = useUserInformation(setTodos);
+
   React.useEffect(() => {
     retrieveUserInformation();
   }, [retrieveUserInformation]);
