@@ -1,18 +1,18 @@
 import React from 'react';
 import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
 import analytics from '@react-native-firebase/analytics';
+
 import TextField, { dismiss } from '../../atoms/TextField';
-import testIDs from '../../../constants/testIDs';
-import { UiContext, UserContext } from '../../../contexts';
-import { Todos } from '../../../domain/models';
-import * as TodosRepository from '../../../domain/repositories/todos';
-import { useControlledComponent } from '../../../lib/hooks';
-import useNetworker from '../../../lib/hooks/use-networker';
-import * as LocalStore from '../../../lib/local-store';
-import signInWithPasswordToFirebase from '../../../lib/firebase/sign-in-with-password';
 import Button from '../../atoms/Button';
 import SignInWithGoogle from './SignInWithGoogle';
 import { Status } from '../../../contexts/ui';
+import { UiContext, UserContext } from '../../../contexts';
+import { Todos } from '../../../domain/models';
+import * as TodosRepository from '../../../domain/repositories/todos';
+import { useControlledComponent, useNetworker } from '../../../lib/hooks';
+import * as LocalStore from '../../../lib/local-store';
+import signInWithPasswordToFirebase from '../../../lib/firebase/sign-in-with-password';
+import testIDs from '../../../constants/testIDs';
 
 const styles = StyleSheet.create({
   container: {
@@ -60,7 +60,7 @@ export default function SignIn(props: Props) {
       setTodos(todos);
       await analytics().logLogin({ method: 'mail address and password' });
     });
-  }, [setApplicationState, networker, setUserState, setTodos, mailAddress.value, password.value]);
+  }, [mailAddress.value, password.value, setApplicationState, networker, setUserState, setTodos]);
 
   return (
     <TouchableWithoutFeedback onPress={dismiss} testID={testIDs.SIGN_IN}>
