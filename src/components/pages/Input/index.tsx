@@ -55,7 +55,7 @@ export default function Input(props: Props) {
     back();
     title.onChangeText('');
     detail.onChangeText('');
-  }, [title, detail, props.actions]);
+  }, [back, title, detail, props.actions]);
 
   return (
     <SafeAreaView style={styles.container}>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import analytics from '@react-native-firebase/analytics';
 import TextField, { dismiss } from '../../atoms/TextField';
 import testIDs from '../../../constants/testIDs';
@@ -46,7 +45,6 @@ interface Props {
 export default function SignIn(props: Props) {
   const { setUserState } = React.useContext(UserContext);
   const { setApplicationState } = React.useContext(UiContext);
-  const { navigate } = useNavigation();
   const networker = useNetworker();
   const mailAddress = useControlledComponent('');
   const password = useControlledComponent('');
@@ -62,7 +60,7 @@ export default function SignIn(props: Props) {
       setTodos(todos);
       await analytics().logLogin({ method: 'mail address and password' });
     });
-  }, [navigate, networker, setUserState, setTodos, mailAddress.value, password.value]);
+  }, [setApplicationState, networker, setUserState, setTodos, mailAddress.value, password.value]);
 
   return (
     <TouchableWithoutFeedback onPress={dismiss} testID={testIDs.SIGN_IN}>

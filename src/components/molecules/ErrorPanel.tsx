@@ -27,7 +27,7 @@ export default function ErrorPanel() {
         setError(null);
       }, 2000);
     }
-  }, [error]);
+  }, [error, setError]);
   return (
     <>
       {error && (
