@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { COLOR } from '../../../constants/theme';
 import IconButton from '../../atoms/IconButton';
 import testIDs from '../../../constants/testIDs';
-import { State } from '../../../lib/hooks/useToggle';
+import { State } from './useToggle';
 
 const styles = StyleSheet.create({
   button: {

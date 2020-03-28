@@ -1,12 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 import ProgressPanel, { Statistic } from '../../molecules/ProgressPanel';
-import { State } from '../../../lib/hooks/useToggle';
+import { State } from '../../molecules/Todo/useToggle';
 import { COLOR } from '../../../constants/theme';
 import Todo from '../../molecules/Todo';
 import HeaderText from '../../atoms/HeaderText';
-import { DETAIL } from '../../../constants/path';
-import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   headerTextContainer: {
@@ -25,19 +23,13 @@ interface Props {
   histories: State[];
 }
 
-export default function Statics(props: Props) {
+export default function Statstics(props: Props) {
   const { statistics, histories } = props;
-  const { navigate } = useNavigation();
-  const onPressTodo = React.useCallback(
-    (params: State & { forbiddenEdit: boolean }) => () => {
-      navigate(DETAIL, params);
-    },
-    [navigate],
-  );
+
   return (
     <FlatList
       data={histories}
-      renderItem={({ item }) => <Todo onPress={onPressTodo} state={item} forbiddenEdit={true} />}
+      renderItem={({ item }) => <Todo state={item} forbiddenEdit={true} />}
       ListHeaderComponent={
         <View>
           <ProgressPanel {...statistics} />
