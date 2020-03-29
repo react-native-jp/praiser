@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 import ProgressPanel, { Statistic } from '../../molecules/ProgressPanel';
-import { State } from '../../molecules/Todo/useToggle';
+import { State } from '../../molecules/Todo';
 import { COLOR } from '../../../constants/theme';
 import Todo from '../../molecules/Todo';
 import HeaderText from '../../atoms/HeaderText';

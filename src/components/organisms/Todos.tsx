@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import Todo from '../molecules/Todo';
 import { COLOR } from '../../constants/theme';
-import { Actions as TodoActions, State as TodoState } from '../molecules/Todo/useToggle';
+import { Actions as TodoActions, State as TodoState } from '../molecules/Todo';
 
 type Actions = TodoActions;
 type State = TodoState[];
