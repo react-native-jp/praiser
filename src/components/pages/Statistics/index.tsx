@@ -1,9 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import ProgressPanel, { Statistic } from '../../molecules/ProgressPanel';
-import { State } from '../../molecules/Todo';
-import { COLOR } from '../../../constants/theme';
-import Todo from '../../molecules/Todo';
+
+import Todos, { State as TodosState } from '../../organisms/Todos';
 import HeaderText from '../../atoms/HeaderText';
 
 const styles = StyleSheet.create({
@@ -12,33 +11,24 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 8,
   },
-  separator: {
-    height: 1,
-    backgroundColor: COLOR.SECONDARY,
-  },
 });
 
 interface Props {
   statistics: Statistic;
-  histories: State[];
+  histories: TodosState;
+}
+
+function Header(props: Props) {
+  return (
+    <View>
+      <ProgressPanel {...props.statistics} />
+      <View style={styles.headerTextContainer}>
+        <HeaderText text="History" />
+      </View>
+    </View>
+  );
 }
 
 export default function Statstics(props: Props) {
-  const { statistics, histories } = props;
-
-  return (
-    <FlatList
-      data={histories}
-      renderItem={({ item }) => <Todo state={item} forbiddenEdit={true} />}
-      ListHeaderComponent={
-        <View>
-          <ProgressPanel {...statistics} />
-          <View style={styles.headerTextContainer}>
-            <HeaderText text="History" />
-          </View>
-        </View>
-      }
-      ItemSeparatorComponent={() => <View style={styles.separator} />}
-    />
-  );
+  return <Todos todos={props.histories} isEditable={false} header={<Header {...props} />} />;
 }

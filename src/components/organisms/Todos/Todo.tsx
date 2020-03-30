@@ -7,7 +7,7 @@ import { DETAIL } from '../../../constants/path';
 import { COLOR } from '../../../constants/theme';
 import DoneButton, { ToggleTodo } from './DoneButton';
 import DeleteButton, { RemoveTodo } from './DeleteButton';
-import TodoDisplay from './TodoDisplay';
+import TodoDisplay from '../../molecules/Todo';
 
 export interface Actions {
   toggleTodo: ToggleTodo;
@@ -31,25 +31,22 @@ const styles = StyleSheet.create({
   },
 });
 
-interface BaseProps {
+interface EditableProps {
+  isEditable: true;
   state: State;
-}
-
-interface EditableProps extends BaseProps {
-  forbiddenEdit: false;
   actions: Actions;
 }
 function EditableRow(props: EditableProps) {
   const {
     state,
-    forbiddenEdit,
+    isEditable,
     actions: { toggleTodo, removeTodo },
   } = props;
 
   const { navigate } = useNavigation();
   const gotoDetail = React.useCallback(() => {
-    navigate(DETAIL, { ...state, forbiddenEdit });
-  }, [forbiddenEdit, navigate, state]);
+    navigate(DETAIL, { ...state, isEditable });
+  }, [isEditable, navigate, state]);
 
   const rowRef = React.useRef<SwipeRow<View>>(null);
   const closeRow = React.useCallback(() => {
@@ -72,8 +69,8 @@ function EditableRow(props: EditableProps) {
 
   return (
     <SwipeRow
-      disableLeftSwipe={forbiddenEdit}
-      disableRightSwipe={forbiddenEdit}
+      disableLeftSwipe={!isEditable}
+      disableRightSwipe={!isEditable}
       rightOpenValue={-80}
       leftOpenValue={80}
       ref={rowRef}
@@ -87,16 +84,17 @@ function EditableRow(props: EditableProps) {
   );
 }
 
-interface DisabledProps extends BaseProps {
-  forbiddenEdit: true;
+interface DisabledProps {
+  isEditable: false;
+  state: State;
 }
-function DisabledRow(props: DisabledProps) {
-  const { state, forbiddenEdit } = props;
+function ReadonlyRow(props: DisabledProps) {
+  const { state, isEditable } = props;
 
   const { navigate } = useNavigation();
   const gotoDetail = React.useCallback(() => {
-    navigate(DETAIL, { ...state, forbiddenEdit });
-  }, [forbiddenEdit, navigate, state]);
+    navigate(DETAIL, { ...state, isEditable });
+  }, [isEditable, navigate, state]);
 
   return <TodoDisplay onPress={gotoDetail} title={state.title} detail={state.detail} isDone={state.isDone} />;
 }
@@ -104,8 +102,8 @@ function DisabledRow(props: DisabledProps) {
 type Props = EditableProps | DisabledProps;
 
 export default function Todo(props: Props) {
-  if (props.forbiddenEdit) {
-    return <DisabledRow {...props} />;
+  if (props.isEditable) {
+    return <EditableRow {...props} />;
   }
-  return <EditableRow {...props} />;
+  return <ReadonlyRow {...props} />;
 }

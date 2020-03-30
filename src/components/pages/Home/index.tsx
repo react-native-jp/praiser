@@ -3,8 +3,8 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import analytics from '@react-native-firebase/analytics';
-import Todos from '../../organisms/Todos';
-import { Actions as TodosActions, State as TodoState } from '../../molecules/Todo';
+
+import Todos, { Actions as TodosActions, State as TodosState } from '../../organisms/Todos';
 import { COLOR } from '../../../constants/theme';
 import { INPUT } from '../../../constants/path';
 import testIDs from '../../../constants/testIDs';
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 });
 
 interface Props {
-  todos: TodoState[];
+  todos: TodosState;
   actions: TodosActions;
 }
 
@@ -57,7 +57,7 @@ export default function Home(props: Props) {
 
   return (
     <View style={styles.container} testID={testIDs.HOME}>
-      <Todos {...props} />
+      <Todos {...props} isEditable />
       <TouchableOpacity onPress={onPress} style={styles.button} testID={testIDs.TODO_OPEN_INPUT_BUTTON}>
         <Icon color={COLOR.PRIMARY} size={24} name="plus" />
       </TouchableOpacity>

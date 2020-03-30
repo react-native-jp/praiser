@@ -21,7 +21,6 @@ interface Props {
   };
   actions: {
     removeTodo: RemoveTodo;
-    closeRow: () => void;
   };
 }
 
@@ -30,17 +29,16 @@ export default function DeleteButton(props: Props) {
 
   const {
     state: { id },
-    actions: { removeTodo, closeRow },
+    actions: { removeTodo },
   } = props;
 
   const onPress = React.useCallback(() => {
     try {
       removeTodo(id);
-      closeRow();
     } catch (e) {
       setError(e);
     }
-  }, [id, closeRow, removeTodo, setError]);
+  }, [id, removeTodo, setError]);
 
   return <IconButton onPress={onPress} icon="delete" style={styles.button} testID={testIDs.TODO_ROW_DELETE} />;
 }
