@@ -31,7 +31,7 @@ interface Props {
   };
 }
 
-export default function DoneButton(props: Props) {
+export function Component(props: Props) {
   const { setError } = React.useContext(UiContext);
 
   const {

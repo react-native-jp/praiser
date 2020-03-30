@@ -1,17 +1,15 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { SwipeRow } from 'react-native-swipe-list-view';
-import { useNavigation } from '@react-navigation/native';
 
-import { DETAIL } from '../../../constants/path';
 import { COLOR } from '../../../constants/theme';
-import DoneButton, { ToggleTodo } from './DoneButton';
-import DeleteButton, { RemoveTodo } from './DeleteButton';
+import * as DoneButton from './DoneButton';
+import * as DeleteButton from './DeleteButton';
 import TodoDisplay from '../../molecules/Todo';
 
-export interface Actions {
-  toggleTodo: ToggleTodo;
-  removeTodo: RemoveTodo;
+export { DoneButton, DeleteButton };
+export interface GotoDetail {
+  (state: State, isEditable: boolean): void;
 }
 export interface State {
   id: string;
@@ -31,22 +29,22 @@ const styles = StyleSheet.create({
   },
 });
 
+export interface EditableActions {
+  toggleTodo: DoneButton.ToggleTodo;
+  removeTodo: DeleteButton.RemoveTodo;
+  gotoDetail: GotoDetail;
+}
 interface EditableProps {
   isEditable: true;
   state: State;
-  actions: Actions;
+  actions: EditableActions;
 }
 function EditableRow(props: EditableProps) {
   const {
     state,
     isEditable,
-    actions: { toggleTodo, removeTodo },
+    actions: { gotoDetail, toggleTodo, removeTodo },
   } = props;
-
-  const { navigate } = useNavigation();
-  const gotoDetail = React.useCallback(() => {
-    navigate(DETAIL, { ...state, isEditable });
-  }, [isEditable, navigate, state]);
 
   const rowRef = React.useRef<SwipeRow<View>>(null);
   const closeRow = React.useCallback(() => {
@@ -67,6 +65,10 @@ function EditableRow(props: EditableProps) {
     };
   }, [closeRow, removeTodo]);
 
+  const onPress = React.useCallback(() => {
+    gotoDetail(state, isEditable);
+  }, [state, isEditable, gotoDetail]);
+
   return (
     <SwipeRow
       disableLeftSwipe={!isEditable}
@@ -76,32 +78,38 @@ function EditableRow(props: EditableProps) {
       ref={rowRef}
     >
       <View style={styles.contentContainer}>
-        <DoneButton state={state} actions={toggleActions} />
-        <DeleteButton state={state} actions={removeActions} />
+        <DoneButton.Component state={state} actions={toggleActions} />
+        <DeleteButton.Component state={state} actions={removeActions} />
       </View>
-      <TodoDisplay onPress={gotoDetail} title={state.title} detail={state.detail} isDone={state.isDone} />
+      <TodoDisplay onPress={onPress} title={state.title} detail={state.detail} isDone={state.isDone} />
     </SwipeRow>
   );
 }
 
-interface DisabledProps {
+export interface ReadonlyActions {
+  gotoDetail: GotoDetail;
+}
+interface ReadonlyProps {
   isEditable: false;
   state: State;
+  actions: ReadonlyActions;
 }
-function ReadonlyRow(props: DisabledProps) {
-  const { state, isEditable } = props;
+function ReadonlyRow(props: ReadonlyProps) {
+  const {
+    isEditable,
+    state,
+    actions: { gotoDetail },
+  } = props;
+  const onPress = React.useCallback(() => {
+    gotoDetail(state, isEditable);
+  }, [state, isEditable, gotoDetail]);
 
-  const { navigate } = useNavigation();
-  const gotoDetail = React.useCallback(() => {
-    navigate(DETAIL, { ...state, isEditable });
-  }, [isEditable, navigate, state]);
-
-  return <TodoDisplay onPress={gotoDetail} title={state.title} detail={state.detail} isDone={state.isDone} />;
+  return <TodoDisplay onPress={onPress} title={state.title} detail={state.detail} isDone={state.isDone} />;
 }
 
-type Props = EditableProps | DisabledProps;
+type Props = EditableProps | ReadonlyProps;
 
-export default function Todo(props: Props) {
+export function Component(props: Props) {
   if (props.isEditable) {
     return <EditableRow {...props} />;
   }

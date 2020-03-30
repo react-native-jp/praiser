@@ -1,8 +1,10 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import ProgressPanel, { Statistic } from '../../molecules/ProgressPanel';
+import { useNavigation } from '@react-navigation/native';
 
-import Todos, { State as TodosState } from '../../organisms/Todos';
+import Todos, { Todo, State as TodosState } from '../../organisms/Todos';
+import ProgressPanel, { Statistic } from '../../molecules/ProgressPanel';
+import { DETAIL } from '../../../constants/path';
 import HeaderText from '../../atoms/HeaderText';
 
 const styles = StyleSheet.create({
@@ -30,5 +32,14 @@ function Header(props: Props) {
 }
 
 export default function Statstics(props: Props) {
-  return <Todos todos={props.histories} isEditable={false} header={<Header {...props} />} />;
+  const { navigate } = useNavigation();
+  const gotoDetail = React.useCallback(
+    (state: Todo.State, isEditable: boolean) => {
+      navigate(DETAIL, { ...state, isEditable });
+    },
+    [navigate],
+  );
+  const actions = React.useMemo(() => ({ gotoDetail }), [gotoDetail]);
+
+  return <Todos isEditable={false} todos={props.histories} actions={actions} header={<Header {...props} />} />;
 }

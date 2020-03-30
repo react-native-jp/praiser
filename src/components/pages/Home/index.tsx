@@ -4,9 +4,9 @@ import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import analytics from '@react-native-firebase/analytics';
 
-import Todos, { Actions as TodosActions, State as TodosState } from '../../organisms/Todos';
+import Todos, { Todo, State as TodosState } from '../../organisms/Todos';
 import { COLOR } from '../../../constants/theme';
-import { INPUT } from '../../../constants/path';
+import { DETAIL, INPUT } from '../../../constants/path';
 import testIDs from '../../../constants/testIDs';
 
 const styles = StyleSheet.create({
@@ -37,7 +37,10 @@ const styles = StyleSheet.create({
 
 interface Props {
   todos: TodosState;
-  actions: TodosActions;
+  actions: {
+    toggleTodo: Todo.DoneButton.ToggleTodo;
+    removeTodo: Todo.DeleteButton.RemoveTodo;
+  };
 }
 
 export default function Home(props: Props) {
@@ -54,10 +57,23 @@ export default function Home(props: Props) {
   const onPress = React.useCallback(() => {
     navigate(INPUT);
   }, [navigate]);
+  const gotoDetail = React.useCallback(
+    (state: Todo.State, isEditable: boolean) => {
+      navigate(DETAIL, { ...state, isEditable });
+    },
+    [navigate],
+  );
+  const actions = React.useMemo(
+    () => ({
+      ...props.actions,
+      gotoDetail,
+    }),
+    [gotoDetail, props.actions],
+  );
 
   return (
     <View style={styles.container} testID={testIDs.HOME}>
-      <Todos {...props} isEditable />
+      <Todos isEditable todos={props.todos} actions={actions} />
       <TouchableOpacity onPress={onPress} style={styles.button} testID={testIDs.TODO_OPEN_INPUT_BUTTON}>
         <Icon color={COLOR.PRIMARY} size={24} name="plus" />
       </TouchableOpacity>

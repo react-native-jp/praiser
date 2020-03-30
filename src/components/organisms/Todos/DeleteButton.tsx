@@ -24,7 +24,7 @@ interface Props {
   };
 }
 
-export default function DeleteButton(props: Props) {
+export function Component(props: Props) {
   const { setError } = React.useContext(UiContext);
 
   const {
