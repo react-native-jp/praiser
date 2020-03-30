@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import analytics from '@react-native-firebase/analytics';
 
 import { UiContext } from '../../../contexts';
 import { COLOR } from '../../../constants/theme';
@@ -22,7 +21,6 @@ export interface ToggleTodo {
 interface Props {
   state: {
     id: string;
-    title: string;
     isDone?: boolean;
   };
   actions: {
@@ -35,7 +33,7 @@ export function Component(props: Props) {
   const { setError } = React.useContext(UiContext);
 
   const {
-    state: { id, title, isDone },
+    state: { id, isDone },
     actions: { toggleTodo, closeRow },
   } = props;
 
@@ -43,16 +41,10 @@ export function Component(props: Props) {
     try {
       toggleTodo(id);
       closeRow();
-
-      const eventName = isDone ? 'complete_todo' : 'uncomplete_todo';
-      await analytics().logEvent(eventName, {
-        id: id,
-        name: title,
-      });
     } catch (error) {
       setError(error);
     }
-  }, [id, isDone, title, closeRow, toggleTodo, setError]);
+  }, [id, closeRow, toggleTodo, setError]);
 
   return (
     <IconButton

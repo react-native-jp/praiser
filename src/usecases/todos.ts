@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux';
+import analytics from '@react-native-firebase/analytics';
 
 import { Todo } from '../domain/models';
 import * as TodosRepository from '../domain/repositories/todos';
@@ -23,7 +24,12 @@ export function removeAndSync(userId: string, id: string) {
 export function toggleAndSync(userId: string, id: string) {
   return async function(dispatch: Dispatch, getState: () => AppState) {
     dispatch(toggle(id));
-    const newValue = getState().todos[id].completedAt;
+    const { completedAt: newValue, title } = getState().todos[id];
+    const eventName = newValue ? 'complete_todo' : 'uncomplete_todo';
+    await analytics().logEvent(eventName, {
+      id: id,
+      name: title,
+    });
     TodosRepository.toggle(userId, id, newValue);
   };
 }
