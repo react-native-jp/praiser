@@ -6,32 +6,19 @@ import { COLOR } from '../../../constants/theme';
 import testIDs from '../../../constants/testIDs';
 import IconButton from '../../atoms/IconButton';
 
-interface State {
-  id: string;
-}
-export interface RemoveTodo {
-  (id: string): void;
-}
-
-function useRemove(state: State, removeTodo: RemoveTodo) {
-  const { setError } = React.useContext(UiContext);
-  return React.useCallback(() => {
-    try {
-      removeTodo(state.id);
-    } catch (e) {
-      setError(e);
-    }
-  }, [state.id, removeTodo, setError]);
-}
-
 const styles = StyleSheet.create({
   button: {
     backgroundColor: COLOR.CAUTION,
   },
 });
 
+export interface RemoveTodo {
+  (id: string): void;
+}
 interface Props {
-  state: State;
+  state: {
+    id: string;
+  };
   actions: {
     removeTodo: RemoveTodo;
     closeRow: () => void;
@@ -39,12 +26,21 @@ interface Props {
 }
 
 export default function DeleteButton(props: Props) {
-  const removeTodo = useRemove(props.state, props.actions.removeTodo);
+  const { setError } = React.useContext(UiContext);
+
+  const {
+    state: { id },
+    actions: { removeTodo, closeRow },
+  } = props;
 
   const onPress = React.useCallback(() => {
-    removeTodo();
-    props.actions.closeRow();
-  }, [removeTodo, props.actions]);
+    try {
+      removeTodo(id);
+      closeRow();
+    } catch (e) {
+      setError(e);
+    }
+  }, [id, closeRow, removeTodo, setError]);
 
   return <IconButton onPress={onPress} icon="delete" style={styles.button} testID={testIDs.TODO_ROW_DELETE} />;
 }

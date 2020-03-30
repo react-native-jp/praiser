@@ -7,31 +7,6 @@ import { COLOR } from '../../../constants/theme';
 import testIDs from '../../../constants/testIDs';
 import IconButton from '../../atoms/IconButton';
 
-interface State {
-  id: string;
-  title: string;
-  isDone?: boolean;
-}
-export interface ToggleTodo {
-  (id: string): void;
-}
-
-function useToggle(state: State, toggleTodo: ToggleTodo) {
-  const { setError } = React.useContext(UiContext);
-  return React.useCallback(async () => {
-    try {
-      toggleTodo(state.id);
-      const eventName = state.isDone ? 'complete_todo' : 'uncomplete_todo';
-      await analytics().logEvent(eventName, {
-        id: state.id,
-        name: state.title,
-      });
-    } catch (error) {
-      setError(error);
-    }
-  }, [state.id, state.isDone, state.title, toggleTodo, setError]);
-}
-
 const styles = StyleSheet.create({
   button: {
     backgroundColor: COLOR.PRIMARY,
@@ -41,8 +16,15 @@ const styles = StyleSheet.create({
   },
 });
 
+export interface ToggleTodo {
+  (id: string): void;
+}
 interface Props {
-  state: State;
+  state: {
+    id: string;
+    title: string;
+    isDone?: boolean;
+  };
   actions: {
     toggleTodo: ToggleTodo;
     closeRow: () => void;
@@ -50,17 +32,27 @@ interface Props {
 }
 
 export default function DoneButton(props: Props) {
-  const toggleTodo = useToggle(props.state, props.actions.toggleTodo);
+  const { setError } = React.useContext(UiContext);
 
   const {
-    state: { isDone },
-    actions: { closeRow },
+    state: { id, title, isDone },
+    actions: { toggleTodo, closeRow },
   } = props;
 
-  const onPress = React.useCallback(() => {
-    toggleTodo();
-    closeRow();
-  }, [toggleTodo, closeRow]);
+  const onPress = React.useCallback(async () => {
+    try {
+      toggleTodo(id);
+      closeRow();
+
+      const eventName = isDone ? 'complete_todo' : 'uncomplete_todo';
+      await analytics().logEvent(eventName, {
+        id: id,
+        name: title,
+      });
+    } catch (error) {
+      setError(error);
+    }
+  }, [id, isDone, title, closeRow, toggleTodo, setError]);
 
   return (
     <IconButton
