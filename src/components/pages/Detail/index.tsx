@@ -37,14 +37,14 @@ interface Props {
 
 interface Params {
   id: string;
-  forbiddenEdit: boolean;
+  isEditable: boolean;
   title: string;
   detail: string;
 }
 
 export default function Detail(props: Props) {
   const { params } = useRoute<RouteProp<Record<string, Params>, string>>();
-  const { id, forbiddenEdit, title: titleInitialValue, detail: detailInitialValue } = params;
+  const { id, isEditable, title: titleInitialValue, detail: detailInitialValue } = params;
 
   const title = useControlledComponent(titleInitialValue);
   const detail = useControlledComponent(detailInitialValue);
@@ -77,7 +77,7 @@ export default function Detail(props: Props) {
   return (
     <View style={styles.container} testID={testIDs.TODO_DETAIL_SCREEN}>
       <TextField
-        disabled={forbiddenEdit}
+        disabled={!isEditable}
         label="title"
         value={title.value}
         onChangeText={title.onChangeText}
@@ -85,14 +85,14 @@ export default function Detail(props: Props) {
         testID={testIDs.TODO_DETAIL_INPUT_TITLE}
       />
       <TextField
-        disabled={forbiddenEdit}
+        disabled={!isEditable}
         label="detail"
         value={detail.value}
         onChangeText={detail.onChangeText}
         style={styles.textField}
         testID={testIDs.TODO_DETAIL_INPUT_DETAIL}
       />
-      {!forbiddenEdit && (
+      {isEditable && (
         <Button onPress={onSubmit} label="Submit" style={styles.button} testID={testIDs.TODO_DETAIL_SUBMIT_BUTTON} />
       )}
     </View>

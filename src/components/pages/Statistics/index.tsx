@@ -1,12 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
-import ProgressPanel, { Statistic } from '../../molecules/ProgressPanel';
-import { State } from '../../../lib/hooks/useToggle';
-import { COLOR } from '../../../constants/theme';
-import Todo from '../../molecules/Todo';
-import HeaderText from '../../atoms/HeaderText';
-import { DETAIL } from '../../../constants/path';
+import { StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
+import Todos, { Todo, State as TodosState } from '../../organisms/Todos';
+import ProgressPanel, { Statistic } from '../../molecules/ProgressPanel';
+import { DETAIL } from '../../../constants/path';
+import HeaderText from '../../atoms/HeaderText';
 
 const styles = StyleSheet.create({
   headerTextContainer: {
@@ -14,39 +13,33 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 8,
   },
-  separator: {
-    height: 1,
-    backgroundColor: COLOR.SECONDARY,
-  },
 });
 
 interface Props {
   statistics: Statistic;
-  histories: State[];
+  histories: TodosState;
 }
 
-export default function Statics(props: Props) {
-  const { statistics, histories } = props;
+function Header(props: Props) {
+  return (
+    <View>
+      <ProgressPanel {...props.statistics} />
+      <View style={styles.headerTextContainer}>
+        <HeaderText text="History" />
+      </View>
+    </View>
+  );
+}
+
+export default function Statstics(props: Props) {
   const { navigate } = useNavigation();
-  const onPressTodo = React.useCallback(
-    (params: State & { forbiddenEdit: boolean }) => () => {
-      navigate(DETAIL, params);
+  const gotoDetail = React.useCallback(
+    (state: Todo.State, isEditable: boolean) => {
+      navigate(DETAIL, { ...state, isEditable });
     },
     [navigate],
   );
-  return (
-    <FlatList
-      data={histories}
-      renderItem={({ item }) => <Todo onPress={onPressTodo} state={item} forbiddenEdit={true} />}
-      ListHeaderComponent={
-        <View>
-          <ProgressPanel {...statistics} />
-          <View style={styles.headerTextContainer}>
-            <HeaderText text="History" />
-          </View>
-        </View>
-      }
-      ItemSeparatorComponent={() => <View style={styles.separator} />}
-    />
-  );
+  const actions = React.useMemo(() => ({ gotoDetail }), [gotoDetail]);
+
+  return <Todos isEditable={false} todos={props.histories} actions={actions} header={<Header {...props} />} />;
 }

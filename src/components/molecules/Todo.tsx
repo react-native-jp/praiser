@@ -1,7 +1,8 @@
 import React from 'react';
 import { Text, TouchableHighlight, View, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { COLOR } from '../../../constants/theme';
+
+import { COLOR } from '../../constants/theme';
 
 const styles = StyleSheet.create({
   contentContainer: {
@@ -11,8 +12,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-  },
-  displayContent: {
     paddingHorizontal: 20,
   },
   title: {
@@ -39,11 +38,13 @@ interface Props {
 export default function TodoDisplay(props: Props) {
   const { onPress, title, detail, isDone } = props;
 
+  const labelStyle = React.useMemo(() => (isDone ? [styles.title, styles.doneText] : styles.title), [isDone]);
+
   return (
-    <TouchableHighlight style={[styles.contentContainer, styles.displayContent]} onPress={onPress}>
+    <TouchableHighlight style={styles.contentContainer} onPress={onPress}>
       <View style={styles.contentContainer}>
         <View>
-          <Text style={[styles.title, isDone ? styles.doneText : null]}>{title}</Text>
+          <Text style={labelStyle}>{title}</Text>
           {!!detail && <Text style={styles.detail}>{detail}</Text>}
         </View>
         <Icon name="angle-right" size={32} color={COLOR.WHITE} />

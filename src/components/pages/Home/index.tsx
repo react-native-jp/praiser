@@ -3,8 +3,8 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import analytics from '@react-native-firebase/analytics';
-import Todos from '../../organisms/Todos';
-import useToggle, { Actions as TodosActions, State as TodoState } from '../../../lib/hooks/useToggle';
+
+import Todos, { Todo, State as TodosState } from '../../organisms/Todos';
 import { COLOR } from '../../../constants/theme';
 import { DETAIL, INPUT } from '../../../constants/path';
 import testIDs from '../../../constants/testIDs';
@@ -36,12 +36,14 @@ const styles = StyleSheet.create({
 });
 
 interface Props {
-  todos: TodoState[];
-  actions: TodosActions;
+  todos: TodosState;
+  actions: {
+    toggleTodo: Todo.DoneButton.ToggleTodo;
+    removeTodo: Todo.DeleteButton.RemoveTodo;
+  };
 }
 
 export default function Home(props: Props) {
-  const { todos, actions } = props;
   React.useEffect(() => {
     async function logViewItemList() {
       await analytics().logViewItemList({
@@ -55,16 +57,23 @@ export default function Home(props: Props) {
   const onPress = React.useCallback(() => {
     navigate(INPUT);
   }, [navigate]);
-  const onPressTodo = React.useCallback(
-    params => () => {
-      navigate(DETAIL, params);
+  const gotoDetail = React.useCallback(
+    (state: Todo.State, isEditable: boolean) => {
+      navigate(DETAIL, { ...state, isEditable });
     },
     [navigate],
+  );
+  const actions = React.useMemo(
+    () => ({
+      ...props.actions,
+      gotoDetail,
+    }),
+    [gotoDetail, props.actions],
   );
 
   return (
     <View style={styles.container} testID={testIDs.HOME}>
-      <Todos todos={todos} onPress={onPressTodo} actions={actions} useToggle={useToggle} forbiddenEdit={false} />
+      <Todos isEditable todos={props.todos} actions={actions} />
       <TouchableOpacity onPress={onPress} style={styles.button} testID={testIDs.TODO_OPEN_INPUT_BUTTON}>
         <Icon color={COLOR.PRIMARY} size={24} name="plus" />
       </TouchableOpacity>
