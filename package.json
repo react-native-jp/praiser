@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
+    "android": "react-native run-android --appIdSuffix debug",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest --testPathIgnorePatterns e2e/*",
