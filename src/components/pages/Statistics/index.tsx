@@ -31,7 +31,7 @@ function Header(props: Props) {
   );
 }
 
-export default function Statstics(props: Props) {
+export default function Statistics(props: Props) {
   const { navigate } = useNavigation();
   const gotoDetail = React.useCallback(
     (state: Todo.State, isEditable: boolean) => {
