@@ -25,7 +25,7 @@ function isDefined(state: NavigationState | undefined): state is NavigationState
   return state !== undefined;
 }
 
-const onNavigationStateChange = (routeNameRef: React.MutableRefObject<undefined | string>) => (
+const onNavigationStateChange = (routeNameRef: React.MutableRefObject<null | string>) => (
   prevState: NavigationState | undefined,
 ) => {
   if (!isDefined(prevState)) {
@@ -42,7 +42,7 @@ const onNavigationStateChange = (routeNameRef: React.MutableRefObject<undefined 
 };
 
 export default function LoggingRoutes() {
-  const routeNameRef = React.useRef();
+  const routeNameRef = React.useRef(null);
 
   return (
     <NavigationContainer ref={routeNameRef} onStateChange={onNavigationStateChange(routeNameRef)}>
